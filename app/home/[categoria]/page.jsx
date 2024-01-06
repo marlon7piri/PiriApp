@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from "react";
 import TablaProductos from "./TablaProductos";
 import BusquedaProductos from "./BusquedaProductos";
+
+
+const url ="https://clone-invu-app.vercel.app/api"
 const getProductoPorCategoria = async (categoria) => {
-  const res = await fetch("http://localhost:3000/api/categoriaProducto", {
+  const res = await fetch(`${url}/categoriaProducto`, {
     method: "POST",
     headers: {
       Accept: "application/json",

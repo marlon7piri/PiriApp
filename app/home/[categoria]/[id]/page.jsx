@@ -7,7 +7,7 @@ import * as yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const url = "http://localhost:3000";
+const url ="https://clone-invu-app.vercel.app/api"
 
 const schema = yup
   .object({
@@ -32,7 +32,7 @@ const EditarProducto = ({ params }) => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-    const res = await fetch(`${url}/api/categoriaProducto/${producto.id}`, {
+    const res = await fetch(`${url}/categoriaProducto/${producto.id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -52,7 +52,7 @@ const EditarProducto = ({ params }) => {
   useEffect(() => {
     const getProductoPorCategoria = async () => {
       const res = await fetch(
-        `http://localhost:3000/api/categoriaProducto/${params.id}`
+        `${url}/categoriaProducto/${params.id}`
       );
       const data = await res.json();
       setProducto(data);
