@@ -5,21 +5,21 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-const url = "http://localhost:3000";
-const url2 = "https://eccomerce-next14.vercel.app";
+const url ="https://clone-invu-app.vercel.app/api"
+
 
 const Botones = ({ allproducto }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const url = 'http://localhost:3000'
+
 
   const deleteProduct = async () => {
     try {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
         const res = await fetch(
-          `${url}/api/productos/${allproducto}`,
+          `${url}/productos/${allproducto}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },

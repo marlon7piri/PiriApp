@@ -8,14 +8,15 @@ const TablaOFUsers = ({data}) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const url = 'http://localhost:3000'
+  const url ="https://clone-invu-app.vercel.app/api"
+
 
   const deleteProduct = async (id) => {
     try {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
         const res = await fetch(
-          `${url}/api/usuarios/${id}`,
+          `${url}/usuarios/${id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
