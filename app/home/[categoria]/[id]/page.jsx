@@ -33,7 +33,7 @@ const EditarProducto = ({ params }) => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-    const res = await fetch(`${url2}/categoriaProducto/${producto.id}`, {
+    const res = await fetch(`${url}/categoriaProducto/${producto.id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -53,7 +53,7 @@ const EditarProducto = ({ params }) => {
   useEffect(() => {
     const getProductoPorCategoria = async () => {
       const res = await fetch(
-        `${url2}/categoriaProducto/${params.id}`
+        `${url}/categoriaProducto/${params.id}`
       );
       const data = await res.json();
       setProducto(data);

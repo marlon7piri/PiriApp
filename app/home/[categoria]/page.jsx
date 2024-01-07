@@ -7,7 +7,7 @@ import FiltrosProductos from "./FiltrosProductos";
 const url ="https://clone-invu-app.vercel.app/api"
 const url2 ="http://localhost:3000/api"
 const getProductoPorCategoria = async (categoria) => {
-  const res = await fetch(`${url2}/categoriaProducto`, {
+  const res = await fetch(`${url}/categoriaProducto`, {
     method: "POST",
     headers: {
       Accept: "application/json",
