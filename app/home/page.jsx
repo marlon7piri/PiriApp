@@ -3,7 +3,7 @@ import Areas from './Areas'
 
 const Home = () => {
   return (
-    <div>
+    <div className='w-ful h-screen'>
        <Areas/> 
     </div>
   )

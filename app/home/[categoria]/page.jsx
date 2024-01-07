@@ -1,12 +1,13 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import TablaProductos from "./TablaProductos";
-import BusquedaProductos from "./BusquedaProductos";
+import FiltrosProductos from "./FiltrosProductos";
 
 
 const url ="https://clone-invu-app.vercel.app/api"
+const url2 ="http://localhost:3000/api"
 const getProductoPorCategoria = async (categoria) => {
-  const res = await fetch(`${url}/categoriaProducto`, {
+  const res = await fetch(`${url2}/categoriaProducto`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -32,7 +33,7 @@ const Categoria =  ({ params }) => {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center p-4">
-      <BusquedaProductos   tablaProductos={tablaProductos} setProductos={setProductos}/>
+      <FiltrosProductos   tablaProductos={tablaProductos} setProductos={setProductos}/>
       <TablaProductos productos={productos} />
     </div>
   );

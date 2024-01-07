@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const url ="https://clone-invu-app.vercel.app/api"
+const url2 ="http://localhost:3000/api"
 
 const schema = yup
   .object({
@@ -32,7 +33,7 @@ const EditarProducto = ({ params }) => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-    const res = await fetch(`${url}/categoriaProducto/${producto.id}`, {
+    const res = await fetch(`${url2}/categoriaProducto/${producto.id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -52,7 +53,7 @@ const EditarProducto = ({ params }) => {
   useEffect(() => {
     const getProductoPorCategoria = async () => {
       const res = await fetch(
-        `${url}/categoriaProducto/${params.id}`
+        `${url2}/categoriaProducto/${params.id}`
       );
       const data = await res.json();
       setProducto(data);
@@ -60,9 +61,10 @@ const EditarProducto = ({ params }) => {
     getProductoPorCategoria();
   }, []);
   return (
+    <div className="w-full h-screen flex justify-center items-center ">
     <form
       onSubmit={handleSubmit(enviarData)}
-      className="flex flex-col m-auto p-4 w-2/4 gap-4"
+      className="flex flex-col m-auto p-4 w-2/4  gap-4"
     >
       <input
         type="text"
@@ -116,7 +118,7 @@ const EditarProducto = ({ params }) => {
           Cocina{" "}
           <input
             type="radio"
-            value="cocina"
+            value="cocina" className="cursor-pointer"
             {...register("categoria", { required: true })}
           />
         </div>
@@ -124,7 +126,7 @@ const EditarProducto = ({ params }) => {
           Barra{" "}
           <input
             type="radio"
-            value="barra"
+            value="barra" className="cursor-pointer"
             {...register("categoria", { required: true })}
           />
         </div>
@@ -136,6 +138,7 @@ const EditarProducto = ({ params }) => {
         className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"
       />
     </form>
+    </div>
   );
 };
 
