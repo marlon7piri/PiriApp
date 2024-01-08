@@ -23,7 +23,7 @@ const NavBarClient = () => {
         <button onClick={() => back()}>Regresar</button>
         <Link href="/home/pedidos">Pedidos</Link>
        {!session ?   <Link href="/login">Login</Link> :  <button onClick={signOut}>Logout</button>}
-      { session?.user.email === 'marlon7piri@gmail.com'?<Link href="/dashboard">Dashboard</Link> :"" }
+      { session?.user.email === 'marlon7piri@gmail.com' || session?.user.email === 'antoniojtenox@gmail.com'?<Link href="/dashboard">Dashboard</Link> :"" }
       </ul>
     </nav>
   );
