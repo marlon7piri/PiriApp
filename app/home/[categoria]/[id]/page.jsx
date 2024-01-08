@@ -34,7 +34,7 @@ const EditarProducto = ({ params }) => {
     resolver: yupResolver(schema),
   });
   const actualizarData = async (data) => {
-    const res = await fetch(`${url2}/categoriaProducto/${params.id}`, {
+    const res = await fetch(`${url}/categoriaProducto/${params.id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -55,7 +55,7 @@ const EditarProducto = ({ params }) => {
   useEffect(() => {
     try {
       const getOnlyProducto = async () => {
-        const res = await fetch(`${url2}/categoriaProducto/${params.id}`);
+        const res = await fetch(`${url}/categoriaProducto/${params.id}`);
         const data = await res.json();
         reset(data);
       };
