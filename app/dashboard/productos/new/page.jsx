@@ -34,7 +34,7 @@ const NewProducto = () => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-    const res = await fetch(`${url2}/productos`, {
+    const res = await fetch(`${url}/productos`, {
       method: "POST",
       headers: {
         Accept: "application/json",

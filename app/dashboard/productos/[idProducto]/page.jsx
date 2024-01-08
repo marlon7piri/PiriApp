@@ -121,7 +121,7 @@ const EditProducto = () => {
           />
         </div>
       </div>
-      <input  disabled={isLoading} type="submit" value="Crear"  className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"/>
+      <input  disabled={isLoading} type="submit" value="Editar"  className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"/>
     </form>
   );
 };
