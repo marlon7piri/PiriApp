@@ -1,14 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const url ="https://clone-invu-app.vercel.app/api"
-
+const url = "https://clone-invu-app.vercel.app/api";
+const url2 = "http://localhost:3000/api";
+const urlproveedores =
+  "https://inventario-barra-backend.vercel.app/api/proveedores";
 
 const schema = yup
   .object({
@@ -20,38 +22,45 @@ const schema = yup
   .required();
 
 const NewProducto = () => {
-    const router =useRouter()
-    
+  const router = useRouter();
+  const [proveedores, setProveedores] = useState([]);
 
   const {
     register,
     handleSubmit,
 
-    formState: { errors,isLoading },
+    formState: { errors, isLoading },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-   const res =  await  fetch(`${url}/productos`, {
+    const res = await fetch(`${url2}/productos`, {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body:JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
-   
-   
-       if(!res.ok){
-        toast.error("Error")
-
-       }else{
-        toast.success("Producto creado")
-        router.push('/dashboard/productos')
-        router.refresh()
-       }
-   
+    if (!res.ok) {
+      toast.error("Error");
+    } else {
+      toast.success("Producto creado");
+      router.push("/dashboard/productos");
+      router.refresh();
+    }
   };
+  useEffect(()=>{
+    const getProveedores = async () => {
+      const res = await fetch(urlproveedores);
+      const data = await res.json();
+      setProveedores(data);
+    };
+    getProveedores()
+  },[])
+
+ 
+
   return (
     <form
       onSubmit={handleSubmit(enviarData)}
@@ -103,6 +112,40 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+      <select
+        name=""
+        id=""
+        {...register("unidad", { required: true })}
+        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+      >
+        <option value="KG">KG</option>
+        <option value="LB">LB</option>
+        <option value="UND">UND</option>
+        <option value="PQTE">PQTE</option>
+      </select>
+      <label htmlFor="">Mas Vendido</label>
+      <select
+        name=""
+        id=""
+        {...register("mas_vendido", { required: true })}
+        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+      >
+        <option value={true}>Si</option>
+        <option value={false}>No</option>
+      </select>
+      <label htmlFor="">Proveedor</label>
+      <select
+        name=""
+        id=""
+       
+        {...register("proveedor", { required: true })}
+        className="p-2 outline-none cursor-pointer"
+      >
+        <option value=""> </option>
+        {proveedores?.map((e) => {
+          return <option value={e.nombre}>{e.nombre}</option>;
+        })}
+      </select>
 
       <div className="flex gap-4 justify-center items-center">
         <div>
@@ -122,7 +165,12 @@ const NewProducto = () => {
           />
         </div>
       </div>
-      <input  disabled={isLoading} type="submit" value="Crear"  className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"/>
+      <input
+        disabled={isLoading}
+        type="submit"
+        value="Crear"
+        className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"
+      />
     </form>
   );
 };

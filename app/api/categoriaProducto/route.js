@@ -9,7 +9,6 @@ export  async function POST(req) {
     const allproducts = await Products.find({categoria:type});
 
     if (!allproducts) return NextResponse.json({message:"No hay productos"});
-console.log(allproducts);
     return NextResponse.json(allproducts);
   } catch (error) {
     return Response.json({ message: error });

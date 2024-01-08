@@ -1,13 +1,12 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import TablaProductos from "./TablaProductos";
 import FiltrosProductos from "./FiltrosProductos";
 
-
-const url ="https://clone-invu-app.vercel.app/api"
-const url2 ="http://localhost:3000/api"
+const url = "https://clone-invu-app.vercel.app/api";
+const url2 = "http://localhost:3000/api";
 const getProductoPorCategoria = async (categoria) => {
-  const res = await fetch(`${url}/categoriaProducto`, {
+  const res = await fetch(`${url2}/categoriaProducto`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -18,23 +17,36 @@ const getProductoPorCategoria = async (categoria) => {
   return data;
 };
 
-const Categoria =  ({ params }) => {
-
-    const [productos, setProductos] = useState([])
-    const [tablaProductos, setTablaProductos] = useState([])
+const Categoria = ({ params }) => {
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [tablaProductos, setTablaProductos] = useState([]);
   useEffect(() => {
-    const obtenerProductos = async () => {
-      const res = await getProductoPorCategoria(params.categoria);
-      setProductos(res);
-      setTablaProductos(res);
-    };
-    obtenerProductos()
+    try {
+      setLoading(true)
+      const obtenerProductos = async () => {
+       
+        const res = await getProductoPorCategoria(params.categoria);
+        setProductos(res);
+        setTablaProductos(res);
+        
+
+      };
+      obtenerProductos();
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+    }
+
   }, []);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center p-4">
-      <FiltrosProductos   tablaProductos={tablaProductos} setProductos={setProductos}/>
-      <TablaProductos productos={productos} />
+    <div className="w-full h-full flex flex-col justify-center items-center p-4 min-h-screen">
+      <FiltrosProductos
+        tablaProductos={tablaProductos}
+        setProductos={setProductos}
+      />
+      <TablaProductos productos={productos}  loading={loading}/>
     </div>
   );
 };

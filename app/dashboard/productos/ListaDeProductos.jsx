@@ -27,10 +27,19 @@ const ListaDeProductos = ({ productos } ) => {
                 Stock
               </th>
               <th scope="col" className="px-6 py-3">
-                Created At
+                Stock Min
               </th>
               <th scope="col" className="px-6 py-3">
-                Rating
+                Unidad
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Proveedor
+              </th>
+              <th scope="col" className="px-6 py-3">
+               Mas Vendido
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Fecha de Creacion
               </th>
 
               <th scope="col" className="px-6 py-3">
@@ -50,27 +59,20 @@ const ListaDeProductos = ({ productos } ) => {
                     className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={product._id}
                   >
-                    {/*  {product?.imageUrl && (
-                          <th>
-                            <Image
-                              src={product?.imageUrl}
-                              width={38}
-                              height={38}
-                              alt="una imagen"
-                              className="object-cover"
-                            />
-                          </th>
-                        )} */}
+                    
                     <td className="px-6 py-4 text-gray-900">
                       {product.nombre}
                     </td>
                     <td className="px-6 py-4">${product.precio}</td>
 
                     <td className="px-6 py-4">{product.stock}</td>
+                    <td className="px-6 py-4">{product.stock_min}</td>
+                    <td className="px-6 py-4">{product.unidad}</td>
+                    <td className="px-6 py-4">{product.proveedor}</td>
+                    <td className={ product.mas_vendido ? "px-6 py-4 text-green-700 font-bold" :"px-6 py-4 text-red-700 font-bold"  }>{product.mas_vendido ? "Si" : "No"}</td>
                     <td className="px-6 py-4">
                       {convertidordefecha(product.createdAt)} 
                     </td>
-                    <td className="px-6 py-4">{product.stock}</td>
 
                     <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
                      <Botones allproducto={product._id}/>

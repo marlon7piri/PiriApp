@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { boolean } from "yup";
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -41,6 +42,15 @@ const ProductsSchema = new mongoose.Schema(
     },
     categoria: {
       type: String,
+    },
+    unidad: {
+      type: String,
+    },
+    proveedor: {
+      type: String,
+    },
+    mas_vendido:{
+      type:Boolean
     },
     stock: {
       type: Number,

@@ -1,11 +1,11 @@
 
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import { useSession } from 'next-auth/react'
 import NextAuthProvider from './components/NextAuthProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ subsets: ['latin'],weight:['300','500','700','900'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
     <NextAuthProvider>
-      <body className={inter.className}>
+      <body className={poppins.className}>
      
    
         {children}

@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export  async function DELETE(req,{params}) {
     const id = await params.id;
 
-    console.log(id);
   
     await connectDb();
     try {
@@ -23,7 +22,6 @@ export  async function GET({params}) {
   const regex = new RegExp(params, "i");
 
 
-    console.log(id);
   
     await connectDb();
     try {

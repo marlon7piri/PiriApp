@@ -8,7 +8,6 @@ export  async function GET() {
     const allproducts = await Products.find({});
 
     if (!allproducts) return NextResponse.json({message:"No hay productos"});
-console.log(allproducts);
     return NextResponse.json(allproducts);
   } catch (error) {
     return Response.json({ message: error });
@@ -16,7 +15,9 @@ console.log(allproducts);
 }
 
 export  async function POST(req) {
-  const { nombre, precio, categoria, stock, stock_min } = await req.json();
+  const { nombre, precio, categoria, stock, stock_min ,unidad,mas_vendido,proveedor} = await req.json();
+
+  console.log(nombre, precio, categoria, stock, stock_min ,unidad,mas_vendido,proveedor);
 
   try {
     connectDb();
@@ -26,10 +27,13 @@ export  async function POST(req) {
       categoria,
       stock,
       stock_min,
+      unidad,
+      mas_vendido,proveedor
     });
 
-    const producto = await newproducts.save()
 
+    const producto = await newproducts.save()
+console.log(producto);
     if (!producto) return NextResponse.status(404);
 
     return NextResponse.json(producto);

@@ -8,7 +8,6 @@ const FiltrosProductos = ({ tablaProductos, setProductos }) => {
   const router = useRouter()
   const [filtros, setFiltros] = useState({
     mayor: "mayor",
-    menor: "menor",
   });
 
   const handlerSearch = (e) => {
@@ -36,19 +35,17 @@ const FiltrosProductos = ({ tablaProductos, setProductos }) => {
       let result = tablaProductos.sort((a, b) => {
         return a.stock - b.stock;
       });
-      console.log(result);
       setProductos(result);
 
     } else {
       let result = tablaProductos.sort((a, b) => {
         return b.stock - a.stock;
       });
-      console.log(result);
       setProductos(result);
     }
   };
   return (
-    <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md">
+    <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md  mt-24">
       <input
         type="text"
         onChange={handlerSearch}

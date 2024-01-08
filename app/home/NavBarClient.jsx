@@ -11,11 +11,10 @@ const NavBarClient = () => {
   const { back } = useRouter();
   const {data:session} = useSession()
 
-  if(!session) redirect('/login')
-    console.log(session);
+/*   if(!session) redirect('/login') */
 
   return (
-    <nav className="bg-slate-50 w-full flex justify-between  items-center p-4">
+    <nav className="bg-slate-50 w-full flex justify-between  items-center p-4 fixed ">
       <DeviconFaunadb />
 
       <span>Bienvenido {session?.user?.name}</span>

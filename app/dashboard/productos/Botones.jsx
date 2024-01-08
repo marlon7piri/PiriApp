@@ -1,5 +1,7 @@
 "use client";
 
+import DeleteIcon from "@/app/icons/DeleteIcon";
+import EditIcon from "@/app/icons/EditIcon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -40,18 +42,18 @@ const Botones = ({ allproducto }) => {
   };
 
   return (
-    <div className="w-full flex">
+    <div className="w-full flex gap-2">
       <Link
         href={`/dashboard/productos/${allproducto}`}
-        className="px-4 py-1 rounded bg-sky-500 font-medium text-slate-900 dark:text-blue-500 hover:bg-sky-700"
+        className="px-2 py-1 rounded bg-sky-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
       >
-        edit
+        <EditIcon/>
       </Link>
       <span
         onClick={deleteProduct}
-        className="px-4 py-1 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700 hover:cursor-pointer"
+        className="px-2 py-1 rounded bg-red-500 font-medium text-slate-50   dark:text-blue-500 hover:bg-red-700 hover:cursor-pointer"
       >
-        eliminar
+        <DeleteIcon/>
       </span>
     </div>
   );

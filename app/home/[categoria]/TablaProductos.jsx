@@ -6,15 +6,18 @@ import React from "react";
 import { useClientContext } from "../context/ClientProvider";
 import toast from "react-hot-toast";
 
-const TablaProductos = ({ productos }) => {
+const TablaProductos = ({ productos ,loading}) => {
   const { pedidos, setPedidos } = useClientContext();
 
   const addPedidos = (product) => {
     setPedidos([...pedidos, product]);
     toast.success('producto agregado al pedido')
   };
+
+console.log(loading)
+  if(loading) return <h1 className="text-5xl text-center font-black">Cargando.....</h1>
   return (
-    <table className="w-2/4 m-auto text-sm text-left text-gray-500 dark:text-gray-400 ">
+    <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
         <tr>
           {/*  <th scope="col" className="px-6 py-3">
@@ -29,6 +32,9 @@ const TablaProductos = ({ productos }) => {
           </th>
           <th scope="col" className="px-6 py-3">
             Stock Minimo
+          </th>
+          <th scope="col" className="px-6 py-3">
+           Unidad
           </th>
           <th scope="col" className="px-6 py-3">
             Proveedor
@@ -64,18 +70,23 @@ const TablaProductos = ({ productos }) => {
                 )} */}
                 <td className="px-6 py-4 text-gray-900">{product.nombre}</td>
 
-                <td className="px-6 py-4">{product.stock}</td>
-
-                <td
-                  className={` ${
+                <td  className={` ${
                     product.stock < product.stock_min
                       ? "px-6 py-4   text-red-700 font-bold"
                       : "px-6 py-4   text-green-700 "
-                  }  `}
+                  }  `}>{product.stock}</td>
+
+                <td
+                  className='px-6 py-4 '
                 >
                   {product.stock_min}
                 </td>
-                <td className="px-6 py-4">proveedores</td>
+                <td
+                  className='px-6 py-4 '
+                >
+                    {product.unidad}
+                </td>
+                <td className="px-6 py-4">{product.proveedor}</td>
 
                 <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
                   <Link
