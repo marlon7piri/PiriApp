@@ -19,10 +19,10 @@ const NavBarClient = () => {
 
       <span>Bienvenido {session?.user?.name}</span>
       <ul className=" flex gap-4">
-      <Link href="/login">Pedidos</Link>
-       {/*  <button onClick={() => back()}>Regresar</button> */}
+      
+        <button onClick={() => back()}>Regresar</button>
         <Link href="/home/pedidos">Pedidos</Link>
-       {!session ?   <button onClick={signIn}>Login</button>:  <button onClick={signOut}>Logout</button>}
+       {!session ?   <Link href="/login">Login</Link> :  <button onClick={signOut}>Logout</button>}
       { session?.user.email === 'marlon7piri@gmail.com'?<Link href="/dashboard">Dashboard</Link> :"" }
       </ul>
     </nav>
