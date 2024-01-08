@@ -2,19 +2,28 @@
 
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useSession,signIn,signOut } from "next-auth/react";
+
 import { DeviconFaunadb } from "../icons/Logo";
 
 const NavBarClient = () => {
   const { back } = useRouter();
+  const {data:session} = useSession()
+
+  if(!session) redirect('/login')
+    console.log(session);
 
   return (
     <nav className="bg-slate-50 w-full flex justify-between  items-center p-4">
       <DeviconFaunadb />
+
+      <span>Bienvenido {session?.user?.name}</span>
       <ul className=" flex gap-4">
         <button onClick={() => back()}>Regresar</button>
         <Link href="/home/pedidos">Pedidos</Link>
-        {/* <Link href="/dashboard/productos">Logout</Link>  */}
+       {!session ?   <button onClick={signIn}>Login</button>:  <button onClick={signOut}>Logout</button>}
+      { session?.user.email === 'marlon7piri@gmail.com'?<Link href="/dashboard">Dashboard</Link> :"" }
       </ul>
     </nav>
   );

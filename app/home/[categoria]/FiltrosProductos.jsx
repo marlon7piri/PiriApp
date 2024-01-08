@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const BusquedaProductos = ({ tablaProductos, setProductos }) => {
+const FiltrosProductos = ({ tablaProductos, setProductos }) => {
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
   const [filtros, setFiltros] = useState({
@@ -63,4 +63,4 @@ const BusquedaProductos = ({ tablaProductos, setProductos }) => {
   );
 };
 
-export default BusquedaProductos;
+export default FiltrosProductos;

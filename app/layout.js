@@ -1,6 +1,9 @@
+
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
+import { useSession } from 'next-auth/react'
+import NextAuthProvider from './components/NextAuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,16 +13,20 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+
+
   return (
     <html lang="en">
-
+    <NextAuthProvider>
       <body className={inter.className}>
-
-       
+     
+   
         {children}
        
       <Toaster/>
+    
      </body>
+     </NextAuthProvider>
     </html>
   )
 }

@@ -20,7 +20,6 @@ const schema = yup
   .required();
 
 const EditarProducto = ({ params }) => {
-  console.log(params.id);
   const router = useRouter();
   const [producto, setProducto] = useState([]);
 
