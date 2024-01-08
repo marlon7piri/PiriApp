@@ -119,7 +119,7 @@ const NewProducto = () => {
         className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
       >
         <option value="KG">KG</option>
-        <option value="LB">LB</option>
+        <option value="LT">LT</option>
         <option value="UND">UND</option>
         <option value="PQTE">PQTE</option>
       </select>
