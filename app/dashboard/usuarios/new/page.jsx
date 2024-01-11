@@ -37,7 +37,7 @@ reset,
     console.log("funciono")
     try {
       setLoading(true);
-      const res = await fetch(`${UrlWeb}/api/usuarios`, {
+      const res = await fetch(`${UrlWeb}/usuarios`, {
         method: "POST",
         headers: {
           Accept: "application/json",
