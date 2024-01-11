@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
-  const session = useSession()
+  const {data:session} = useSession()
   const [filtros, setFiltros] = useState({
     mayor: "mayor",
   });
