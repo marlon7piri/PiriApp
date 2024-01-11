@@ -1,33 +1,25 @@
-'use client'
-import { UrlWeb } from '@/app/libs/UrlWeb';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
-import toast from 'react-hot-toast';
+"use client";
+import { UrlWeb } from "@/app/libs/UrlWeb";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
-const TablaOFUsers = ({data}) => {
+const TablaOFUsers = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-
-
 
   const deleteProduct = async (id) => {
     try {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
-        const res = await fetch(
-          `${UrlWeb}/usuarios/${id}`,
-          {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        const res = await fetch(`${UrlWeb}/usuarios/${id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        });
 
-      
-          toast.success("Usuario eliminado");
-          router.refresh();
-       
+        toast.success("Usuario eliminado");
+        router.refresh();
 
         setLoading(false);
       }
@@ -37,15 +29,10 @@ const TablaOFUsers = ({data}) => {
     setLoading(false);
   };
   return (
-
     <>
-    {  data?.map((e) => {
+      {data?.map((e) => {
         return (
-          
-          <tr
-            className=" mt-4    "
-            key={e.id}
-          >
+          <tr className=" mt-4    " key={e.id}>
             <th
               scope="row"
               className=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -67,13 +54,20 @@ const TablaOFUsers = ({data}) => {
             </th>
             <td className="px-6 py-4">{e.email}</td>
             <td className="px-6 py-4">{e.phone}</td>
-          {/*   <td className="px-6 py-4">{e.address}</td> */}
+            {/*   <td className="px-6 py-4">{e.address}</td> */}
             <td className="px-6 py-4">
               {(e.isAdmin === true ? "admin" : "client").toString()}
             </td>
-            <td className={e.isActive === true ? `text-green-500 px-6 py-4` : `text-red-500 px-6 py-4` }>
+            <td
+              className={
+                e.isActive === true
+                  ? `text-green-500 px-6 py-4`
+                  : `text-red-500 px-6 py-4`
+              }
+            >
               {(e.isActive === true ? "activo" : "inactivo").toString()}
             </td>
+         
 
             <td className="px-2 py-2  flex gap-1 justify-center items-center">
               <Link
@@ -82,18 +76,19 @@ const TablaOFUsers = ({data}) => {
               >
                 Edit
               </Link>
-             
-                  <button onClick={()=>deleteProduct(e._id)} className="px-4 py-1 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700">
+
+              <button
+                onClick={() => deleteProduct(e._id)}
+                className="px-4 py-1 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700"
+              >
                 Delete
               </button>
-           
-              
             </td>
           </tr>
-          )
+        );
       })}
-      </>)
-      
-}
+    </>
+  );
+};
 
-export default TablaOFUsers
+export default TablaOFUsers;

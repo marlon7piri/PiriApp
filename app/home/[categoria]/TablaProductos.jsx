@@ -73,12 +73,12 @@ const TablaProductos = ({ productos ,loading}) => {
                     product.stock < product.stock_min
                       ? "px-6 py-4   text-red-700 font-bold"
                       : "px-6 py-4   text-green-700 "
-                  }  `}>{product.stock.toFixed(2)}</td>
+                  }  `}>{product.stock.toFixed(3)}</td>
 
                 <td
                   className='px-6 py-4 '
                 >
-                  {product.stock_min.toFixed(2)}
+                  {product.stock_min.toFixed(3)}
                 </td>
                 <td
                   className='px-6 py-4 '

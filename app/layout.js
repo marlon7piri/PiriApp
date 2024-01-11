@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast'
 import { useSession } from 'next-auth/react'
 import NextAuthProvider from './components/NextAuthProvider'
 
-const poppins = Poppins({ subsets: ['latin'],weight:['300','700','900'] })
+const poppins = Poppins({ subsets: ['latin'],weight:['300','500','700','900'] })
 
 export const metadata = {
   title: 'Create Next App',

@@ -6,16 +6,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { UrlWeb } from "@/app/libs/UrlWeb";
 
-const url = "https://clone-invu-app.vercel.app/api";
-const url2 = "http://localhost:3000/api";
+
 
 const schema = yup
   .object({
     nombre: yup.string().max(20).required(),
-    precio: yup.number().positive().required(),
-    stock: yup.number().positive().round().required(),
-    stock_min: yup.number().positive().round().required(),
+    precio: yup.number().positive().round().required(),
+    stock: yup.number().positive().required(),
+    stock_min: yup.number().positive().required(),
   })
   .required();
 
@@ -34,7 +34,7 @@ const EditarProducto = ({ params }) => {
     resolver: yupResolver(schema),
   });
   const actualizarData = async (data) => {
-    const res = await fetch(`${url}/categoriaProducto/${params.id}`, {
+    const res = await fetch(`${UrlWeb}/categoriaProducto/${params.id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -55,7 +55,7 @@ const EditarProducto = ({ params }) => {
   useEffect(() => {
     try {
       const getOnlyProducto = async () => {
-        const res = await fetch(`${url}/categoriaProducto/${params.id}`);
+        const res = await fetch(`${UrlWeb}/categoriaProducto/${params.id}`);
         const data = await res.json();
         reset(data);
       };

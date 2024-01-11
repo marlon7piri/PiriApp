@@ -17,7 +17,6 @@ export  async function GET() {
 export  async function POST(req) {
   const { nombre, precio, categoria, stock, stock_min ,unidad,mas_vendido,proveedor} = await req.json();
 
-  console.log(nombre, precio, categoria, stock, stock_min ,unidad,mas_vendido,proveedor);
 
   try {
     connectDb();
@@ -33,7 +32,6 @@ export  async function POST(req) {
 
 
     const producto = await newproducts.save()
-console.log(producto);
     if (!producto) return NextResponse.status(404);
 
     return NextResponse.json(producto);
