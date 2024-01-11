@@ -17,7 +17,7 @@ const TablaOFUsers = ({data}) => {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
         const res = await fetch(
-          `${UrlWeb}/api/usuarios/${id}`,
+          `${UrlWeb}/usuarios/${id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
