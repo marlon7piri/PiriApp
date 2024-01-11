@@ -1,4 +1,5 @@
 'use client'
+import { UrlWeb } from '@/app/libs/UrlWeb';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
@@ -8,8 +9,7 @@ const TablaOFUsers = ({data}) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const url ="https://clone-invu-app.vercel.app/api"
-  const url2 = "http://localhost:3000";
+
 
 
   const deleteProduct = async (id) => {
@@ -17,7 +17,7 @@ const TablaOFUsers = ({data}) => {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
         const res = await fetch(
-          `${url2}/api/usuarios/${id}`,
+          `${UrlWeb}/api/usuarios/${id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
