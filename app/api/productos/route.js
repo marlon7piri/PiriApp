@@ -25,8 +25,8 @@ export  async function POST(req) {
       nombre,
       precio:precio.toString(),
       categoria,
-      stock,
-      stock_min,
+      stock:stock.toString(),
+      stock_min:stock_min.toString(),
       unidad,
       mas_vendido,proveedor
     });
