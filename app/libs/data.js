@@ -19,7 +19,7 @@ export const getProducts = async (query) => {
   
   try {
     connectDb();
-    const allusers = await Products.find({ name: { $regex: regex } });
+    const allusers = await Products.find({ nombre: { $regex: regex } });
    
 
     return  allusers 
