@@ -27,7 +27,7 @@ const ListaDeProductos = ({ productos } ) => {
     <Suspense>
       <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full h-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400 fixed top-0">
+          <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400 fixed mt-10">
             <tr>
               {/*  <th scope="col" className="px-6 py-3">
                     Image
