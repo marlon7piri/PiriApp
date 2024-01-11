@@ -13,7 +13,7 @@ import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 
 const schema = yup
   .object({
-    nombre: yup.string().max(20).required(),
+    nombre: yup.string().max(50).required(),
     precio: yup.number().positive().required(),
     stock: yup.number().positive().required(),
     stock_min: yup.number().positive().required(),
