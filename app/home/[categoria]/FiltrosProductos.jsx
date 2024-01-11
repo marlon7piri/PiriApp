@@ -57,9 +57,9 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
      const jspdf = new jsPDF()
      jspdf.text(`Inventario del Dia ${fecha}`,30,10)
 
-     const column =["Producto","Stock","Proveedor"]
+     const column =["Producto","Stock","Unidad","Proveedor"]
      const body = productos.map((e)=>{
-      return [e.nombre,e.stock,e.proveedor]
+      return [e.nombre,e.stock,e.unidad,e.proveedor]
      })
 
      jspdf.autoTable({
