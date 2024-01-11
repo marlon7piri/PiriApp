@@ -14,7 +14,6 @@ const TablaProductos = ({ productos ,loading}) => {
     toast.success('producto agregado al pedido')
   };
 
-console.log(loading)
   if(loading) return <h1 className="text-5xl text-center font-black">Cargando.....</h1>
   return (
     <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
@@ -74,12 +73,12 @@ console.log(loading)
                     product.stock < product.stock_min
                       ? "px-6 py-4   text-red-700 font-bold"
                       : "px-6 py-4   text-green-700 "
-                  }  `}>{product.stock}</td>
+                  }  `}>{product.stock.toFixed(2)}</td>
 
                 <td
                   className='px-6 py-4 '
                 >
-                  {product.stock_min}
+                  {product.stock_min.toFixed(2)}
                 </td>
                 <td
                   className='px-6 py-4 '
