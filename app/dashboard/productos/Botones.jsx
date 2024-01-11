@@ -2,12 +2,12 @@
 
 import DeleteIcon from "@/app/icons/DeleteIcon";
 import EditIcon from "@/app/icons/EditIcon";
+import { UrlWeb } from "@/app/libs/UrlWeb";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-const url ="https://clone-invu-app.vercel.app/api"
 
 
 const Botones = ({ allproducto }) => {
@@ -21,7 +21,7 @@ const Botones = ({ allproducto }) => {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
         const res = await fetch(
-          `${url}/productos/${allproducto}`,
+          `${UrlWeb}/productos/${allproducto}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },

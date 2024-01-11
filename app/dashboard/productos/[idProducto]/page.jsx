@@ -6,8 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 import {  useRouter } from "next/navigation";
+import { UrlWeb } from "@/app/libs/UrlWeb";
 
-const url = "http://localhost:3000";
 
 const schema = yup
   .object({
@@ -31,7 +31,7 @@ const EditProducto = () => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-   const res =  await  fetch(`${url}/api/productos`, {
+   const res =  await  fetch(`${UrlWeb}/api/productos`, {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -10,14 +10,14 @@ import { DeviconFaunadb } from "../icons/Logo";
 const NavBarClient = () => {
   const { back } = useRouter();
   const {data:session} = useSession()
-
-/*   if(!session) redirect('/login') */
+console.log(session?.user.email)
+  if(!session) redirect('/login')
 
   return (
     <nav className="bg-slate-50 w-full flex justify-between  items-center p-4 fixed ">
       <DeviconFaunadb />
 
-      <span>Bienvenido {session?.user?.name}</span>
+      <span className="text-slate-900">Bienvenido {session?.username}</span>
       <ul className=" flex gap-4">
       
         <button onClick={() => back()}>Regresar</button>

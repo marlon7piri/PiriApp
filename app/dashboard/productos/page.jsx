@@ -4,7 +4,7 @@ import NavProductos from "./NavProductos";
 import { getProducts } from "@/app/libs/data";
 
 
-const url = "http://localhost:3000";
+
 
 export default async function Productos({searchParams} ) {
  

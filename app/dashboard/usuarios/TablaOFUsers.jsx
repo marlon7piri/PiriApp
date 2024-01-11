@@ -9,6 +9,7 @@ const TablaOFUsers = ({data}) => {
   const router = useRouter();
 
   const url ="https://clone-invu-app.vercel.app/api"
+  const url2 = "http://localhost:3000";
 
 
   const deleteProduct = async (id) => {
@@ -16,7 +17,7 @@ const TablaOFUsers = ({data}) => {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
         const res = await fetch(
-          `${url}/usuarios/${id}`,
+          `${url2}/api/usuarios/${id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -24,7 +25,7 @@ const TablaOFUsers = ({data}) => {
         );
 
       
-          toast.success("Producto eliminado");
+          toast.success("Usuario eliminado");
           router.refresh();
        
 
@@ -60,13 +61,13 @@ const TablaOFUsers = ({data}) => {
                   backgroundColor: "red",
                 }}
               >
-                {e.name?.substring(0, 2)}
+                {e.username?.substring(0, 2)}
               </span>{" "}
-              {e.name}
+              {e.username}
             </th>
             <td className="px-6 py-4">{e.email}</td>
             <td className="px-6 py-4">{e.phone}</td>
-            <td className="px-6 py-4">{e.address}</td>
+          {/*   <td className="px-6 py-4">{e.address}</td> */}
             <td className="px-6 py-4">
               {(e.isAdmin === true ? "admin" : "client").toString()}
             </td>

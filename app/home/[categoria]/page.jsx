@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import TablaProductos from "./TablaProductos";
 import FiltrosProductos from "./FiltrosProductos";
+import { UrlWeb } from "@/app/libs/UrlWeb";
 
-const url = "https://clone-invu-app.vercel.app/api";
-const url2 = "http://localhost:3000/api";
+
 const getProductoPorCategoria = async (categoria) => {
-  const res = await fetch(`${url}/categoriaProducto`, {
+  const res = await fetch(`${UrlWeb}/categoriaProducto`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -44,7 +44,7 @@ const Categoria = ({ params }) => {
     <div className="w-full h-full flex flex-col justify-center items-center p-4 min-h-screen">
       <FiltrosProductos
         tablaProductos={tablaProductos}
-        setProductos={setProductos}
+        setProductos={setProductos} productos={productos}
       />
       <TablaProductos productos={productos}  loading={loading}/>
     </div>

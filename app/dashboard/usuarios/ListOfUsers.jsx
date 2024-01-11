@@ -20,9 +20,9 @@ const ListOfUsers = ({ data }) => {
               <th scope="col" className="px-6 py-3">
                 Telefono
               </th>
-              <th scope="col" className="px-6 py-3">
+             {/*  <th scope="col" className="px-6 py-3">
                 Direccion
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 Rol
               </th>

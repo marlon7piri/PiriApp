@@ -2,8 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import {jsPDF} from 'jspdf'
+import  'jspdf-autotable'
+import { convertidordefecha } from "@/app/libs/convertidordefecha";
+import { GrDocumentPdf } from "react-icons/gr";
 
-const FiltrosProductos = ({ tablaProductos, setProductos }) => {
+const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
   const [filtros, setFiltros] = useState({
@@ -44,6 +48,28 @@ const FiltrosProductos = ({ tablaProductos, setProductos }) => {
       setProductos(result);
     }
   };
+
+
+  const descargarPDF =()=>{
+    const fecha2 =   new Date().toLocaleString().substring(0,10)
+    const fecha = fecha2.toString()/* .substring(0,10) *//* .reverse().split("-").join("") */
+    
+     const jspdf = new jsPDF()
+     jspdf.text(`Inventario del Dia ${fecha}`,30,10)
+
+     const column =["Producto","Stock","Proveedor"]
+     const body = productos.map((e)=>{
+      return [e.nombre,e.stock,e.proveedor]
+     })
+
+     jspdf.autoTable({
+      startY:30,
+      head:[column],
+      body:body
+     })
+
+     jspdf.save(`Inventario_Semanal-${fecha}.pdf`) 
+  }
   return (
     <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md  mt-24">
       <input
@@ -56,6 +82,7 @@ const FiltrosProductos = ({ tablaProductos, setProductos }) => {
         <option value={filtros.mayor}>Mayor Cantidad</option>
         <option value={filtros.menor}>Menor Cantidad</option>
       </select>
+      <button onClick={descargarPDF} className="bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "><GrDocumentPdf/></button>
     </nav>
   );
 };

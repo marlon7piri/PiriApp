@@ -6,11 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 
-const url = "https://clone-invu-app.vercel.app/api";
-const url2 = "http://localhost:3000/api";
-const urlproveedores =
-  "https://inventario-barra-backend.vercel.app/api/proveedores";
+
+
 
 const schema = yup
   .object({
@@ -34,7 +33,7 @@ const NewProducto = () => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-    const res = await fetch(`${url}/productos`, {
+    const res = await fetch(`${UrlWeb}/productos`, {
       method: "POST",
       headers: {
         Accept: "application/json",
