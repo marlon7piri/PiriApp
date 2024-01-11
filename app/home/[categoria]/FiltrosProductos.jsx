@@ -6,10 +6,12 @@ import {jsPDF} from 'jspdf'
 import  'jspdf-autotable'
 import { convertidordefecha } from "@/app/libs/convertidordefecha";
 import { GrDocumentPdf } from "react-icons/gr";
+import { useSession } from "next-auth/react";
 
 const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
+  const session = useSession()
   const [filtros, setFiltros] = useState({
     mayor: "mayor",
   });
@@ -55,7 +57,7 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
     const fecha = fecha2.toString()/* .substring(0,10) *//* .reverse().split("-").join("") */
     
      const jspdf = new jsPDF()
-     jspdf.text(`Inventario del Dia ${fecha}`,30,10)
+     jspdf.text(`Inventario del Dia ${fecha}, tutor ${session.username}`,30,10)
 
      const column =["Producto","Stock","Unidad","Proveedor"]
      const body = productos.map((e)=>{
