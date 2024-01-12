@@ -15,7 +15,8 @@ console.log(session?.user.email)
 
   return (
     <nav className="bg-slate-50 w-full flex justify-between  items-center p-4 fixed ">
-      <DeviconFaunadb />
+   {/*    <DeviconFaunadb /> */}
+   <span className="text-slate-900">Restaurante Al-Alma</span>
 
       <span className="text-slate-900">Bienvenido {session?.username}</span>
       <ul className=" flex gap-4">

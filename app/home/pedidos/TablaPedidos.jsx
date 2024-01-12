@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import StoreIcon from "@/app/icons/StoreIcon";
 import Link from "next/link";
@@ -7,18 +7,16 @@ import { useClientContext } from "../context/ClientProvider";
 import DeleteIcon from "@/app/icons/DeleteIcon";
 
 const TablaPedidos = () => {
+  const { pedidos, setPedidos } = useClientContext();
 
-    const { pedidos, setPedidos } = useClientContext();
+  const deletePedidos = (id) => {
+    const res = pedidos.filter((item) => {
+      return item._id !== id;
+    });
+    setPedidos(res);
 
-    const deletePedidos = (id) => {
-
-        const res = pedidos.filter(item => {
-            return item._id !== id
-        });
-        setPedidos(res)
-     
-      toast.error('producto eliminado del pedido')
-    };
+    toast.error("producto eliminado del pedido");
+  };
   return (
     <div className="w-full h-full flex justify-center items-center">
       {" "}
@@ -72,14 +70,20 @@ const TablaPedidos = () => {
               )} */}
                   <td className="px-6 py-4 text-gray-900">{product.nombre}</td>
 
-                  <td className="px-6 py-4">{product.stock}</td>
-
                   <td
-                    className={` ${
+                    className={`${
                       product.stock < product.stock_min
                         ? "px-6 py-4   text-red-700 font-bold"
                         : "px-6 py-4   text-green-700 "
-                    }  `}
+                    }  
+                     
+                   `}
+                  >
+                    {product.stock}
+                  </td>
+
+                  <td
+                    className= "px-6 py-4 "
                   >
                     {product.stock_min}
                   </td>
@@ -99,7 +103,6 @@ const TablaPedidos = () => {
           )}
         </tbody>
       </table>
-      
     </div>
   );
 };
