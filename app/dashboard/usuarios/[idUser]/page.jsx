@@ -8,12 +8,14 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 
-const schema = yup.object({
-  username: yup.string().max(10).required(),
-  password: yup.string().required(),
-  email: yup.string().email().required(),
-  phone: yup.number().positive().required(),
-}).required();
+const schema = yup
+  .object({
+    username: yup.string().max(50).required(),
+    password: yup.string().required(),
+    email: yup.string().email().required(),
+    phone: yup.number().positive().required(),
+  })
+  .required();
 
 const EditarUsuario = ({ params }) => {
   const router = useRouter();
@@ -43,7 +45,6 @@ const EditarUsuario = ({ params }) => {
     getUnSoloUsuario();
   }, []);
   const enviarData = async (data) => {
-    console.log("funciono")
     try {
       const res = await fetch(`${UrlWeb}/usuarios/${params.idUser}`, {
         method: "PUT",
@@ -53,7 +54,6 @@ const EditarUsuario = ({ params }) => {
         body: JSON.stringify(data),
       });
 
-      console.log(res);
 
       if (!res.ok) {
         toast.error("Error");
@@ -64,7 +64,7 @@ const EditarUsuario = ({ params }) => {
       }
     } catch (error) {
       console.log(error);
-    } 
+    }
   };
   return (
     <form
@@ -84,12 +84,12 @@ const EditarUsuario = ({ params }) => {
           caracteres
         </span>
       )}
-      <Controller
-        name="password"
-        control={control}
-        defaultValue=""
-        render={({ field }) => <input {...field} placeholder="Password" />}
+      <input
+        type="password"
+        {...register("password", { required: true })}
+        placeholder="password"
       />
+  
       {errors.password && (
         <span className="text-red-500"> La contraseña es requerida</span>
       )}
@@ -126,8 +126,10 @@ const EditarUsuario = ({ params }) => {
           <Controller
             name="isAdmin"
             control={control}
-            defaultValue=""
-            render={({ field }) => <input {...field} type="radio" />}
+            defaultValue={true}
+            render={({ field }) => (
+              <input {...field} type="radio" value={true} />
+            )}
           />
         </div>
         <div>
@@ -135,8 +137,10 @@ const EditarUsuario = ({ params }) => {
           <Controller
             name="isAdmin"
             control={control}
-            defaultValue=""
-            render={({ field }) => <input {...field} type="radio" />}
+            defaultValue={false}
+            render={({ field }) => (
+              <input {...field} type="radio" value={false} />
+            )}
           />
         </div>
       </div>
@@ -146,8 +150,10 @@ const EditarUsuario = ({ params }) => {
           <Controller
             name="isActive"
             control={control}
-            defaultValue="true"
-            render={({ field }) => <input {...field} type="radio" />}
+            defaultValue={true}
+            render={({ field }) => (
+              <input {...field} type="radio" value={true} />
+            )}
           />
         </div>
         <div>
@@ -155,8 +161,10 @@ const EditarUsuario = ({ params }) => {
           <Controller
             name="isActive"
             control={control}
-            defaultValue="false"
-            render={({ field }) => <input {...field} type="radio" />}
+            defaultValue={false}
+            render={({ field }) => (
+              <input {...field} type="radio" value={false} />
+            )}
           />
         </div>
       </div>

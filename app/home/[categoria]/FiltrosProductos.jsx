@@ -12,9 +12,7 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
   const {data:session} = useSession()
-  const [filtros, setFiltros] = useState({
-    mayor: "mayor",
-  });
+  const [filtros, setFiltros] = useState("");
 
   const handlerSearch = (e) => {
     setTerminobusqueda(e.target.value);
@@ -35,20 +33,21 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
     setProductos(result);
   };
 
-  const filtrarPorCantidades = (e) => {
-    setFiltros(e.target.value);
-    if (e.target.value == "mayor") {
+  const filtrarPorCantidades = (value) => {
+    setFiltros(value);
+    if (value == "mayor") {
       let result = tablaProductos.sort((a, b) => {
-        return a.stock - b.stock;
+        return b.stock - a.stock;
       });
       setProductos(result);
 
     } else {
       let result = tablaProductos.sort((a, b) => {
-        return b.stock - a.stock;
+        return a.stock - b.stock;
       });
       setProductos(result);
     }
+    router.refresh()
   };
 
 
@@ -80,9 +79,9 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
         className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
         placeholder="Buscar...."
       />{" "}
-      <select name=""  id="" onChange={(e) => filtrarPorCantidades(e)}  className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500">
-        <option value={filtros.mayor}>Mayor Cantidad</option>
-        <option value={filtros.menor}>Menor Cantidad</option>
+      <select name=""  id="" onChange={(e) => filtrarPorCantidades(e.target.value)}  className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500 cursor-pointer">
+        <option value="mayor">Mayor Cantidad</option>
+        <option value="menor">Menor Cantidad</option>
       </select>
       <button onClick={descargarPDF} className="bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "><GrDocumentPdf/></button>
     </nav>

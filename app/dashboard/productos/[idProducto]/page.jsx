@@ -1,66 +1,91 @@
 "use client";
 
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
-import {  useRouter } from "next/navigation";
-import { UrlWeb } from "@/app/libs/UrlWeb";
-
+import { useRouter } from "next/navigation";
+import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 
 const schema = yup
   .object({
-    nombre: yup.string().max(20).required(),
+    nombre: yup.string().max(50).required(),
     precio: yup.number().positive().required(),
     stock: yup.number().positive().required(),
     stock_min: yup.number().positive().required(),
   })
   .required();
 
-const EditProducto = () => {
-    const router =useRouter()
-    
+const EditProducto = ({ params }) => {
+  const router = useRouter();
+  const [proveedores, setProveedores] = useState([]);
 
   const {
     register,
     handleSubmit,
-
-    formState: { errors,isLoading },
+    reset,
+    control,
+    formState: { errors, isLoading },
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    const getUnSoloProducto = async () => {
+      try {
+        const res = await fetch(`${UrlWeb}/productos/${params.idProducto}`);
+        const producto = await res.json();
+
+        reset(producto);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUnSoloProducto();
+  }, []);
   const enviarData = async (data) => {
-   const res =  await  fetch(`${UrlWeb}/api/productos`, {
-      method: "POST",
+    console.log(data)
+
+    const res = await fetch(`${UrlWeb}/productos/${params.idProducto}`, {
+      method: "PUT",
       headers: {
         Accept: "application/json",
       },
-      body:JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
-   
-   
-       if(!res.ok){
-        toast.error("Error")
+    if (!res.ok) {
+      toast.error("Error al editar el producto");
+    }else{
+      toast.success("Producto editado");
+      router.push("/dashboard/productos");
+      router.refresh();
+    }
 
-       }else{
-        toast.success("Producto creado")
-        router.push('/dashboard/productos')
-        router.refresh()
-       }
    
   };
+
+  useEffect(() => {
+    const getProveedores = async () => {
+      const res = await fetch(urlproveedores);
+      const data = await res.json();
+      setProveedores(data);
+    };
+    getProveedores();
+  }, []);
   return (
     <form
       onSubmit={handleSubmit(enviarData)}
       className="flex flex-col m-auto p-4 w-2/4 gap-4"
     >
-      <input
-        type="text"
-        {...register("nombre", { required: true })}
-        placeholder="nombre"
+      <Controller
+        name="nombre"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <input {...field} placeholder="Nombre" />}
       />
+
       {errors.nombre && (
         <span className="text-red-500">
           {" "}
@@ -68,60 +93,138 @@ const EditProducto = () => {
           caracteres
         </span>
       )}
-      <input
-        type="text"
-        {...register("precio", { required: true })}
-        placeholder="precio"
+      <Controller
+        name="precio"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <input {...field} placeholder="Precio" />}
       />
+
       {errors.precio && (
         <span className="text-red-500">
           {" "}
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-      <input
-        type="text"
-        {...register("stock", { required: true })}
-        placeholder="stock"
+
+      <Controller
+        name="stock"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <input {...field} placeholder="Stock" />}
       />
+
       {errors.stock && (
         <span className="text-red-500">
           {" "}
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-
-      <input
-        type="text"
-        {...register("stock_min", { required: true })}
-        placeholder="stock_min"
+      <Controller
+        name="stock_min"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <input {...field} placeholder="Stock_min" />}
       />
+
       {errors.stock_min && (
         <span className="text-red-500">
           {" "}
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+      <Controller
+        name="proveedor"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            {" "}
+            <label htmlFor="">Unidad</label>
+            <select
+              {...field}
+              className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+            >
+              <option value="KG">KG</option>
+              <option value="LT">LT</option>
+              <option value="UND">UND</option>
+              <option value="PQTE">PQTE</option>
+            </select>
+          </>
+        )}
+      />
 
-      <div className="flex gap-4 justify-center items-center">
-        <div>
-          Cocina{" "}
-          <input
-            type="radio"
-            value="cocina"
-            {...register("categoria", { required: true })}
-          />
-        </div>
-        <div>
-          Barra{" "}
-          <input
-            type="radio"
-            value="barra"
-            {...register("categoria", { required: true })}
-          />
-        </div>
-      </div>
-      <input  disabled={isLoading} type="submit" value="Editar"  className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"/>
+      {errors.unidad && (
+        <span className="text-red-500">
+          {" "}
+          Solo son numeros enteros y con decimales{" "}
+        </span>
+      )}
+
+      <Controller
+        name="proveedor"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            {" "}
+            <label htmlFor="">Proveedor</label>
+            <select
+              {...field}
+              name=""
+              id=""
+              className="p-2 outline-none cursor-pointer"
+            >
+              <option value=""> </option>
+              {proveedores?.map((e) => {
+                return <option value={e.nombre}>{e.nombre}</option>;
+              })}
+            </select>
+          </>
+        )}
+      />
+      <Controller
+        name="mas_vendido"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            <label htmlFor="">Mas Vendido</label>
+            <select
+              name=""
+              id=""
+              {...field}
+              className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+            >
+              <option value={true}>Si</option>
+              <option value={false}>No</option>
+            </select>
+          </>
+        )}
+      />
+
+      <Controller
+        name="categoria"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <div className="flex gap-4 justify-center items-center">
+            <div>
+              Cocina <input  {...field}  type="radio" value="cocina" />
+            </div>
+            <div>
+              Barra <input  {...field} type="radio" value="barra"  />
+            </div>
+          </div>
+        )}
+      />
+
+      <input
+        disabled={isLoading}
+        type="submit"
+        value={params.idProducto ? "Editar " : "Crear"}
+        className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"
+      />
     </form>
   );
 };

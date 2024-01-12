@@ -58,6 +58,9 @@ const ListaDeProductos = ({ productos } ) => {
                Mas Vendido
               </th>
               <th scope="col" className="px-6 py-3">
+               Categoria
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Fecha de Creacion
               </th>
 
@@ -90,6 +93,7 @@ const ListaDeProductos = ({ productos } ) => {
                     <td className="px-6 py-4">${ (product.stock * product.precio).toFixed(3)}</td>
                     <td className="px-6 py-4">{product.proveedor}</td>
                     <td className={ product.mas_vendido ? "px-6 py-4 text-green-700 font-bold" :"px-6 py-4 text-red-700 font-bold"  }>{product.mas_vendido ? "Si" : "No"}</td>
+                    <td className="px-6 py-4">{product.categoria}</td>
                     <td className="px-6 py-4">
                       {convertidordefecha(product.createdAt)} 
                     </td>
