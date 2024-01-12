@@ -1,6 +1,7 @@
 import { User} from "@/app/libs/models";
 import { connectDb } from "@/app/libs/mongoDb";
 import { NextResponse } from "next/server";
+import bcrypt from 'bcrypt'
 
 export  async function DELETE(req,{params}) {
     const id = await params.id;
@@ -17,19 +18,20 @@ export  async function DELETE(req,{params}) {
       return NextResponse.json({ message: error });
     }
   }
-export  async function GET({params}) {
-
-  const regex = new RegExp(params, "i");
+export  async function GET(req,{params}) {
+  const id = await params.id;
 
 
   
-    await connectDb();
+
     try {
-      const productdeleted = await User.findById({ name: { $regex: regex } });
+      await connectDb();
+      const usuario = await User.findById(id);
   
-      if (!productdeleted) return NextResponse.json(404);
-  
-      return NextResponse.json(productdeleted);
+      if (!usuario) return NextResponse.json(404);
+      
+  console.log(usuario);
+      return NextResponse.json(usuario);
     } catch (error) {
       return NextResponse.json({ message: error });
     }

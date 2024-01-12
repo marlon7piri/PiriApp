@@ -46,7 +46,7 @@ const EditarProducto = ({ params }) => {
       toast.error("Error");
     } else {
       toast.success("Producto editado");
-      router;
+     
       router.back();
       router.refresh();
     }

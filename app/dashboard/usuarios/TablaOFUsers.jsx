@@ -32,7 +32,7 @@ const TablaOFUsers = ({ data }) => {
     <>
       {data?.map((e) => {
         return (
-          <tr className=" mt-4    " key={e.id}>
+          <tr className=" mt-4    " key={e._id}>
             <th
               scope="row"
               className=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
