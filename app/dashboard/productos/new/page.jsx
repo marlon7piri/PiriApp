@@ -68,6 +68,7 @@ const NewProducto = () => {
       onSubmit={handleSubmit(enviarData)}
       className="flex flex-col m-auto p-4 w-2/4 gap-4"
     >
+            <label htmlFor="">Nombre</label>
       <input
         type="text"
         {...register("nombre", { required: true })}
@@ -80,6 +81,7 @@ const NewProducto = () => {
           caracteres
         </span>
       )}
+            <label htmlFor="">Presentacion por unidad</label>
       <input
         type="text"
         {...register("presentacion_por_unidad", { required: true })}
@@ -91,6 +93,8 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+            <label htmlFor="">Precio por unidad</label>
+
       <input
         type="text"
         {...register("precio_por_unidad", { required: true })}
@@ -102,6 +106,7 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+            <label htmlFor="">ITBMS</label>
      
       <input
         type="text"
@@ -114,6 +119,7 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+            <label htmlFor="">Stock</label>
 
       <input
         type="text"
@@ -126,6 +132,7 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+            <label htmlFor="">Stock Min</label>
 
       <input
         type="text"
@@ -138,6 +145,9 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+
+<label htmlFor="">Unidad</label>
+
       <select
         name=""
         id=""
