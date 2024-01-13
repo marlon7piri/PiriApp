@@ -6,6 +6,7 @@ import { redirect, useRouter } from "next/navigation";
 import { useSession,signIn,signOut } from "next-auth/react";
 
 import { DeviconFaunadb } from "../icons/Logo";
+import Image from "next/image";
 
 const NavBarClient = () => {
   const { back } = useRouter();
@@ -16,7 +17,13 @@ console.log(session?.user.email)
   return (
     <nav className="bg-slate-50 w-full flex justify-between  items-center p-4 fixed ">
    {/*    <DeviconFaunadb /> */}
-   <span className="text-slate-900">Restaurante Al-Alma</span>
+   <Image
+        alt="logo al alma"
+        src="/logo.jpg"
+        width={80}
+        height={80}
+        className="border border-slate-300 rounded-full p-2 object-cover"
+      />
 
       <span className="text-slate-900">Bienvenido {session?.username}</span>
       <ul className=" flex gap-4">

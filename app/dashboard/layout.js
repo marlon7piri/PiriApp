@@ -10,7 +10,7 @@ const layout = ({ children }) => {
       <div className="w-full h-full  ">
         <div className="flex gap-2">
           <NavBar />
-<div className="w-full h-screen bg-slate-300 p-8 overflow-y-scroll">
+<div className="w-full h-screen bg-slate-300 p-8 overflow-y-scroll border border-slate-700 rounded-md">
 {children}
 </div>
         </div>
