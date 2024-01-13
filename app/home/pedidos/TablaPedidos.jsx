@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { useClientContext } from "../context/ClientProvider";
 import DeleteIcon from "@/app/icons/DeleteIcon";
+import toast from "react-hot-toast";
 
 const TablaPedidos = () => {
   const { pedidos, setPedidos } = useClientContext();
@@ -14,8 +15,8 @@ const TablaPedidos = () => {
       return item._id !== id;
     });
     setPedidos(res);
+    toast.success("Producto eliminado")
 
-    toast.error("producto eliminado del pedido");
   };
   return (
     <div className="w-full h-full flex justify-center items-center">
@@ -87,7 +88,7 @@ const TablaPedidos = () => {
                   >
                     {product.stock_min}
                   </td>
-                  <td className="px-6 py-4">proveedores</td>
+                  <td className="px-6 py-4"> {product.proveedor}</td>
 
                   <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
                     <button

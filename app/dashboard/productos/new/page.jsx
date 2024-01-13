@@ -8,15 +8,15 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 
-
-
-
 const schema = yup
   .object({
     nombre: yup.string().max(50).required(),
-    precio: yup.number().positive().required(),
     stock: yup.number().positive().required(),
     stock_min: yup.number().positive().required(),
+   
+    precio_por_unidad: yup.number().positive().required(),
+    presentacion_por_unidad: yup.number().positive().required(),
+    itbms: yup.number().required(),
   })
   .required();
 
@@ -33,6 +33,8 @@ const NewProducto = () => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
+
+    
     const res = await fetch(`${UrlWeb}/productos`, {
       method: "POST",
       headers: {
@@ -44,21 +46,22 @@ const NewProducto = () => {
     if (!res.ok) {
       toast.error("Error");
     } else {
+
+      const producto = await res.json()
+      console.log(producto)
       toast.success("Producto creado");
       router.push("/dashboard/productos");
       router.refresh();
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     const getProveedores = async () => {
       const res = await fetch(urlproveedores);
       const data = await res.json();
       setProveedores(data);
     };
-    getProveedores()
-  },[])
-
- 
+    getProveedores();
+  }, []);
 
   return (
     <form
@@ -79,15 +82,39 @@ const NewProducto = () => {
       )}
       <input
         type="text"
-        {...register("precio", { required: true })}
-        placeholder="precio"
+        {...register("presentacion_por_unidad", { required: true })}
+        placeholder="presentacion_por_unidad"
       />
-      {errors.precio && (
+      {errors.presentacion_por_unidad && (
         <span className="text-red-500">
           {" "}
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+      <input
+        type="text"
+        {...register("precio_por_unidad", { required: true })}
+        placeholder="precio_por_unidad"
+      />
+      {errors.precio_por_unidad && (
+        <span className="text-red-500">
+          {" "}
+          Solo son numeros enteros y con decimales{" "}
+        </span>
+      )}
+     
+      <input
+        type="text"
+        {...register("itbms", { required: true })}
+        placeholder="itbms"
+      />
+      {errors.itbms && (
+        <span className="text-red-500">
+          {" "}
+          Solo son numeros enteros y con decimales{" "}
+        </span>
+      )}
+
       <input
         type="text"
         {...register("stock", { required: true })}
@@ -136,13 +163,12 @@ const NewProducto = () => {
       <select
         name=""
         id=""
-       
         {...register("proveedor", { required: true })}
         className="p-2 outline-none cursor-pointer"
       >
         <option value=""> </option>
         {proveedores?.map((e) => {
-          return <option value={e.nombre}>{e.nombre}</option>;
+          return <option value={e.nombre} key={e._id}>{e.nombre}</option>;
         })}
       </select>
 

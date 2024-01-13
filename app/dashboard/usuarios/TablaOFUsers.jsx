@@ -35,22 +35,26 @@ const TablaOFUsers = ({ data }) => {
           <tr className=" mt-4    " key={e._id}>
             <th
               scope="row"
-              className=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              className=" px-6 py-4 font-medium  whitespace-nowrap "
             >
-              <span
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  fontWeigth: "black",
-                  color: "white",
-                  padding: "10px",
-                  borderRadius: "50%",
-                  backgroundColor: "red",
-                }}
-              >
-                {e.username?.substring(0, 2)}
-              </span>{" "}
-              {e.username}
+              {" "}
+              <td className="px-6 py-4">
+                {" "}
+                <span
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    fontWeigth: "black",
+                    color: "white",
+                    padding: "10px",
+                    borderRadius: "50%",
+                    backgroundColor: "red",
+                  }}
+                >
+                  {e.username?.substring(0, 2)}
+                </span>{" "}
+                <span>{e.username}</span>
+              </td>
             </th>
             <td className="px-6 py-4">{e.email}</td>
             <td className="px-6 py-4">{e.phone}</td>
@@ -67,7 +71,6 @@ const TablaOFUsers = ({ data }) => {
             >
               {(e.isActive === true ? "activo" : "inactivo").toString()}
             </td>
-         
 
             <td className="px-2 py-2  flex gap-1 justify-center items-center">
               <Link

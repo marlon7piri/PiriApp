@@ -8,10 +8,12 @@ import { convertidordefecha } from "@/app/libs/convertidordefecha";
 
 const ListaDeProductos = ({ productos } ) => {
   const [total, setTotal] = useState(0)
+  
 
+  
   const getTotal =()=>{
     const numero = productos.reduce((acc,current)=>{
-       return acc + current.precio * current.stock
+       return acc + current.precio_por_unidad * current.stock
      
     },0)
 
@@ -26,6 +28,8 @@ const ListaDeProductos = ({ productos } ) => {
   return (
     <Suspense>
       <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg">
+      <span className="w-full  m-auto text-center text-2xl">Dinero Total en Stock: ${total.toFixed(3)}</span>
+
         <table className="w-full h-full relative text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
             <tr>
@@ -36,21 +40,17 @@ const ListaDeProductos = ({ productos } ) => {
                 Producto
               </th>
               <th scope="col" className="px-6 py-3">
-                Precio
+                Precio Por Unidad
               </th>
 
               <th scope="col" className="px-6 py-3">
-                Stock
+              Presentacion Por Unidad
               </th>
+              
               <th scope="col" className="px-6 py-3">
-                Stock Min
+               Costo
               </th>
-              <th scope="col" className="px-6 py-3">
-                Unidad
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Monto Actual
-              </th>
+              
               <th scope="col" className="px-6 py-3">
                 Proveedor
               </th>
@@ -82,15 +82,14 @@ const ListaDeProductos = ({ productos } ) => {
                     key={product._id}
                   >
                     
-                    <td className="px-6 py-4 text-gray-900">
+                    <td className="px-6 py-4 ">
                       {product.nombre}
                     </td>
-                    <td className="px-6 py-4">${product.precio}</td>
+                    <td className="px-6 py-4">${product.precio_por_unidad}</td>
 
-                    <td className="px-6 py-4">{product.stock}</td>
-                    <td className="px-6 py-4">{product.stock_min}</td>
-                    <td className="px-6 py-4">{product.unidad}</td>
-                    <td className="px-6 py-4">${ (product.stock * product.precio).toFixed(3)}</td>
+                    <td className="px-6 py-4">{product.presentacion_por_unidad}/{product.unidad}</td>
+                 
+                    <td className="px-6 py-4">${product.costo}</td>
                     <td className="px-6 py-4">{product.proveedor}</td>
                     <td className={ product.mas_vendido ? "px-6 py-4 text-green-700 font-bold" :"px-6 py-4 text-red-700 font-bold"  }>{product.mas_vendido ? "Si" : "No"}</td>
                     <td className="px-6 py-4">{product.categoria}</td>
@@ -109,7 +108,6 @@ const ListaDeProductos = ({ productos } ) => {
            
           </tbody>
         </table>
-        <span className="w-full  m-auto text-center text-2xl">Total: ${total.toFixed(3)}</span>
 
       </div>
     </Suspense>

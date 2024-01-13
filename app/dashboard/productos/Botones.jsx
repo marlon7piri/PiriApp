@@ -45,13 +45,13 @@ const Botones = ({ allproducto }) => {
     <div className="w-full flex gap-2">
       <Link
         href={`/dashboard/productos/${allproducto}`}
-        className="px-2 py-1 rounded bg-sky-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
+        className="px-2 py-1 rounded bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"
       >
         <EditIcon/>
       </Link>
       <span
         onClick={deleteProduct}
-        className="px-2 py-1 rounded bg-red-500 font-medium text-slate-50   dark:text-blue-500 hover:bg-red-700 hover:cursor-pointer"
+        className="px-2 py-1 rounded bg-red-500 font-medium text-slate-50   dark:text-slate-50 hover:bg-red-700 hover:cursor-pointer"
       >
         <DeleteIcon/>
       </span>

@@ -33,14 +33,50 @@ export async function GET(req, { params }) {
 
 export async function PUT(req, { params }) {
   const id = params.id;
-  const data = await req.json();
+  const {
+    nombre,
 
-  console.log(id);
-  console.log(data);
+    categoria,
+    stock,
+    stock_min,
+    unidad,
+    mas_vendido,
+    proveedor,
+    itbms,
+    costo,
+    presentacion_por_unidad,
+    precio_por_unidad,
+  } = await req.json();
+
+  let itbmsreal;
+  if (itbms === 0) {
+    itbmsreal = 0;
+    console.log(itbmsreal);
+  } else if (itbms === 7) {
+    itbmsreal = precio_por_unidad * 0.7;
+    console.log(itbmsreal);
+  } else if (itbms === 10) {
+    itbmsreal = precio_por_unidad * 0.1;
+    console.log(itbmsreal);
+  }
 
   try {
     connectDb();
-    const producto = await Products.findByIdAndUpdate(id, data);
+    const producto = await Products.findByIdAndUpdate(id, {
+      nombre,
+      precio_por_unidad,
+      presentacion_por_unidad,
+      categoria,
+      stock,
+      stock_min,
+      unidad,
+      mas_vendido,
+      proveedor,
+      itbms,
+      costo: (precio_por_unidad / presentacion_por_unidad + itbmsreal).toFixed(
+        2
+      ),
+    });
 
     if (!producto)
       return NextResponse.json({ message: "No se encontro ningun producto" });

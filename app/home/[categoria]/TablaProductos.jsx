@@ -67,18 +67,18 @@ const TablaProductos = ({ productos ,loading}) => {
                     />
                   </th>
                 )} */}
-                <td className="px-6 py-4 text-gray-900">{product.nombre}</td>
+                <td className="px-6 py-4 text-gray-900 dark:text-slate-50">{product.nombre}</td>
 
                 <td  className={` ${
                     product.stock < product.stock_min
                       ? "px-6 py-4   text-red-700 font-bold"
                       : "px-6 py-4   text-green-700 "
-                  }  `}>{product.stock.toFixed(3)}</td>
+                  }  `}>{product.stock}</td>
 
                 <td
                   className='px-6 py-4 '
                 >
-                  {product.stock_min.toFixed(3)}
+                  {product.stock_min}
                 </td>
                 <td
                   className='px-6 py-4 '
@@ -90,13 +90,13 @@ const TablaProductos = ({ productos ,loading}) => {
                 <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
                   <Link
                     href={`/home/${product.categoria}/${product._id}`}
-                    className=" rounded-full p-2 bg-sky-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
+                    className=" rounded-full p-2 bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"
                   >
                     <EditIcon />
                   </Link>
                   <button
                     onClick={() => addPedidos(product)}
-                    className=" rounded-full p-2 bg-sky-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
+                    className=" rounded-full p-2 bg-green-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-green-700"
                   >
                     <StoreIcon />
                   </button>

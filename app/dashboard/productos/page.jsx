@@ -11,6 +11,11 @@ export default async function Productos({searchParams} ) {
   const q = searchParams?.query || ""
 
   const productos = await getProducts(q); 
+
+
+  const {costo} = productos
+
+  console.log(typeof(costo))
   return (
     <div className="flex flex-col gap-4 ">
       <NavProductos/>

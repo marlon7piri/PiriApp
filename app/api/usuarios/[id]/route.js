@@ -26,7 +26,7 @@ export async function GET(req, { params }) {
 
     if (!usuario) return NextResponse.json(404);
 
-    return NextResponse.json(usuario);
+    return NextResponse.json({usuario});
   } catch (error) {
     return NextResponse.json({ message: error });
   }
@@ -38,11 +38,14 @@ export async function PUT(req, { params }) {
 
   console.log(data);
 
-  const passwordhased = await bcrypt.hash(data.password,10)
+  const passwordhased = await bcrypt.hash(data.password, 10);
 
   try {
     connectDb();
-    const usuario = await User.findByIdAndUpdate(id, {...data,password:passwordhased});
+    const usuario = await User.findByIdAndUpdate(id, {
+      ...data,
+      password: passwordhased,
+    });
 
     if (!usuario)
       return NextResponse.json({ message: "No se encontro ningun usuario" });

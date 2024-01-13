@@ -11,9 +11,12 @@ import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 const schema = yup
   .object({
     nombre: yup.string().max(50).required(),
-    precio: yup.number().positive().required(),
     stock: yup.number().positive().required(),
     stock_min: yup.number().positive().required(),
+   
+    precio_por_unidad: yup.number().positive().required(),
+    presentacion_por_unidad: yup.number().positive().required(),
+    itbms: yup.number().required(),
   })
   .required();
 
@@ -79,6 +82,8 @@ const EditProducto = ({ params }) => {
       onSubmit={handleSubmit(enviarData)}
       className="flex flex-col m-auto p-4 w-2/4 gap-4"
     >
+      <label htmlFor="">Nombre</label>
+
       <Controller
         name="nombre"
         control={control}
@@ -93,19 +98,52 @@ const EditProducto = ({ params }) => {
           caracteres
         </span>
       )}
+      <label htmlFor="">precio por unidad</label>
       <Controller
-        name="precio"
+        name="precio_por_unidad"
         control={control}
         defaultValue=""
-        render={({ field }) => <input {...field} placeholder="Precio" />}
+        render={({ field }) => <input {...field} placeholder="precio_por_unidad" />}
       />
 
-      {errors.precio && (
+      {errors.precio_por_unidad && (
         <span className="text-red-500">
           {" "}
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+      <label htmlFor="">presentacion por unidad</label>
+      
+      <Controller
+        name="presentacion_por_unidad"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <input {...field} placeholder="presentacion_por_unidad" />}
+      />
+
+      {errors.presentacion_por_unidad && (
+        <span className="text-red-500">
+          {" "}
+          Solo son numeros enteros y con decimales{" "}
+        </span>
+      )}
+      <label htmlFor="">itbms</label>
+
+        <Controller
+        name="itbms"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <input {...field} placeholder="itbms" />}
+      />
+
+      {errors.itbms && (
+        <span className="text-red-500">
+          {" "}
+          Solo son numeros enteros y con decimales{" "}
+        </span>
+      )}
+     
+      <label htmlFor="">Stock</label>
 
       <Controller
         name="stock"
@@ -120,6 +158,8 @@ const EditProducto = ({ params }) => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+      <label htmlFor="">Stock Min</label>
+
       <Controller
         name="stock_min"
         control={control}
@@ -133,6 +173,8 @@ const EditProducto = ({ params }) => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
+      
+
       <Controller
         name="proveedor"
         control={control}

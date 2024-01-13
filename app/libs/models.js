@@ -36,7 +36,19 @@ const ProductsSchema = new mongoose.Schema(
     nombre: {
       type: String,
     },
-    precio: {
+    precio_por_unidad: {
+      type: Number,
+      required: true,
+    },
+    presentacion_por_unidad: {
+      type: Number,
+      required: true,
+    },
+    costo: {  
+      type: Number,
+      required: true,
+    },
+    itbms: {
       type: Number,
       required: true,
     },
@@ -49,12 +61,11 @@ const ProductsSchema = new mongoose.Schema(
     proveedor: {
       type: String,
     },
-    mas_vendido:{
-      type:Boolean
+    mas_vendido: {
+      type: Boolean,
     },
     stock: {
       type: Number,
-    
     },
     stock_min: {
       type: Number,
