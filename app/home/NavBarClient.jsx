@@ -20,8 +20,8 @@ console.log(session?.user.email)
    <Image
         alt="logo al alma"
         src="/logo.jpg"
-        width={80}
-        height={80}
+        width={60}
+        height={60} priority='true'
         className="border border-slate-300 rounded-full p-2 object-cover"
       />
 

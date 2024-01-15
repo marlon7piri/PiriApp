@@ -1,4 +1,4 @@
-import { User } from "@/app/libs/models";
+import { User } from "@/app/libs/models/usuarios";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -18,6 +18,8 @@ import { NextResponse } from "next/server";
 
     if (!passwordcorrect) {
       throw new Error("Credenciales invalidas");
+
+      
     }
     return user;
   } catch (error) {
@@ -38,6 +40,7 @@ export const authoptions = NextAuth({
       async authorize(credentials) {
         try {
           const user = await login(credentials);
+
           return user;
         } catch (error) {
           return null;
@@ -51,6 +54,7 @@ export const authoptions = NextAuth({
         token.username = user.username;
         token.email = user.email;
         token.id = user.id;
+        token.isAdmin = user.isAdmin;
       }
 
       return token;
@@ -60,7 +64,9 @@ export const authoptions = NextAuth({
         session.username = token.username;
         session.email = token.email;
         session.id = token.id;
+        session.isAdmin = token.isAdmin;
       }
+
       return session;
     },
   },

@@ -1,7 +1,7 @@
 import React from "react";
 import { MdModeEditOutline } from "react-icons/md";
 
-const EditIcon = ({styles="w-6 h-6"}) => {
+const EditIcon = ({styles="w-4 h-4"}) => {
   return <MdModeEditOutline  className={styles}/>;
 };
 

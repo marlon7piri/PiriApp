@@ -1,4 +1,5 @@
-const { Products, User } = require("./models");
+const { Products} = require("./models/productos");
+const { User } = require("./models/usuarios");
 const { connectDb } = require("./mongoDb");
 
 export const getProductos = async () => {
@@ -24,7 +25,7 @@ export const getProducts = async (query) => {
 
     return  allusers 
   } catch (error) {
-    throw new Error("Failed to fetch users desde el backend");
+    throw new Error("Failed to fetch products desde el backend");
   }
 };
 

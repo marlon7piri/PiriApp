@@ -32,6 +32,7 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
     });
     setProductos(result);
   };
+ 
 
   const filtrarPorCantidades = (value) => {
     setFiltros(value);
@@ -72,7 +73,7 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
      jspdf.save(`Inventario_Semanal-${fecha}.pdf`) 
   }
   return (
-    <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md  mt-24">
+    <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md  mt-32">
       <input
         type="text"
         onChange={handlerSearch}

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Botones from "./Botones";
@@ -8,6 +8,8 @@ import { convertidordefecha } from "@/app/libs/convertidordefecha";
 
 const ListaDeProductos = ({ productos }) => {
   const [total, setTotal] = useState(0);
+  const [tablaProductos, setTablaProductos] = useState(productos);
+  const router = useRouter();
 
   const getTotal = () => {
     const numero = productos.reduce((acc, current) => {
@@ -21,13 +23,45 @@ const ListaDeProductos = ({ productos }) => {
     getTotal();
   }, [productos]);
 
+  const ordenarPorNombre = () => {
+    let res = tablaProductos.sort((a, b) => {
+      return a.nombre - b.nombre;
+    });
+
+    setTablaProductos(res);
+    router.refresh();
+  };
+
+  let arrayPrecios = productos.filter(
+    (e) => e.precio
+  );
+  let arrayPesos = productos.filter((e) => e.presentacion_por_unidad );
+
+  // Calcular el promedio ponderado
+  var sumaPrecios = 0;
+  var sumaPesos = 0;
+
+/*   for (var i = 0; i < arrayPesos.length; i++) {
+    sumaPesos += arrayPesos[i].presentacion_por_unidad;
+  } */
+  for (let j = 0; j < arrayPrecios.legth; j++) {
+    sumaPrecios += arrayPrecios[j].precio_por_unidad;
+
+  }
+console.log(sumaPrecios)
+  /*   var promedioPonderado = sumaProductos / sumaPesos; */
+
+  console.log({ pesos: sumaPesos, precios: sumaPrecios });
+
   return (
     <Suspense>
       <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex gap-2">
           {" "}
           <span className="">Dinero Total en Stock: ${total.toFixed(3)}</span>
-          <span className="">Cantidad De Productos: {productos.length}</span>
+          <span className="">
+            Cantidad De Productos: {tablaProductos.length}
+          </span>
         </div>
 
         <table className="w-full h-full relative text-sm text-left text-gray-500 dark:text-gray-400">
@@ -36,7 +70,11 @@ const ListaDeProductos = ({ productos }) => {
               {/*  <th scope="col" className="px-6 py-3">
                     Image
                   </th> */}
-              <th scope="col" className="px-6 py-3">
+              <th
+                scope="col"
+                className="px-6 py-3 cursor-pointer"
+                onClick={ordenarPorNombre}
+              >
                 Producto
               </th>
               <th scope="col" className="px-6 py-3">
@@ -70,12 +108,12 @@ const ListaDeProductos = ({ productos }) => {
             </tr>
           </thead>
           <tbody className="w-full ">
-            {productos?.length === 0 ? (
+            {tablaProductos?.length === 0 ? (
               <h1 className="w-full   text-center text-2xl text-slate-900">
                 No hay productos{" "}
               </h1>
             ) : (
-              productos?.map((product) => {
+              tablaProductos?.map((product) => {
                 return (
                   <tr
                     className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"

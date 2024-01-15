@@ -37,6 +37,8 @@ const EditarUsuario = ({ params }) => {
         const res = await fetch(`${UrlWeb}/usuarios/${params.idUser}`);
         const usuario = await res.json();
 
+
+        console.log(usuario)
         reset(usuario);
       } catch (error) {
         console.log(error);

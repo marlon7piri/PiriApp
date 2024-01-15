@@ -1,35 +1,6 @@
 import mongoose from "mongoose";
-import { boolean } from "yup";
 
-const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  phone: {
-    type: String,
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
-  address: {
-    type: String,
-  },
-});
+
 
 const ProductsSchema = new mongoose.Schema(
   {
@@ -74,6 +45,5 @@ const ProductsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const User = mongoose.models.User || mongoose.model("User", UserSchema);
 export const Products =
   mongoose.models.Products || mongoose.model("Products", ProductsSchema);

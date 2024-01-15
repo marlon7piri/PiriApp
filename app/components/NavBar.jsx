@@ -13,7 +13,6 @@ const NavBar = () => {
 
   const pathname= usePathname()
 
-  console.log(pathname)
 
   const fondoLinks =(links)=>{
     const stylespath  = pathname ===links ? "w-full flex gap-2 text-sky-900 font-bold" : " w-full flex gap-2" 
@@ -26,7 +25,7 @@ const NavBar = () => {
       <Image
         alt="logo al alma"
         src="/logo.jpg"
-        width={130}
+        width={130} priority='true'
         height={130}
         className="border border-slate-300 rounded-full p-2"
       />

@@ -48,7 +48,6 @@ const EditProducto = ({ params }) => {
     getUnSoloProducto();
   }, []);
   const enviarData = async (data) => {
-    console.log(data)
 
     const res = await fetch(`${UrlWeb}/productos/${params.idProducto}`, {
       method: "PUT",

@@ -1,4 +1,6 @@
 "use client";
+import DeleteIcon from "@/app/icons/DeleteIcon";
+import EditIcon from "@/app/icons/EditIcon";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -75,16 +77,16 @@ const TablaOFUsers = ({ data }) => {
             <td className="px-2 py-2  flex gap-1 justify-center items-center">
               <Link
                 href={`/dashboard/usuarios/${e._id}`}
-                className="px-4 py-1 rounded bg-sky-500 font-medium text-slate-900 dark:text-blue-500 hover:bg-sky-700"
+                className="px-2 py-2 rounded bg-sky-500 font-medium text-slate-900 dark:text-blue-500 hover:bg-sky-700"
               >
-                Edit
+                <EditIcon/>
               </Link>
 
               <button
                 onClick={() => deleteProduct(e._id)}
-                className="px-4 py-1 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700"
+                className="px-2 py-2 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700"
               >
-                Delete
+               <DeleteIcon/>
               </button>
             </td>
           </tr>

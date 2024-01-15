@@ -6,15 +6,25 @@ import React from "react";
 import { useClientContext } from "../context/ClientProvider";
 import toast from "react-hot-toast";
 
-const TablaProductos = ({ productos ,loading}) => {
+const TablaProductos = ({ productos, loading,ordenarPorNombre }) => {
   const { pedidos, setPedidos } = useClientContext();
 
   const addPedidos = (product) => {
-    setPedidos([...pedidos, product]);
-    toast.success('producto agregado al pedido')
+    const product_exist = pedidos.find((e) => {
+      return e._id === product._id;
+    });
+
+    if (product_exist) {
+      toast.error("El producto agregado ya existe");
+      return
+    } else {
+      setPedidos([...pedidos, product]);
+      toast.success("producto agregado al pedido");
+    }
   };
 
-  if(loading) return <h1 className="text-5xl text-center font-black">Cargando.....</h1>
+  if (loading)
+    return <h1 className="text-5xl text-center font-black">Cargando.....</h1>;
   return (
     <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
@@ -22,7 +32,7 @@ const TablaProductos = ({ productos ,loading}) => {
           {/*  <th scope="col" className="px-6 py-3">
             Image
           </th> */}
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-6 py-3 cursor-pointer" onClick={ordenarPorNombre}>
             Producto
           </th>
 
@@ -33,7 +43,7 @@ const TablaProductos = ({ productos ,loading}) => {
             Stock Minimo
           </th>
           <th scope="col" className="px-6 py-3">
-           Unidad
+            Unidad
           </th>
           <th scope="col" className="px-6 py-3">
             Proveedor
@@ -67,24 +77,22 @@ const TablaProductos = ({ productos ,loading}) => {
                     />
                   </th>
                 )} */}
-                <td className="px-6 py-4 text-gray-900 dark:text-slate-50">{product.nombre}</td>
+                <td className="px-6 py-4 text-gray-900 dark:text-slate-50">
+                  {product.nombre}
+                </td>
 
-                <td  className={` ${
+                <td
+                  className={` ${
                     product.stock < product.stock_min
                       ? "px-6 py-4   text-red-700 font-bold"
                       : "px-6 py-4   text-green-700 "
-                  }  `}>{product.stock}</td>
+                  }  `}
+                >
+                  {product.stock}
+                </td>
 
-                <td
-                  className='px-6 py-4 '
-                >
-                  {product.stock_min}
-                </td>
-                <td
-                  className='px-6 py-4 '
-                >
-                    {product.unidad}
-                </td>
+                <td className="px-6 py-4 ">{product.stock_min}</td>
+                <td className="px-6 py-4 ">{product.unidad}</td>
                 <td className="px-6 py-4">{product.proveedor}</td>
 
                 <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">

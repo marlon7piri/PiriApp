@@ -1,4 +1,4 @@
-import { User } from "@/app/libs/models";
+import { User } from "@/app/libs/models/usuarios";
 import { connectDb } from "@/app/libs/mongoDb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
@@ -26,7 +26,9 @@ export async function GET(req, { params }) {
 
     if (!usuario) return NextResponse.json(404);
 
-    return NextResponse.json({usuario});
+    const {username, password, email, isAdmin, isActive, phone, address} =usuario
+
+    return NextResponse.json({username, email, isAdmin, isActive, phone, address});
   } catch (error) {
     return NextResponse.json({ message: error });
   }

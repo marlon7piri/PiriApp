@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import TablaProductos from "./TablaProductos";
 import FiltrosProductos from "./FiltrosProductos";
 import { UrlWeb } from "@/app/libs/UrlWeb";
+import { useRouter } from "next/navigation";
+
 
 
 const getProductoPorCategoria = async (categoria) => {
@@ -21,6 +23,8 @@ const Categoria = ({ params }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
+
+  const router = useRouter()
   useEffect(() => {
     try {
       setLoading(true)
@@ -40,13 +44,22 @@ const Categoria = ({ params }) => {
 
   }, []);
 
+  const ordenarPorNombre = () => {
+    let res = tablaProductos.sort((a, b) => a.nombre.localeCompare(b.nombre, undefined, { sensitivity: 'base' })
+    );
+   
+
+ setProductos(res); 
+  router.refresh(); 
+  };
+
   return (
     <div className="w-full h-full flex flex-col justify-center items-center p-4 min-h-screen">
       <FiltrosProductos
         tablaProductos={tablaProductos}
         setProductos={setProductos} productos={productos}
       />
-      <TablaProductos productos={productos}  loading={loading}/>
+      <TablaProductos productos={productos}  loading={loading} ordenarPorNombre={ordenarPorNombre}/>
     </div>
   );
 };

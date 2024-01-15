@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { User } from "@/app/libs/models";
+import { User } from "@/app/libs/models/usuarios";
 import { connectDb } from "@/app/libs/mongoDb";
 import bcrypt from "bcrypt";
 
