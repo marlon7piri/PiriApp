@@ -13,7 +13,7 @@ import { UrlWeb } from "@/app/libs/UrlWeb";
 const schema = yup
   .object({
     nombre: yup.string().max(20).required(),
-    precio: yup.number().positive().round().required(),
+    
     stock: yup.number().positive().required(),
     stock_min: yup.number().positive().required(),
   })
@@ -41,6 +41,8 @@ const EditarProducto = ({ params }) => {
       },
       body: JSON.stringify(data),
     });
+
+
 
     if (!res.ok) {
       toast.error("Error");
