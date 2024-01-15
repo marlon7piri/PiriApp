@@ -65,7 +65,7 @@ export async function PUT(req, { params }) {
     
   }
 
-  const a = precio_por_unidad / presentacion_por_unidad + itbmsreal;
+  const a =( precio_por_unidad / presentacion_por_unidad ) + itbmsreal;
 
   try {
     connectDb();

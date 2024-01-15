@@ -44,8 +44,8 @@ export async function POST(req) {
     console.log(itbmsreal);
   }
 
-  const a = precio_por_unidad / presentacion_por_unidad + itbmsreal;
-  console.log(a);
+  const a = (precio_por_unidad / presentacion_por_unidad) + itbmsreal;
+  
   try {
     connectDb();
     const newproducts = new Products({
