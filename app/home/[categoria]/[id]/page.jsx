@@ -14,7 +14,7 @@ const schema = yup
   .object({
     nombre: yup.string().max(20).required(),
     
-    stock: yup.number().positive().required(),
+    stock: yup.number().positive().required().min(0),
     stock_min: yup.number().positive().required(),
   })
   .required();

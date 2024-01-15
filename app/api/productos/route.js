@@ -31,21 +31,21 @@ export async function POST(req) {
   } = await req.json();
 
   console.log(itbms);
-  let itbmsreal;
-  if (itbms === 0) {
-    itbmsreal = 0
+  console.log(precio_por_unidad);
+  let itbmsreal = 0;
+  if (itbms == 0) {
+    itbmsreal = 0;
     console.log(itbmsreal);
-  } else if (itbms === 7) {
-    itbmsreal = (
-      
-      precio_por_unidad * 0.7
-    )
+  } else if (itbms == 7) {
+    itbmsreal = precio_por_unidad * 0.07
     console.log(itbmsreal);
-  } else if (itbms === 10) {
-    itbmsreal = (precio_por_unidad * 0.1)
+  } else if (itbms == 10) {
+    itbmsreal = precio_por_unidad * 0.1
     console.log(itbmsreal);
   }
 
+  const a = precio_por_unidad / presentacion_por_unidad + itbmsreal;
+  console.log(a);
   try {
     connectDb();
     const newproducts = new Products({
@@ -57,13 +57,13 @@ export async function POST(req) {
       unidad,
       mas_vendido,
       proveedor,
-      itbms,
-      costo: (precio_por_unidad / presentacion_por_unidad + itbmsreal).toFixed(2),
+      itbms: itbmsreal.toFixed(2),
+      costo: a.toFixed(
+        2
+      ),
       presentacion_por_unidad,
       precio_por_unidad,
     });
-
-    console.log(itbmsreal, newproducts.costo);
 
     const producto = await newproducts.save();
     if (!producto) return NextResponse.status(404);

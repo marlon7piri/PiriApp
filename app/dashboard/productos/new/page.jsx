@@ -13,7 +13,7 @@ const schema = yup
     nombre: yup.string().max(50).required(),
     stock: yup.number().positive().required(),
     stock_min: yup.number().positive().required(),
-   
+
     precio_por_unidad: yup.number().positive().required(),
     presentacion_por_unidad: yup.number().positive().required(),
     itbms: yup.number().required(),
@@ -33,8 +33,6 @@ const NewProducto = () => {
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-
-    
     const res = await fetch(`${UrlWeb}/productos`, {
       method: "POST",
       headers: {
@@ -46,9 +44,8 @@ const NewProducto = () => {
     if (!res.ok) {
       toast.error("Error");
     } else {
-
-      const producto = await res.json()
-      console.log(producto)
+      const producto = await res.json();
+      console.log(producto);
       toast.success("Producto creado");
       router.push("/dashboard/productos");
       router.refresh();
@@ -68,7 +65,7 @@ const NewProducto = () => {
       onSubmit={handleSubmit(enviarData)}
       className="flex flex-col m-auto p-4 w-2/4 gap-4"
     >
-            <label htmlFor="">Nombre</label>
+      <label htmlFor="">Nombre</label>
       <input
         type="text"
         {...register("nombre", { required: true })}
@@ -81,7 +78,7 @@ const NewProducto = () => {
           caracteres
         </span>
       )}
-            <label htmlFor="">Presentacion por unidad</label>
+      <label htmlFor="">Presentacion por unidad</label>
       <input
         type="text"
         {...register("presentacion_por_unidad", { required: true })}
@@ -93,7 +90,7 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-            <label htmlFor="">Precio por unidad</label>
+      <label htmlFor="">Precio por unidad</label>
 
       <input
         type="text"
@@ -106,20 +103,24 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-            <label htmlFor="">ITBMS</label>
-     
-      <input
-        type="text"
+      <label htmlFor="">ITBMS</label>
+
+      <select
         {...register("itbms", { required: true })}
-        placeholder="itbms"
-      />
+        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+      >
+        <option value={0}>0</option>
+        <option value={7}>7</option>
+        <option value={10}>10</option>
+      </select>
+
       {errors.itbms && (
         <span className="text-red-500">
           {" "}
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-            <label htmlFor="">Stock</label>
+      <label htmlFor="">Stock</label>
 
       <input
         type="text"
@@ -132,7 +133,7 @@ const NewProducto = () => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-            <label htmlFor="">Stock Min</label>
+      <label htmlFor="">Stock Min</label>
 
       <input
         type="text"
@@ -146,7 +147,7 @@ const NewProducto = () => {
         </span>
       )}
 
-<label htmlFor="">Unidad</label>
+      <label htmlFor="">Unidad</label>
 
       <select
         name=""
@@ -178,7 +179,11 @@ const NewProducto = () => {
       >
         <option value=""> </option>
         {proveedores?.map((e) => {
-          return <option value={e.nombre} key={e._id}>{e.nombre}</option>;
+          return (
+            <option value={e.nombre} key={e._id}>
+              {e.nombre}
+            </option>
+          );
         })}
       </select>
 

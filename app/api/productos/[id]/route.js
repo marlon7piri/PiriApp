@@ -48,17 +48,24 @@ export async function PUT(req, { params }) {
     precio_por_unidad,
   } = await req.json();
 
-  let itbmsreal;
+  let itbmsreal=0;
   if (itbms === 0) {
     itbmsreal = 0;
     console.log(itbmsreal);
-  } else if (itbms === 7) {
-    itbmsreal = precio_por_unidad * 0.7;
+    console.log(precio_por_unidad);
+
+  } else if (itbms == 7) {
+    itbmsreal = precio_por_unidad * 0.07
     console.log(itbmsreal);
-  } else if (itbms === 10) {
-    itbmsreal = precio_por_unidad * 0.1;
+  } else if (itbms == 10) {
+    itbmsreal = precio_por_unidad * 0.1
+    console.log(precio_por_unidad);
+
     console.log(itbmsreal);
+    
   }
+
+  const a = precio_por_unidad / presentacion_por_unidad + itbmsreal;
 
   try {
     connectDb();
@@ -72,12 +79,14 @@ export async function PUT(req, { params }) {
       unidad,
       mas_vendido,
       proveedor,
-      itbms,
-      costo: (precio_por_unidad / presentacion_por_unidad + itbmsreal).toFixed(
+      itbms: itbmsreal.toFixed(2),
+      costo: a.toFixed(
         2
       ),
     });
 
+    console.log(producto.itbms);
+    console.log(producto.costo);
     if (!producto)
       return NextResponse.json({ message: "No se encontro ningun producto" });
     return NextResponse.json(producto);

@@ -11,9 +11,9 @@ import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 const schema = yup
   .object({
     nombre: yup.string().max(50).required(),
-    stock: yup.number().positive().required(),
+    stock: yup.number().positive().required().min(0),
     stock_min: yup.number().positive().required(),
-   
+
     precio_por_unidad: yup.number().positive().required(),
     presentacion_por_unidad: yup.number().positive().required(),
     itbms: yup.number().required(),
@@ -48,7 +48,6 @@ const EditProducto = ({ params }) => {
     getUnSoloProducto();
   }, []);
   const enviarData = async (data) => {
-
     const res = await fetch(`${UrlWeb}/productos/${params.idProducto}`, {
       method: "PUT",
       headers: {
@@ -59,13 +58,11 @@ const EditProducto = ({ params }) => {
 
     if (!res.ok) {
       toast.error("Error al editar el producto");
-    }else{
+    } else {
       toast.success("Producto editado");
       router.push("/dashboard/productos");
       router.refresh();
     }
-
-   
   };
 
   useEffect(() => {
@@ -102,7 +99,9 @@ const EditProducto = ({ params }) => {
         name="precio_por_unidad"
         control={control}
         defaultValue=""
-        render={({ field }) => <input {...field} placeholder="precio_por_unidad" />}
+        render={({ field }) => (
+          <input {...field} placeholder="precio_por_unidad" />
+        )}
       />
 
       {errors.precio_por_unidad && (
@@ -112,12 +111,14 @@ const EditProducto = ({ params }) => {
         </span>
       )}
       <label htmlFor="">presentacion por unidad</label>
-      
+
       <Controller
         name="presentacion_por_unidad"
         control={control}
         defaultValue=""
-        render={({ field }) => <input {...field} placeholder="presentacion_por_unidad" />}
+        render={({ field }) => (
+          <input {...field} placeholder="presentacion_por_unidad" />
+        )}
       />
 
       {errors.presentacion_por_unidad && (
@@ -126,13 +127,24 @@ const EditProducto = ({ params }) => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-      <label htmlFor="">itbms</label>
 
-        <Controller
+      <Controller
         name="itbms"
         control={control}
         defaultValue=""
-        render={({ field }) => <input {...field} placeholder="itbms" />}
+        render={({ field }) =>( 
+          <>
+            <label htmlFor="">itbms</label>
+            <select
+              {...field}
+              className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+            >
+              <option value={0}>0</option>
+              <option value={7}>7</option>
+              <option value={10}>10</option>
+            </select>
+          </>
+  )}
       />
 
       {errors.itbms && (
@@ -141,7 +153,7 @@ const EditProducto = ({ params }) => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-     
+
       <label htmlFor="">Stock</label>
 
       <Controller
@@ -172,7 +184,6 @@ const EditProducto = ({ params }) => {
           Solo son numeros enteros y con decimales{" "}
         </span>
       )}
-      
 
       <Controller
         name="proveedor"
@@ -251,10 +262,10 @@ const EditProducto = ({ params }) => {
         render={({ field }) => (
           <div className="flex gap-4 justify-center items-center">
             <div>
-              Cocina <input  {...field}  type="radio" value="cocina" />
+              Cocina <input {...field} type="radio" value="cocina" />
             </div>
             <div>
-              Barra <input  {...field} type="radio" value="barra"  />
+              Barra <input {...field} type="radio" value="barra" />
             </div>
           </div>
         )}
