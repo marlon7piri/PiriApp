@@ -8,6 +8,7 @@ import LogoutIcon from "../icons/LogoutIcon";
 import { signOut } from "next-auth/react";
 import HomeIcon from "../icons/HomeIcon";
 import { usePathname} from "next/navigation";
+import DashboardIcon from "../icons/DashboardIcon";
 
 const NavBar = () => {
 
@@ -32,7 +33,7 @@ const NavBar = () => {
       <ul className="w-full mt-6 flex flex-col gap-4">
       <div className={fondoLinks("/dashboard")}>
           {" "}
-          <ProductIcon />
+          <DashboardIcon />
           <Link href="/dashboard">Dashboard</Link>
         </div>
         <div className={fondoLinks("/dashboard/productos")}>
