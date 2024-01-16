@@ -34,7 +34,6 @@ reset,
   });
   const enviarData = async (data) => {
 
-    console.log("funciono")
     try {
       setLoading(true);
       const res = await fetch(`${UrlWeb}/usuarios`, {

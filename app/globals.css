@@ -38,9 +38,7 @@ input{
   aspect-ratio: 1;
   position: relative;
   margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
 }
 .loader:before,
 .loader:after {

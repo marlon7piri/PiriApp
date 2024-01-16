@@ -200,7 +200,7 @@ const NewProducto = () => {
           Barra{" "}
           <input
             type="radio"
-            value="barra"
+            value="barra"s
             {...register("categoria", { required: true })}
           />
         </div>

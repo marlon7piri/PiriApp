@@ -186,7 +186,7 @@ const EditProducto = ({ params }) => {
       )}
 
       <Controller
-        name="proveedor"
+        name="unidad"
         control={control}
         defaultValue=""
         render={({ field }) => (

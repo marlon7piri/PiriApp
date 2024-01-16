@@ -37,6 +37,9 @@ export async function POST(req) {
   let itbmsreal = 0;
   if (itbms == 0) {
     itbmsreal = 0;
+    valor = precio_por_unidad / presentacion_por_unidad;
+  
+    costototal = valor;
   } else if (itbms == 7) {
     valor = precio_por_unidad / presentacion_por_unidad;
     impuesto_del_valor = valor * 0.07;
@@ -47,7 +50,7 @@ export async function POST(req) {
     costototal = valor + impuesto_del_valor;
   }
 
-
+  
   try {
     connectDb();
     const newproducts = new Products({

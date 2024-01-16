@@ -38,7 +38,6 @@ export async function PUT(req, { params }) {
   const id = params.id;
   const data = await req.json();
 
-  console.log(data);
 
   const passwordhased = await bcrypt.hash(data.password, 10);
 
