@@ -17,6 +17,7 @@ const [totalProductos, setTotalProductos] = useState(0)
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
 
+
   const router = useRouter();
   const params = useParams()
 
@@ -35,23 +36,16 @@ const [totalProductos, setTotalProductos] = useState(0)
   };
 
 
+
   useEffect(() => {
-    try {
-     
-      const obtenerProductos = async () => {
-        setLoading(true);
-        const res = await getProductoPorCategoria(params.categoria);
-        console.log(res)
-        setProductos(res);
-        setTablaProductos(res);
-        setLoading(false);
-      };
-      obtenerProductos();
-      
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+    const obtenerTodosLosProductos = async () => {
+      const res = await fetch(`${UrlWeb}/productos`);
+      const data = await res.json();
+
+      setTotalProductos(data);
+    };
+    obtenerTodosLosProductos()
+  });
   const ordenarPorNombre = () => {
     let res = tablaProductos.sort((a, b) =>
       a.nombre.localeCompare(b.nombre, undefined, { sensitivity: "base" })
@@ -70,7 +64,7 @@ const [totalProductos, setTotalProductos] = useState(0)
         setTablaProductos,
         productos,
         loading,
-        setLoading,setTotalProductos,totalProductos,tablaProductos
+        setLoading,setTotalProductos,totalProductos,tablaProductos,getProductoPorCategoria
       }}
     >
       {children}

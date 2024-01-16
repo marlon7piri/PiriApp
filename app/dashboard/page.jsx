@@ -12,9 +12,9 @@ import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
 const page = () => {
   const { data: session } = useSession();
 
- /*  if (!session?.isAdmin) {
+ if (!session?.isAdmin) {
     redirect("/home");
-  } */
+  } 
 
   return (
     <div className="w-full h-screen">

@@ -10,27 +10,42 @@ const DashboardProductosCasiAgotados = () => {
     
 
 
-    const ordenarProductos = ()=>{
+ /*    const ordenarProductos = ()=>{
         const ordenados = totalProductos.sort((a,b)=>{
            return  a.stock - b.stock
         })
 
-        console.log(ordenados)
+        console.log(ordenados) 
 
     }
-
-    useEffect(()=>{
+ */
+  /*   useEffect(()=>{
         ordenarProductos()
-    },[])
+    },[]) */
+
+    var productos = [
+        { nombre: 'Producto1', cantidad: 10 },
+        { nombre: 'Producto2', cantidad: 20 },
+        { nombre: 'Producto3', cantidad: 15 },
+        { nombre: 'Producto4', cantidad: 25 },
+        { nombre: 'Producto5', cantidad: 18 },
+        { nombre: 'Producto6', cantidad: 12 },
+        // ... más productos
+    ];
+    
+    // Mostrar solo los 5 primeros productos
+    var primerosCincoProductos = productos.slice(0, 5);
+
+
+
   return (
     <div className={styles.productosCasiAgotados}>
         <h2>Productos Casi Agotados</h2>
     <ul >
-      <li>Producto 1</li>
-      <li>Producto 2</li>
-      <li>Producto 3</li>
-      <li>Producto 4</li>
-      <li>Producto 5</li>
+      <li>{primerosCincoProductos.map((e)=>{
+        return <p>{e.nombre}</p>
+      })}</li>
+     
     </ul>
     </div>
   );

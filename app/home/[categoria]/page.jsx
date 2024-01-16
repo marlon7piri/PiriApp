@@ -10,11 +10,11 @@ import { useClientContext } from "../context/ClientProvider";
 
 
 
-const Categoria = ({ params }) => {
- const {setTablaProductos,setProductos,setLoading,tablaProductos,ordenarPorNombre} = useClientContext()
+const Categoria = ({params}) => {
+ const {setTablaProductos,setProductos,setLoading,tablaProductos,ordenarPorNombre,getProductoPorCategoria} = useClientContext()
 
-  const router = useRouter()
- /*  useEffect(() => {
+/*   const router = useRouter() */
+ useEffect(() => {
     try {
       setLoading(true)
       const obtenerProductos = async () => {
@@ -33,21 +33,21 @@ const Categoria = ({ params }) => {
 
   }, []);
 
-  const ordenarPorNombre = () => {
+/*   const ordenarPorNombre = () => {
     let res = tablaProductos.sort((a, b) => a.nombre.localeCompare(b.nombre, undefined, { sensitivity: 'base' })
     );
    
 
  setProductos(res); 
   router.refresh(); 
-  }; */
+  };  */
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center p-4 min-h-screen">
       <FiltrosProductos
         
       />
-      <TablaProductos /* productos={productos}  loading={loading} ordenarPorNombre={ordenarPorNombre} *//>
+      <TablaProductos />
     </div>
   );
 };

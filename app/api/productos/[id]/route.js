@@ -56,12 +56,9 @@ export async function PUT(req, { params }) {
 
   } else if (itbms == 7) {
     itbmsreal = precio_por_unidad * 0.07
-    console.log(itbmsreal);
   } else if (itbms == 10) {
     itbmsreal = precio_por_unidad * 0.1
-    console.log(precio_por_unidad);
 
-    console.log(itbmsreal);
     
   } 
 

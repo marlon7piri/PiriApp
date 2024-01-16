@@ -11,12 +11,11 @@ import Image from "next/image";
 const NavBarClient = () => {
   const { back } = useRouter();
   const {data:session} = useSession()
-console.log(session?.user.email)
-/*   if(!session) redirect('/login') */
+  if(!session) redirect('/login') 
 
   return (
     <nav className="bg-slate-50 w-full flex justify-between  items-center p-4 fixed ">
-   {/*    <DeviconFaunadb /> */}
+   
    <Image
         alt="logo al alma"
         src="/logo.jpg"
