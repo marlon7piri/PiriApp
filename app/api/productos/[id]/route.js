@@ -63,9 +63,9 @@ export async function PUT(req, { params }) {
 
     console.log(itbmsreal);
     
-  }
+  } 
 
-  const a =( precio_por_unidad / presentacion_por_unidad ) + itbmsreal;
+  const a = precio_por_unidad / presentacion_por_unidad;
 
   try {
     connectDb();
@@ -82,11 +82,10 @@ export async function PUT(req, { params }) {
       itbms: itbmsreal.toFixed(2),
       costo: a.toFixed(
         2
-      ),
+      ) + itbmsreal,
     });
 
-    console.log(producto.itbms);
-    console.log(producto.costo);
+   
     if (!producto)
       return NextResponse.json({ message: "No se encontro ningun producto" });
     return NextResponse.json(producto);

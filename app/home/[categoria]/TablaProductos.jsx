@@ -6,8 +6,8 @@ import React from "react";
 import { useClientContext } from "../context/ClientProvider";
 import toast from "react-hot-toast";
 
-const TablaProductos = ({ productos, loading,ordenarPorNombre }) => {
-  const { pedidos, setPedidos } = useClientContext();
+const TablaProductos = (/* { productos, loading,ordenarPorNombre } */) => {
+  const { pedidos, setPedidos,productos, loading,ordenarPorNombre } = useClientContext();
 
   const addPedidos = (product) => {
     const product_exist = pedidos.find((e) => {
@@ -23,8 +23,10 @@ const TablaProductos = ({ productos, loading,ordenarPorNombre }) => {
     }
   };
 
-  if (loading)
-    return <h1 className="text-5xl text-center font-black">Cargando.....</h1>;
+  if (loading){
+    return <div class="loader"></div>
+
+  }
   return (
     <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">

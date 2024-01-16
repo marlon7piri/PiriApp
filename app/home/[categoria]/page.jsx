@@ -4,28 +4,17 @@ import TablaProductos from "./TablaProductos";
 import FiltrosProductos from "./FiltrosProductos";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useRouter } from "next/navigation";
+import { useClientContext } from "../context/ClientProvider";
 
 
 
-const getProductoPorCategoria = async (categoria) => {
-  const res = await fetch(`${UrlWeb}/categoriaProducto`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-    },
-    body: JSON.stringify(categoria),
-  });
-  const data = await res.json();
-  return data;
-};
+
 
 const Categoria = ({ params }) => {
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [tablaProductos, setTablaProductos] = useState([]);
+ const {setTablaProductos,setProductos,setLoading,tablaProductos,ordenarPorNombre} = useClientContext()
 
   const router = useRouter()
-  useEffect(() => {
+ /*  useEffect(() => {
     try {
       setLoading(true)
       const obtenerProductos = async () => {
@@ -51,15 +40,14 @@ const Categoria = ({ params }) => {
 
  setProductos(res); 
   router.refresh(); 
-  };
+  }; */
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center p-4 min-h-screen">
       <FiltrosProductos
-        tablaProductos={tablaProductos}
-        setProductos={setProductos} productos={productos}
+        
       />
-      <TablaProductos productos={productos}  loading={loading} ordenarPorNombre={ordenarPorNombre}/>
+      <TablaProductos /* productos={productos}  loading={loading} ordenarPorNombre={ordenarPorNombre} *//>
     </div>
   );
 };

@@ -1,15 +1,14 @@
 
 import React from "react";
 import NavBarClient from "./NavBarClient";
-import { ClientProvider } from "./context/ClientProvider";
 
 const layout = ({ children }) => {
 
   return (
-    <ClientProvider>
+    <div>
       <NavBarClient />
       {children}
-    </ClientProvider>
+    </div>
   );
 };
 

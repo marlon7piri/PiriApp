@@ -25,11 +25,16 @@ const NavBar = () => {
       <Image
         alt="logo al alma"
         src="/logo.jpg"
-        width={130} priority='true'
-        height={130}
-        className="border border-slate-300 rounded-full p-2"
+        width={120} priority='true'
+        height={120}
+        className="border border-slate-300 rounded-full p-2 "
       />
-      <ul className="w-full mt-28 flex flex-col gap-8">
+      <ul className="w-full mt-4 flex flex-col gap-4">
+      <div className={fondoLinks("/dashboard")}>
+          {" "}
+          <ProductIcon />
+          <Link href="/dashboard">Dashboard</Link>
+        </div>
         <div className={fondoLinks("/dashboard/productos")}>
           {" "}
           <ProductIcon />

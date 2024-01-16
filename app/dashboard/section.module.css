@@ -1,0 +1,72 @@
+.section{
+    background-color: #F9F7F8;
+    width:100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-auto-rows: auto;
+    grid-template-areas:
+     "grafica total "
+     "total dineroTotal"
+     "total dineroTotal";
+     gap: 20px;
+     padding: 10px;
+    
+}
+
+.totalProductos{
+    grid-area: 'total';
+    width: 50%;
+    background-color:#fff;
+    box-shadow: 0px 0px 88px 26px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dineroInventario{
+    grid-area: 'total';
+    width: 50%;
+    background-color:#fff;
+    box-shadow: 0px 0px 88px 26px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.masVendidos{
+    grid-area: 'dineroTotal';
+    background-color:#fff;
+    box-shadow: 0px 0px 88px 26px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grafica{
+    grid-area: 'dineroTotal';
+    background-color:#fff;
+    box-shadow: 0px 0px 88px 26px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productosCasiAgotados{
+    grid-area: 'dineroTotal';
+    background-color:#fff;
+    box-shadow: 0px 0px 88px 26px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+
+     justify-content: center;
+     align-items: center;
+}

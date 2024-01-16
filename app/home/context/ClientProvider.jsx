@@ -1,29 +1,78 @@
 "use client";
 
+import { UrlWeb } from "@/app/libs/UrlWeb";
+import { useParams, useRouter } from "next/navigation";
+
 const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
 
+
+
+
 export const ClientProvider = ({ children }) => {
- 
   const [pedidos, setPedidos] = useState([]);
+const [totalProductos, setTotalProductos] = useState(0)
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [tablaProductos, setTablaProductos] = useState([]);
+
+  const router = useRouter();
+  const params = useParams()
 
 
- /*  useEffect(()=>{
-    const pedidos = JSON.parse(localStorage.getItem("pedidos"));
-  
-    setPedidos(pedidos)
-   
-   
-  
-  },[])
-  
-  useEffect(()=>{
-  localStorage.setItem("pedidos",JSON.stringify(pedidos))
-  
-  },[pedidos]) */
+
+  const getProductoPorCategoria = async (categoria) => {
+    const res = await fetch(`${UrlWeb}/categoriaProducto`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: JSON.stringify(categoria),
+    });
+    const data = await res.json();
+    return data;
+  };
+
+
+  useEffect(() => {
+    try {
+     
+      const obtenerProductos = async () => {
+        setLoading(true);
+        const res = await getProductoPorCategoria(params.categoria);
+        console.log(res)
+        setProductos(res);
+        setTablaProductos(res);
+        setLoading(false);
+      };
+      obtenerProductos();
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  const ordenarPorNombre = () => {
+    let res = tablaProductos.sort((a, b) =>
+      a.nombre.localeCompare(b.nombre, undefined, { sensitivity: "base" })
+    );
+
+    setProductos(res);
+    router.refresh();
+  };
   return (
-    <ClientContext.Provider value={{ pedidos, setPedidos }}>
+    <ClientContext.Provider
+      value={{
+        pedidos,
+        setPedidos,
+        ordenarPorNombre,
+        setProductos,
+        setTablaProductos,
+        productos,
+        loading,
+        setLoading,setTotalProductos,totalProductos,tablaProductos
+      }}
+    >
       {children}
     </ClientContext.Provider>
   );

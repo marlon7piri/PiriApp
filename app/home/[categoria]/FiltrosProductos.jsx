@@ -4,15 +4,15 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import {jsPDF} from 'jspdf'
 import  'jspdf-autotable'
-import { convertidordefecha } from "@/app/libs/convertidordefecha";
 import { GrDocumentPdf } from "react-icons/gr";
 import { useSession } from "next-auth/react";
+import { useClientContext } from "../context/ClientProvider";
 
-const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
+const FiltrosProductos = () => {
+  const {tablaProductos, setProductos,productos} = useClientContext()
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
   const {data:session} = useSession()
-  const [filtros, setFiltros] = useState("");
 
   const handlerSearch = (e) => {
     setTerminobusqueda(e.target.value);
@@ -35,7 +35,6 @@ const FiltrosProductos = ({ tablaProductos, setProductos,productos }) => {
  
 
   const filtrarPorCantidades = (value) => {
-    setFiltros(value);
     if (value == "mayor") {
       let result = tablaProductos.sort((a, b) => {
         return b.stock - a.stock;

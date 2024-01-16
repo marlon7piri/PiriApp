@@ -30,8 +30,6 @@ export async function POST(req) {
     precio_por_unidad,
   } = await req.json();
 
-  console.log(itbms);
-  console.log(precio_por_unidad);
   let itbmsreal = 0;
   if (itbms == 0) {
     itbmsreal = 0;
@@ -44,7 +42,7 @@ export async function POST(req) {
     console.log(itbmsreal);
   }
 
-  const a = (precio_por_unidad / presentacion_por_unidad) + itbmsreal;
+  const a = precio_por_unidad  + itbmsreal;
   
   try {
     connectDb();
