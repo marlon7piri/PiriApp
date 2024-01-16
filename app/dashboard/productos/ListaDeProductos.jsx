@@ -95,7 +95,7 @@ const ListaDeProductos = ({ productos }) => {
                     </td>
 
                     <td className="px-6 py-4">${product.costo}</td>
-                    <td className="px-6 py-4">${product.stock}</td>
+                    <td className="px-6 py-4">{product.stock}</td>
                     <td className="px-6 py-4">{product.proveedor}</td>
                     <td
                       className={

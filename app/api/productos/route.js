@@ -48,7 +48,6 @@ export async function POST(req) {
   }
 
 
-  console.log('costo total',costototal);
   try {
     connectDb();
     const newproducts = new Products({
@@ -60,10 +59,10 @@ export async function POST(req) {
       unidad,
       mas_vendido,
       proveedor,
-      itbms: itbmsreal.toFixed(2),
-      costo: costototal.toFixed(2),
       presentacion_por_unidad,
       precio_por_unidad,
+      itbms: itbmsreal.toFixed(2),
+      costo: costototal.toFixed(2),
     });
 
     const producto = await newproducts.save();
