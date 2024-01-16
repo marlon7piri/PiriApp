@@ -62,7 +62,11 @@ export async function PUT(req, { params }) {
     
   } 
 
-  const a = precio_por_unidad / presentacion_por_unidad;
+  const valor = precio_por_unidad / presentacion_por_unidad;
+  const impuesto_del_valor = valor * 0.1
+  const costototal = valor + impuesto_del_valor
+
+  console.log('costo total' ,costototal);
 
   try {
     connectDb();
@@ -77,9 +81,9 @@ export async function PUT(req, { params }) {
       mas_vendido,
       proveedor,
       itbms: itbmsreal.toFixed(2),
-      costo: a.toFixed(
+      costo: costototal.toFixed(
         2
-      ) + itbmsreal,
+      ),
     });
 
    

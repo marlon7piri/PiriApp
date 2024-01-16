@@ -23,7 +23,7 @@ const NavProductos = () => {
     replace(`${pathname}?${params}`);
   }, 300);
   return (
-    <nav className="flex justify-between bg-slate-50 shadow-2xl p-4 rounded-md">
+    <nav className="flex justify-between bg-slate-50 shadow-2xl p-4 rounded-md mt-8">
       <input
         type="text"
         onChange={handlerSearch}

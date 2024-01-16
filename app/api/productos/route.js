@@ -30,20 +30,25 @@ export async function POST(req) {
     precio_por_unidad,
   } = await req.json();
 
+  let valor = 0;
+  let impuesto_del_valor = 0;
+  let costototal = 0;
+
   let itbmsreal = 0;
   if (itbms == 0) {
     itbmsreal = 0;
-    console.log(itbmsreal);
   } else if (itbms == 7) {
-    itbmsreal = precio_por_unidad * 0.07
-    console.log(itbmsreal);
+    valor = precio_por_unidad / presentacion_por_unidad;
+    impuesto_del_valor = valor * 0.07;
+    costototal = valor + impuesto_del_valor;
   } else if (itbms == 10) {
-    itbmsreal = precio_por_unidad * 0.1
-    console.log(itbmsreal);
+    valor = precio_por_unidad / presentacion_por_unidad;
+    impuesto_del_valor = valor * 0.1;
+    costototal = valor + impuesto_del_valor;
   }
 
-  const a = precio_por_unidad  + itbmsreal;
-  
+
+  console.log('costo total',costototal);
   try {
     connectDb();
     const newproducts = new Products({
@@ -56,9 +61,7 @@ export async function POST(req) {
       mas_vendido,
       proveedor,
       itbms: itbmsreal.toFixed(2),
-      costo: a.toFixed(
-        2
-      ),
+      costo: costototal.toFixed(2),
       presentacion_por_unidad,
       precio_por_unidad,
     });

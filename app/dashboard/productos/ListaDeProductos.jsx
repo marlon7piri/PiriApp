@@ -28,15 +28,9 @@ const ListaDeProductos = ({ productos }) => {
   return (
     <Suspense>
       <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex gap-2">
-          {" "}
-          <span className="">Dinero Total en Stock: ${total.toFixed(3)}</span>
-          <span className="">
-            Cantidad De Productos: {productos.length}
-          </span>
-        </div>
+        
 
-        <table className="w-full h-full relative text-sm text-left text-gray-500 dark:text-gray-400">
+        <table className="w-full h-full  relative text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
             <tr>
               {/*  <th scope="col" className="px-6 py-3">
@@ -58,6 +52,9 @@ const ListaDeProductos = ({ productos }) => {
 
               <th scope="col" className="px-6 py-3">
                 Costo
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Stock
               </th>
 
               <th scope="col" className="px-6 py-3">
@@ -98,6 +95,7 @@ const ListaDeProductos = ({ productos }) => {
                     </td>
 
                     <td className="px-6 py-4">${product.costo}</td>
+                    <td className="px-6 py-4">${product.stock}</td>
                     <td className="px-6 py-4">{product.proveedor}</td>
                     <td
                       className={

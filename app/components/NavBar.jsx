@@ -27,9 +27,9 @@ const NavBar = () => {
         src="/logo.jpg"
         width={120} priority='true'
         height={120}
-        className="border border-slate-300 rounded-full p-2 "
+        className=" rounded-full p-2 "
       />
-      <ul className="w-full mt-4 flex flex-col gap-4">
+      <ul className="w-full mt-6 flex flex-col gap-4">
       <div className={fondoLinks("/dashboard")}>
           {" "}
           <ProductIcon />
