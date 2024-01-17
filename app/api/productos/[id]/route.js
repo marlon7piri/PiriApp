@@ -69,7 +69,6 @@ export async function PUT(req, { params }) {
   }
 
   
-console.log(costototal);
 
   try {
     connectDb();

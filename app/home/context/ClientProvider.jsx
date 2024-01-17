@@ -7,21 +7,16 @@ const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
 
-
-
-
 export const ClientProvider = ({ children }) => {
   const [pedidos, setPedidos] = useState([]);
-const [totalProductos, setTotalProductos] = useState(0)
+  const [totalProductos, setTotalProductos] = useState(0);
   const [productos, setProductos] = useState([]);
+  const [mermas, setMermas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
 
-
   const router = useRouter();
-  const params = useParams()
-
-
+  const params = useParams();
 
   const getProductoPorCategoria = async (categoria) => {
     const res = await fetch(`${UrlWeb}/categoriaProducto`, {
@@ -35,7 +30,14 @@ const [totalProductos, setTotalProductos] = useState(0)
     return data;
   };
 
-
+  useEffect(() => {
+    const getMermas = async () => {
+      const res = await fetch(`${UrlWeb}/mermas`);
+      const data = await res.json();
+      setMermas(data);
+    };
+    getMermas();
+  });
 
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
@@ -44,7 +46,7 @@ const [totalProductos, setTotalProductos] = useState(0)
 
       setTotalProductos(data);
     };
-    obtenerTodosLosProductos()
+    obtenerTodosLosProductos();
   });
   const ordenarPorNombre = () => {
     let res = tablaProductos.sort((a, b) =>
@@ -64,7 +66,12 @@ const [totalProductos, setTotalProductos] = useState(0)
         setTablaProductos,
         productos,
         loading,
-        setLoading,setTotalProductos,totalProductos,tablaProductos,getProductoPorCategoria
+        setLoading,
+        setTotalProductos,
+        totalProductos,
+        tablaProductos,
+        getProductoPorCategoria,
+        mermas,setMermas
       }}
     >
       {children}
