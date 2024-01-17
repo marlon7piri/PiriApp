@@ -7,22 +7,10 @@ import Link from "next/link";
 import React from "react";
 import toast from "react-hot-toast";
 
-const TablaMermas = () => {
-  const { mermas,pedidos ,loading,ordenarPorNombre} = useClientContext();
+const TablaMermas = ({mermas}) => {
+  const { loading,ordenarPorNombre} = useClientContext();
 
-/*   const addPedidos = (product) => {
-    const product_exist = pedidos.find((e) => {
-      return e._id === product._id;
-    });
 
-    if (product_exist) {
-      toast.error("El producto agregado ya existe");
-      return
-    } else {
-      setPedidos([...pedidos, product]);
-      toast.success("producto agregado al pedido");
-    }
-  }; */
 
   if (loading){
     return <div class="loader"></div>
@@ -91,7 +79,7 @@ const TablaMermas = () => {
                 <td
                   className='px-6 py-4'
                 >
-                {  convertidordefecha (product.fecha)}
+                {product.fecha}
                 </td>
 
                 <td className="px-6 py-4 ">{product.servicio}</td>
@@ -101,13 +89,13 @@ const TablaMermas = () => {
 
                 <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
                   <Link
-                    href={`/home/${product.categoria}/${product._id}`}
+                    href={`/home/`}
                     className=" rounded-full p-2 bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"
                   >
                     <EditIcon />
                   </Link>
                   <button
-                    onClick={() => addPedidos(product)}
+                   /*  onClick={() => addPedidos(product)} */
                     className=" rounded-full p-2 bg-green-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-green-700"
                   >
                     <StoreIcon />

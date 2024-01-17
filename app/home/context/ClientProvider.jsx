@@ -12,6 +12,7 @@ export const ClientProvider = ({ children }) => {
   const [totalProductos, setTotalProductos] = useState(0);
   const [productos, setProductos] = useState([]);
   const [mermas, setMermas] = useState([]);
+  const [tablademermas, setTablademermas] = useState([])
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
 
@@ -30,14 +31,6 @@ export const ClientProvider = ({ children }) => {
     return data;
   };
 
-  useEffect(() => {
-    const getMermas = async () => {
-      const res = await fetch(`${UrlWeb}/mermas`);
-      const data = await res.json();
-      setMermas(data);
-    };
-    getMermas();
-  });
 
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
@@ -71,7 +64,7 @@ export const ClientProvider = ({ children }) => {
         totalProductos,
         tablaProductos,
         getProductoPorCategoria,
-        mermas,setMermas
+        mermas,setMermas,setTablademermas,tablademermas
       }}
     >
       {children}
