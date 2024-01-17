@@ -2,10 +2,13 @@
 
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useParams, useRouter } from "next/navigation";
-
+import NextAuthProvider from "../components/NextAuthProvider";
+import {useSession} from 'next-auth/react'
 const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
+
+
 
 export const ClientProvider = ({ children }) => {
   const [pedidos, setPedidos] = useState([]);
@@ -15,9 +18,11 @@ export const ClientProvider = ({ children }) => {
   const [tablademermas, setTablademermas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
-
+  const {data:session} =  useSession()
   const router = useRouter();
   const params = useParams();
+
+ /*  console.log(session) */
 
   const getProductoPorCategoria = async (categoria) => {
     const res = await fetch(
@@ -43,7 +48,7 @@ export const ClientProvider = ({ children }) => {
       setTotalProductos(data);
     };
     obtenerTodosLosProductos();
-  });
+  },[]);
   const ordenarPorNombre = () => {
     let res = tablaProductos.sort((a, b) =>
       a.nombre.localeCompare(b.nombre, undefined, { sensitivity: "base" })
@@ -53,6 +58,7 @@ export const ClientProvider = ({ children }) => {
     router.refresh();
   };
   return (
+    <NextAuthProvider>
     <ClientContext.Provider
       value={{
         pedidos,
@@ -75,6 +81,7 @@ export const ClientProvider = ({ children }) => {
     >
       {children}
     </ClientContext.Provider>
+    </NextAuthProvider>
   );
 };
 

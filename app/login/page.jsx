@@ -2,14 +2,14 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
-import {useRouter} from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginInProgress, setLoginInProgress] = useState(false);
-  const [error, setError] = useState("")
-  const router = useRouter()
+  const [error, setError] = useState("");
+  const router = useRouter();
   async function handleFormSubmit(ev) {
     ev.preventDefault();
     try {
@@ -20,27 +20,24 @@ export default function Login() {
         password: password,
         redirect: false,
       });
-      if(res.error){
-        setError("invalid credentials")
-        setEmail("")
-        setPassword("")
-        setLoginInProgress(false);
-        return 
-      
-      }
-        router.replace('/home')
-      
-     
 
+      if (res.error) {
+        setError("invalid credentials");
+        setEmail("");
+        setPassword("");
+        setLoginInProgress(false);
+        return;
+      }
+      router.replace("/home");
       setLoginInProgress(false);
     } catch (error) {
-      setError(error)
+      setError(error);
     }
   }
   return (
     <section className="w-full h-screen mt-8">
       <h1 className="text-center text-primary text-4xl mb-4">Login</h1>
-   
+
       <form
         className="max-w-xs mx-auto flex flex-col p-4 bg-slate-900  gap-4 "
         onSubmit={handleFormSubmit}
@@ -61,7 +58,11 @@ export default function Login() {
           disabled={loginInProgress}
           onChange={(ev) => setPassword(ev.target.value)}
         />
-         {error&&  <span className="bg-red-500 p-2 text-salte-50 text-center">{error}</span>}
+        {error && (
+          <span className="bg-red-500 p-2 text-salte-50 text-center">
+            {error}
+          </span>
+        )}
         <button
           disabled={loginInProgress}
           type="submit"
