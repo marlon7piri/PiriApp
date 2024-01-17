@@ -6,4 +6,4 @@ const EditMermas = () => {
   )
 }
 
-export default page
+export default EditMermas
