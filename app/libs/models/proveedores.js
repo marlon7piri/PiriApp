@@ -8,4 +8,4 @@ const ProveedoresSchema = new mongoose.Schema({
 });
 
 export const Proveedor =
-  mongoose.models.User || mongoose.model("Proveedor", ProveedoresSchema);
+  mongoose.models.Proveedor || mongoose.model("Proveedor", ProveedoresSchema);

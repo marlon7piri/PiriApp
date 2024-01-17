@@ -12,6 +12,8 @@ import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
 const page = () => {
   const { data: session } = useSession();
 
+  console.log(session)
+
  if (!session?.isAdmin) {
     redirect("/home");
   } 

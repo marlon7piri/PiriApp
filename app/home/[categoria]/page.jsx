@@ -4,7 +4,7 @@ import TablaProductos from "./TablaProductos";
 import FiltrosProductos from "./FiltrosProductos";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useRouter } from "next/navigation";
-import { useClientContext } from "../context/ClientProvider";
+import { useClientContext } from "../../context/ClientProvider";
 
 
 
@@ -14,6 +14,8 @@ const Categoria = ({params}) => {
  const {setTablaProductos,setProductos,setLoading,tablaProductos,ordenarPorNombre,getProductoPorCategoria} = useClientContext()
 
 /*   const router = useRouter() */
+
+console.log(params)
  useEffect(() => {
     try {
       setLoading(true)

@@ -5,8 +5,8 @@ import { NextResponse } from "next/server";
 export async function DELETE(req, { params }) {
   const id = await params.id;
 
-  await connectDb();
   try {
+    await connectDb();
     const productdeleted = await Products.findByIdAndDelete(id);
 
     if (!productdeleted) return NextResponse.json(404);

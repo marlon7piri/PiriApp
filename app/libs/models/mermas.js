@@ -33,4 +33,4 @@ const MermasSchema = new mongoose.Schema(
 );
 
 export const Merma =
-  mongoose.models.Merma || mongoose.model("Merma", MermasSchema);
+  mongoose.models?.Merma || mongoose.model("Merma", MermasSchema);

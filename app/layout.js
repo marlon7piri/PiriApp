@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import NextAuthProvider from "./components/NextAuthProvider";
-import { ClientProvider } from "./home/context/ClientProvider";
+import { ClientProvider } from "./context/ClientProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],

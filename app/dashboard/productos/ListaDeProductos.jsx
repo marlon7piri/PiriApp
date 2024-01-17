@@ -7,26 +7,16 @@ import Botones from "./Botones";
 import { convertidordefecha } from "@/app/libs/convertidordefecha";
 
 const ListaDeProductos = ({ productos }) => {
-  const [total, setTotal] = useState(0);
+  
 
-  const getTotal = () => {
-    const numero = productos.reduce((acc, current) => {
-      return acc + current.precio_por_unidad * current.stock;
-    }, 0);
-
-    setTotal(numero);
-  };
-
-  useEffect(() => {
-    getTotal();
-  }, [productos]);
+ 
 
  
 
  
 
   return (
-    <Suspense>
+  
       <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg">
         
 
@@ -108,7 +98,7 @@ const ListaDeProductos = ({ productos }) => {
                     </td>
                     <td className="px-6 py-4">{product.categoria}</td>
                     <td className="px-6 py-4">
-                      {convertidordefecha(product.createdAt)}
+                      {convertidordefecha(product.createdAt)} 
                     </td>
 
                     <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
@@ -121,7 +111,7 @@ const ListaDeProductos = ({ productos }) => {
           </tbody>
         </table>
       </div>
-    </Suspense>
+   
   );
 };
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import styles from "./section.module.css";
-import { useClientContext } from "../home/context/ClientProvider";
+import { useClientContext } from "../context/ClientProvider";
 
 
 const DashboardTotalProductos = () => {

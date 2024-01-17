@@ -6,7 +6,7 @@ import {jsPDF} from 'jspdf'
 import  'jspdf-autotable'
 import { GrDocumentPdf } from "react-icons/gr";
 import { useSession } from "next-auth/react";
-import { useClientContext } from "../context/ClientProvider";
+import { useClientContext } from "../../context/ClientProvider";
 
 const FiltrosProductos = () => {
   const {tablaProductos, setProductos,productos} = useClientContext()

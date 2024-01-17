@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./section.module.css";
-import { useClientContext } from "../home/context/ClientProvider";
+import { useClientContext } from "../context/ClientProvider";
 
 const DashboardDineroEnInventario = () => {
   const { setTotalProductos, totalProductos, productos } = useClientContext();

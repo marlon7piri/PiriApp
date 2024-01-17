@@ -9,10 +9,10 @@ const ClientContext = createContext();
 
 export const ClientProvider = ({ children }) => {
   const [pedidos, setPedidos] = useState([]);
-  const [totalProductos, setTotalProductos] = useState(0);
+  const [totalProductos, setTotalProductos] = useState([]);
   const [productos, setProductos] = useState([]);
   const [mermas, setMermas] = useState([]);
-  const [tablademermas, setTablademermas] = useState([])
+  const [tablademermas, setTablademermas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
 
@@ -20,21 +20,24 @@ export const ClientProvider = ({ children }) => {
   const params = useParams();
 
   const getProductoPorCategoria = async (categoria) => {
-    const res = await fetch(`${UrlWeb}/categoriaProducto`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: JSON.stringify(categoria),
-    });
+    const res = await fetch(
+      `${UrlWeb}/categoriaProducto`,
+     
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: JSON.stringify(categoria),
+      }
+    );
     const data = await res.json();
     return data;
   };
 
-
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
-      const res = await fetch(`${UrlWeb}/productos`);
+      const res = await fetch(`${UrlWeb}/productos`, { cache: "no-cache" });
       const data = await res.json();
 
       setTotalProductos(data);
@@ -64,7 +67,10 @@ export const ClientProvider = ({ children }) => {
         totalProductos,
         tablaProductos,
         getProductoPorCategoria,
-        mermas,setMermas,setTablademermas,tablademermas
+        mermas,
+        setMermas,
+        setTablademermas,
+        tablademermas,
       }}
     >
       {children}

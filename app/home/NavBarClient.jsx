@@ -11,6 +11,7 @@ import Image from "next/image";
 const NavBarClient = () => {
   const { back } = useRouter();
   const {data:session} = useSession()
+
   if(!session) redirect('/login') 
 
   return (

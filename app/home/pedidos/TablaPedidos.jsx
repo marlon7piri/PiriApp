@@ -3,7 +3,7 @@
 import StoreIcon from "@/app/icons/StoreIcon";
 import Link from "next/link";
 import React from "react";
-import { useClientContext } from "../context/ClientProvider";
+import { useClientContext } from "../../context/ClientProvider";
 import DeleteIcon from "@/app/icons/DeleteIcon";
 import toast from "react-hot-toast";
 

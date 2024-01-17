@@ -3,7 +3,7 @@ import EditIcon from "@/app/icons/EditIcon";
 import StoreIcon from "@/app/icons/StoreIcon";
 import Link from "next/link";
 import React from "react";
-import { useClientContext } from "../context/ClientProvider";
+import { useClientContext } from "../../context/ClientProvider";
 import toast from "react-hot-toast";
 
 const TablaProductos = () => {
