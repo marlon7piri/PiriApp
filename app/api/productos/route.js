@@ -30,6 +30,7 @@ export async function POST(req) {
     precio_por_unidad,
   } = await req.json();
 
+
   let valor = 0;
   let impuesto_del_valor = 0;
   let costototal = 0;

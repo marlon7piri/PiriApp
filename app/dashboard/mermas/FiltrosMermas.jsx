@@ -19,6 +19,10 @@ const FiltrosMermas = ({ mermas, tablaMermas, setMermas }) => {
     } else {
       setMermas(result);
     } 
+  }
+    const limpiar = () => {
+      setMermas(tablaMermas);
+     
    
   };
   return (
@@ -26,6 +30,9 @@ const FiltrosMermas = ({ mermas, tablaMermas, setMermas }) => {
       <input type="date" onChange={(e) => setFecha(e.target.value)}  value={fecha} className="cursor-pointer"/>
       <button type="submit" onClick={filtrar} className="w-max ml-4 bg-sky-500  hover:bg-sky-900 px-4 py-2 rounded-sm">
         Filtrar
+      </button>
+      <button type="submit" onClick={limpiar} className="w-max ml-4 bg-sky-500  hover:bg-sky-900 px-4 py-2 rounded-sm">
+        Limpiar
       </button>
 
       <TablaMermas mermas={mermas}  setMermas={setMermas}/>

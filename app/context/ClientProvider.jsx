@@ -2,8 +2,7 @@
 
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useParams, useRouter } from "next/navigation";
-import NextAuthProvider from "../components/NextAuthProvider";
-import { useSession } from "next-auth/react";
+import { useSession,SessionProvider} from "next-auth/react";
 const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
@@ -16,12 +15,10 @@ export const ClientProvider = ({ children }) => {
   const [tablademermas, setTablademermas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tablaProductos, setTablaProductos] = useState([]);
-  const [dinerototal, setDinerototal] = useState(0)
-  const [avisodecorreo, setAvisodecorreo] = useState(false)
+  const [dinerototal, setDinerototal] = useState(0);
+  const [avisodecorreo, setAvisodecorreo] = useState(false);
   const router = useRouter();
   const params = useParams();
-
-  /*  console.log(session) */
 
   const getProductoPorCategoria = async (categoria) => {
     const res = await fetch(
@@ -41,13 +38,16 @@ export const ClientProvider = ({ children }) => {
 
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
-      const res = await fetch(`${UrlWeb}/productos`, { cache: "no-cache" });
+      const res = await fetch(`${UrlWeb}/productos`,{cache:'reload'});
       const data = await res.json();
       setTotalProductos(data);
       conteoDineroTotal(data);
     };
     obtenerTodosLosProductos();
   }, []);
+  
+
+
   const ordenarPorNombre = () => {
     let res = tablaProductos.sort((a, b) =>
       a.nombre.localeCompare(b.nombre, undefined, { sensitivity: "base" })
@@ -57,7 +57,7 @@ export const ClientProvider = ({ children }) => {
     router.refresh();
   };
 
- /*  const prueba = [
+  /*  const prueba = [
     {
       _id: "659f81d507a62",
       nombre: "Aguacate",
@@ -96,7 +96,7 @@ export const ClientProvider = ({ children }) => {
     },
   ]; */
 
-  const conteoDineroTotal = ( array ) => {
+  const conteoDineroTotal = (array) => {
     const valor = array.reduce((acc, current) => {
       return (acc += current.precio_por_unidad * current.stock);
     }, 0);
@@ -104,7 +104,7 @@ export const ClientProvider = ({ children }) => {
     setDinerototal(valor);
   };
   return (
-    <NextAuthProvider>
+    <SessionProvider>
       <ClientContext.Provider
         value={{
           pedidos,
@@ -122,12 +122,15 @@ export const ClientProvider = ({ children }) => {
           mermas,
           setMermas,
           setTablademermas,
-          tablademermas,dinerototal,avisodecorreo
+          tablademermas,
+          dinerototal,
+          avisodecorreo,
+          setAvisodecorreo,
         }}
       >
         {children}
       </ClientContext.Provider>
-    </NextAuthProvider>
+    </SessionProvider>
   );
 };
 

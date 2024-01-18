@@ -16,9 +16,13 @@ const page = () => {
 
   console.log(session);
 
-  if (!session?.isAdmin) {
+ /* useEffect(()=>{
+    localStorage.setItem('sesion',session)
+  },[])
+
+   if (!session?.isAdmin) {
     redirect("/home");
-  }
+  } */
 /* 
   const timer = 5000;
   useEffect(() => {

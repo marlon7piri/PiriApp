@@ -6,19 +6,18 @@ import Image from "next/image";
 const DashboardProductosCasiAgotados = () => {
   const { setTotalProductos, totalProductos } = useClientContext();
 
-  const [productos, setProductos] = useState([]);
 
   const ordenarProductos = () => {
     const ordenados = totalProductos.sort((a, b) => {
       return a.stock - b.stock;
     });
 
-    setProductos(ordenados);
+    return ordenados 
   };
 
-  useEffect(() => {
-    ordenarProductos();
-  }, []);
+ 
+    const productos = ordenarProductos();
+ 
 
   // Mostrar solo los 5 primeros productos
   var primerosCincoProductos = productos.slice(0, 7);
@@ -46,7 +45,7 @@ const DashboardProductosCasiAgotados = () => {
           </tr>
         </thead>
         <tbody>
-        {primerosCincoProductos.map((e) => {
+        {primerosCincoProductos?.map((e) => {
           return (
             <tr className="border border-b-slate-500">
               <td>{e.nombre}</td>
