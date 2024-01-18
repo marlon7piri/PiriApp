@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import styles from "./login.module.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -35,42 +36,45 @@ export default function Login() {
     }
   }
   return (
-    <section className="w-full h-screen mt-8">
-      <h1 className="text-center text-primary text-4xl mb-4">Login</h1>
+    <section className="w-full h-screen flex">
+      <div className="w-[45%] bg-gray-900 flex justify-center flex-col" >
+        <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">Login</h1>
 
-      <form
-        className="max-w-xs mx-auto flex flex-col p-4 bg-slate-900  gap-4 "
-        onSubmit={handleFormSubmit}
-      >
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          value={email}
-          disabled={loginInProgress}
-          onChange={(ev) => setEmail(ev.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={password}
-          disabled={loginInProgress}
-          onChange={(ev) => setPassword(ev.target.value)}
-        />
-        {error && (
-          <span className="bg-red-500 p-2 text-salte-50 text-center">
-            {error}
-          </span>
-        )}
-        <button
-          disabled={loginInProgress}
-          type="submit"
-          className="bg-sky-500 hover:bg-sky-900 px-4  py-2 rounded-sm w-max m-auto"
+        <form
+          className="max-w-xs mx-auto flex flex-col p-4 bg-slate-50  gap-4 rounded-md"
+          onSubmit={handleFormSubmit}
         >
-          Login
-        </button>
-      </form>
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={email}
+            disabled={loginInProgress}
+            onChange={(ev) => setEmail(ev.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            disabled={loginInProgress}
+            onChange={(ev) => setPassword(ev.target.value)}
+          />
+          {error && (
+            <span className="bg-red-500 p-2 text-salte-50 text-center">
+              {error}
+            </span>
+          )}
+          <button
+            disabled={loginInProgress}
+            type="submit"
+            className="bg-sky-500 hover:bg-sky-900 px-8  py-2 rounded-md w-max m-auto"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+      <div className={styles.section}></div>
     </section>
   );
 }
