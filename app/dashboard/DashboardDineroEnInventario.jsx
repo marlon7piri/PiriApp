@@ -1,29 +1,15 @@
-
 import React, { useEffect, useState } from "react";
 import styles from "./section.module.css";
 import { useClientContext } from "../context/ClientProvider";
+import Image from 'next/image'
 
 const DashboardDineroEnInventario = () => {
-  const { setTotalProductos, totalProductos, productos } = useClientContext();
-  const [dinerototal, setDinerototal] = useState(0)
-
-
- const obtenerDineroTotal = () => {
-    const total = totalProductos?.reduce((acc, current) => {
-      return (acc = current.precio_por_unidad * current.stock );
-    }, 0);
-    setDinerototal(total);
-    
-  };
-
-  useEffect(() => {
-    obtenerDineroTotal();
-  }, []);
+  const { dinerototal } = useClientContext();
 
 
   return (
     <div className={styles.dineroInventario}>
-      Dinero En Inventario: $ {dinerototal}
+    <Image src='/moneyicon.png' alt="icono de dinero" width={65} height={65} className="object-cover"/><span className="text-2xl font-bold">${dinerototal.toFixed(2)}</span>
     </div>
   );
 };

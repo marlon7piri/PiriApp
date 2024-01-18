@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { useClientContext } from "../../context/ClientProvider";
 
 const FiltrosProductos = () => {
-  const {tablaProductos, setProductos,productos} = useClientContext()
+  const {tablaProductos, setProductos,productos,setAvisodecorreo,avisodecorreo} = useClientContext()
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter()
   const {data:session} = useSession()
@@ -68,7 +68,7 @@ const FiltrosProductos = () => {
       head:[column],
       body:body
      })
-
+     setAvisodecorreo(!avisodecorreo)
      jspdf.save(`Inventario_Semanal-${fecha}.pdf`) 
   }
   return (

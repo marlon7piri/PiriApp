@@ -45,7 +45,6 @@ const NewProducto = () => {
       toast.error("Error");
     } else {
       const producto = await res.json();
-      console.log(producto);
       toast.success("Producto creado");
       router.push("/dashboard/productos");
       router.refresh();

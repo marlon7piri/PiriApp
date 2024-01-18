@@ -3,41 +3,50 @@
 import React, { useEffect, useState } from "react";
 import styles from "./section.module.css";
 import { useClientContext } from "../context/ClientProvider";
-import { useRouter } from "next/navigation";
-import { getProductos } from "../libs/actions/productos/get-productos";
 
 const DashboardProductosMasYMenosVendidos = () => {
-  /*  const [productos, setProductos] = useState([])
-  const router = useRouter();
+  const { totalProductos } = useClientContext();
+  const [masVendidos, setMasVendidos] = useState([]);
+  console.log(totalProductos);
 
- 
-    useEffect(() => {
-      const obtenerProductos = async () => {
-        const res = await getProductos();
-        setProductos(res);
-      };
-      obtenerProductos();
-    }, []); */
-
-  /*    const ordenarProductos = () => {
-    const result = productos.sort((a, b) => {
-      return b.stock - a.stock;
+  const obtenerMasvendidos = () => {
+    const res = totalProductos.filter((e) => {
+      return e.mas_vendido === true;
     });
 
-    setProductos(result);
-    router.refresh();
+    setMasVendidos(res);
   };
 
-  const primeroscinco = productos.slice(0, 5);
   useEffect(() => {
-    ordenarProductos();
-  }, []); */
+    obtenerMasvendidos();
+  }, []);
+
   return (
     <div className={styles.masVendidos}>
-      <h2>Productos Mas Vendidos</h2>
-      <ul>
-        <li>productos mas vendidos</li>
-      </ul>
+      <h2 className="text-green-700 text-left text-xl w-max my-4 font-bold">Productos Mas Vendidos</h2>
+
+      <table className="w-full text-slate-800">
+        <thead className="w-full text-left">
+          <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+        {masVendidos.slice(0, 10).map((e) => {
+          return (
+            <tr className="border border-b-slate-500">
+              <td>{e.nombre}</td>
+              <td>{e.precio_por_unidad}</td>
+              <td>{e.stock}</td>
+              </tr>
+              
+          );
+        })}
+         </tbody>
+      </table>
+      
     </div>
   );
 };
