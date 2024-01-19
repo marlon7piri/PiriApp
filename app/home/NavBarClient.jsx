@@ -12,6 +12,8 @@ const NavBarClient = () => {
   const { back } = useRouter();
   const { data: session } = useSession();
 
+  
+
   return (
     <nav className="bg-slate-50 w-full flex justify-between  items-center p-4 fixed ">
       <Image
@@ -39,8 +41,7 @@ const NavBarClient = () => {
             Logout
           </button>
         )}
-        {session?.user.email === "marlon7piri@gmail.com" ||
-        session?.user.email === "antoniojtnox@gmail.com" ? (
+        {session?.isAdmin  ? (                                                                          
           <Link href="/dashboard">Dashboard</Link>
         ) : (
           ""

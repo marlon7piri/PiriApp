@@ -47,11 +47,11 @@ const page = () => {
 
       <section className={styles.section}>
         {" "}
-        <DashboardGrafica />
-        <div className="flex w-full p-4 gap-4">
+{/*         <DashboardGrafica /> */}
+
           <DashboardTotalProductos />
           <DashboardDineroEnInventario />
-        </div>
+       
         <DashboardProductosMasYMenosVendidos />
         <DashboardProductosCasiAgotados />
       </section>

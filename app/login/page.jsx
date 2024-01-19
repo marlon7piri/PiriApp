@@ -13,32 +13,33 @@ export default function Login() {
   const router = useRouter();
   async function handleFormSubmit(ev) {
     ev.preventDefault();
-    try {
-      setLoginInProgress(true);
 
-      const res = await signIn("credentials", {
-        email: email,
-        password: password,
-        redirect: false,
-      });
+    setLoginInProgress(true);
 
-      if (res.error) {
-        setError("invalid credentials");
-        setEmail("");
-        setPassword("");
-        setLoginInProgress(false);
-        return;
-      }
-      router.replace("/home");
+    const res = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false,
+    });
+
+    console.log(res.error);
+
+    if (res.error) {
+      setError(res.error);
+      setEmail("");
+      setPassword("");
       setLoginInProgress(false);
-    } catch (error) {
-      setError(error);
+     
     }
+    router.push("/home");
+    setLoginInProgress(false);
   }
   return (
     <section className="w-full h-screen flex">
-      <div className="w-[45%] bg-gray-900 flex justify-center flex-col" >
-        <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">Login</h1>
+      <div className="w-[45%] bg-gray-900 flex justify-center flex-col">
+        <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">
+          Login
+        </h1>
 
         <form
           className="max-w-xs mx-auto flex flex-col p-4 bg-slate-50  gap-4 rounded-md"
@@ -70,7 +71,7 @@ export default function Login() {
             type="submit"
             className="bg-sky-500 hover:bg-sky-900 px-8  py-2 rounded-md w-max m-auto"
           >
-            Login
+            {loginInProgress ? "loading..." : "Login"}
           </button>
         </form>
       </div>
