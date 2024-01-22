@@ -11,11 +11,11 @@ import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
 const schema = yup
   .object({
     nombre: yup.string().max(50).required(),
-    stock: yup.number().positive().required(),
-    stock_min: yup.number().positive().required(),
+    stock: yup.number().positive().required().min(0),
+    stock_min: yup.number().positive().required().min(0),
 
-    precio_por_unidad: yup.number().positive().required(),
-    presentacion_por_unidad: yup.number().positive().required(),
+    precio_por_unidad: yup.number().positive().required().min(0),
+    presentacion_por_unidad: yup.number().positive().required().min(0),
     itbms: yup.number().required(),
   })
   .required();

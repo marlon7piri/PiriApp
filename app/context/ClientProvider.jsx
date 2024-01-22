@@ -2,7 +2,7 @@
 
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useParams, useRouter } from "next/navigation";
-import { useSession,SessionProvider} from "next-auth/react";
+import { useSession, SessionProvider } from "next-auth/react";
 const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
@@ -38,15 +38,13 @@ export const ClientProvider = ({ children }) => {
 
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
-      const res = await fetch(`${UrlWeb}/productos`,{cache:'reload'});
+      const res = await fetch(`${UrlWeb}/productos`, { cache: "reload" });
       const data = await res.json();
       setTotalProductos(data);
       conteoDineroTotal(data);
     };
     obtenerTodosLosProductos();
   }, []);
-  
-
 
   const ordenarPorNombre = () => {
     let res = tablaProductos.sort((a, b) =>

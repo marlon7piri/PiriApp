@@ -42,6 +42,11 @@ const NavBar = () => {
           <ProductIcon />
           <Link href="/dashboard/productos">Productos</Link>
         </div>
+        <div className={fondoLinks("/dashboard/productos")}>
+          {" "}
+          <ProductIcon />
+          <Link href="/dashboard/inventarios">Inventarios</Link>
+        </div>
         <div className={fondoLinks("/dashboard/mermas")}>
           {" "}
           <MermaIcon />
