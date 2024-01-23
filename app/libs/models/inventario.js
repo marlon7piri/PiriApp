@@ -4,7 +4,7 @@ import { Products } from "./productos";
 const SchemaInventario = new mongoose.Schema(
   {
     fecha: {
-      type: Date,
+      type: String,
       required: true,
     },
     productos: {

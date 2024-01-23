@@ -15,7 +15,6 @@ const Categoria = ({params}) => {
 
 /*   const router = useRouter() */
 
-console.log(params)
  useEffect(() => {
     try {
       setLoading(true)

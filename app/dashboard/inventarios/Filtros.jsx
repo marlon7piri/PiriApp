@@ -1,16 +1,15 @@
 'use client'
 
-import Inputs from '@/app/components/Inputs'
 import React from 'react'
 
-const Filtros = () => {
+const Filtros = ({obtenerFecha,fechaseleccionada}) => {
 
-    const filtrar =()=>{
-        alert("Filtrando inventarios por fechas")
+    const filtrar =(e)=>{
+      obtenerFecha(e.target.value)
     }
   return (
     <div>
-        <Inputs onChange={filtrar}/>
+        <input type="date" onChange={filtrar} value={fechaseleccionada} className='cursor-pointer'/>
     </div>
   )
 }

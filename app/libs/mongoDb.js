@@ -4,7 +4,6 @@ export const connectDb = async () => {
 
     const connection ={}
 
-    console.log(process.env.NODE_ENV);
 
     
   try {
