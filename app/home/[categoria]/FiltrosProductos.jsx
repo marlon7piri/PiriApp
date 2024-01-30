@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { useClientContext } from "../../context/ClientProvider";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import toast from "react-hot-toast";
+import Spinner from "@/app/components/Spinner";
 
 const FiltrosProductos = () => {
   const {
@@ -20,6 +21,8 @@ const FiltrosProductos = () => {
   } = useClientContext();
   const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter();
+  const params = useParams();
+  const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
 
   const handlerSearch = (e) => {
@@ -92,22 +95,27 @@ const FiltrosProductos = () => {
 
     // Formatea la fecha en el formato deseado (puedes ajustar el formato según tus preferencias)
     let fechaFormateada = año + "-" + mes + "-" + dia;
-
+    console.log(fechaFormateada);
     // Devuelve la fecha formateada
 
+    let area = params.categoria;
+    setLoading(true);
     const res = await fetch(`${UrlWeb}/inventario`, {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body: JSON.stringify({ fecha: fechaFormateada, productos }),
+      body: JSON.stringify({ fecha: fechaFormateada, productos, area }),
     });
 
     if (!res.ok) {
-      toast.error("Error al enviar el inventario, intente nuevamente");
+      const result = await res.json();
+
+      toast.error(result.error);
     } else {
       toast.success("Inventario enviado");
     }
+    setLoading(false);
   };
   return (
     <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md  mt-32">
@@ -128,15 +136,16 @@ const FiltrosProductos = () => {
       </select>
       <button
         onClick={descargarPDF}
-        className="bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
+        className="flex gap-2 justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
       >
-        <GrDocumentPdf />
+        <span>Descargar</span> <GrDocumentPdf />
       </button>
       <button
+      disabled={loading}
         onClick={EnviarInventario}
-        className="bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
+        className="w-[100px] flex justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
       >
-        Enviar
+        {loading ? <Spinner/> : "Enviar"}
       </button>
     </nav>
   );

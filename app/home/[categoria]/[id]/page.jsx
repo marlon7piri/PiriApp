@@ -12,7 +12,7 @@ import { UrlWeb } from "@/app/libs/UrlWeb";
 
 const schema = yup
   .object({
-    nombre: yup.string().max(20).required(),
+    nombre: yup.string().max(50).required(),
     
     stock: yup.number().positive().required().min(0),
     stock_min: yup.number().positive().required(),
@@ -34,6 +34,7 @@ const EditarProducto = ({ params }) => {
     resolver: yupResolver(schema),
   });
   const actualizarData = async (data) => {
+
     const res = await fetch(`${UrlWeb}/categoriaProducto/${params.id}`, {
       method: "PUT",
       headers: {
@@ -41,6 +42,7 @@ const EditarProducto = ({ params }) => {
       },
       body: JSON.stringify(data),
     });
+
 
 
 
@@ -60,7 +62,9 @@ const EditarProducto = ({ params }) => {
         const res = await fetch(`${UrlWeb}/categoriaProducto/${params.id}`);
         const data = await res.json();
         reset(data);
+
       };
+
       getOnlyProducto();
     } catch (error) {
       console.log(error);

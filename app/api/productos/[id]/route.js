@@ -48,21 +48,24 @@ export async function PUT(req, { params }) {
     precio_por_unidad,
   } = await req.json();
 
+ 
+
   let valor = 0;
   let impuesto_del_valor = 0;
   let costototal = 0;
 
   let itbmsreal = 0;
-  if (itbms == 0) {
-    itbmsreal = 0;
+  if (itbms === 0) {
     valor = precio_por_unidad / presentacion_por_unidad;
   
     costototal = valor;
-  } else if (itbms == 7) {
+  } else if (itbms === 7) {
+    itbmsreal = precio_por_unidad * 0.07;
     valor = precio_por_unidad / presentacion_por_unidad;
     impuesto_del_valor = valor * 0.07;
     costototal = valor + impuesto_del_valor;
-  } else if (itbms == 10) {
+  } else if (itbms === 10) {
+    itbmsreal = precio_por_unidad * 0.1
     valor = precio_por_unidad / presentacion_por_unidad;
     impuesto_del_valor = valor * 0.1;
     costototal = valor + impuesto_del_valor;
@@ -82,7 +85,7 @@ export async function PUT(req, { params }) {
       unidad,
       mas_vendido,
       proveedor,
-      itbms: itbmsreal.toFixed(2),
+      itbms,
       costo: costototal.toFixed(
         2
       ),

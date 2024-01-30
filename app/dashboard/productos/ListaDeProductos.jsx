@@ -10,8 +10,12 @@ const ListaDeProductos = ({ productos }) => {
   
 
  
+/* !=='Prestige Francois Brut' */
+ const res = productos.filter((item)=>{
+  return item.proveedor ==='Varela Hermanos'
+ })
 
- 
+ console.log(res)
 
  
 
@@ -52,6 +56,9 @@ const ListaDeProductos = ({ productos }) => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Mas Vendido
+              </th>
+              <th scope="col" className="px-6 py-3">
+                ITBMS
               </th>
               <th scope="col" className="px-6 py-3">
                 Categoria
@@ -96,6 +103,8 @@ const ListaDeProductos = ({ productos }) => {
                     >
                       {product.mas_vendido ? "Si" : "No"}
                     </td>
+                    <td className="px-6 py-4">{product.itbms}</td>
+
                     <td className="px-6 py-4">{product.categoria}</td>
                     <td className="px-6 py-4">
                       {convertidordefecha(product.createdAt)} 

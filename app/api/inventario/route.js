@@ -3,29 +3,32 @@ import { connectDb } from "@/app/libs/mongoDb";
 import { Inventario } from "@/app/libs/models/inventario";
 
 export async function POST(req) {
-  const { fecha, productos } = await req.json();
+  const { fecha, productos, area } = await req.json();
 
   try {
     connectDb();
-    const invenatriofound = await Inventario.find({});
+    const inventarios = await Inventario.find({});
 
-    console.log(invenatriofound);
 
-    const exist = invenatriofound.find((inventario) => {
-      console.log(inventario.fecha);
-      return inventario.fecha === fecha;
+    const exist = inventarios.find((inventario) => {
+      
+      return inventario.fecha === fecha && inventario.area === area;
     });
 
-    console.log(exist);
 
     if (exist) {
-      return NextResponse.json({
-        error: "Ya existe un inventario con la fecha actual",
-      },{status:401});
+      return NextResponse.json(
+        {
+          error: "No se puede repetir inventario o area ",
+        },
+        { status: 401 }
+      );
     }
+
     const newproducts = new Inventario({
       fecha,
       productos,
+      area
     });
 
     const producto = await newproducts.save();

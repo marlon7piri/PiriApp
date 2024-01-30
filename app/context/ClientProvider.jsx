@@ -11,6 +11,8 @@ export const ClientProvider = ({ children }) => {
   const [pedidos, setPedidos] = useState([]);
   const [totalProductos, setTotalProductos] = useState([]);
   const [productos, setProductos] = useState([]);
+  const [orden, setOrden] = useState([]);
+
   const [mermas, setMermas] = useState([]);
   const [tablademermas, setTablademermas] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -55,44 +57,7 @@ export const ClientProvider = ({ children }) => {
     router.refresh();
   };
 
-  /*  const prueba = [
-    {
-      _id: "659f81d507a62",
-      nombre: "Aguacate",
-      precio: 14.98,
-
-      stock: 3.5,
-
-      precio_por_unidad: 2.25,
-    },
-    {
-      _id: "659f81d1a9507a62",
-      nombre: "Aguacate",
-      precio: 8.65,
-
-      stock: 8.5,
-
-      precio_por_unidad: 8.25,
-    },
-    {
-      _id: "659f81d14363e8862",
-      nombre: "Aguacate",
-      precio: 5.3,
-
-      stock: 52,
-
-      precio_por_unidad: 22.25,
-    },
-    {
-      _id: "659f81d14369507a62",
-      nombre: "Aguacate",
-      precio: 67.96,
-
-      stock: 5,
-
-      precio_por_unidad: 5.25,
-    },
-  ]; */
+ 
 
   const conteoDineroTotal = (array) => {
     const valor = array.reduce((acc, current) => {
@@ -124,6 +89,8 @@ export const ClientProvider = ({ children }) => {
           dinerototal,
           avisodecorreo,
           setAvisodecorreo,
+          orden,
+          setOrden,
         }}
       >
         {children}

@@ -11,6 +11,11 @@ const SchemaInventario = new mongoose.Schema(
       type:[Object],
       required: true,
     },
+    
+    area: {
+      type:String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

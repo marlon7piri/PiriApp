@@ -19,7 +19,6 @@ export  async function PUT(req,{params}) {
   const id =  params.id
   const data = await req.json()
 
-
  
    try {
    connectDb();

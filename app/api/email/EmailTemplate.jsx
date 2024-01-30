@@ -1,7 +1,6 @@
 import React from "react";
 
 const EmailTemplate = ({ pedido }) => {
-  console.log(pedido);
   return (
     <div>
       <h1>Hola queria hacer un pedido para esta semana</h1> 
