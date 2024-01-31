@@ -35,7 +35,7 @@ export default function Login() {
     setLoginInProgress(false);
   }
   return (
-    <section className="w-full h-screen flex">
+    <section className="w-full h-screen lg:flex  sm:flex sm:flex-col md:flex md:flex-col ">
       <div className="w-[45%] bg-gray-900 flex justify-center flex-col">
         <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">
           Login
