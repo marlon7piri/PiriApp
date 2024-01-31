@@ -7,8 +7,8 @@ export const connectDb = async () => {
     if (connection.isConnected) return;
     const db = await mongoose.connect(
       process.env.NODE_ENV === "development"
-        ?
-        process.env.MONGO_URL_TEST  : process.env.MONGO_URL
+        ? process.env.MONGO_URL_TEST
+        : process.env.MONGO_URL
     );
     connection.isConnected = db.connections[0].readyState;
   } catch (error) {

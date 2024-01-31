@@ -3,6 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { ClientProvider } from "./context/ClientProvider";
+import Footer from "./components/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,15 +18,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-     
-        <ClientProvider>
-          <body className={poppins.className}>
-            {children}
-
-            <Toaster />
-          </body>
-        </ClientProvider>
-      
+      <ClientProvider>
+        <body className={poppins.className}>
+          {children}
+          <Footer />
+          <Toaster />
+        </body>
+      </ClientProvider>
     </html>
   );
 }

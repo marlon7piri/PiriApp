@@ -2,11 +2,9 @@
 import React, { /* useEffect, useState  */} from "react";
 import Areas from "./Areas";
 import styles from "./home.module.css";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
-const Home = async() => {
+
+const Home = () => {
 
 
   return (

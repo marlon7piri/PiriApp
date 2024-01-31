@@ -5,9 +5,11 @@ import NavBarClient from "./NavBarClient";
 const layout = ({ children }) => {
 
   return (
-    <div>
+    <div >
       <NavBarClient />
-      {children}
+   <div className="overflow-y-scroll">
+   {children}
+   </div>
     </div>
   );
 };

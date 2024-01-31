@@ -118,7 +118,7 @@ const FiltrosProductos = () => {
     setLoading(false);
   };
   return (
-    <nav className="flex gap-4 justify-between  shadow-2xl  rounded-md  mt-32">
+    <nav className=" lg:flex gap-4 justify-between sm:flex sm:flex-col sm:gap-8 md:flex md:flex-col md:gap-8    mt-32">
       <input
         type="text"
         onChange={handlerSearch}
