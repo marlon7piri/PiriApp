@@ -10,7 +10,7 @@ import { useClientContext } from "../../context/ClientProvider";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import toast from "react-hot-toast";
 import Spinner from "@/app/components/Spinner";
-import styles from './filtros.module.css'
+import styles from "./filtros.module.css";
 
 const FiltrosProductos = () => {
   const {
@@ -118,6 +118,16 @@ const FiltrosProductos = () => {
     }
     setLoading(false);
   };
+
+  const filtrarTipoInventario = (e) => {
+    console.log(e)
+    const res = tablaProductos.filter((item) => {
+      return e === "mas" ? item.mas_vendido : item;
+    });
+
+    console.log(res);
+    setProductos(res)
+  };
   return (
     <nav className={styles.filtrosContainer}>
       <input
@@ -135,6 +145,15 @@ const FiltrosProductos = () => {
         <option value="mayor">Mayor Cantidad</option>
         <option value="menor">Menor Cantidad</option>
       </select>
+      <select
+        name=""
+        id=""
+        onChange={(e) => filtrarTipoInventario(e.target.value)}
+        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500 cursor-pointer"
+      >
+        <option value="todos">Todos</option>
+        <option value="mas">Mas Vendidos</option>
+      </select>
       <button
         onClick={descargarPDF}
         className="flex gap-2 justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
@@ -142,11 +161,11 @@ const FiltrosProductos = () => {
         <span>Descargar</span> <GrDocumentPdf />
       </button>
       <button
-      disabled={loading}
+        disabled={loading}
         onClick={EnviarInventario}
         className="w-[100px] flex justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
       >
-        {loading ? <Spinner/> : "Enviar"}
+        {loading ? <Spinner /> : "Enviar"}
       </button>
     </nav>
   );
