@@ -24,6 +24,8 @@ const NavBarClient = () => {
   const backFunction =()=>{
     back()
     document.getElementById("menu").classList.toggle("show_menu");
+    setCambiarclase(!cambiarclase);
+
 
   }
   return (
