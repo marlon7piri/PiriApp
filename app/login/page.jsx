@@ -11,6 +11,7 @@ export default function Login() {
   const [loginInProgress, setLoginInProgress] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  
   async function handleFormSubmit(ev) {
     ev.preventDefault();
 
@@ -35,14 +36,16 @@ export default function Login() {
     setLoginInProgress(false);
   }
   return (
-    <section className="w-full h-screen lg:flex  sm:flex sm:flex-col md:flex md:flex-col ">
-      <div className="w-[45%] bg-gray-900 flex justify-center flex-col">
-        <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">
+    <section className="w-full h-screen ">
+      <div className={styles.containerLogin}>
+        
+
+       <div className="p-4">
+       <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">
           Login
         </h1>
-
-        <form
-          className="max-w-xs mx-auto flex flex-col p-4 bg-slate-50  gap-4 rounded-md"
+       <form
+          className=" max-w-xs mx-auto flex flex-col p-4 bg-slate-50  gap-4 rounded-md"
           onSubmit={handleFormSubmit}
         >
           <input
@@ -74,8 +77,10 @@ export default function Login() {
             {loginInProgress ? "loading..." : "Login"}
           </button>
         </form>
+       </div>
+       <div className={styles.section}></div>
       </div>
-      <div className={styles.section}></div>
+      
     </section>
   );
 }

@@ -82,7 +82,7 @@ const FormMermas = () => {
       />
       <datalist id="productos">
         {totalProductos.map((e) => {
-           return <option value={e.nombre}>{e.nombre}</option>;
+           return <option value={e.nombre} key={e._id}>{e.nombre}</option>;
          
         })}
       </datalist>

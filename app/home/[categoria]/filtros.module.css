@@ -1,0 +1,11 @@
+.filtrosContainer{
+    display: flex;
+    gap:1rem;
+    margin-top: 6rem;
+}
+
+@media(width<600px){
+    .filtrosContainer{
+        flex-direction: column;
+    }
+}

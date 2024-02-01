@@ -10,6 +10,7 @@ import { useClientContext } from "../../context/ClientProvider";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import toast from "react-hot-toast";
 import Spinner from "@/app/components/Spinner";
+import styles from './filtros.module.css'
 
 const FiltrosProductos = () => {
   const {
@@ -118,7 +119,7 @@ const FiltrosProductos = () => {
     setLoading(false);
   };
   return (
-    <nav className=" lg:flex gap-4 justify-between sm:flex sm:flex-col sm:gap-8 md:flex md:flex-col md:gap-8    mt-32">
+    <nav className={styles.filtrosContainer}>
       <input
         type="text"
         onChange={handlerSearch}

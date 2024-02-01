@@ -4,7 +4,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { RxHamburgerMenu } from "react-icons/rx";
+
 import Image from "next/image";
+import { IoClose } from "react-icons/io5";
+
 
 const NavBarClient = () => {
   const [cambiarclase, setCambiarclase] = useState(false);
@@ -15,9 +19,16 @@ const NavBarClient = () => {
     document.getElementById("menu").classList.toggle("show_menu");
     setCambiarclase(!cambiarclase);
   };
+
+
+  const backFunction =()=>{
+    back()
+    document.getElementById("menu").classList.toggle("show_menu");
+
+  }
   return (
     <div className="nav_container">
-      <div className=" w-full h-full flex  bg-negro justify-between p-3 text-blanco ">
+      <div className=" w-full h-full flex  justify-between p-4  items-center">
       <div className="flex gap-4 justify-center items-center">
         <Image
           alt="logo al alma"
@@ -32,9 +43,7 @@ const NavBarClient = () => {
       <div className="navbar_container">
         <ul className="menu" id="menu">
           <button
-            onClick={() => {
-              back();
-            }}
+            onClick={backFunction}
           >
             Regresar
           </button>
@@ -64,17 +73,17 @@ const NavBarClient = () => {
           )}
         </ul>
       </div>
-      <div>
+     
         {!cambiarclase ? (
           <span className="boton_hamburguesa" onClick={() => showMenu()}>
-            open
+          <RxHamburgerMenu />
           </span>
         ) : (
           <span className="boton_hamburguesa_close" onClick={() => showMenu()}>
-           close
+           <IoClose />
           </span>
         )}
-      </div>
+     
       </div>
     </div>
   );

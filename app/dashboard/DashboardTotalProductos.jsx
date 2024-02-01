@@ -10,7 +10,7 @@ const DashboardTotalProductos = () => {
 
   return (
     <div className={styles.totalProductos}>
-      <div className="flex  items-end gap-2">
+      <div className="flex  items-end gap-2 ">
       <Image
         src="/productostotales.png"
         alt="icono de dinero"

@@ -24,7 +24,7 @@ const DashboardProductosCasiAgotados = () => {
 
   return (
     <div className={styles.productosCasiAgotados}>
-      <div className="w-full mt-4">
+      <div className="w-full mt-4 min-h-max">
         <Image
           src="/boxagotado.png"
           alt="icono de productos agotados"

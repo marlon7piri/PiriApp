@@ -7,7 +7,6 @@ import { connectDb } from "@/app/libs/mongoDb";
 import bcrypt from "bcrypt";
 
 const login = async (credentials) => {
- 
     connectDb();
     const user = await User.findOne({ email: credentials.email });
     if (!user)  throw new Error("Usuario no encontrado")

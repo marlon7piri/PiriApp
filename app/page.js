@@ -5,7 +5,7 @@ import Login from './login/page'
 
 export default function page() {
   return (
-    <main className='w-full h-screen overflow-scroll flex flex-col justify-center items-center p-4'>
+    <main className='w-full h-screen'>
      {/*  <div>
       <h1 className='  w-full  text-4xl text-center font-bold'>Inventario</h1>
       </div>

@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
       <ClientProvider>
         <body className={poppins.className}>
           {children}
+         
           <Footer />
           <Toaster />
         </body>
