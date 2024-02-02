@@ -29,7 +29,7 @@ const TablaProductos = () => {
   }
   return (
     <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
-      <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
+      <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400  overflow-scroll">
         <tr>
           {/*  <th scope="col" className="px-6 py-3">
             Image
@@ -56,7 +56,7 @@ const TablaProductos = () => {
           </th>
         </tr>
       </thead>
-      <tbody className="w-full ">
+      <tbody className="w-full overflow-scroll">
         {!productos ? (
           <h1 className="w-full   text-center text-2xl text-slate-900">
             No hay productos{" "}

@@ -30,7 +30,7 @@ const NavBarClient = () => {
   }
   return (
     <div className="nav_container">
-      <div className=" w-full h-full flex  justify-between p-4  items-center">
+      <div className=" w-full h-full flex  justify-between p-4  items-center ">
       <div className="flex gap-4 justify-center items-center">
         <Image
           alt="logo al alma"
@@ -52,6 +52,13 @@ const NavBarClient = () => {
           <Link href="/home/pedidos" onClick={showMenu}>
             Pedidos
           </Link>
+          {session?.isAdmin ? (
+            <Link href="/dashboard" onClick={showMenu}>
+              Dashboard
+            </Link>
+          ) : (
+            ""
+          )}
           {!session ? (
             <Link href="/login" onClick={showMenu}>
               Login
@@ -66,13 +73,7 @@ const NavBarClient = () => {
               Logout
             </button>
           )}
-          {session?.isAdmin ? (
-            <Link href="/dashboard" onClick={showMenu}>
-              Dashboard
-            </Link>
-          ) : (
-            ""
-          )}
+       
         </ul>
       </div>
      

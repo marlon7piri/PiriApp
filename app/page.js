@@ -1,6 +1,4 @@
-import Image from 'next/image'
-import Home from './home/page'
-import Areas from './home/Areas'
+
 import Login from './login/page'
 
 export default function page() {

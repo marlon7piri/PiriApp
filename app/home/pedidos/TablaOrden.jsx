@@ -7,11 +7,12 @@ export const TablaOrden = () => {
   const { orden } = useClientContext();
 
   return (
-    <table className=" w-3/4  m-auto border border-slate-500">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
+    <table className="  border border-slate-500">
+      <thead className=" bg-slate-900 text-slate-50 ">
+        <tr className="p-2">
+          <th className="p-2">Producto</th>
+          <th  className="p-2">Cantidad</th>
+          <th  className="p-2">Accion</th>
         </tr>
       </thead>
       <tbody>{orden.length ===0 ? <h1>No hay productos</h1> : orden?.map((e) => {

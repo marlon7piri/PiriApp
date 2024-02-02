@@ -79,39 +79,39 @@ const TablaPedidos = () => {
   };
 
   return (
-    <table className="w-[50%] m-auto text-sm text-left text-gray-500 dark:text-gray-400 ">
+    <table className="w-2/4  m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
         <tr>
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-2 py-3">
             Pedir
           </th>
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-2 py-3">
             Unidad
           </th>
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-2 py-3">
             Producto
           </th>
 
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-2 py-3">
             Stock
           </th>
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-2 py-3">
             Stock Minimo
           </th>
           <th
             scope="col"
-            className="px-6 py-3 cursor-pointer"
+            className="px-2 py-3 cursor-pointer"
             onClick={ordenarPorNombre}
           >
             Proveedor
           </th>
 
-          <th scope="col" className="px-6 py-3">
+          <th scope="col" className="px-2 py-3">
             Accion
           </th>
         </tr>
       </thead>
-      <tbody className="w-full ">
+      <tbody className="">
         {pedidos?.length === 0 ? (
           <h1 className="w-full   text-center text-2xl text-slate-900 ">
             No hay pedidos{" "}
@@ -123,7 +123,7 @@ const TablaPedidos = () => {
                 className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 key={product._id}
               >
-                <td className="px-2 py-2 text-gray-900">
+                <td className="px-2 py-3 text-gray-900">
                   <input
                     type="text"
                     value={pedidos.cantidades}
@@ -133,13 +133,13 @@ const TablaPedidos = () => {
                     }
                   />
                 </td>
-                <td className="px-6 py-4 text-gray-900">{product.unidad}</td>
-                <td className="px-6 py-4 text-gray-900">{product.nombre}</td>
+                <td className="px-2 py-3 text-gray-900">{product.unidad}</td>
+                <td className="px-2 py-3 text-gray-900">{product.nombre}</td>
                 <td
                   className={`${
                     product.stock < product.stock_min
-                      ? "px-6 py-4   text-red-700 font-bold"
-                      : "px-6 py-4   text-green-700 "
+                      ? "px-2 py-3  text-red-700 font-bold"
+                      : "px-2 py-3 text-green-700 "
                   }  
                      
                    `}
@@ -147,10 +147,10 @@ const TablaPedidos = () => {
                   {product.stock}
                 </td>
 
-                <td className="px-6 py-4 ">{product.stock_min}</td>
-                <td className="px-6 py-4"> {product.proveedor}</td>
+                <td className="px-2 py-3">{product.stock_min}</td>
+                <td className="px-2 py-3"> {product.proveedor}</td>
 
-                <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
+                <td className="">
                   <button
                     onClick={() => deletePedidos(product._id)}
                     className=" rounded-full p-2 bg-red-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"

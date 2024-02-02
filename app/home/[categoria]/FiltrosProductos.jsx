@@ -25,6 +25,7 @@ const FiltrosProductos = () => {
   const params = useParams();
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+  const [masvendidos, setMasvendidos] = useState('')
 
   const handlerSearch = (e) => {
     setTerminobusqueda(e.target.value);
@@ -90,13 +91,12 @@ const FiltrosProductos = () => {
     let fechaActual = new Date();
 
     // Obtiene los componentes de la fecha (día, mes y año)
-    let dia = fechaActual.getDate();
+    let dia = fechaActual.getDate().toString().padStart(2, "0");
     let mes = (fechaActual.getMonth() + 1).toString().padStart(2, "0"); // Los meses comienzan desde 0, por lo que se suma 1
     let año = fechaActual.getFullYear();
 
     // Formatea la fecha en el formato deseado (puedes ajustar el formato según tus preferencias)
     let fechaFormateada = año + "-" + mes + "-" + dia;
-    console.log(fechaFormateada);
     // Devuelve la fecha formateada
 
     let area = params.categoria;
@@ -115,17 +115,24 @@ const FiltrosProductos = () => {
       toast.error(result.error);
     } else {
       toast.success("Inventario enviado");
+      const result = await res.json();
+
     }
     setLoading(false);
   };
 
+  const handlerSelectTipoInventario =(e)=>{
+    setMasvendidos(e)
+    console.log(masvendidos)
+    filtrarTipoInventario()
+  }
+
   const filtrarTipoInventario = (e) => {
-    console.log(e)
+  
     const res = tablaProductos.filter((item) => {
-      return e === "mas" ? item.mas_vendido : item;
+      return e.target.value === 'mas'  ? item.mas_vendido : item;
     });
 
-    console.log(res);
     setProductos(res)
   };
   return (
@@ -148,7 +155,7 @@ const FiltrosProductos = () => {
       <select
         name=""
         id=""
-        onChange={(e) => filtrarTipoInventario(e.target.value)}
+        onChange={filtrarTipoInventario}
         className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500 cursor-pointer"
       >
         <option value="todos">Todos</option>

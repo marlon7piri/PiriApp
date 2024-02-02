@@ -1,11 +1,13 @@
 .filtrosContainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     gap:1rem;
     margin-top: 6rem;
 }
 
 @media(width<600px){
     .filtrosContainer{
-        flex-direction: column;
+        grid-template-columns: repeat(1,1fr);
+
     }
 }

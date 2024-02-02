@@ -10,7 +10,7 @@ const Mermas = () => {
 
   return (
     <div className='w-ful h-screen flex flex-col justify-center p-4 overflow-scroll'>
-      <h1>Mermas</h1>
+      <h1 className='text-center text-4xl'>Mermas</h1>
       <FormMermas/>
     </div>
   )

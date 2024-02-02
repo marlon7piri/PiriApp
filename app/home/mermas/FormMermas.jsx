@@ -138,6 +138,8 @@ const FormMermas = () => {
               );
             })}
           </select>
+          <label htmlFor="">Fecha</label>
+
           <input type="date" {...register("fecha", { required: true })} />
           {errors.fecha && (
             <span className="text-red-500"> La fecha es requerida</span>

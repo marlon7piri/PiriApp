@@ -52,7 +52,7 @@ const EditarProducto = ({ params }) => {
       toast.success("Producto editado");
      
       router.back();
-      router.refresh();
+      /* router.refresh(); */
     }
   };
 
