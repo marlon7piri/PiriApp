@@ -9,7 +9,8 @@ import ExcelIcon from '../icons/ExcelIcon';
 const BotonEXCEL = ({productos}) => {
     const filteredData = productos.map(product => ({
         nombre: product.nombre,
-        precio: product.precio,
+        precio_por_unidad: product.precio_por_unidad,
+        unidad:product.unidad
       }));
     const downloadInventory = () => {
         const ws = XLSX.utils.json_to_sheet(filteredData);
