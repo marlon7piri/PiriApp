@@ -1,12 +1,18 @@
 import { NextResponse } from "next/server";
 import { Products } from "../../libs/models/productos";
 import { connectDb } from "@/app/libs/mongoDb";
+import { authoptions } from "../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { User } from "@/app/libs/models/usuarios";
 
 export async function GET() {
+
+
   try {
     connectDb();
-    const allproducts = await Products.find({});
 
+
+    const allproducts = await Products.find({})
     if (!allproducts) return NextResponse.json({ message: "No hay productos" });
     return NextResponse.json(allproducts);
   } catch (error) {
@@ -27,9 +33,23 @@ export async function POST(req) {
     itbms,
     costo,
     presentacion_por_unidad,
-    precio_por_unidad,
+    precio_por_unidad
   } = await req.json();
 
+  console.log(
+    nombre,
+
+    categoria,
+    stock,
+    stock_min,
+    unidad,
+    mas_vendido,
+    proveedor,
+    itbms,
+    costo,
+    presentacion_por_unidad,
+    precio_por_unidad
+  );
 
   let valor = 0;
   let impuesto_del_valor = 0;
@@ -39,7 +59,7 @@ export async function POST(req) {
   if (itbms == 0) {
     itbmsreal = 0;
     valor = precio_por_unidad / presentacion_por_unidad;
-  
+
     costototal = valor;
   } else if (itbms == 7) {
     valor = precio_por_unidad / presentacion_por_unidad;
@@ -51,7 +71,6 @@ export async function POST(req) {
     costototal = valor + impuesto_del_valor;
   }
 
-  
   try {
     connectDb();
     const newproducts = new Products({
@@ -66,7 +85,7 @@ export async function POST(req) {
       presentacion_por_unidad,
       precio_por_unidad,
       itbms: itbmsreal.toFixed(2),
-      costo: costototal.toFixed(2),
+      costo: costototal.toFixed(2)
     });
 
     const producto = await newproducts.save();

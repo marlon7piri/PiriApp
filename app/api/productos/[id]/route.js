@@ -1,6 +1,8 @@
 import { Products } from "@/app/libs/models/productos";
 import { connectDb } from "@/app/libs/mongoDb";
+
 import { NextResponse } from "next/server";
+
 
 export async function DELETE(req, { params }) {
   const id = await params.id;
@@ -17,6 +19,8 @@ export async function DELETE(req, { params }) {
   }
 }
 export async function GET(req, { params }) {
+
+ 
   const id = await params.id;
 
   await connectDb();

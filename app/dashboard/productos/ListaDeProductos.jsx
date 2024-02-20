@@ -9,13 +9,8 @@ import { convertidordefecha } from "@/app/libs/convertidordefecha";
 const ListaDeProductos = ({ productos }) => {
   
 
- 
-/* !=='Prestige Francois Brut' */
- const res = productos.filter((item)=>{
-  return item.proveedor ==='Varela Hermanos'
- })
 
- console.log(res)
+
 
  
 

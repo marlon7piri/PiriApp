@@ -7,20 +7,20 @@ import { connectDb } from "@/app/libs/mongoDb";
 import bcrypt from "bcrypt";
 
 const login = async (credentials) => {
-    connectDb();
-    const user = await User.findOne({ email: credentials.email });
-    if (!user)  throw new Error("Usuario no encontrado")
-      
-   
-    const passwordcorrect = await bcrypt.compare(
-      credentials.password,
-      user.password
-    );
-    if (!passwordcorrect)   throw new Error("Credenciales invalidas");
-   
+  connectDb();
 
-    return user;
+  const user = await User.findOne({ email: credentials.email });
+
+  if (!user) throw new Error("Usuario no encontrado");
+
+  const passwordcorrect = await bcrypt.compare(
+    credentials.password,
+    user.password
+  );
+  if (!passwordcorrect) throw new Error("Credenciales invalidas");
+
   
+  return user;
 };
 
 export const authoptions = NextAuth({
@@ -34,11 +34,9 @@ export const authoptions = NextAuth({
 
       credentials: {},
       async authorize(credentials) {
-        
-          const user = await login(credentials);
+        const user = await login(credentials);
 
-          return user;
-       
+        return user;
       },
     }),
   ],
@@ -50,7 +48,6 @@ export const authoptions = NextAuth({
         token.id = user.id;
         token.isAdmin = user.isAdmin;
       }
-
       return token;
     },
     async session({ session, token }) {
@@ -60,6 +57,7 @@ export const authoptions = NextAuth({
         session.id = token.id;
         session.isAdmin = token.isAdmin;
       }
+
 
       return session;
     },

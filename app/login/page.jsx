@@ -23,7 +23,7 @@ export default function Login() {
       redirect: false,
     });
 
-    console.log(res.error);
+   
 
     if (res.error) {
       setError(res.error);
@@ -32,6 +32,8 @@ export default function Login() {
       setLoginInProgress(false);
      
     }
+    
+
     router.push("/home");
     setLoginInProgress(false);
   }

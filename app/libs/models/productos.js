@@ -1,6 +1,5 @@
+import { Restaurante } from "./restaurante";
 import mongoose from "mongoose";
-
-
 
 const ProductsSchema = new mongoose.Schema(
   {
@@ -15,7 +14,7 @@ const ProductsSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    costo: {  
+    costo: {
       type: Number,
       required: true,
     },
@@ -41,6 +40,7 @@ const ProductsSchema = new mongoose.Schema(
     stock_min: {
       type: Number,
     },
+  
   },
   { timestamps: true }
 );

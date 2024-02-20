@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 1rem;
+  margin-top: 100px;
+ /*  padding: 1rem; */
 }
 
 @media (width<600px) {

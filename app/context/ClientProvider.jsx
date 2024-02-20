@@ -19,6 +19,7 @@ export const ClientProvider = ({ children }) => {
   const [tablaProductos, setTablaProductos] = useState([]);
   const [dinerototal, setDinerototal] = useState(0);
   const [avisodecorreo, setAvisodecorreo] = useState(false);
+  const [session, setSession] = useState({})
   const router = useRouter();
   const params = useParams();
 
@@ -31,16 +32,17 @@ export const ClientProvider = ({ children }) => {
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify(categoria),
+        body: JSON.stringify({categoria})
       }
     );
     const data = await res.json();
+
     return data;
   };
 
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
-      const res = await fetch(`${UrlWeb}/productos`, { cache: "reload" });
+      const res = await fetch(`${UrlWeb}/productos`, { cache: "no-cache" });
       const data = await res.json();
       setTotalProductos(data);
       conteoDineroTotal(data);
@@ -90,7 +92,7 @@ export const ClientProvider = ({ children }) => {
           avisodecorreo,
           setAvisodecorreo,
           orden,
-          setOrden,
+          setOrden,session, setSession
         }}
       >
         {children}

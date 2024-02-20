@@ -2,15 +2,14 @@
 
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { jsPDF } from "jspdf";
-import "jspdf-autotable";
-import { GrDocumentPdf } from "react-icons/gr";
 import { useSession } from "next-auth/react";
 import { useClientContext } from "../../context/ClientProvider";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import toast from "react-hot-toast";
 import Spinner from "@/app/components/Spinner";
 import styles from "./filtros.module.css";
+import BotonPDF from "@/app/components/BotonPDF";
+import BotonEXCEL from "@/app/components/BotonEXCEL";
 
 const FiltrosProductos = () => {
   const {
@@ -61,31 +60,7 @@ const FiltrosProductos = () => {
     router.refresh();
   };
 
-  const descargarPDF = () => {
-    const fecha2 = new Date().toLocaleString().substring(0, 10);
-    const fecha =
-      fecha2.toString(); /* .substring(0,10) */ /* .reverse().split("-").join("") */
-
-    const jspdf = new jsPDF();
-    jspdf.text(
-      `Inventario del Dia ${fecha}, tutor ${session.username}`,
-      30,
-      10
-    );
-
-    const column = ["Producto", "Stock", "Unidad", "Proveedor"];
-    const body = productos.map((e) => {
-      return [e.nombre, e.stock, e.unidad, e.proveedor];
-    });
-
-    jspdf.autoTable({
-      startY: 30,
-      head: [column],
-      body: body,
-    });
-    setAvisodecorreo(!avisodecorreo);
-    jspdf.save(`Inventario_Semanal-${fecha}.pdf`);
-  };
+ 
 
   const EnviarInventario = async () => {
     let fechaActual = new Date();
@@ -161,12 +136,12 @@ const FiltrosProductos = () => {
         <option value="todos">Todos</option>
         <option value="mas">Mas Vendidos</option>
       </select>
-      <button
-        onClick={descargarPDF}
-        className="flex gap-2 justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
-      >
-        <span>Descargar</span> <GrDocumentPdf />
-      </button>
+      <div className='flex gap-4'>
+      <BotonPDF productos={productos} 
+    setAvisodecorreo={setAvisodecorreo}
+    avisodecorreo={avisodecorreo}/>
+      <BotonEXCEL productos={productos}/>
+      </div>
       <button
         disabled={loading}
         onClick={EnviarInventario}
