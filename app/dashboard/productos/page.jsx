@@ -12,7 +12,7 @@ export default async function Productos({ searchParams }) {
 
   return (
     <div className="flex flex-col gap-4 ">
-      <NavProductos />
+      <NavProductos productos={productos}/>
       <ListaDeProductos productos={productos} />
     </div>
   );

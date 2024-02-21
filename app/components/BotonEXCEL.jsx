@@ -9,7 +9,7 @@ import ExcelIcon from '../icons/ExcelIcon';
 const BotonEXCEL = ({productos}) => {
     const filteredData = productos.map(product => ({
         nombre: product.nombre,
-        precio_por_unidad: product.precio_por_unidad,
+        stock:product.stock,
         unidad:product.unidad
       }));
     const downloadInventory = () => {
