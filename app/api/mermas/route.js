@@ -18,7 +18,6 @@ export async function POST(req) {
   const { nombre, fecha, servicio, cantidad, causa, observaciones } =
     await req.json();
 
-  console.log(nombre, fecha, servicio, cantidad, causa, observaciones);
   try {
     connectDb();
     const merma = new Merma({
@@ -30,7 +29,6 @@ export async function POST(req) {
       observaciones,
     });
     const mermanueva = await merma.save();
-    console.log(mermanueva);
     if (!merma) return NextResponse.status(404);
 
     return NextResponse.json(mermanueva);
