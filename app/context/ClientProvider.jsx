@@ -42,7 +42,7 @@ export const ClientProvider = ({ children }) => {
 
   useEffect(() => {
     const obtenerTodosLosProductos = async () => {
-      const res = await fetch(`${UrlWeb}/productos`, { cache: "no-cache" });
+      const res = await fetch(`${UrlWeb}/productos`);
       const data = await res.json();
       setTotalProductos(data);
       conteoDineroTotal(data);

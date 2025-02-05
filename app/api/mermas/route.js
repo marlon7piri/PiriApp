@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { connectDb } from "@/app/libs/mongoDb";
 import { Merma } from "@/app/libs/models/mermas";
+import { Products } from "@/app/libs/models/productos";
+
 
 export async function GET() {
   try {
@@ -15,7 +17,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
-  const { nombre, fecha, servicio, cantidad, causa, observaciones } =
+  const { nombre, fecha, servicio, cantidad, causa, observaciones, id } =
     await req.json();
 
   try {
@@ -28,9 +30,13 @@ export async function POST(req) {
       causa,
       observaciones,
     });
+
+
+    await Products.findByIdAndUpdate(id, { $inc: { stock: -cantidad } })
+
     const mermanueva = await merma.save();
     if (!merma) return NextResponse.status(404);
-
+   
     return NextResponse.json(mermanueva);
   } catch (error) {
     return NextResponse.json({ message: error });

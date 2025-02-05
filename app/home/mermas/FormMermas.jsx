@@ -11,7 +11,7 @@ import { useClientContext } from "@/app/context/ClientProvider";
 
 const schema = yup
   .object({
-    nombre: yup.string().max(20).required(),
+    nombre: yup.string().max(200),
     cantidad: yup.number().positive().required(),
     fecha: yup.string().required(),
     observaciones: yup.string().required(),
@@ -32,9 +32,11 @@ const FormMermas = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [idSelected, setIdSelected] = useState({
 
+  })
   const { totalProductos } = useClientContext();
-
+  const [productosfilter, setProductosfilter] = useState(totalProductos);
   const {
     register,
     handleSubmit,
@@ -43,7 +45,9 @@ const FormMermas = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   const enviarData = async (data) => {
+
     try {
       setLoading(true);
       const res = await fetch(`${UrlWeb}/mermas`, {
@@ -51,7 +55,7 @@ const FormMermas = () => {
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, id: idSelected.id }),
       });
 
       if (!res.ok) {
@@ -69,6 +73,26 @@ const FormMermas = () => {
       console.log(error);
     }
   };
+
+  const selectProduct = (product) => {
+    setIdSelected({ id: product._id, nombre: product.nombre })
+
+  }
+
+  const handlerChange = (e) => {
+
+    const nombre = e.target.value
+
+    const productsfound = totalProductos.map(i => {
+      return i.nombre.toLowerCase().includes(nombre.toLowerCase()) ? i : totalProductos
+
+    })
+    setProductosfilter(productsfound)
+     setIdSelected({ ...idSelected, nombre: nombre })
+
+
+
+  }
   return (
     <form
       onSubmit={handleSubmit(enviarData)}
@@ -77,15 +101,23 @@ const FormMermas = () => {
       {error && <span className="bg-red-500 text-white p-2">{error}</span>}
       <input
         list="productos"
-        {...register("nombre", { required: true })}
+        value={idSelected?.nombre}
+        onChange={handlerChange}
+
+       {...register("nombre", { required: false })} 
         placeholder="nombre"
       />
-      <datalist id="productos">
-        {totalProductos.map((e) => {
-           return <option value={e.nombre} key={e._id}>{e.nombre}</option>;
-         
+      {<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
+        {productosfilter.map((e) => {
+          return <li
+            className="cursor-pointer hover:bg-slate-300  p-2"
+            value={e._id}
+            key={e._id}
+            onClick={() => selectProduct(e)}>{e.nombre}</li>;
+
         })}
-      </datalist>
+      </ul>}
+
       {errors.nombre && (
         <span className="text-red-500">
           {" "}

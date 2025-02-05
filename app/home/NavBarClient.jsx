@@ -24,7 +24,7 @@ const NavBarClient = () => {
   useEffect(()=>{
 
     setSession(session);
-    console.log(session)
+   
 
   },[])
 
