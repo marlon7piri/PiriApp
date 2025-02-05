@@ -5,10 +5,10 @@ import { Merma } from "@/app/libs/models/mermas";
 export async function GET() {
   try {
     connectDb();
-    const allproducts = await Merma.find({});
+    const mermas = await Merma.find({});
 
-    if (!allproducts) return NextResponse.json({ message: "No hay productos" });
-    return NextResponse.json(allproducts);
+    if (!mermas) return NextResponse.json({ message: "No hay mermas" });
+    return NextResponse.json(mermas);
   } catch (error) {
     return Response.json({ message: error });
   }
