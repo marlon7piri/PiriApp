@@ -4,23 +4,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./section.module.css";
 import { useClientContext } from "../context/ClientProvider";
 
-const DashboardProductosMasYMenosVendidos = () => {
-  const { totalProductos } = useClientContext();
+const DashboardProductosMasYMenosVendidos = ({productosMasVendidos}) => {
 
-  const obtenerMasvendidos = () => {
-    const res = totalProductos.filter((e) => {
-      return e.mas_vendido === true;
-    });
 
-    return res 
-  };
 
-  const result = obtenerMasvendidos();
 
   return (
     <div className={styles.masVendidos}>
       <h2 className="text-green-700 text-left text-xl w-max my-4 font-bold">
-        Productos Mas Vendidos
+        5 Productos Mas Vendidos
       </h2>
 
       <table className="w-full text-slate-800">
@@ -32,7 +24,7 @@ const DashboardProductosMasYMenosVendidos = () => {
           </tr>
         </thead>
         <tbody>
-          {result.slice(0, 10).map((e) => {
+          {productosMasVendidos?.slice(0, 10).map((e) => {
             return (
               <tr className="border border-b-slate-500">
                 <td>{e.nombre}</td>

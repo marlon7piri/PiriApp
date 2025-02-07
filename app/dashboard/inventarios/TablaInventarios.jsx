@@ -45,7 +45,7 @@ const TablaInventarios = ({ inventarios,area, fechaseleccionada }) => {
                     <td className="px-6 py-3">{e.costo}</td>
                     <td className="px-6 py-3">{e.presentacion_por_unidad}</td>
 
-             
+                    <td className="px-6 py-3">{e.proveedor}</td>
                   </tr>
                 );
               });

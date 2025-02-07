@@ -10,6 +10,7 @@
     "area3 area4";
   gap: 20px;
   padding: 10px;
+  position: relative;
 }
 
 .totalProductos {
@@ -31,6 +32,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .masVendidos {

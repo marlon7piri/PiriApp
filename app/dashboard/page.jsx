@@ -1,44 +1,28 @@
-"use client";
-import React, { useEffect } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import React, { cache } from "react";
 import { redirect } from "next/navigation";
 import styles from "./section.module.css";
-import DashboardGrafica from "./DashboardGrafica";
 import DashboardTotalProductos from "./DashboardTotalProductos";
 import DashboardDineroEnInventario from "./DashboardDineroEnInventario";
 import DashboardProductosMasYMenosVendidos from "./DashboardProductosMasYMenosVendidos";
 import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
-import { useClientContext } from "../context/ClientProvider";
-
-const page = () => {
-  const { data: session } = useSession();
-  const { avisodecorreo } = useClientContext();
+import { UrlWeb } from "../libs/UrlWeb";
+import DashboardGrafica from "./DashboardGrafica";
 
 
+const loadEstadisticas = async ()=>{
+  const res = await fetch(`${UrlWeb}/estadisticas`,{cache:'no-cache'})
+  const data = await res.json()
 
- /* useEffect(()=>{
-    localStorage.setItem('sesion',session)
-  },[])
+ 
+  return data
+}
 
-   if (!session?.isAdmin) {
-    redirect("/home");
-  } */
-/* 
-  const timer = 5000;
-  useEffect(() => {
-    const intervalo = setInterval(() => {
-      alertadeCorreoNoEnviado();
+const page = async () => {
+  
 
-      clearInterval(intervalo);
-    }, timer);
-  }, []);
+  const {cantidadProductos,productosAgotados,dineroTotal,productosMasVendidos} = await loadEstadisticas()
 
-  const alertadeCorreoNoEnviado = () => {
-    if (!avisodecorreo) {
-      alert("Hay productos agotados, revisalos");
-    }
-  }; */
-
+ 
   return (
     <div className="w-full h-screen">
       <h1 className="text-3xl font-bold text-center my-6 text-slate-800">
@@ -47,13 +31,13 @@ const page = () => {
 
       <section className={styles.section}>
         {" "}
-{/*         <DashboardGrafica /> */}
+    {/*    <DashboardGrafica /> */}
 
-          <DashboardTotalProductos />
-          <DashboardDineroEnInventario />
+          <DashboardTotalProductos cantidadProductos={cantidadProductos}/>
+          <DashboardDineroEnInventario dineroTotal={dineroTotal}/>
        
-        <DashboardProductosMasYMenosVendidos />
-        <DashboardProductosCasiAgotados />
+        <DashboardProductosMasYMenosVendidos productosMasVendidos={productosMasVendidos}/>
+        <DashboardProductosCasiAgotados productosAgotados={productosAgotados}/>
       </section>
     </div>
   );

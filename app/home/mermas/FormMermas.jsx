@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useClientContext } from "@/app/context/ClientProvider";
+import styles from"./styles.module.css"
 
 const schema = yup
   .object({
@@ -48,16 +49,16 @@ const FormMermas = () => {
 
   const enviarData = async (data) => {
 
-   
 
-   try {
+
+    try {
       setLoading(true);
       const res = await fetch(`${UrlWeb}/mermas`, {
         method: "POST",
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify({...data,nombre:idSelected.nombre,id:idSelected.id}),
+        body: JSON.stringify({ ...data, nombre: idSelected.nombre, id: idSelected.id }),
       });
 
       if (!res.ok) {
@@ -73,7 +74,7 @@ const FormMermas = () => {
       }
     } catch (error) {
       console.log(error);
-    } 
+    }
   };
 
   const selectProduct = (product) => {
@@ -90,7 +91,7 @@ const FormMermas = () => {
 
     })
     setProductosfilter(productsfound)
-     setIdSelected({ ...idSelected, nombre: nombre })
+    setIdSelected({ ...idSelected, nombre: nombre })
 
 
 
@@ -106,7 +107,7 @@ const FormMermas = () => {
         value={idSelected?.nombre}
         onChange={handlerChange}
 
-       {...register("nombre", { required: false })} 
+        {...register("nombre", { required: false })}
         placeholder="nombre"
       />
       {<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
@@ -136,8 +137,8 @@ const FormMermas = () => {
         <span className="text-red-500"> Solo son numeros del 0 al 9</span>
       )}
 
-      <div className="flex gap-2">
-        {" "}
+      <div className={styles.containerTextArea}>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="">Causa</label>
           <select
@@ -179,16 +180,19 @@ const FormMermas = () => {
             <span className="text-red-500"> La fecha es requerida</span>
           )}
         </div>
-        <textarea
-          rows={4}
-          className="resize-none p-2 w-full"
-          type="text"
-          {...register("observaciones", { required: true })}
-          placeholder="observaciones"
-        />
-        {errors.address && (
-          <span className="text-red-500"> La direccion es requerida</span>
-        )}
+        <div className="w-full h-full">
+          <textarea
+            rows={4}
+            className="resize-none p-2 w-full h-full"
+            type="text"
+            {...register("observaciones", { required: true })}
+            placeholder="observaciones"
+          />
+          {errors.address && (
+            <span className="text-red-500"> La direccion es requerida</span>
+          )}
+        </div>
+
       </div>
 
       <input
