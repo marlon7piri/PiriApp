@@ -6,7 +6,7 @@ export async function GET(req, res) {
     let dineroTotal = 0;
     let productosAgotados = []
     let cantidadProductos;
-    let productosMasVendidos=[]
+    let productosMasVendidos = []
 
     try {
         cantidadProductos = await Products.find({}).countDocuments();
@@ -31,11 +31,11 @@ export async function GET(req, res) {
 
 
 
-const td = productosMasVendidos.slice(0,5)
+        const td = productosMasVendidos.slice(0, 5)
 
-        return NextResponse.json({ cantidadProductos, dineroTotal, productosAgotados,productosMasVendidos:td })
+        return NextResponse.json({ cantidadProductos, dineroTotal, productosAgotados, productosMasVendidos: td })
     } catch (error) {
 
-        return NextResponse.json({ message: error }).status(500)
+        return NextResponse.json({error:"Error al cargar estadisticas",error});
     }
 }
