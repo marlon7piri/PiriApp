@@ -6,6 +6,7 @@ import DashboardDineroEnInventario from "./DashboardDineroEnInventario";
 import DashboardProductosMasYMenosVendidos from "./DashboardProductosMasYMenosVendidos";
 import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
 import { UrlWeb } from "@/app/libs/UrlWeb";
+import styles from"./section.module.css"
 
 const Dashboard = () => {
   const [estadisticas, setEstadisticas] = useState(null);
@@ -36,7 +37,7 @@ const Dashboard = () => {
   return (
     <div className="w-full h-screen">
       <h1 className="text-3xl font-bold text-center my-6 text-slate-800">Dashboard</h1>
-      <section>
+      <section className={styles.section}>
         <DashboardTotalProductos cantidadProductos={estadisticas.cantidadProductos} />
         <DashboardDineroEnInventario dineroTotal={estadisticas.dineroTotal} />
         <DashboardProductosMasYMenosVendidos productosMasVendidos={estadisticas.productosMasVendidos} />
