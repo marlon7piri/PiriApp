@@ -32,6 +32,7 @@ const Areas = () => {
         className="w-[200px] h-[200px] bg-slate-50  rounded-md flex flex-col justify-center items-center hover:scale-105 transition duration-500 cursor-pointer shadow-2xl"
       >
         <h1 className="text-3xl font-bold text-center">Mermas</h1>
+        <Image src='/merma.svg' alt="imagen de una copa" width={40} height={40}/>
       </Link>
 
     </div>

@@ -31,6 +31,7 @@ const FiltrosProductos = () => {
     filtrar(e.target.value);
   };
 
+
   const filtrar = (terminobusqueda) => {
     const result = tablaProductos.filter((producto) => {
       if (
@@ -60,7 +61,7 @@ const FiltrosProductos = () => {
     router.refresh();
   };
 
- 
+
 
   const EnviarInventario = async () => {
     let fechaActual = new Date();
@@ -75,13 +76,14 @@ const FiltrosProductos = () => {
     // Devuelve la fecha formateada
 
     let area = params.categoria;
+
     setLoading(true);
     const res = await fetch(`${UrlWeb}/inventario`, {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body: JSON.stringify({ fecha: fechaFormateada, productos, area }),
+      body: JSON.stringify({ fecha: fechaFormateada, productos, area, autor: session.id }),
     });
 
     if (!res.ok) {
@@ -96,16 +98,16 @@ const FiltrosProductos = () => {
     setLoading(false);
   };
 
-  const handlerSelectTipoInventario =(e)=>{
+  const handlerSelectTipoInventario = (e) => {
     setMasvendidos(e)
-   
+
     filtrarTipoInventario()
   }
 
   const filtrarTipoInventario = (e) => {
-  
+
     const res = tablaProductos.filter((item) => {
-      return e.target.value === 'mas'  ? item.mas_vendido : item;
+      return e.target.value === 'mas' ? item.mas_vendido : item;
     });
 
     setProductos(res)
@@ -137,17 +139,17 @@ const FiltrosProductos = () => {
         <option value="mas">Mas Vendidos</option>
       </select>
       <div className='flex gap-4'>
-      <BotonPDF productos={productos} 
-    setAvisodecorreo={setAvisodecorreo}
-    avisodecorreo={avisodecorreo}/>
-      <BotonEXCEL productos={productos}/>
+        <BotonPDF productos={productos}
+          setAvisodecorreo={setAvisodecorreo}
+          avisodecorreo={avisodecorreo} />
+        <BotonEXCEL productos={productos} />
       </div>
       <button
         disabled={loading}
         onClick={EnviarInventario}
-        className="w-[100px] flex justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
+        className="w-[170px] flex justify-center items-center bg-sky-700 px-4  py-2 text-slate-50 rounded-md hover:bg-sky-900 "
       >
-        {loading ? <Spinner /> : "Enviar"}
+        {loading ? <Spinner /> : "Enviar Inventario"}
       </button>
     </nav>
   );

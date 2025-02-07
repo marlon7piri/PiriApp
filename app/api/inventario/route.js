@@ -1,41 +1,55 @@
 import { NextResponse } from "next/server";
 import { connectDb } from "@/app/libs/mongoDb";
 import { Inventario } from "@/app/libs/models/inventario";
+import mongoose from "mongoose";
+import { User } from "@/app/libs/models/usuarios";
 
 export async function POST(req) {
-  const { fecha, productos, area } = await req.json();
-
   try {
-    connectDb();
-    const inventarios = await Inventario.find({});
+    const { fecha, productos, area, autor } = await req.json();
 
+    await connectDb();
 
-    const exist = inventarios.find((inventario) => {
-      
-      return inventario.fecha === fecha && inventario.area === area;
-    });
-
-
-    if (exist) {
+    // Verificar si el autor es un ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(autor)) {
       return NextResponse.json(
-        {
-          error: "No se puede repetir inventario o area ",
-        },
-        { status: 401 }
+        { error: "El autor debe ser un ObjectId válido" },
+        { status: 400 }
       );
     }
 
-    const newproducts = new Inventario({
-      fecha,
-      productos,
-      area
+  
+    const usuarioExiste = await User.findById(autor);
+    if (!usuarioExiste) {
+      return NextResponse.json(
+        { error: "El usuario no existe" },
+        { status: 400 }
+      );
+    }
+    const inventarios = await Inventario.find({});
+
+    const exist = inventarios.find((inventario) => {
+      return inventario.fecha === fecha && inventario.area === area;
     });
 
-    const producto = await newproducts.save();
-    if (!producto) return NextResponse.status(404);
+    if (exist) {
+      return NextResponse.json(
+        { error: "No se puede repetir inventario o área" },
+        { status: 401 }
+      );
+    }
+   
+    const newInventario = new Inventario({
+      fecha,
+      productos,
+      area,
+      autor: usuarioExiste._id,
+    });
 
-    return NextResponse.json(producto);
+    const inventarioGuardado = await newInventario.save();
+
+    return NextResponse.json(inventarioGuardado);
   } catch (error) {
-    return NextResponse.json({ message: error });
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }

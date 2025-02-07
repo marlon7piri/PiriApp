@@ -82,6 +82,7 @@ const Inventarios = () => {
       ) : (
         <TablaInventarios
           inventarios={inventarios}
+          area={area}
           fechaseleccionada={fechaseleccionada}
         />
       )}

@@ -6,8 +6,8 @@ export async function POST(req, { params }) {
   const fecha = await params.id;
 
   try {
-    connectDb();
-    const invenatriofound = await Inventario.find({});
+    await connectDb();
+    const invenatriofound = await Inventario.find({}).populate("autor");
   
 
     const result = invenatriofound.filter((inventario) => {

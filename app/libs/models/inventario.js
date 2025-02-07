@@ -8,14 +8,20 @@ const SchemaInventario = new mongoose.Schema(
       required: true,
     },
     productos: {
-      type:[Object],
+      type: [Object],
       required: true,
     },
-    
+
+
     area: {
-      type:String,
+      type: String,
       required: true,
     },
+    autor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    }
   },
   { timestamps: true }
 );

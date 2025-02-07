@@ -9,6 +9,8 @@ import { signOut } from "next-auth/react";
 import HomeIcon from "../icons/HomeIcon";
 import { usePathname} from "next/navigation";
 import DashboardIcon from "../icons/DashboardIcon";
+import InventoryIcon from "../icons/InventoryIcon";
+
 import MermaIcon from "../icons/MermaIcon";
 
 const NavBar = () => {
@@ -44,7 +46,7 @@ const NavBar = () => {
         </div>
         <div className={fondoLinks("/dashboard/productos")}>
           {" "}
-          <ProductIcon />
+          <InventoryIcon />
           <Link href="/dashboard/inventarios">Inventarios</Link>
         </div>
         <div className={fondoLinks("/dashboard/mermas")}>
