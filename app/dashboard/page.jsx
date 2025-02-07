@@ -1,46 +1,49 @@
-import React, { cache } from "react";
-import { redirect } from "next/navigation";
-import styles from "./section.module.css";
+"use client";
+
+import { useEffect, useState } from "react";
 import DashboardTotalProductos from "./DashboardTotalProductos";
 import DashboardDineroEnInventario from "./DashboardDineroEnInventario";
 import DashboardProductosMasYMenosVendidos from "./DashboardProductosMasYMenosVendidos";
 import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
-import { UrlWeb } from "../libs/UrlWeb";
-import DashboardGrafica from "./DashboardGrafica";
+import { UrlWeb } from "@/app/libs/UrlWeb";
 
+const Dashboard = () => {
+  const [estadisticas, setEstadisticas] = useState(null);
 
-const loadEstadisticas = async ()=>{
-  const res = await fetch(`${UrlWeb}/estadisticas`,{cache:'no-cache'})
-  const data = await res.json()
+  useEffect(() => {
+    const fetchEstadisticas = async () => {
+      try {
+        const res = await fetch(`${UrlWeb}/estadisticas`, { cache: "no-cache" });
 
- 
-  return data
-}
+        if (!res.ok) {
+          throw new Error(`Error en la API: ${res.status}`);
+        }
 
-const page = async () => {
-  
+        const data = await res.json();
+        setEstadisticas(data);
+      } catch (error) {
+        console.error("Error al cargar estadísticas:", error);
+      }
+    };
 
-  const {cantidadProductos,productosAgotados,dineroTotal,productosMasVendidos} = await loadEstadisticas()
+    fetchEstadisticas();
+  }, []);
 
- 
+  if (!estadisticas) {
+    return <p>Cargando estadísticas...</p>;
+  }
+
   return (
     <div className="w-full h-screen">
-      <h1 className="text-3xl font-bold text-center my-6 text-slate-800">
-        Dashboard
-      </h1>
-
-      <section className={styles.section}>
-        {" "}
-    {/*    <DashboardGrafica /> */}
-
-          <DashboardTotalProductos cantidadProductos={cantidadProductos}/>
-          <DashboardDineroEnInventario dineroTotal={dineroTotal}/>
-       
-        <DashboardProductosMasYMenosVendidos productosMasVendidos={productosMasVendidos}/>
-        <DashboardProductosCasiAgotados productosAgotados={productosAgotados}/>
+      <h1 className="text-3xl font-bold text-center my-6 text-slate-800">Dashboard</h1>
+      <section>
+        <DashboardTotalProductos cantidadProductos={estadisticas.cantidadProductos} />
+        <DashboardDineroEnInventario dineroTotal={estadisticas.dineroTotal} />
+        <DashboardProductosMasYMenosVendidos productosMasVendidos={estadisticas.productosMasVendidos} />
+        <DashboardProductosCasiAgotados productosAgotados={estadisticas.productosAgotados} />
       </section>
     </div>
   );
 };
 
-export default page;
+export default Dashboard;

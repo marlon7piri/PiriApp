@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./section.module.css";
-import { useClientContext } from "../context/ClientProvider";
 
 const DashboardProductosMasYMenosVendidos = ({productosMasVendidos}) => {
 
