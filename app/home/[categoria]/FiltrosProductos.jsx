@@ -98,7 +98,7 @@ const FiltrosProductos = () => {
 
   const handlerSelectTipoInventario =(e)=>{
     setMasvendidos(e)
-    console.log(masvendidos)
+   
     filtrarTipoInventario()
   }
 

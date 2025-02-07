@@ -15,17 +15,7 @@ export async function PUT(req, { params }) {
     id_restaurante,
   } = await req.json();
 
-  console.log(id);
-  console.log(
-    username,
-    password,
-    email,
-    phone,
-    isAdmin,
-    isActive,
-    address,
-    id_restaurante
-  );
+  
 
   try {
     connectDb();
@@ -51,7 +41,7 @@ export async function PUT(req, { params }) {
       }
     );
 
-    console.log(restaurantefound);
+    
 
     if (!restaurantefound) {
       return NextResponse.json({ message: "No hay restaurantes" });

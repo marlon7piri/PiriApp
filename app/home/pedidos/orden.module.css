@@ -1,0 +1,13 @@
+.containerPedidos{
+    display: flex;
+    margin-top: 4rem;
+    padding: 2rem;
+    gap:1rem
+}
+
+@media(width<1170px){
+    .containerPedidos{
+        display: flex;
+        flex-direction: column;
+    } 
+}

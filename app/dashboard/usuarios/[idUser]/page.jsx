@@ -38,7 +38,7 @@ const EditarUsuario = ({ params }) => {
         const usuario = await res.json();
 
 
-        console.log(usuario)
+       
         reset(usuario);
       } catch (error) {
         console.log(error);

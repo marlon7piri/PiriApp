@@ -28,7 +28,7 @@ const Inventarios = () => {
   //hacer una peticion fetch a /api/inventarios y retornar el inventario segun la fecha seleccionada
 
   const obtenerInventario = async (fecha) => {
-    console.log(fecha)
+ 
     setLoading(true);
     const res = await fetch(`${UrlWeb}/inventario/${fecha}`, {
       method: "POST",
@@ -42,7 +42,7 @@ const Inventarios = () => {
       return;
     }
     const invent = await res.json();
-    console.log(invent)
+   
     return invent;
   };
 

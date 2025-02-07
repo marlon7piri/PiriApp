@@ -4,7 +4,7 @@ import DeleteIcon from "@/app/icons/DeleteIcon";
 import React from "react";
 
 export const TablaOrden = () => {
-  const { orden } = useClientContext();
+  const { orden,deleteOrdenProduct } = useClientContext();
 
   return (
     <table className="  border border-slate-500">
@@ -15,19 +15,19 @@ export const TablaOrden = () => {
           <th  className="p-2">Accion</th>
         </tr>
       </thead>
-      <tbody>{orden.length ===0 ? <h1>No hay productos</h1> : orden?.map((e) => {
+      <tbody>{orden.length ===0 ? <h1 className="text-center">No hay productos</h1> : orden?.map((e) => {
           return (
-            <tr className=" border border-b-slate-700 ">
-              <td className="w-3/4"> {e.nombre} </td>
-              <td className="w-3/4">
+            <tr className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+              <td className="px-2 py-3 text-gray-900"> {e.nombre} </td>
+              <td className="px-2 py-3 text-gray-900">
                 {" "}
                 {e.cantidad}/{e.unidad}{" "}
               </td>
 
-              <td className="p-2 block">
+              <td className="px-2 py-3 text-gray-900">
                 <button
                   className=" rounded-full p-2 bg-red-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
-                  /*  onClick={() => deleteOrden(e._id)} */
+                  onClick={() => deleteOrdenProduct(e._id)}
                 >
                   <DeleteIcon />
                 </button>

@@ -48,14 +48,16 @@ const FormMermas = () => {
 
   const enviarData = async (data) => {
 
-    try {
+   
+
+   try {
       setLoading(true);
       const res = await fetch(`${UrlWeb}/mermas`, {
         method: "POST",
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify({ ...data, id: idSelected.id }),
+        body: JSON.stringify({...data,nombre:idSelected.nombre,id:idSelected.id}),
       });
 
       if (!res.ok) {
@@ -71,7 +73,7 @@ const FormMermas = () => {
       }
     } catch (error) {
       console.log(error);
-    }
+    } 
   };
 
   const selectProduct = (product) => {

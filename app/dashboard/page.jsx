@@ -14,7 +14,7 @@ const page = () => {
   const { data: session } = useSession();
   const { avisodecorreo } = useClientContext();
 
-  console.log(session);
+
 
  /* useEffect(()=>{
     localStorage.setItem('sesion',session)

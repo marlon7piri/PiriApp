@@ -68,6 +68,10 @@ export const ClientProvider = ({ children }) => {
 
     setDinerototal(valor);
   };
+
+  const deleteOrdenProduct =(id)=>{
+    setOrden((prevSTate)=>prevSTate.filter(y=>y.id !== id))
+  }
   return (
     <SessionProvider>
       <ClientContext.Provider
@@ -92,6 +96,7 @@ export const ClientProvider = ({ children }) => {
           avisodecorreo,
           setAvisodecorreo,
           orden,
+          deleteOrdenProduct,
           setOrden,session, setSession
         }}
       >

@@ -12,6 +12,7 @@ import { UrlWeb } from "@/app/libs/UrlWeb";
 const TablaPedidos = () => {
   const { pedidos, setPedidos, orden, setOrden } = useClientContext();
   const router = useRouter();
+  const[loading,setLoading]=useState(false)
 
   const deletePedidos = (id) => {
     const res = pedidos.filter((item) => {
@@ -31,7 +32,7 @@ const TablaPedidos = () => {
   const handlerChange = (id, cantidad) => {
     setPedidos((prevProductos) =>
       prevProductos.map((producto) =>
-        producto._id === id ? { ...producto, cantidad } : producto
+        producto._id === id ? { ...producto, cantidad,id:producto._id } : producto
       )
     );
   };
@@ -62,6 +63,8 @@ const TablaPedidos = () => {
   };
 
   const enviarProductosAcomppra = async () => {
+   try{
+    setLoading(true)
     const res = await fetch(`${UrlWeb}/email`, {
       method: "POST",
       headers: {
@@ -76,10 +79,14 @@ const TablaPedidos = () => {
       toast.success("Pedido enviado satisfactoriamente");
       setOrden([]);
     }
+    setLoading(false)
+   }catch(error){
+
+   }
   };
 
   return (
-    <table className="w-2/4  m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
+    <table className="w-full   text-sm text-left text-gray-500 dark:text-gray-400 ">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
         <tr>
           <th scope="col" className="px-2 py-3">
@@ -126,7 +133,7 @@ const TablaPedidos = () => {
                 <td className="px-2 py-3 text-gray-900">
                   <input
                     type="text"
-                    value={pedidos.cantidades}
+                    value={product.cantidad}
                     className="w-[60px]"
                     onChange={(e) =>
                       handlerChange(product._id, parseFloat(e.target.value, 10))
@@ -162,18 +169,18 @@ const TablaPedidos = () => {
             );
           })
         )}
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full ">
           <button
             onClick={() => agregarAlCarrito()}
-            className=" rounded-md mt-2 p-2 bg-red-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
+            className="w-[150px] rounded-md mt-2 p-2 bg-red-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
           >
-            add
+           Agregar a la orden
           </button>
           <button
             onClick={() => enviarProductosAcomppra()}
-            className=" rounded-md mt-2 p-2 bg-green-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
+            className="w-[150px] rounded-md mt-2 p-2 bg-green-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
           >
-            Pedir
+          {loading ? "Cargando...":  "Realizar el pedido"}
           </button>
         </div>
       </tbody>

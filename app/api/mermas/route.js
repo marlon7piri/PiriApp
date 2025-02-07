@@ -17,6 +17,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  let stockActual;
   const { nombre, fecha, servicio, cantidad, causa, observaciones, id } =
     await req.json();
 
@@ -32,11 +33,25 @@ export async function POST(req) {
     });
 
 
-    await Products.findByIdAndUpdate(id, { $inc: { stock: -cantidad } })
+    const productfound = await Products.findById(id);
+
+    stockActual = productfound.stock - cantidad
+
+   
+
+    if (stockActual < 0) {
+      productfound.stock = 0;
+    } else {
+      productfound.stock = stockActual
+    }
+
+
+    await productfound.save()
 
     const mermanueva = await merma.save();
+
     if (!merma) return NextResponse.status(404);
-   
+
     return NextResponse.json(mermanueva);
   } catch (error) {
     return NextResponse.json({ message: error });
