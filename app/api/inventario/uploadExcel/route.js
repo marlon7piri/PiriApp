@@ -50,7 +50,7 @@ export async function POST(req) {
     await Promise.all(updates);
 
     // Eliminar el archivo temporal después de usarlo
-    await fs.unlink(tempPath);
+ /*    await fs.unlink(tempPath); */
 
     return NextResponse.json({ message: "Productos actualizados correctamente" });
   } catch (error) {
