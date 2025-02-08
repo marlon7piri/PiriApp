@@ -17,7 +17,7 @@ export async function POST(req) {
     // Leer el archivo en formato Buffer
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Definir carpeta temporal segura
+    /* // Definir carpeta temporal segura
     const tempDir = path.join(process.cwd(), "public", "temp");
     const tempPath = path.join(tempDir, file.name);
 
@@ -26,7 +26,7 @@ export async function POST(req) {
 
     // Guardar temporalmente el archivo
     await fs.writeFile(tempPath, buffer);
-
+ */
     // *** Nueva forma de leer el archivo Excel desde el buffer ***
     const workbook = XLSX.read(buffer, { type: "buffer" });
 
