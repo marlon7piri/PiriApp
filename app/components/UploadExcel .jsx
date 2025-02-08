@@ -26,9 +26,9 @@ const UploadExcel = () => {
   };
 
   return (
-    <div className="w-[300px]">
+    <div >
       <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Subir y Actualizar Inventario</button>
+      <button onClick={handleUpload} className="bg-green-600 hover:bg-green-900 p-2 rounded-md mt-4">Subir y Actualizar Inventario</button>
     </div>
   );
 };

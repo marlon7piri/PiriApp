@@ -28,15 +28,19 @@ const NavProductos = ({ productos }) => {
   }, 300);
 
   return (
-    <div className="flex justify-between bg-slate-50 shadow-2xl p-4 rounded-md mt-8">
+    <div className="flex justify-evenly gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8">
       <input
         type="text"
         onChange={handlerSearch}
-        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+        className="outline-none p-2  h-16 border-slate-900 rounded-md focus:border-sky-500"
         placeholder="Buscar...."
       />
+      <div>
       <UploadExcel />
+      </div>
+      
       <div className="flex gap-4">
+      
         <BotonEXCEL productos={productos} />
         <BotonPDF productos={productos} />
         <Boton texto="Nuevo" href="/dashboard/productos/new" />

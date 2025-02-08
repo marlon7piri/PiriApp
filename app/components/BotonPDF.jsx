@@ -38,7 +38,7 @@ const BotonPDF = ({productos,setAvisodecorreo,avisodecorreo}) => {
   return (
     <button
         onClick={descargarPDF}
-        className="flex gap-2 justify-center items-center bg-red-700 w-max p-4 text-slate-50 rounded-md hover:bg-red-900 "
+        className="flex gap-2 justify-center items-center bg-red-700 w-max h-16 p-4 text-slate-50 rounded-md hover:bg-red-900 "
       >
         <GrDocumentPdf />
       </button>
