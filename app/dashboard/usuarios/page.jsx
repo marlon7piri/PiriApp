@@ -11,7 +11,7 @@ export default async function Users({searchParams}) {
 
   return (
     <div className="w-full h-full ">
-      <h1 className="text-center text-gray-900 font-bold text-2xl">Users</h1>
+      <h1 className="text-center text-gray-900 font-bold text-2xl">Usuarios</h1>
 
       <NavUsuario />
       <ListOfUsers data={data} />
