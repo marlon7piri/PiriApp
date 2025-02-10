@@ -15,7 +15,7 @@ export const TablaOrden = () => {
           <th  className="p-2">Accion</th>
         </tr>
       </thead>
-      <tbody>{orden.length ===0 ? <h1 className="text-center">No hay productos</h1> : orden?.map((e) => {
+      <tbody>{orden.length ===0 ? <h1 className="text-center text-slate-50">No hay productos</h1> : orden?.map((e) => {
           return (
             <tr className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
               <td className="px-2 py-3 text-gray-900"> {e.nombre} </td>

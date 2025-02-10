@@ -31,7 +31,7 @@ const DashboardProductosCasiAgotados = ({productosAgotados}) => {
         <tbody>
         {productosAgotados?.map((e) => {
           return (
-            <tr className="border border-b-slate-500">
+            <tr className="border border-b-slate-500" key={e._id}>
               <td>{e.nombre}</td>
               <td>{e.precio_por_unidad}</td>
               <td>{e.stock}</td>

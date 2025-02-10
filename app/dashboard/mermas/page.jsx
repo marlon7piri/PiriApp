@@ -7,7 +7,7 @@ import { useClientContext } from "@/app/context/ClientProvider";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { getMermas } from "@/app/libs/actions/mermas/get-mermas";
 
-const Mermas = async () => {
+const Mermas =  () => {
   const [mermas, setMermas] = useState([]);
   const [tablaMermas, setTablaMermas] = useState([]);
 

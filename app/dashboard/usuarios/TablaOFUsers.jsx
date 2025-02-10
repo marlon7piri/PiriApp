@@ -35,13 +35,10 @@ const TablaOFUsers = ({ data }) => {
       {data?.map((e) => {
         return (
           <tr className=" mt-4    " key={e._id}>
-            <th
-              scope="row"
-              className=" px-6 py-4 font-medium  whitespace-nowrap "
-            >
-              {" "}
-              <td className="px-6 py-4">
-                {" "}
+           
+            
+              <td className=" px-6 py-4 font-medium  whitespace-nowrap " scope="row">
+              
                 <span
                   style={{
                     width: "20px",
@@ -57,7 +54,7 @@ const TablaOFUsers = ({ data }) => {
                 </span>{" "}
                 <span>{e.username}</span>
               </td>
-            </th>
+         
             <td className="px-6 py-4">{e.email}</td>
             <td className="px-6 py-4">{e.phone}</td>
             {/*   <td className="px-6 py-4">{e.address}</td> */}

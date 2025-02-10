@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -15,6 +15,7 @@ const NavBarClient = () => {
   const [cambiarclase, setCambiarclase] = useState(false);
   const { back } = useRouter();
   const { data: session } = useSession();
+  const path = usePathname()
 
   const showMenu = () => {
     document.getElementById("menu").classList.toggle("show_menu");
@@ -34,13 +35,17 @@ const NavBarClient = () => {
     document.getElementById("menu").classList.toggle("show_menu");
     setCambiarclase(!cambiarclase);
   };
+
+  const isActive = (ruta) => {
+    return path == ruta ? `text-purple-900` : `text-slate-900`
+  }
   return (
     <div className="nav_container">
       <div className=" w-full h-full flex  justify-between p-4  items-center ">
         <div className="flex gap-4 justify-center items-center">
           <Image
             alt="logo al alma"
-            src="/logo.jpg"
+            src="/wallpaperlogin.svg"
             width={60}
             height={60}
             priority="true"
@@ -49,11 +54,11 @@ const NavBarClient = () => {
           <span className="text-slate-900">Bienvenido {session?.username}</span>
         </div>
         <div className="navbar_container">
-          <ul className="menu" id="menu">
-            <Link href="/home" onClick={showMenu}>
+          <ul className='menu' id="menu">
+            <Link href="/home" onClick={showMenu} className={isActive('/home')}>
               Home
             </Link>
-            <Link href="/home/pedidos" onClick={showMenu}>
+            <Link href="/home/pedidos" onClick={showMenu} className={isActive("/home/pedidos")}>
               Pedidos
             </Link>
             {session?.isAdmin ? (

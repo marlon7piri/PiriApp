@@ -19,19 +19,20 @@ const NavBar = () => {
 
 
   const fondoLinks = useCallback((links) => {
-    const stylespath = pathname === links ? "w-full flex  items-center gap-2 text-sky-900 font-bold" : " w-full flex gap-2 items-center"
+    const stylespath = pathname === links ? "w-full flex  items-center gap-2 text-purple-900 font-bold" : " w-full flex gap-2 items-center"
     return stylespath
 
-  },[pathname])
+  }, [pathname])
 
   return (
     <nav className="bg-slate-50 border border-slate-950 w-1/4 h-screen flex  flex-col  p-4 rounded-md">
       <Image
         alt="logo al alma"
-        src="/logo.jpg"
-        width={120} priority='true'
+        src="/wallpaperlogin.svg"
+        width={120}
         height={120}
-        className=" rounded-full p-2 "
+        priority="true"
+        className="border border-slate-300 rounded-full p-2 object-cover"
       />
       <ul className="w-full mt-6 flex flex-col gap-4">
         <div className={fondoLinks("/dashboard")}>

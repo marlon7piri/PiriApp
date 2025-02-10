@@ -8,11 +8,11 @@ const Pedidos = () => {
     <div className="w-full h-min-screen h-screen p-4 overflow-scroll">
       <div className={styles.containerPedidos}>
         <div  className="w-full  flex flex-col  ">
-          <h2 className="text-3xl">Pedido</h2>
+          <h2 className="text-3xl text-slate-50">Pedido</h2>
           <TablaPedidos />
         </div >
         <div className="w-full flex flex-col  ">
-          <h2 className="text-3xl">Orden</h2>
+          <h2 className="text-3xl text-slate-50">Orden</h2>
           <TablaOrden />
 
         </div>

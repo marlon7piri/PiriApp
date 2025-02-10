@@ -38,6 +38,7 @@ const FormMermas = ({ productos }) => {
 
   })
   const [termino, setTermino] = useState('')
+  const [closelist, setCloselist] = useState(true)
   const searchparams = useSearchParams()
   const path = usePathname()
   const { totalProductos } = useClientContext();
@@ -83,11 +84,11 @@ const FormMermas = ({ productos }) => {
   const selectProduct = (product) => {
     setIdSelected({ id: product._id, nombre: product.nombre })
     setTermino(product.nombre)
-
+    setCloselist(true)
   }
 
   const handlerChange = useDebouncedCallback((e) => {
-
+   
     const params = new URLSearchParams(searchparams)
 
     const nombre = e.target.value
@@ -95,12 +96,12 @@ const FormMermas = ({ productos }) => {
 
     if (params) {
       params.set('query', nombre)
-
+      setCloselist(false)
     } else {
       params.delete('query')
     }
     router.replace(`${path}?${params}`)
-
+  
   }, 300)
   return (
     <div>
@@ -108,7 +109,7 @@ const FormMermas = ({ productos }) => {
 
       <form
         onSubmit={handleSubmit(enviarData)}
-        className="flex flex-col m-auto p-4 w-2/4  gap-4 mt-28"
+        className="flex flex-col m-auto p-4 w-2/4  gap-4 mt-28 bg-slate-50 rounded-md"
       >
 
 
@@ -124,16 +125,16 @@ const FormMermas = ({ productos }) => {
           /*  {...register("nombre", { required: false })} */
           placeholder="nombre"
         />
-        {<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
+        {(!closelist && termino) && (<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
           {productos.map((e) => {
             return <li
-              className="cursor-pointer hover:bg-slate-300  p-2"
+              className="cursor-pointer hover:bg-sky-500  p-2"
               value={e._id}
               key={e._id}
               onClick={() => selectProduct(e)}>{e.nombre}</li>;
 
           })}
-        </ul>}
+        </ul>)}
 
         {errors.nombre && (
           <span className="text-red-500">

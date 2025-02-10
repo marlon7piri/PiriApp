@@ -120,7 +120,7 @@ const TablaPedidos = () => {
       </thead>
       <tbody className="">
         {pedidos?.length === 0 ? (
-          <h1 className="w-full   text-center text-2xl text-slate-900 ">
+          <h1 className="w-full   text-center text-2xl text-slate-50">
             No hay pedidos{" "}
           </h1>
         ) : (
