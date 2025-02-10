@@ -19,13 +19,17 @@ const login = async (credentials) => {
   );
   if (!passwordcorrect) throw new Error("Credenciales invalidas");
 
-  
+
   return user;
 };
 
 export const authoptions = NextAuth({
   pages: {
     signIn: "/login",
+  },
+  session: {
+    strategy: 'jwt',
+    maxAge:30 * 60 //30 minutos
   },
   providers: [
     CredentialsProvider({
@@ -47,19 +51,23 @@ export const authoptions = NextAuth({
         token.email = user.email;
         token.id = user.id;
         token.isAdmin = user.isAdmin;
+
       }
       return token;
     },
     async session({ session, token }) {
+
       if (session) {
         session.username = token.username;
         session.email = token.email;
         session.id = token.id;
         session.isAdmin = token.isAdmin;
+
+
+
+        return session;
       }
 
-
-      return session;
     },
   },
 });

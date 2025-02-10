@@ -7,6 +7,7 @@ import DashboardProductosMasYMenosVendidos from "./DashboardProductosMasYMenosVe
 import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import styles from"./section.module.css"
+import Loading from "./loading";
 
 const Dashboard = () => {
   const [estadisticas, setEstadisticas] = useState(null);
@@ -31,7 +32,7 @@ const Dashboard = () => {
   }, []);
 
   if (!estadisticas) {
-    return <p>Cargando estadísticas...</p>;
+    return <Loading/>;
   }
 
   return (

@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { ClientProvider } from "./context/ClientProvider";
 import Footer from "./components/Footer";
+import { FollowSession } from "./libs/FollowSession";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,12 +20,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <ClientProvider>
+
         <body className={poppins.className}>
-          {children}
-         
-          <Footer />
-          <Toaster />
+          <FollowSession>
+            {children}
+
+            </FollowSession>
+            <Footer />
+            <Toaster />
+        
         </body>
+
       </ClientProvider>
     </html>
   );
