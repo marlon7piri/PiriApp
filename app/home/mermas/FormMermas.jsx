@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useClientContext } from "@/app/context/ClientProvider";
-import styles from"./styles.module.css"
+import styles from "./styles.module.css"
+import { useDebouncedCallback } from "use-debounce";
 
 const schema = yup
   .object({
@@ -29,15 +30,17 @@ const causas = [
 ];
 const servicios = ["apertura", "cierre"];
 
-const FormMermas = () => {
+const FormMermas = ({ productos }) => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [idSelected, setIdSelected] = useState({
 
   })
+  const [termino, setTermino] = useState('')
+  const searchparams = useSearchParams()
+  const path = usePathname()
   const { totalProductos } = useClientContext();
-  const [productosfilter, setProductosfilter] = useState(totalProductos);
   const {
     register,
     handleSubmit,
@@ -79,129 +82,141 @@ const FormMermas = () => {
 
   const selectProduct = (product) => {
     setIdSelected({ id: product._id, nombre: product.nombre })
+    setTermino(product.nombre)
 
   }
 
-  const handlerChange = (e) => {
+  const handlerChange = useDebouncedCallback((e) => {
+
+    const params = new URLSearchParams(searchparams)
 
     const nombre = e.target.value
 
-    const productsfound = totalProductos.map(i => {
-      return i.nombre.toLowerCase().includes(nombre.toLowerCase()) ? i : totalProductos
 
-    })
-    setProductosfilter(productsfound)
-    setIdSelected({ ...idSelected, nombre: nombre })
+    if (params) {
+      params.set('query', nombre)
 
+    } else {
+      params.delete('query')
+    }
+    router.replace(`${path}?${params}`)
 
-
-  }
+  }, 300)
   return (
-    <form
-      onSubmit={handleSubmit(enviarData)}
-      className="flex flex-col m-auto p-4 w-2/4  gap-4 mt-28"
-    >
-      {error && <span className="bg-red-500 text-white p-2">{error}</span>}
-      <input
-        list="productos"
-        value={idSelected?.nombre}
-        onChange={handlerChange}
+    <div>
 
-        {...register("nombre", { required: false })}
-        placeholder="nombre"
-      />
-      {<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
-        {productosfilter.map((e) => {
-          return <li
-            className="cursor-pointer hover:bg-slate-300  p-2"
-            value={e._id}
-            key={e._id}
-            onClick={() => selectProduct(e)}>{e.nombre}</li>;
 
-        })}
-      </ul>}
+      <form
+        onSubmit={handleSubmit(enviarData)}
+        className="flex flex-col m-auto p-4 w-2/4  gap-4 mt-28"
+      >
 
-      {errors.nombre && (
-        <span className="text-red-500">
-          {" "}
-          El nombre es requerido y tiene que ser maximo 20 caracteres
-        </span>
-      )}
 
-      <input
-        type="text"
-        {...register("cantidad", { required: true })}
-        placeholder="cantidad"
-      />
-      {errors.cantidad && (
-        <span className="text-red-500"> Solo son numeros del 0 al 9</span>
-      )}
+        {error && <span className="bg-red-500 text-white p-2">{error}</span>}
+        <input
 
-      <div className={styles.containerTextArea}>
+          value={termino}
+          onChange={(e) => {
+            setTermino(e.target.value); // Actualiza inmediatamente el estado
+            handlerChange(e); // Luego llama a la función debounced
+          }}
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="">Causa</label>
-          <select
-            name=""
-            id=""
-            {...register("causa", { required: true })}
-            className="p-2 outline-none cursor-pointer"
-          >
-            <option value=""> </option>
-            {causas?.map((e) => {
-              return (
-                <option value={e} key={e}>
-                  {e}
-                </option>
-              );
-            })}
-          </select>
+          /*  {...register("nombre", { required: false })} */
+          placeholder="nombre"
+        />
+        {<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
+          {productos.map((e) => {
+            return <li
+              className="cursor-pointer hover:bg-slate-300  p-2"
+              value={e._id}
+              key={e._id}
+              onClick={() => selectProduct(e)}>{e.nombre}</li>;
 
-          <label htmlFor="">Servicios</label>
-          <select
-            name=""
-            id=""
-            {...register("servicio", { required: true })}
-            className="p-2 outline-none cursor-pointer"
-          >
-            <option value=""> </option>
-            {servicios?.map((e) => {
-              return (
-                <option value={e} key={e}>
-                  {e}
-                </option>
-              );
-            })}
-          </select>
-          <label htmlFor="">Fecha</label>
+          })}
+        </ul>}
 
-          <input type="date" {...register("fecha", { required: true })} />
-          {errors.fecha && (
-            <span className="text-red-500"> La fecha es requerida</span>
-          )}
+        {errors.nombre && (
+          <span className="text-red-500">
+            {" "}
+            El nombre es requerido y tiene que ser maximo 20 caracteres
+          </span>
+        )}
+
+        <input
+          type="text"
+          {...register("cantidad", { required: true })}
+          placeholder="cantidad"
+        />
+        {errors.cantidad && (
+          <span className="text-red-500"> Solo son numeros del 0 al 9</span>
+        )}
+
+        <div className={styles.containerTextArea}>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="">Causa</label>
+            <select
+              name=""
+              id=""
+              {...register("causa", { required: true })}
+              className="p-2 outline-none cursor-pointer"
+            >
+              <option value=""> </option>
+              {causas?.map((e) => {
+                return (
+                  <option value={e} key={e}>
+                    {e}
+                  </option>
+                );
+              })}
+            </select>
+
+            <label htmlFor="">Servicios</label>
+            <select
+              name=""
+              id=""
+              {...register("servicio", { required: true })}
+              className="p-2 outline-none cursor-pointer"
+            >
+              <option value=""> </option>
+              {servicios?.map((e) => {
+                return (
+                  <option value={e} key={e}>
+                    {e}
+                  </option>
+                );
+              })}
+            </select>
+            <label htmlFor="">Fecha</label>
+
+            <input type="date" {...register("fecha", { required: true })} />
+            {errors.fecha && (
+              <span className="text-red-500"> La fecha es requerida</span>
+            )}
+          </div>
+          <div className="w-full h-full">
+            <textarea
+              rows={4}
+              className="resize-none p-2 w-full h-full"
+              type="text"
+              {...register("observaciones", { required: true })}
+              placeholder="observaciones"
+            />
+            {errors.address && (
+              <span className="text-red-500"> La direccion es requerida</span>
+            )}
+          </div>
+
         </div>
-        <div className="w-full h-full">
-          <textarea
-            rows={4}
-            className="resize-none p-2 w-full h-full"
-            type="text"
-            {...register("observaciones", { required: true })}
-            placeholder="observaciones"
-          />
-          {errors.address && (
-            <span className="text-red-500"> La direccion es requerida</span>
-          )}
-        </div>
 
-      </div>
-
-      <input
-        /*   disabled={isLoading} */
-        type="submit"
-        value={loading ? " loading..." : "Crear"}
-        className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"
-      />
-    </form>
+        <input
+          /*   disabled={isLoading} */
+          type="submit"
+          value={loading ? " loading..." : "Crear"}
+          className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"
+        />
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useClientContext } from "../../context/ClientProvider";
@@ -10,6 +10,8 @@ import Spinner from "@/app/components/Spinner";
 import styles from "./filtros.module.css";
 import BotonPDF from "@/app/components/BotonPDF";
 import BotonEXCEL from "@/app/components/BotonEXCEL";
+import { useDebouncedCallback } from "use-debounce";
+import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 const FiltrosProductos = () => {
   const {
@@ -19,49 +21,57 @@ const FiltrosProductos = () => {
     setAvisodecorreo,
     avisodecorreo,
   } = useClientContext();
-  const [terminobusqueda, setTerminobusqueda] = useState("");
   const router = useRouter();
   const params = useParams();
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
   const [masvendidos, setMasvendidos] = useState('')
+  const searchparams = useSearchParams()
+  const path = usePathname()
 
-  const handlerSearch = (e) => {
-    setTerminobusqueda(e.target.value);
-    filtrar(e.target.value);
-  };
+  const handlerSearch = useDebouncedCallback((e) => {
+    const params = new URLSearchParams(searchparams)
+    const termino = e.target.value
+
+    if (params) {
+      params.set('query', termino)
+    } else {
+      params.delete('query')
+    }
+
+    router.replace(`${path}?${params}`)
+
+  }, 300);
 
 
-  const filtrar = (terminobusqueda) => {
-    const result = tablaProductos.filter((producto) => {
-      if (
-        producto.nombre
-          .toString()
-          .toLowerCase()
-          .includes(terminobusqueda.toLowerCase())
-      ) {
-        return producto;
-      }
-    });
-    setProductos(result);
-  };
+
 
   const filtrarPorCantidades = (value) => {
-    if (value == "mayor") {
-      let result = tablaProductos.sort((a, b) => {
-        return b.stock - a.stock;
-      });
-      setProductos(result);
+    const params = new URLSearchParams(searchparams)
+
+    if (params) {
+      params.set('orden', value)
     } else {
-      let result = tablaProductos.sort((a, b) => {
-        return a.stock - b.stock;
-      });
-      setProductos(result);
+      params.delete('orden')
     }
-    router.refresh();
+
+    router.replace(`${path}?${params}`)
+
   };
 
+  const filtarMasVendido = (e) => {
 
+    const params = new URLSearchParams(searchparams)
+
+
+    if (e.target.value === 'mas') {
+      params.set("mas_vendido", "true")
+    } else {
+      params.delete("mas_vendido")
+    }
+    router.replace(`${path}?${params}`)
+
+  };
 
   const EnviarInventario = async () => {
     let fechaActual = new Date();
@@ -98,20 +108,9 @@ const FiltrosProductos = () => {
     setLoading(false);
   };
 
-  const handlerSelectTipoInventario = (e) => {
-    setMasvendidos(e)
 
-    filtrarTipoInventario()
-  }
 
-  const filtrarTipoInventario = (e) => {
-
-    const res = tablaProductos.filter((item) => {
-      return e.target.value === 'mas' ? item.mas_vendido : item;
-    });
-
-    setProductos(res)
-  };
+  
   return (
     <nav className={styles.filtrosContainer}>
       <input
@@ -132,7 +131,7 @@ const FiltrosProductos = () => {
       <select
         name=""
         id=""
-        onChange={filtrarTipoInventario}
+        onChange={filtarMasVendido}
         className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500 cursor-pointer"
       >
         <option value="todos">Todos</option>

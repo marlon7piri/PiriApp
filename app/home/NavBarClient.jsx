@@ -11,7 +11,7 @@ import { IoClose } from "react-icons/io5";
 import { useClientContext } from "../context/ClientProvider";
 
 const NavBarClient = () => {
-  const {setSession}= useClientContext()
+  const { setSession } = useClientContext()
   const [cambiarclase, setCambiarclase] = useState(false);
   const { back } = useRouter();
   const { data: session } = useSession();
@@ -21,12 +21,12 @@ const NavBarClient = () => {
     setCambiarclase(!cambiarclase);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
 
     setSession(session);
-   
 
-  },[])
+
+  }, [])
 
 
   const backFunction = () => {
@@ -50,7 +50,9 @@ const NavBarClient = () => {
         </div>
         <div className="navbar_container">
           <ul className="menu" id="menu">
-            <button onClick={backFunction}>Regresar</button>
+            <Link href="/home" onClick={showMenu}>
+              Home
+            </Link>
             <Link href="/home/pedidos" onClick={showMenu}>
               Pedidos
             </Link>

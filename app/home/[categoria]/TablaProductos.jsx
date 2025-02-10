@@ -6,8 +6,8 @@ import React from "react";
 import { useClientContext } from "../../context/ClientProvider";
 import toast from "react-hot-toast";
 
-const TablaProductos = () => {
-  const { pedidos, setPedidos,productos, loading,ordenarPorNombre } = useClientContext();
+const TablaProductos = ({productos}) => {
+  const { pedidos, setPedidos, loading,ordenarPorNombre } = useClientContext();
 
 
   const addPedidos = (product) => {
