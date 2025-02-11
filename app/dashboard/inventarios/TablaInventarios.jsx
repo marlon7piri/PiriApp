@@ -1,11 +1,11 @@
 import BotonPDF from "@/app/components/BotonPDF";
 import React from "react";
 
-const TablaInventarios = ({ inventarios }) => {
+const TablaInventarios = ({ inventarios,fecha }) => {
   const fechaseleccionada = 'fecha de prueba'
   return (
     <div className="w-full overflow-scroll">
-      <h1 className="mt-4 text-3xl font-bold text-center">Fecha Elegida: {fechaseleccionada}</h1>
+      <h1 className="mt-4 text-3xl font-bold text-center">Fecha Elegida: {fecha}</h1>
       
 
       <table className="w-full h-full  relative text-sm text-left text-gray-500 dark:text-gray-400 mt-8">

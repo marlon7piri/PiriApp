@@ -7,9 +7,9 @@ const ListOfUsers = ({ data }) => {
 
   return (
     
-      <div className="flex justify-center items-center w-full relative overflow-x-auto shadow-md sm:rounded-lg p-4">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-sky-100 dark:text-gray-400">
+      <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg p-4">
+        <table  className="w-full  m-auto text-sm text-left text-gray-500 dark:text-gray-400  ">
+          <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Nombre
@@ -37,7 +37,7 @@ const ListOfUsers = ({ data }) => {
             </tr>
           </thead>
           
-          <tbody className="bg-slate-50">
+          <tbody className="w-full ">
     
            <TablaOFUsers data={data}/>
           

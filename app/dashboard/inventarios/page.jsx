@@ -19,9 +19,9 @@ const Inventario = async ({ searchParams }) => {
   return (
     <div>
       <Filtros
-
+       
       />
-      <TablaInventarios inventarios={inventarios} />
+      <TablaInventarios inventarios={inventarios}  fecha={fecha}/>
     </div>
   )
 }

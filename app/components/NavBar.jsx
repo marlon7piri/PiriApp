@@ -25,7 +25,7 @@ const NavBar = () => {
   }, [pathname])
 
   return (
-    <nav className="bg-slate-50 border border-slate-950 w-1/4 h-screen flex  flex-col  p-4 rounded-md">
+    <nav className="bg-slate-50 border border-slate-950 w-1/4 min-w-[150px] h-screen flex  flex-col  p-4 rounded-md">
       <Image
         alt="logo al alma"
         src="/wallpaperlogin.svg"

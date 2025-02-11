@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
+import styles from '@/app/dashboard/productos/styles.module.css'
 
 const Filtros = () => {
 
@@ -26,9 +27,8 @@ const Filtros = () => {
 
   const filtrarQuery = () => {
     const params = new URLSearchParams(searchparams)
-
-
-    if (filtros) {
+   
+    if (filtros.fecha || filtros.area && filtros.area !== 'todos') {
       params.set('area', filtros.area)
       params.set('fecha', filtros.fecha)
 
@@ -42,7 +42,7 @@ const Filtros = () => {
 
   }
   return (
-    <div className="flex gap-2">
+    <div className={`flex gap-2 ${styles.containerSearch}`}>
       <input
         type="date"
         onChange={filtrar}
@@ -54,7 +54,7 @@ const Filtros = () => {
         <option value="cocina">cocina</option>
         <option value="barra">barra</option>
       </select>
-   
+
       <button onClick={filtrarQuery} className="p-2 bg-sky-500 hover:bg-sky-900 transition duration-500 rounded-md">Filtrar</button>
     </div>
   );
