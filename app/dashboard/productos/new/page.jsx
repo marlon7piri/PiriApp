@@ -65,7 +65,7 @@ const NewProducto = () => {
   return (
     <form
       onSubmit={handleSubmit(enviarData)}
-      className="flex flex-col m-auto p-4 w-2/4 gap-4"
+      className="flex flex-col m-auto p-4 w-[60%] gap-4"
     >
       <label htmlFor="">Nombre</label>
       {}
