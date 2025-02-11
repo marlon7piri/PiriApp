@@ -2,12 +2,15 @@ import { NextResponse } from "next/server";
 import { connectDb } from "@/app/libs/mongoDb";
 import { Merma } from "@/app/libs/models/mermas";
 import { Products } from "@/app/libs/models/productos";
+import { findUserId } from "@/app/libs/findUserId";
 
 
-export async function GET() {
+export async function GET(req, { params }) {
+  const { userId } = await params.userId
   try {
-    connectDb();
-    const mermas = await Merma.find({});
+    await connectDb();
+    const idfound = await findUserId(userId)
+    const mermas = await Merma.find({ userId: idfound });
 
     if (!mermas) return NextResponse.json({ message: "No hay mermas" });
     return NextResponse.json(mermas);
@@ -18,11 +21,13 @@ export async function GET() {
 
 export async function POST(req) {
   let stockActual;
-  const { nombre, fecha, servicio, cantidad, causa, observaciones, id } =
+  const { nombre, fecha, servicio, cantidad, causa, observaciones, id, autor, userId } =
     await req.json();
 
   try {
-    connectDb();
+    await connectDb();
+    const idFound = await findUserId(userId)
+
     const merma = new Merma({
       nombre,
       fecha,
@@ -30,14 +35,15 @@ export async function POST(req) {
       cantidad,
       causa,
       observaciones,
+      autor,
+      userId: idFound || ''
     });
-
 
     const productfound = await Products.findById(id);
 
     stockActual = productfound.stock - cantidad
 
-   
+
 
     if (stockActual < 0) {
       productfound.stock = 0;

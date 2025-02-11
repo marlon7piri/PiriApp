@@ -51,7 +51,7 @@ const NavBarClient = () => {
             priority="true"
             className="border border-slate-300 rounded-full p-2 object-cover"
           />
-          <span className="text-slate-900">Bienvenido {session?.username}</span>
+          <span className="text-slate-900">Bienvenido {session?.user?.username}</span>
         </div>
         <div className="navbar_container">
           <ul className='menu' id="menu">
@@ -61,7 +61,7 @@ const NavBarClient = () => {
             <Link href="/home/pedidos" onClick={showMenu} className={isActive("/home/pedidos")}>
               Pedidos
             </Link>
-            {session?.isAdmin ? (
+            {session?.user.isAdmin ? (
               <Link href="/dashboard" onClick={showMenu}>
                 Dashboard
               </Link>

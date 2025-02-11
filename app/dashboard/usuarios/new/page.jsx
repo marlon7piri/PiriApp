@@ -21,6 +21,7 @@ const schema = yup
 
 const NewProducto = () => {
   const router = useRouter();
+   const {data:session} = useSession()
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +42,7 @@ reset,
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({...data,userId:session?.user?.userId}),
       });
 
       if (!res.ok) {

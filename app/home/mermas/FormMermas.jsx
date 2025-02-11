@@ -10,6 +10,7 @@ import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useClientContext } from "@/app/context/ClientProvider";
 import styles from "./styles.module.css"
 import { useDebouncedCallback } from "use-debounce";
+import { useSession } from "next-auth/react";
 
 const schema = yup
   .object({
@@ -32,6 +33,8 @@ const servicios = ["apertura", "cierre"];
 
 const FormMermas = ({ productos }) => {
   const router = useRouter();
+  const { data: session } = useSession()
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [idSelected, setIdSelected] = useState({
@@ -41,7 +44,6 @@ const FormMermas = ({ productos }) => {
   const [closelist, setCloselist] = useState(true)
   const searchparams = useSearchParams()
   const path = usePathname()
-  const { totalProductos } = useClientContext();
   const {
     register,
     handleSubmit,
@@ -62,7 +64,13 @@ const FormMermas = ({ productos }) => {
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify({ ...data, nombre: idSelected.nombre, id: idSelected.id }),
+        body: JSON.stringify({
+          ...data,
+          nombre: idSelected.nombre,
+          id: idSelected.id,
+          autor: session?.user?.id,
+          userId: session?.user?.userId
+        }),
       });
 
       if (!res.ok) {
@@ -88,7 +96,7 @@ const FormMermas = ({ productos }) => {
   }
 
   const handlerChange = useDebouncedCallback((e) => {
-   
+
     const params = new URLSearchParams(searchparams)
 
     const nombre = e.target.value
@@ -101,7 +109,7 @@ const FormMermas = ({ productos }) => {
       params.delete('query')
     }
     router.replace(`${path}?${params}`)
-  
+
   }, 300)
   return (
     <div>

@@ -40,6 +40,11 @@ const ProductsSchema = new mongoose.Schema(
     stock_min: {
       type: Number,
     },
+    userId:{
+      type:String,
+      required:true
+     
+    }
   
   },
   { timestamps: true }

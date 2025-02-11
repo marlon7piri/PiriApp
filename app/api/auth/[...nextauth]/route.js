@@ -22,14 +22,13 @@ const login = async (credentials) => {
 
   return user;
 };
-
-export const authoptions = NextAuth({
+export const authoptions = {
   pages: {
     signIn: "/login",
   },
   session: {
     strategy: 'jwt',
-    maxAge:30 * 60 //30 minutos
+    maxAge: 30 * 60 //30 minutos
   },
   providers: [
     CredentialsProvider({
@@ -51,25 +50,34 @@ export const authoptions = NextAuth({
         token.email = user.email;
         token.id = user.id;
         token.isAdmin = user.isAdmin;
+        token.userId = user.userId
 
       }
       return token;
     },
     async session({ session, token }) {
 
-      if (session) {
-        session.username = token.username;
-        session.email = token.email;
-        session.id = token.id;
-        session.isAdmin = token.isAdmin;
-
-
-
-        return session;
+      if (session.user) {
+        session.user.username = token.username;
+        session.user.email = token.email;
+        session.user.id = token.id || token.sub; // Usa token.sub como respaldo
+        session.user.isAdmin = token.isAdmin;
+        session.user.userId = token.userId
+      } else {
+        session.user = {
+          username: token.username,
+          email: token.email,
+          id: token.id || token.sub, // Usa token.sub si no hay id
+          isAdmin: token.isAdmin,
+          userId: token.userId
+        };
       }
 
-    },
-  },
-});
+      return session;
+    }
 
-export { authoptions as GET, authoptions as POST };
+  },
+}
+const handler = NextAuth(authoptions);
+
+export { handler as GET, handler as POST };

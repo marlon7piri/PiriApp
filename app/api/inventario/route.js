@@ -3,13 +3,14 @@ import { connectDb } from "@/app/libs/mongoDb";
 import { Inventario } from "@/app/libs/models/inventario";
 import mongoose from "mongoose";
 import { User } from "@/app/libs/models/usuarios";
+import { findUserId } from "@/app/libs/findUserId";
 
 export async function POST(req) {
   try {
-    const { fecha, productos, area, autor } = await req.json();
+    const { fecha, productos, area, autor, userId } = await req.json();
 
     await connectDb();
-
+    const idfound = await findUserId(userId)
     // Verificar si el autor es un ObjectId válido
     if (!mongoose.Types.ObjectId.isValid(autor)) {
       return NextResponse.json(
@@ -18,7 +19,7 @@ export async function POST(req) {
       );
     }
 
-  
+
     const usuarioExiste = await User.findById(autor);
     if (!usuarioExiste) {
       return NextResponse.json(
@@ -38,12 +39,13 @@ export async function POST(req) {
         { status: 401 }
       );
     }
-   
+
     const newInventario = new Inventario({
       fecha,
       productos,
       area,
       autor: usuarioExiste._id,
+      userId:idfound
     });
 
     const inventarioGuardado = await newInventario.save();

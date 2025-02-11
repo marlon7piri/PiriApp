@@ -1,4 +1,4 @@
-const { Products} = require("./models/productos");
+const { Products } = require("./models/productos");
 const { User } = require("./models/usuarios");
 const { connectDb } = require("./mongoDb");
 
@@ -15,31 +15,32 @@ export const getProductos = async () => {
 
 export const getProducts = async (query) => {
   const regex = new RegExp(query, "i");
- 
 
-  
+
+
   try {
     connectDb();
     const allusers = await Products.find({ nombre: { $regex: regex } });
-   
 
-    return  allusers 
+
+    return allusers
   } catch (error) {
     throw new Error("Failed to fetch products desde el backend");
   }
 };
 
-export const getUsuarios = async (query) => {
+export const getUsuarios = async (query, userId) => {
   const regex = new RegExp(query, "i");
- 
 
-  
+
+
   try {
-    connectDb();
-    const allusers = await User.find({ username: { $regex: regex } });
-   
+    await connectDb();
+    const filtro = { username: { $regex: regex }, userId: userId }
+    const allusers = await User.find(filtro);
 
-    return  allusers 
+
+    return allusers
   } catch (error) {
     throw new Error("Failed to fetch users desde el backend");
   }

@@ -4,6 +4,7 @@ import { connectDb } from "@/app/libs/mongoDb";
 import { authoptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { User } from "@/app/libs/models/usuarios";
+import { findUserId } from "@/app/libs/findUserId";
 
 export async function GET() {
 
@@ -33,23 +34,11 @@ export async function POST(req) {
     itbms,
     costo,
     presentacion_por_unidad,
-    precio_por_unidad
+    precio_por_unidad,
+    userId
   } = await req.json();
 
-  console.log(
-    nombre,
-
-    categoria,
-    stock,
-    stock_min,
-    unidad,
-    mas_vendido,
-    proveedor,
-    itbms,
-    costo,
-    presentacion_por_unidad,
-    precio_por_unidad
-  );
+  
 
   let valor = 0;
   let impuesto_del_valor = 0;
@@ -73,6 +62,7 @@ export async function POST(req) {
 
   try {
     connectDb();
+    const idFound = await findUserId(userId)
     const newproducts = new Products({
       nombre,
 
@@ -85,7 +75,8 @@ export async function POST(req) {
       presentacion_por_unidad,
       precio_por_unidad,
       itbms: itbmsreal.toFixed(2),
-      costo: costototal.toFixed(2)
+      costo: costototal.toFixed(2),
+      userId:idFound || '',
     });
 
     const producto = await newproducts.save();

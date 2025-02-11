@@ -13,11 +13,11 @@ import BotonEXCEL from "@/app/components/BotonEXCEL";
 import { useDebouncedCallback } from "use-debounce";
 import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
-const FiltrosProductos = () => {
+const FiltrosProductos = ({productos}) => {
   const {
     tablaProductos,
     setProductos,
-    productos,
+    
     setAvisodecorreo,
     avisodecorreo,
   } = useClientContext();
@@ -93,7 +93,13 @@ const FiltrosProductos = () => {
       headers: {
         Accept: "application/json",
       },
-      body: JSON.stringify({ fecha: fechaFormateada, productos, area, autor: session.id }),
+      body: JSON.stringify({
+        fecha: fechaFormateada,
+        productos,
+        area,
+        autor: session?.user?.id,
+        userId: session?.user?.userId
+      }),
     });
 
     if (!res.ok) {
@@ -110,7 +116,7 @@ const FiltrosProductos = () => {
 
 
 
-  
+
   return (
     <nav className={styles.filtrosContainer}>
       <input

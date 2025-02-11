@@ -29,6 +29,10 @@ const UserSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+    },
+    userId:{
+      type:String,
+      required:true
     }
   },
   { versionKey: false }

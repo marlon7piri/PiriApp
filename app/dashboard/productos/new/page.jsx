@@ -7,6 +7,7 @@ import * as yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
+import { useSession } from "next-auth/react";
 
 const schema = yup
   .object({
@@ -23,6 +24,7 @@ const schema = yup
 const NewProducto = () => {
   const router = useRouter();
   const [proveedores, setProveedores] = useState([]);
+  const {data:session} = useSession()
 
   const {
     register,
@@ -32,13 +34,14 @@ const NewProducto = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   const enviarData = async (data) => {
     const res = await fetch(`${UrlWeb}/productos`, {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({...data,userId:session?.user?.userId}),
     });
 
     if (!res.ok) {
@@ -65,6 +68,7 @@ const NewProducto = () => {
       className="flex flex-col m-auto p-4 w-2/4 gap-4"
     >
       <label htmlFor="">Nombre</label>
+      {}
       <input
         type="text"
         {...register("nombre", { required: true })}

@@ -62,7 +62,7 @@ export const ClientProvider = ({ children }) => {
  
 
   const conteoDineroTotal = (array) => {
-    const valor = array.reduce((acc, current) => {
+    const valor = array?.reduce((acc, current) => {
       return (acc += current.precio_por_unidad * current.stock);
     }, 0);
 
