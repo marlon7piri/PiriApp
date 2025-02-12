@@ -132,7 +132,7 @@ const TablaPedidos = () => {
               >
                 <td className="px-2 py-3 text-gray-900">
                   <input
-                    type="text"
+                    type="number"
                     value={product.cantidad}
                     className="w-[60px]"
                     onChange={(e) =>

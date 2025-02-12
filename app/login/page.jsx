@@ -38,15 +38,15 @@ export default function Login() {
     setLoginInProgress(false);
   }
   return (
-    <section className="w-full h-screen">
-       
-      <div className={styles.containerLogin}>
 
-      
+
+    <div className={styles.container}>
+
+      <div className={styles.containerLogin}>
         <div className="w-full p-4 ">
-          <h1 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">
+          <h3 className="text-center text-primary text-4xl mb-4 text-slate-50 font-bold">
             Iniciar Sesión
-          </h1>
+          </h3>
           <form
             className=" max-w-xs mx-auto flex flex-col p-4 bg-slate-50  gap-4 rounded-md"
             onSubmit={handleFormSubmit}
@@ -81,11 +81,15 @@ export default function Login() {
             </button>
           </form>
         </div>
-        <div className={styles.section}>
+        <div>
+
+          <Image src={"./wallpaperlogin.svg"} width={800} height={300} objectFit="cover"/>
 
         </div>
       </div>
 
-    </section>
+    </div>
+
+
   );
 }
