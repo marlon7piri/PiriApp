@@ -4,7 +4,7 @@ import DeleteIcon from "@/app/icons/DeleteIcon";
 import React from "react";
 
 export const TablaOrden = () => {
-  const { orden,deleteOrdenProduct } = useClientContext();
+  const { orden,deleteOrdenProduct} = useClientContext();
 
   return (
     <table className="  border border-slate-500">

@@ -111,14 +111,18 @@ const FormMermas = ({ productos }) => {
     router.replace(`${path}?${params}`)
 
   }, 300)
+
   return (
     <div>
 
 
       <form
         onSubmit={handleSubmit(enviarData)}
-        className="flex flex-col m-auto p-4 w-2/4  gap-4 mt-28 bg-slate-50 rounded-md"
+        className={styles.form}
       >
+        <label className='text-center text-2xl text-slate-900'>
+          Mermas
+        </label>
 
 
         {error && <span className="bg-red-500 text-white p-2">{error}</span>}
@@ -203,7 +207,7 @@ const FormMermas = ({ productos }) => {
               <span className="text-red-500"> La fecha es requerida</span>
             )}
           </div>
-          <div className="w-full h-full">
+          <div className="w-full h-auto ">
             <textarea
               rows={4}
               className="resize-none p-2 w-full h-full"

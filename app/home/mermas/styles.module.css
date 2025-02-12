@@ -3,8 +3,27 @@
     gap:1rem
 }
 
+.form{
+    width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    padding: 2rem;
+    margin-top: 100px;
+    background-color: white;
+    border-radius: 1rem;
+   
+}
+
 @media(width<1000px){
     .containerTextArea{
         flex-direction: column;
+    }
+
+    .form{
+        width: 90%;
+       
+       
     }
 }

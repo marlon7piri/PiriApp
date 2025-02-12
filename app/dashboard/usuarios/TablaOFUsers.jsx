@@ -35,26 +35,18 @@ const TablaOFUsers = ({ data }) => {
       {data?.map((e) => {
         return (
           <tr className=" mt-4    " key={e._id}>
-           
-            
-              <td className=" px-6 py-4 font-medium  whitespace-nowrap " scope="row">
-              
-                <span
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    fontWeigth: "black",
-                    color: "white",
-                    padding: "10px",
-                    borderRadius: "50%",
-                    backgroundColor: "red",
-                  }}
-                >
-                  {e.username?.substring(0, 2)}
-                </span>{" "}
-                <span>{e.username}</span>
-              </td>
-         
+
+
+            <td className=" flex gap-2 items-center px-6 py-4 font-medium " scope="row">
+
+              <span className='w-8 h-8 text-slate-50 flex justify-center items-center p-2 rounded-full bg-red-500'
+                
+              >
+                {e.username?.substring(0, 2)}
+              </span>
+              <span>{e.username}</span>
+            </td>
+
             <td className="px-6 py-4">{e.email}</td>
             <td className="px-6 py-4">{e.phone}</td>
             {/*   <td className="px-6 py-4">{e.address}</td> */}
@@ -71,19 +63,21 @@ const TablaOFUsers = ({ data }) => {
               {(e.isActive === true ? "activo" : "inactivo").toString()}
             </td>
 
-            <td className="px-2 py-2  flex gap-1 justify-center items-center">
+            <td className="  flex gap-1 justify-center items-center">
+
               <Link
                 href={`/dashboard/usuarios/${e._id}`}
                 className="px-2 py-2 rounded bg-sky-500 font-medium text-slate-900 dark:text-blue-500 hover:bg-sky-700"
               >
-                <EditIcon/>
+                <EditIcon />
               </Link>
 
               <button
-                onClick={() => deleteProduct(e._id)}
+                
+                onClick={() => alert('Funcion desabilitada por seguridad')/* () => deleteProduct(e._id) */}
                 className="px-2 py-2 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700"
               >
-               <DeleteIcon/>
+                <DeleteIcon />
               </button>
             </td>
           </tr>

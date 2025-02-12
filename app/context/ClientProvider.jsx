@@ -3,6 +3,7 @@
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useParams, useRouter } from "next/navigation";
 import { useSession, SessionProvider } from "next-auth/react";
+import toast from "react-hot-toast";
 const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
@@ -32,7 +33,7 @@ export const ClientProvider = ({ children }) => {
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify({categoria})
+        body: JSON.stringify({ categoria })
       }
     );
     const data = await res.json();
@@ -59,7 +60,7 @@ export const ClientProvider = ({ children }) => {
     router.refresh();
   };
 
- 
+
 
   const conteoDineroTotal = (array) => {
     const valor = array?.reduce((acc, current) => {
@@ -69,8 +70,30 @@ export const ClientProvider = ({ children }) => {
     setDinerototal(valor);
   };
 
-  const deleteOrdenProduct =(id)=>{
-    setOrden((prevSTate)=>prevSTate.filter(y=>y.id !== id))
+  const deleteOrdenProduct = (id) => {
+    setOrden((prevSTate) => prevSTate.filter(y => y.id !== id))
+  }
+
+  const deleteInventario = async (id) => {
+
+    const accion = confirm(`Seguro desea eliminar el inventario?`)
+
+    if(accion){
+      try {
+        const res = await fetch(`${UrlWeb}/inventario/${id}`, {
+          method: "DELETE",
+        })
+  
+       
+        if(res.ok){
+          toast.success('Inventario eliminado')
+          router.refresh()
+        }
+      } catch (error) {
+        throw new Error(error)
+      }
+    }
+    
   }
   return (
     <SessionProvider>
@@ -97,7 +120,7 @@ export const ClientProvider = ({ children }) => {
           setAvisodecorreo,
           orden,
           deleteOrdenProduct,
-          setOrden,session, setSession
+          setOrden, session, setSession, deleteInventario
         }}
       >
         {children}

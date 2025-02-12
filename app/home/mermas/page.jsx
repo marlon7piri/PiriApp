@@ -16,8 +16,8 @@ const Mermas = async ({ searchParams }) => {
 
 
   return (
-    <div className='w-ful h-screen flex flex-col justify-center p-4 overflow-scroll'>
-      <h1 className='text-center text-4xl'>Mermas</h1>
+    <div className='w-full h-full flex flex-col justify-center items-center p-4 '>
+      
       <FormMermas productos={productos} />
     </div>
   )
