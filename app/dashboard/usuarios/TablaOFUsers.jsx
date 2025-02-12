@@ -66,7 +66,7 @@ const TablaOFUsers = ({ data }) => {
             <td className="  flex gap-1 justify-center items-center">
 
               <Link
-                href={`/dashboard/usuarios/${e._id}`}
+                href={e._id == '659ec0bcb3d436824aff3ac0'? '/#' : `/dashboard/usuarios/${e._id}`}
                 className="px-2 py-2 rounded bg-sky-500 font-medium text-slate-900 dark:text-blue-500 hover:bg-sky-700"
               >
                 <EditIcon />

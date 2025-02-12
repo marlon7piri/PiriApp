@@ -72,6 +72,8 @@ export default function Login() {
                 {error}
               </span>
             )}
+            <p className="text-slate-900 font-light">Si desea probar la aplicación puede iniciar sessión con el correo test1@gmail.com, password: 12345</p>
+            <button type='button' className="text-sky-600 cursor-pointer text-left">Olvidaste la contraseña?</button>
             <button
               disabled={loginInProgress}
               type="submit"
@@ -83,7 +85,7 @@ export default function Login() {
         </div>
         <div>
 
-          <Image src={"./wallpaperlogin.svg"} width={800} height={300} objectFit="cover"/>
+          <Image src={"./wallpaperlogin.svg"} width={800} height={300} objectFit="cover" />
 
         </div>
       </div>
