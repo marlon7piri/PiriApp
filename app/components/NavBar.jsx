@@ -59,10 +59,13 @@ const NavBar = () => {
           <UserIcon />
           <Link href="/dashboard/usuarios">Usuarios</Link>
         </div>
-
+        <div className={fondoLinks("/dashboard/areas")}>
+          <UserIcon />
+          <Link href="/dashboard/areas">Areas</Link>
+        </div>
         <div className="flex gap-2">
-          {" "}
-          <HomeIcon />{" "}
+         
+          <HomeIcon />
 
           <Link href="/home">Home</Link>
         </div>

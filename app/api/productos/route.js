@@ -4,7 +4,7 @@ import { connectDb } from "@/app/libs/mongoDb";
 import { authoptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { User } from "@/app/libs/models/usuarios";
-import { findUserId } from "@/app/libs/findUserId";
+import { findRestauranteId } from "@/app/libs/findRestauranteId";
 
 export async function GET() {
 
@@ -25,7 +25,7 @@ export async function POST(req) {
   const {
     nombre,
 
-    categoria,
+    area,
     stock,
     stock_min,
     unidad,
@@ -35,7 +35,7 @@ export async function POST(req) {
     costo,
     presentacion_por_unidad,
     precio_por_unidad,
-    userId
+    restaurante_id
   } = await req.json();
 
   
@@ -62,11 +62,11 @@ export async function POST(req) {
 
   try {
     connectDb();
-    const idFound = await findUserId(userId)
+    const idFound = await findRestauranteId(restaurante_id)
     const newproducts = new Products({
       nombre,
 
-      categoria,
+      area,
       stock,
       stock_min,
       unidad,
@@ -76,7 +76,7 @@ export async function POST(req) {
       precio_por_unidad,
       itbms: itbmsreal.toFixed(2),
       costo: costototal.toFixed(2),
-      userId:idFound || '',
+      restaurante_id:idFound || '',
     });
 
     const producto = await newproducts.save();

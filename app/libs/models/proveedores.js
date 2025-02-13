@@ -5,9 +5,10 @@ const ProveedoresSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  restaurante_id:{
+    type:String,
+    required:true
+   
   }
 });
 

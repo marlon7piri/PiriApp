@@ -6,23 +6,28 @@ import DashboardDineroEnInventario from "./DashboardDineroEnInventario";
 import DashboardProductosMasYMenosVendidos from "./DashboardProductosMasYMenosVendidos";
 import DashboardProductosCasiAgotados from "./DashboardProductosCasiAgotados";
 import { UrlWeb } from "@/app/libs/UrlWeb";
-import styles from"./section.module.css"
+import styles from "./section.module.css"
 import Loading from "./loading";
+import { useSession } from "next-auth/react";
 
 const Dashboard = () => {
   const [estadisticas, setEstadisticas] = useState(null);
-
+  const { data: session } = useSession()
+  console.log(session?.user?.restaurante_id)
   useEffect(() => {
     const fetchEstadisticas = async () => {
       try {
-        const res = await fetch(`${UrlWeb}/estadisticas`, { cache: "no-cache" });
+        if(session){
+          const res = await fetch(`${UrlWeb}/estadisticas?restaurante_id=${session?.user?.restaurante_id}`, { cache: "no-cache" });
 
-        if (!res.ok) {
-          throw new Error(`Error en la API: ${res.status}`);
+          if (!res.ok) {
+            throw new Error(`Error en la API: ${res.status}`);
+          }
+  
+          const data = await res.json();
+          setEstadisticas(data);
         }
-
-        const data = await res.json();
-        setEstadisticas(data);
+       
       } catch (error) {
         console.error("Error al cargar estadísticas:", error);
       }
@@ -32,7 +37,7 @@ const Dashboard = () => {
   }, []);
 
   if (!estadisticas) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (

@@ -14,19 +14,19 @@ const SchemaInventario = new mongoose.Schema(
 
 
     area: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Area',
+      required: true
     },
     autor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true
     },
-    userId: {
-      type:String,
+    restaurante_id: {
+      type: String,
       required: true
 
-     
     }
   },
   { timestamps: true }

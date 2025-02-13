@@ -7,7 +7,7 @@ import * as XLSX from 'xlsx';
 import ExcelIcon from '../icons/ExcelIcon';
 
 const BotonEXCEL = ({ productos }) => {
-  const filteredData = productos.map(product => ({
+  const filteredData = productos?.map(product => ({
     id: product._id,
     nombre: product.nombre,
     stock: product.stock,

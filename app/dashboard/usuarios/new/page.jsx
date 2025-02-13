@@ -43,7 +43,7 @@ reset,
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify({...data,userId:session?.user?.userId}),
+        body: JSON.stringify({...data,restaurante_id:session?.user?.restaurante_id}),
       });
 
       if (!res.ok) {

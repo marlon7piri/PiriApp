@@ -1,18 +1,18 @@
 'use server'
 
 
-import { findUserId } from "../../findUserId";
+import { findRestauranteId } from "../../findRestauranteId";
 import { Merma } from "../../models/mermas";
 import { connectDb } from "../../mongoDb";
 
-export const getMermas = async (userId, fecha) => {
+export const getMermas = async (restaurante_id, fecha) => {
   try {
     await connectDb();
-    const idfound = await findUserId(userId)
+    const idfound = await findRestauranteId(restaurante_id)
     let filtro = {}
     
-    filtro = { userId: idfound, fecha }
-    if (fecha === '') filtro = {}
+    filtro = { restaurante_id: idfound, fecha }
+    if (fecha === '') filtro = {restaurante_id: idfound}
 
     const mermas = await Merma.find(filtro);
 

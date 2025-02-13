@@ -10,7 +10,7 @@ import { authoptions } from "@/app/api/auth/[...nextauth]/route";
 export default async function Users({searchParams}) {
   const session = await getServerSession(authoptions)
   const q = searchParams?.query || ""
-  const data = await getUsuarios(q,session.user.userId);
+  const data = await getUsuarios(q,session.user.restaurante_id);
 
   return (
     <div className="w-full h-full ">

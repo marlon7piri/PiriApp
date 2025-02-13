@@ -1,34 +1,34 @@
-import { findUserId } from "../../findUserId"
+import { findRestauranteId } from "../../findRestauranteId"
 import { Inventario } from "../../models/inventario"
 import { connectDb } from "../../mongoDb"
 
-export const getAllInventarios = async (userId, fecha, area) => {
+export const getAllInventarios = async (restaurante_id, fecha, area) => {
 
     let data = []
     try {
         await connectDb()
 
-        const idfound = await findUserId(userId)
+        const idfound = await findRestauranteId(restaurante_id)
         let filtros = {}
 
 
 
-        filtros = { userId: idfound, fecha, area }
+        filtros = { restaurante_id: idfound, fecha, area }
 
 
-        if (fecha === '') filtros = {}
+        if (fecha === '') filtros = {restaurante_id: idfound}
 
         if (fecha) filtros.fecha = fecha
         if (area) filtros.area = area
 
         if (area === 'todos') {
-            filtros = { fecha }
+            filtros = { fecha,restaurante_id: idfound }
         }
 
 
     
 
-        const inventarios = await Inventario.find(filtros).populate('autor')
+        const inventarios = await Inventario.find(filtros).populate('autor').populate('area')
 
         if (!inventarios) {
             return data

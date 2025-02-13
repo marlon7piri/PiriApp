@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function DELETE(req, { params }) {
   const id = await params.id;
 
-  console.log(id);
+
 
   try {
       await connectDb();

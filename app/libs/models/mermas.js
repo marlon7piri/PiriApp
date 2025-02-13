@@ -31,10 +31,10 @@ const MermasSchema = new mongoose.Schema(
       ref: 'User',
       required: true
     },
-    userId: {
-      type: String,
+    restaurante_id:{
+      type:String,
       required:true
-      
+     
     }
   },
   {

@@ -22,8 +22,10 @@ const ProductsSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    categoria: {
-      type: String,
+    area: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Area',
+      required:true
     },
     unidad: {
       type: String,
@@ -40,7 +42,7 @@ const ProductsSchema = new mongoose.Schema(
     stock_min: {
       type: Number,
     },
-    userId:{
+    restaurante_id:{
       type:String,
       required:true
      

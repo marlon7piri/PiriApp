@@ -1,21 +1,26 @@
 import { Products } from "@/app/libs/models/productos";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req, { params }) {
+    const restaurante_id = await req.query
+
     try {
         let dineroTotal = 0;
         let productosAgotados = [];
         let productosMasVendidos = [];
+        let filtro = { restaurante_id }
 
         // Obtener la cantidad total de productos
         const cantidadProductos = await Products.countDocuments();
 
         // Obtener los productos
-        const productos = await Products.find({});
+        const productos = await Products.find(filtro);
+
+
 
         // Procesar productos
         productos.forEach((element) => {
-            dineroTotal += element.stock * element.precio_por_unidad;
+            dineroTotal += element.stock * element.costo;
 
             if (element.stock < element.stock_min) {
                 productosAgotados.push(element);
@@ -30,7 +35,7 @@ export async function GET() {
         const productosTop = productosMasVendidos.slice(0, 5);
 
         return NextResponse.json(
-            { cantidadProductos, dineroTotal, productosAgotados, productosMasVendidos: productosTop },
+            { cantidadProductos: productos.length, dineroTotal, productosAgotados, productosMasVendidos: productosTop },
             { status: 200 }
         );
     } catch (error) {

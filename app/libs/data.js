@@ -19,7 +19,7 @@ export const getProducts = async (query) => {
 
 
   try {
-    connectDb();
+    await connectDb();
     const allusers = await Products.find({ nombre: { $regex: regex } });
 
 
@@ -29,14 +29,14 @@ export const getProducts = async (query) => {
   }
 };
 
-export const getUsuarios = async (query, userId) => {
+export const getUsuarios = async (query, restaurante_id) => {
   const regex = new RegExp(query, "i");
 
 
 
   try {
     await connectDb();
-    const filtro = { username: { $regex: regex }, userId: userId }
+    const filtro = { username: { $regex: regex }, restaurante_id }
     const allusers = await User.find(filtro);
 
 

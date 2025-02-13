@@ -4,12 +4,12 @@ import { connectDb } from "@/app/libs/mongoDb";
 
 
 export async function POST(req) {
-  const { categoria} = await req.json();
+  const { area} = await req.json();
 
   try {
     await connectDb();
-
-    const allproducts = await Products.find({ categoria:categoria})
+    let filtro = {restaurante_id,area:area}
+    const allproducts = await Products.find(filtro)
 
     if (!allproducts) return NextResponse.json({ message: "No hay productos" });
     return NextResponse.json(allproducts);

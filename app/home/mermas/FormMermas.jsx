@@ -69,7 +69,7 @@ const FormMermas = ({ productos }) => {
           nombre: idSelected.nombre,
           id: idSelected.id,
           autor: session?.user?.id,
-          userId: session?.user?.userId
+          restaurante_id: session?.user?.restaurante_id
         }),
       });
 

@@ -42,7 +42,7 @@ const TablaInventarios = ({ inventarios, fecha }) => {
                 <tr className="border border-slate-300 border-b-3" key={e._id}>
 
                   <td className="px-6 py-3">{e.fecha}</td>
-                  <td className="px-6 py-3">{e.area}</td>
+                  <td className="px-6 py-3">{e?.area?.nombre}</td>
                   <td className="px-6 py-3">{e.autor?.username}</td>
                   <td className="px-2 py-2">
                   <BotonPDF productos={e.productos} autor={e.autor?.username} /> 

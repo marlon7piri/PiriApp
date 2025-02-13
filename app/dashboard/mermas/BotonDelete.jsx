@@ -8,7 +8,7 @@ import { useClientContext } from "@/app/context/ClientProvider";
 import React from "react";
 import DeleteIcon from "@/app/icons/DeleteIcon";
 
-const BotonDelete = ({ id, setMermas, mermas }) => {
+const BotonDelete = ({ id}) => {
   const { setLoading } = useClientContext();
   const router = useRouter();
 
@@ -25,13 +25,9 @@ const BotonDelete = ({ id, setMermas, mermas }) => {
         if (!res.ok) {
           toast.error("algo salio mal");
         }
-        setMermas(
-          mermas.filter((merma) => {
-            return merma._id !== data._id;
-          })
-        );
+      
         toast.success("Producto eliminado");
-       /*  router.refresh(); */
+      router.refresh(); 
 
         setLoading(false);
       }

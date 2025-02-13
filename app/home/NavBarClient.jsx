@@ -58,6 +58,9 @@ const NavBarClient = () => {
             <Link href="/home" onClick={showMenu} className={isActive('/home')}>
               Home
             </Link>
+            <Link href="/home/mermas" onClick={showMenu} className={isActive("/home/mermas")}>
+              Mermas
+            </Link>
             <Link href="/home/pedidos" onClick={showMenu} className={isActive("/home/pedidos")}>
               Pedidos
             </Link>

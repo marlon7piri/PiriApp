@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import { User } from "@/app/libs/models/usuarios";
 import { connectDb } from "@/app/libs/mongoDb";
 import bcrypt from "bcrypt";
-import { Restaurante } from "@/app/libs/models/restaurante";
-import { findUserId } from "@/app/libs/findUserId";
+import { findRestauranteId } from "@/app/libs/findRestauranteId";
 
 export async function GET() {
   try {
@@ -27,8 +26,7 @@ export async function POST(req, { params }) {
     isActive,
     phone,
     address,
-    userId,
-    restaurante,
+    restaurante_id,
   } = await req.json();
 
 
@@ -46,7 +44,7 @@ export async function POST(req, { params }) {
     const salt = await bcrypt.genSalt(10);
     const passwordhas = await bcrypt.hash(password, salt);
 
-    const idfound = await findUserId(userId)
+    const idfound = await findRestauranteId(restaurante_id)
     const user = await User.create({
       username,
       password: passwordhas,
@@ -55,8 +53,8 @@ export async function POST(req, { params }) {
       isActive,
       phone,
       address,
-      userId: idfound || "",
-      restaurante,
+      restaurante_id: idfound || "",
+      
     });
 
 

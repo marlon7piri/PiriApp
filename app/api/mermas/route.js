@@ -2,15 +2,16 @@ import { NextResponse } from "next/server";
 import { connectDb } from "@/app/libs/mongoDb";
 import { Merma } from "@/app/libs/models/mermas";
 import { Products } from "@/app/libs/models/productos";
-import { findUserId } from "@/app/libs/findUserId";
+import { findRestauranteId } from "@/app/libs/findRestauranteId";
 
 
 export async function GET(req, { params }) {
-  const { userId } = await params.userId
+  const { restaurante_id } = await params.userId
   try {
     await connectDb();
-    const idfound = await findUserId(userId)
-    const mermas = await Merma.find({ userId: idfound });
+    const idfound = await findRestauranteId(restaurante_id)
+    let filtro = {restaurante_id:idfound}
+    const mermas = await Merma.find(filtro);
 
     if (!mermas) return NextResponse.json({ message: "No hay mermas" });
     return NextResponse.json(mermas);
@@ -21,12 +22,12 @@ export async function GET(req, { params }) {
 
 export async function POST(req) {
   let stockActual;
-  const { nombre, fecha, servicio, cantidad, causa, observaciones, id, autor, userId } =
+  const { nombre, fecha, servicio, cantidad, causa, observaciones, id, autor, restaurante_id } =
     await req.json();
 
   try {
     await connectDb();
-    const idFound = await findUserId(userId)
+    const idFound = await findRestauranteId(restaurante_id)
 
     const merma = new Merma({
       nombre,
@@ -36,7 +37,7 @@ export async function POST(req) {
       causa,
       observaciones,
       autor,
-      userId: idFound || ''
+      restaurante_id: idFound || ''
     });
 
     const productfound = await Products.findById(id);

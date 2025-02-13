@@ -18,9 +18,9 @@ const Categoria = async ({ searchParams, params }) => {
   const orden = searchParams.orden || ""
   const session = await getServerSession(authoptions)
 
-  
 
-  const res = await getProductos(params.categoria, q, mas_vendido, orden, session?.user?.userId);
+
+  const res = await getProductos(params.categoria, q, mas_vendido, orden, session?.user?.restaurante_id);
 
 
 
@@ -28,9 +28,9 @@ const Categoria = async ({ searchParams, params }) => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center p-4 min-h-screen">
-      
-      <FiltrosProductos productos={res}/>
-    
+
+      <FiltrosProductos productos={res} />
+
       <TablaProductos productos={res} />
     </div>
   );

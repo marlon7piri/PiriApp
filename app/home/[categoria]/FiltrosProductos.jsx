@@ -98,7 +98,7 @@ const FiltrosProductos = ({productos}) => {
         productos,
         area,
         autor: session?.user?.id,
-        userId: session?.user?.userId
+        restaurante_id: session?.user?.restaurante_id
       }),
     });
 

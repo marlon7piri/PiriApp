@@ -30,9 +30,9 @@ const UserSchema = new mongoose.Schema(
     address: {
       type: String,
     },
-    userId:{
-      type:String,
-      required:true
+    restaurante_id: {
+      type: String,
+      required: true
     }
   },
   { versionKey: false }

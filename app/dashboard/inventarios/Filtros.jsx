@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import styles from '@/app/dashboard/productos/styles.module.css'
 
-const Filtros = () => {
+const Filtros = ({ areas }) => {
 
   const searchparams = useSearchParams()
   const { replace } = useRouter()
@@ -27,7 +27,7 @@ const Filtros = () => {
 
   const filtrarQuery = () => {
     const params = new URLSearchParams(searchparams)
-   
+
     if (filtros.fecha || filtros.area && filtros.area !== 'todos') {
       params.set('area', filtros.area)
       params.set('fecha', filtros.fecha)
@@ -50,9 +50,13 @@ const Filtros = () => {
         className="cursor-pointer"
       />
       <select onChange={(e) => areafiltrada(e)} value={filtros.area} className="cursor-pointer">
+
         <option value="todos">todos</option>
-        <option value="cocina">cocina</option>
-        <option value="barra">barra</option>
+
+        {areas.map(t => {
+          return <option value={t._id}>{t.nombre}</option>
+        })}
+
       </select>
 
       <button onClick={filtrarQuery} className="p-2 bg-sky-500 hover:bg-sky-900 transition duration-500 rounded-md">Filtrar</button>

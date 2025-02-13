@@ -17,7 +17,7 @@ const TablaMermas = ({ mermas,setMermas }) => {
             <th scope="col" className="px-6 py-3 cursor-pointer">
               Producto
             </th>
-
+          
             <th scope="col" className="px-6 py-3">
               Fecha
             </th>
@@ -54,7 +54,6 @@ const TablaMermas = ({ mermas,setMermas }) => {
                   <td className="px-6 py-4 text-gray-900 dark:text-slate-50">
                     {product.nombre}
                   </td>
-
                   <td className="px-6 py-4">{product.fecha}</td>
 
                   <td className="px-6 py-4 ">{product.servicio}</td>
@@ -63,7 +62,7 @@ const TablaMermas = ({ mermas,setMermas }) => {
                   <td className="px-6 py-4">{product.observaciones}</td>
 
                   <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
-                    <BotonDelete id={product._id} setMermas={setMermas} mermas={mermas}/>
+                    <BotonDelete id={product._id}/>
                   </td>
                 </tr>
               );

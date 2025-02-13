@@ -10,13 +10,13 @@ const Mermas = async ({ searchParams }) => {
   const q = searchParams.query || ""
 
   const session = await getServerSession(authoptions)
-  const productos = await getAllProductos(q,session?.user?.userId)
+  const productos = await getAllProductos(q,session?.user?.restaurante_id)
 
 
 
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center p-4 '>
+    <div className='w-full h-screen flex flex-col justify-center items-center p-4 '>
       
       <FormMermas productos={productos} />
     </div>
