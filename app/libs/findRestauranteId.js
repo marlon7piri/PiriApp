@@ -1,5 +1,4 @@
 import { Restaurante } from "./models/restaurante"
-import { User } from "./models/usuarios"
 import { connectDb } from "./mongoDb"
 
 export const findRestauranteId = async (id) => {

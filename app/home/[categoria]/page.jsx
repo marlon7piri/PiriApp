@@ -23,9 +23,7 @@ const Categoria = async ({ searchParams, params }) => {
   const res = await getProductos(params.categoria, q, mas_vendido, orden, session?.user?.restaurante_id);
 
 
-  if (!res || res.length === 0) {
-    return <div>No se encontraron productos.</div>;
-  }
+ 
 
 
   return (

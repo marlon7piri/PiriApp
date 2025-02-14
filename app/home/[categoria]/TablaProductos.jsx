@@ -32,9 +32,7 @@ const TablaProductos = ({productos}) => {
     <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400  overflow-scroll">
         <tr>
-          {/*  <th scope="col" className="px-6 py-3">
-            Image
-          </th> */}
+       
           <th scope="col" className="px-6 py-3 cursor-pointer" onClick={ordenarPorNombre}>
             Producto
           </th>
@@ -58,8 +56,8 @@ const TablaProductos = ({productos}) => {
         </tr>
       </thead>
       <tbody className="w-full overflow-scroll">
-        {!productos ? (
-          <h1 className="w-full   text-center text-2xl text-slate-900">
+        {!productos || productos.length == 0 ? (
+          <h1 className="w-full   text-center text-xl text-slate-50">
             No hay productos{" "}
           </h1>
         ) : (
@@ -69,17 +67,7 @@ const TablaProductos = ({productos}) => {
                 className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 key={product._id}
               >
-                {/*  {product?.imageUrl && (
-                  <th>
-                    <Image
-                      src={product?.imageUrl}
-                      width={38}
-                      height={38}
-                      alt="una imagen"
-                      className="object-cover"
-                    />
-                  </th>
-                )} */}
+                
                 <td className="px-6 py-4 text-gray-900 dark:text-slate-50">
                   {product.nombre}
                 </td>
@@ -100,7 +88,7 @@ const TablaProductos = ({productos}) => {
 
                 <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
                   <Link
-                    href={`/home/${product.categoria}/${product._id}`}
+                    href={`/home/${product.area._id}/${product._id}`}
                     className=" rounded-full p-2 bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"
                   >
                     <EditIcon />

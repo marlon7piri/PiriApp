@@ -1,6 +1,5 @@
 import { Products } from "@/app/libs/models/productos";
 import { connectDb } from "@/app/libs/mongoDb";
-import { NextResponse } from "next/server";
 import { findRestauranteId } from "../../findRestauranteId";
 
 export const getProductos = async (area, query, mas_vendido, orden, restaurante_id) => {
@@ -37,8 +36,9 @@ export const getAllProductos = async (query, restaurante_id) => {
 
   try {
     await connectDb();
-
+    console.log("Conexión a la base de datos exitosa");
     const idfound = await findRestauranteId(restaurante_id)
+    console.log("ID del restaurante encontrado:", idfound);
     const filtro = { restaurante_id }
 
     filtro.restaurante_id = idfound
@@ -47,12 +47,14 @@ export const getAllProductos = async (query, restaurante_id) => {
 
 
     const allproducts = await Products.find(filtro).populate('area nombre').lean();
+    console.log("Productos encontrados:", allproducts);
     if (!allproducts) {
       throw new Error('No existen productos')
     }
 
     return allproducts;
   } catch (error) {
+    console.error("Error en getAllProductos:", error);
     throw new Error('Error del servidor' + error)
   }
 };

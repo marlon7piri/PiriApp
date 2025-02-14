@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 const Dashboard = () => {
   const [estadisticas, setEstadisticas] = useState(null);
   const { data: session } = useSession()
-  console.log(session?.user?.restaurante_id)
+ 
   useEffect(() => {
     const fetchEstadisticas = async () => {
       try {
