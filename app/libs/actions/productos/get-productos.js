@@ -27,7 +27,7 @@ export const getProductos = async (area, query, mas_vendido, orden, restaurante_
 
     return allproducts;
   } catch (error) {
-    return NextResponse.json({ message: error });
+    throw new Error('Error del servidor' + error)
   }
 };
 
@@ -48,11 +48,11 @@ export const getAllProductos = async (query, restaurante_id) => {
 
     const allproducts = await Products.find(filtro).populate('area nombre').lean();
     if (!allproducts) {
-      return NextResponse.json({ message: 'No existen productos' });
+      throw new Error('No existen productos')
     }
 
     return allproducts;
   } catch (error) {
-    return NextResponse.json({ message: error });
+    throw new Error('Error del servidor' + error)
   }
 };
