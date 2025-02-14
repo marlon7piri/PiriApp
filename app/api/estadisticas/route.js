@@ -2,7 +2,7 @@ import { Products } from "@/app/libs/models/productos";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
-    const restaurante_id  = await req.query;
+    const {restaurante_id}  = await req.query;
   
     try {
       const pipeline = [
