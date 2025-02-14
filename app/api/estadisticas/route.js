@@ -10,8 +10,7 @@ export async function GET(req, { params }) {
         let productosMasVendidos = [];
         let filtro = { restaurante_id }
 
-        // Obtener la cantidad total de productos
-        const cantidadProductos = await Products.countDocuments();
+       
 
         // Obtener los productos
         const productos = await Products.find(filtro);
@@ -39,7 +38,6 @@ export async function GET(req, { params }) {
             { status: 200 }
         );
     } catch (error) {
-        console.error("Error en la API de estadísticas:", error);
-        return NextResponse.json({ error: "Error al cargar estadísticas" }, { status: 500 });
+        return NextResponse.json({ error: "Error al cargar estadísticas" + error }, { status: 500 });
     }
 }

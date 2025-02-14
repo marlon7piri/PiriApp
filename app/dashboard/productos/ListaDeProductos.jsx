@@ -11,7 +11,7 @@ const ListaDeProductos = ({ productos }) => {
 
 
 
-console.log(productos)
+
  
 
   return (

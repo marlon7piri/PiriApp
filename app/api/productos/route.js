@@ -61,7 +61,7 @@ export async function POST(req) {
   }
 
   try {
-    connectDb();
+    await connectDb();
     const idFound = await findRestauranteId(restaurante_id)
     const newproducts = new Products({
       nombre,

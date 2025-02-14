@@ -6,7 +6,7 @@ import { findRestauranteId } from "../../findRestauranteId";
 export const getProductos = async (area, query, mas_vendido, orden, restaurante_id) => {
 
   const queryEx = new RegExp(query, 'i')
-  console.log(area, query, mas_vendido, orden, restaurante_id)
+  
   try {
     await connectDb();
     const idfound = await findRestauranteId(restaurante_id)
@@ -48,7 +48,7 @@ export const getAllProductos = async (query, restaurante_id) => {
 
     const allproducts = await Products.find(filtro).populate('area nombre').lean();
     if (!allproducts) {
-      return NextResponse.json([]);
+      return NextResponse.json({ message: 'No existen productos' });
     }
 
     return allproducts;
