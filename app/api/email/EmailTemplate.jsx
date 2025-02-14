@@ -6,7 +6,7 @@ const EmailTemplate = ({ pedido }) => {
       <h1>Hola queria hacer un pedido para esta semana</h1> 
       {pedido.map((e) => {
         return (
-          <ul>
+          <ul key={e.nombre}>
             <li>
               {e.nombre} - {e.cantidad} /{e.unidad}
             </li>

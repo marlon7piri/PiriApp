@@ -1,3 +1,8 @@
-export const convertidordefecha = (str)=>{
-    return str.toString().replace("T"," ").substring(0,10)
+export const convertidordefecha = (fecha)=>{
+    const fechaConvertida = new Date(fecha).toLocaleString('es-ES',{
+        day:'2-digit',
+        month:'2-digit',
+        year:'numeric'
+    })
+    return fechaConvertida;
 }

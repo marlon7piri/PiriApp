@@ -10,10 +10,7 @@ const MermasSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    servicio: {
-      type: String,
-      required: true,
-    },
+    
     cantidad: {
       type: Number,
       required: true,

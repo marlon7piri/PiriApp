@@ -21,11 +21,9 @@ const schema = yup
     })
     .required();
 
-const FormNewProducto = ({ areas }) => {
+const FormNewProducto = ({ areas ,proveedores}) => {
     const router = useRouter();
-    const [proveedores, setProveedores] = useState([]);
     const { data: session } = useSession()
-
     const {
         register,
         handleSubmit,
@@ -53,14 +51,7 @@ const FormNewProducto = ({ areas }) => {
             router.refresh();
         }
     };
-    useEffect(() => {
-        const getProveedores = async () => {
-            const res = await fetch(urlproveedores);
-            const data = await res.json();
-            setProveedores(data);
-        };
-        getProveedores();
-    }, []);
+    
 
     return (
         <form

@@ -5,6 +5,7 @@ import { authoptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { User } from "@/app/libs/models/usuarios";
 import { findRestauranteId } from "@/app/libs/findRestauranteId";
+import { prefetchDNS } from "react-dom";
 
 export async function GET() {
 
@@ -38,13 +39,20 @@ export async function POST(req) {
     restaurante_id
   } = await req.json();
 
-  
+
 
   let valor = 0;
   let impuesto_del_valor = 0;
   let costototal = 0;
 
   let itbmsreal = 0;
+
+  const impuestoProducto = {
+    0: precio_por_unidad * 0,
+    7: precio_por_unidad * 0.07,
+    10: precio_por_unidad * 0.1
+  }
+
   if (itbms == 0) {
     itbmsreal = 0;
     valor = precio_por_unidad / presentacion_por_unidad;
@@ -53,10 +61,12 @@ export async function POST(req) {
   } else if (itbms == 7) {
     valor = precio_por_unidad / presentacion_por_unidad;
     impuesto_del_valor = valor * 0.07;
+    itbmsreal = precio_por_unidad * 0.07
     costototal = valor + impuesto_del_valor;
   } else if (itbms == 10) {
     valor = precio_por_unidad / presentacion_por_unidad;
     impuesto_del_valor = valor * 0.1;
+    itbmsreal = precio_por_unidad * 0.1
     costototal = valor + impuesto_del_valor;
   }
 
@@ -74,9 +84,9 @@ export async function POST(req) {
       proveedor,
       presentacion_por_unidad,
       precio_por_unidad,
-      itbms: itbmsreal.toFixed(2),
+      itbms: impuestoProducto[itbms].toFixed(2),
       costo: costototal.toFixed(2),
-      restaurante_id:idFound || '',
+      restaurante_id: idFound || '',
     });
 
     const producto = await newproducts.save();

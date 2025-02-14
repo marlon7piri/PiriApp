@@ -27,7 +27,7 @@ const NavUsuario = () => {
   }, 300); 
 
   return (
-    <div className={`flex gap-2  items-center ${styles.containerSearch}`}>
+    <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input
         type="text"    onChange={handlerSearch} 
         className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"

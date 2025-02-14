@@ -10,7 +10,7 @@ const TablaMermas = ({ mermas,setMermas }) => {
 
   return (
     <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg p-4">
-      <table className="w-full  m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24 ">
+      <table className="w-full  m-auto text-sm text-left text-gray-500 dark:text-gray-400 ">
         <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
           <tr>
             

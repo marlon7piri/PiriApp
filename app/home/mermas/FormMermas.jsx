@@ -7,7 +7,6 @@ import * as yup from "yup";
 import toast from "react-hot-toast";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
-import { useClientContext } from "@/app/context/ClientProvider";
 import styles from "./styles.module.css"
 import { useDebouncedCallback } from "use-debounce";
 import { useSession } from "next-auth/react";
@@ -16,20 +15,14 @@ const schema = yup
   .object({
     nombre: yup.string().max(200),
     cantidad: yup.number().positive().required(),
+    causa: yup.string().required(),
     fecha: yup.string().required(),
     observaciones: yup.string().required(),
   })
   .required();
 
-const causas = [
-  "Devolucion del cliente",
-  "Error al hacer el pedido",
-  "Error de cocina",
-  "accidente",
-  "caducidad",
-  "otro motivo(especificar)",
-];
-const servicios = ["apertura", "cierre"];
+
+
 
 const FormMermas = ({ productos }) => {
   const router = useRouter();
@@ -120,9 +113,7 @@ const FormMermas = ({ productos }) => {
         onSubmit={handleSubmit(enviarData)}
         className={styles.form}
       >
-        <label className='text-center text-2xl text-slate-900'>
-          Mermas
-        </label>
+
 
 
         {error && <span className="bg-red-500 text-white p-2">{error}</span>}
@@ -135,7 +126,7 @@ const FormMermas = ({ productos }) => {
           }}
 
           /*  {...register("nombre", { required: false })} */
-          placeholder="nombre"
+          placeholder="Buscar producto"
         />
         {(!closelist && termino) && (<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
           {productos.map((e) => {
@@ -168,38 +159,19 @@ const FormMermas = ({ productos }) => {
 
           <div className="flex flex-col gap-2">
             <label htmlFor="">Causa</label>
-            <select
-              name=""
-              id=""
-              {...register("causa", { required: true })}
-              className="p-2 outline-none cursor-pointer"
-            >
-              <option value=""> </option>
-              {causas?.map((e) => {
-                return (
-                  <option value={e} key={e}>
-                    {e}
-                  </option>
-                );
-              })}
-            </select>
+            <input
 
-            <label htmlFor="">Servicios</label>
-            <select
-              name=""
-              id=""
-              {...register("servicio", { required: true })}
-              className="p-2 outline-none cursor-pointer"
-            >
-              <option value=""> </option>
-              {servicios?.map((e) => {
-                return (
-                  <option value={e} key={e}>
-                    {e}
-                  </option>
-                );
-              })}
-            </select>
+
+              {...register("causa", { required: true })}
+
+              /*  {...register("nombre", { required: false })} */
+              placeholder="causa"
+            />
+            {errors.causa && (
+              <span className="text-red-500">Es requerido</span>
+            )}
+
+
             <label htmlFor="">Fecha</label>
 
             <input type="date" {...register("fecha", { required: true })} />
@@ -223,7 +195,7 @@ const FormMermas = ({ productos }) => {
         </div>
 
         <input
-          /*   disabled={isLoading} */
+          disabled={isLoading}
           type="submit"
           value={loading ? " loading..." : "Crear"}
           className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"

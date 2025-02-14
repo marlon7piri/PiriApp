@@ -22,7 +22,7 @@ export async function GET(req, { params }) {
 
 export async function POST(req) {
   let stockActual;
-  const { nombre, fecha, servicio, cantidad, causa, observaciones, id, autor, restaurante_id } =
+  const { nombre, fecha, cantidad, causa, observaciones, id, autor, restaurante_id } =
     await req.json();
 
   try {
@@ -32,7 +32,7 @@ export async function POST(req) {
     const merma = new Merma({
       nombre,
       fecha,
-      servicio,
+     
       cantidad,
       causa,
       observaciones,

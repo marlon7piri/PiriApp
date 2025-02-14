@@ -17,9 +17,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchEstadisticas = async () => {
       try {
-        if(session){
-          const res = await fetch(`${UrlWeb}/estadisticas?restaurante_id=${session?.user?.restaurante_id}`, { cache: "no-cache" });
-
+        if (session) {
+          const res = await fetch(
+            `${UrlWeb}/estadisticas?restaurante_id=${session?.user?.restaurante_id}`,
+            { cache: "no-cache" }
+          );
+  
           if (!res.ok) {
             throw new Error(`Error en la API: ${res.status}`);
           }
@@ -27,14 +30,13 @@ const Dashboard = () => {
           const data = await res.json();
           setEstadisticas(data);
         }
-       
       } catch (error) {
         console.error("Error al cargar estadísticas:", error);
       }
     };
-
+  
     fetchEstadisticas();
-  }, []);
+  }, [session]); // Asegúrate de incluir `session` como dependencia
 
   if (!estadisticas) {
     return <Loading />;

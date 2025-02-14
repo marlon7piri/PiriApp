@@ -1,8 +1,8 @@
 import { Products } from "@/app/libs/models/productos";
 import { NextResponse } from "next/server";
 
-export async function GET(req, { params }) {
-    const restaurante_id  = await req.query;
+export async function GET(req) {
+    const restaurante_id  =  req.query;
   
     try {
       const pipeline = [

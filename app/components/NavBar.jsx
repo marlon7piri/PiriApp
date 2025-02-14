@@ -12,6 +12,8 @@ import DashboardIcon from "../icons/DashboardIcon";
 import InventoryIcon from "../icons/InventoryIcon";
 
 import MermaIcon from "../icons/MermaIcon";
+import ProveedorIcon from "../icons/ProveedorIcon";
+import AreaIcon from "../icons/AreaIcon";
 
 const NavBar = () => {
 
@@ -40,10 +42,16 @@ const NavBar = () => {
           <DashboardIcon />
           <Link href="/dashboard">Dashboard</Link>
         </div>
+
         <div className={fondoLinks("/dashboard/productos")}>
           {" "}
           <ProductIcon />
           <Link href="/dashboard/productos">Productos</Link>
+        </div>
+        <div className={fondoLinks("/dashboard/proveedores")}>
+          {" "}
+          <ProveedorIcon />
+          <Link href="/dashboard/proveedores">Proveedores</Link>
         </div>
         <div className={fondoLinks("/dashboard/inventarios")}>
           {" "}
@@ -60,11 +68,11 @@ const NavBar = () => {
           <Link href="/dashboard/usuarios">Usuarios</Link>
         </div>
         <div className={fondoLinks("/dashboard/areas")}>
-          <UserIcon />
+          <AreaIcon />
           <Link href="/dashboard/areas">Areas</Link>
         </div>
         <div className="flex gap-2">
-         
+
           <HomeIcon />
 
           <Link href="/home">Home</Link>

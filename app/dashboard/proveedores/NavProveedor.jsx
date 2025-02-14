@@ -8,7 +8,7 @@ import React from "react";
 import UploadExcel from "@/app/components/UploadExcel ";
 import styles from './styles.module.css'
 
-const NavCategorias= ({ productos }) => {
+const NavProveedor= ({ productos }) => {
   const searchparams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -33,11 +33,11 @@ const NavCategorias= ({ productos }) => {
         className="outline-none p-2  h-16 border-slate-900 rounded-md focus:border-sky-500"
         placeholder="Buscar...."
       />
-       <Boton texto="Nueva" href="/dashboard/areas/new" />
+       <Boton texto="Nueva" href="/dashboard/proveedores/new" />
       
      
     </div>
   );
 };
 
-export default NavCategorias;
+export default NavProveedor;

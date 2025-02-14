@@ -42,7 +42,7 @@ const Filtros = ({ areas }) => {
 
   }
   return (
-    <div className={`flex gap-2 ${styles.containerSearch}`}>
+    <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input
         type="date"
         onChange={filtrar}
