@@ -1,5 +1,13 @@
 @media(width<1000px) {
     .containerSearch {
+        width:100%;
         flex-direction: column;
+        gap:1rem
+    }
+
+    .btncontainer{
+        display:flex;
+        gap:1rem;
+        flex-direction:column
     }
 }

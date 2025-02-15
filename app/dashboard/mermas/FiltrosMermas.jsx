@@ -37,11 +37,11 @@ const FiltrosMermas = () => {
   return (
     <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input type="date" onChange={(e) => setFecha(e.target.value)} value={fecha} className="cursor-pointer" />
-      <div>
-        <button type="button" onClick={Filtrar} className="w-max ml-4 bg-sky-500  hover:bg-sky-900 px-4 py-2 rounded-sm">
+      <div className={styles.btncontainer}>
+        <button type="button" onClick={Filtrar} className="w-[100px]  bg-sky-500  hover:bg-sky-900 px-4 py-2 rounded-sm">
           Filtrar
         </button>
-        <button type="button" onClick={limpiar} className="w-max ml-4 bg-sky-500  hover:bg-sky-900 px-4 py-2 rounded-sm">
+        <button type="button" onClick={limpiar} className="w-[100px]  bg-sky-500  hover:bg-sky-900 px-4 py-2 rounded-sm">
           Limpiar
         </button>
       </div>
