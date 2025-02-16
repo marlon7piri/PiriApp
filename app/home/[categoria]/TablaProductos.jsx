@@ -6,8 +6,8 @@ import React from "react";
 import { useClientContext } from "../../context/ClientProvider";
 import toast from "react-hot-toast";
 
-const TablaProductos = ({productos}) => {
-  const { pedidos, setPedidos, loading,ordenarPorNombre } = useClientContext();
+const TablaProductos = ({ productos }) => {
+  const { pedidos, setPedidos, loading, ordenarPorNombre } = useClientContext();
 
 
   const addPedidos = (product) => {
@@ -24,7 +24,7 @@ const TablaProductos = ({productos}) => {
     }
   };
 
-  if (loading){
+  if (loading) {
     return <div class="loader"></div>
 
   }
@@ -32,7 +32,7 @@ const TablaProductos = ({productos}) => {
     <table className="w-2/4 h-full m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400  overflow-scroll">
         <tr>
-       
+
           <th scope="col" className="px-6 py-3 cursor-pointer" onClick={ordenarPorNombre}>
             Producto
           </th>
@@ -41,11 +41,12 @@ const TablaProductos = ({productos}) => {
             Stock
           </th>
           <th scope="col" className="px-6 py-3">
-            Stock Minimo
-          </th>
-          <th scope="col" className="px-6 py-3">
             Unidad
           </th>
+          <th scope="col" className="px-6 py-3">
+            Stock Minimo
+          </th>
+
           <th scope="col" className="px-6 py-3">
             Proveedor
           </th>
@@ -67,23 +68,22 @@ const TablaProductos = ({productos}) => {
                 className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 key={product._id}
               >
-                
+
                 <td className="px-6 py-4 text-gray-900 dark:text-slate-50">
                   {product.nombre}
                 </td>
+                <td className="px-6 py-4 ">{product.unidad}</td>
 
                 <td
-                  className={` ${
-                    product.stock < product.stock_min
-                      ? "px-6 py-4   text-red-700 font-bold"
-                      : "px-6 py-4   text-green-700 "
-                  }  `}
+                  className={` ${product.stock < product.stock_min
+                    ? "px-6 py-4   text-red-700 font-bold"
+                    : "px-6 py-4   text-green-700 "
+                    }  `}
                 >
                   {product.stock}
                 </td>
 
                 <td className="px-6 py-4 ">{product.stock_min}</td>
-                <td className="px-6 py-4 ">{product.unidad}</td>
                 <td className="px-6 py-4">{product.proveedor}</td>
 
                 <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
