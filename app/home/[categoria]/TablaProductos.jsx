@@ -37,11 +37,12 @@ const TablaProductos = ({ productos }) => {
             Producto
           </th>
 
-          <th scope="col" className="px-6 py-3">
-            Stock
-          </th>
+         
           <th scope="col" className="px-6 py-3">
             Unidad
+          </th>
+          <th scope="col" className="px-6 py-3">
+            Stock
           </th>
           <th scope="col" className="px-6 py-3">
             Stock Minimo
