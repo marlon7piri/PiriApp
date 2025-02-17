@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { UrlWeb, urlproveedores } from "@/app/libs/UrlWeb";
+import { UrlWeb} from "@/app/libs/UrlWeb";
 import { useSession } from "next-auth/react";
 
 const schema = yup

@@ -2,7 +2,7 @@ import { Products } from "@/app/libs/models/productos";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-    const restaurante_id  =  req.query;
+    const restaurante_id  =  await req.query;
   
     try {
       const pipeline = [
@@ -42,8 +42,8 @@ export async function GET(req) {
         );
       }
   
+    
       const { dineroTotal, productos } = result[0];
-  
       // Procesar productos
       const productosAgotados = productos.filter(
         (producto) => producto.stock < producto.stock_min

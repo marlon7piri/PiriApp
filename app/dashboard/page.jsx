@@ -19,7 +19,7 @@ const Dashboard = () => {
       try {
         if (session) {
           const res = await fetch(
-            `${UrlWeb}/estadisticas?restaurante_id=${session?.user?.restaurante_id}`,
+            `${UrlWeb}/estadisticas/${session?.user?.restaurante_id}`,
             { cache: "no-cache" }
           );
   

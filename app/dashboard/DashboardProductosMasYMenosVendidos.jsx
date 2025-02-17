@@ -18,7 +18,7 @@ const DashboardProductosMasYMenosVendidos = ({productosMasVendidos}) => {
         <thead className="w-full text-left">
           <tr>
             <th>Nombre</th>
-            <th>Precio</th>
+            <th>Costo</th>
             <th>Stock</th>
           </tr>
         </thead>
@@ -27,7 +27,7 @@ const DashboardProductosMasYMenosVendidos = ({productosMasVendidos}) => {
             return (
               <tr className="border border-b-slate-500">
                 <td>{e.nombre}</td>
-                <td>{e.precio_por_unidad}</td>
+                <td>{e.costo}</td>
                 <td>{e.stock}</td>
               </tr>
             );
