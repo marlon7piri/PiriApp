@@ -42,7 +42,7 @@ const Botones = ({ allproducto }) => {
   };
 
   return (
-    <div className="w-full flex gap-2">
+    <div className="w-full flex gap-2 ">
       <Link
         href={`/dashboard/productos/${allproducto}`}
         className="px-2 py-1 rounded bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"

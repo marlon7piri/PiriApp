@@ -105,7 +105,7 @@ const ListaDeProductos = ({ productos }) => {
                     {convertidordefecha(product.createdAt)}
                   </td>
 
-                  <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
+                  <td className="w-max h-full px-6 py-4  flex gap-1 justify-center items-center ">
                     <Botones allproducto={product._id} />
                   </td>
                 </tr>
