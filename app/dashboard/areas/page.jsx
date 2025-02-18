@@ -15,7 +15,7 @@ export default async function Categorias({ searchParams }) {
   return (
     <div className="w-full ">
       <h1 className="text-center text-gray-900 font-bold text-2xl">Categorias</h1>
-      <NavCategorias productos={data}/> 
+      <NavCategorias /> 
       <TablaAreas categorias={data} />
 
     </div>
