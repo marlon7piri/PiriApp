@@ -27,8 +27,8 @@ const UploadExcel = () => {
 
   return (
     <div className="flex flex-col w-[230px]">
-      <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
-      <button onClick={handleUpload} className="bg-green-600 hover:bg-green-900 p-2 rounded-md mt-4">
+      <input type="file" accept=".xlsx, .xls" onChange={handleFileChange}/>
+      <button onClick={handleUpload} className="w-max bg-green-600 hover:bg-green-900 p-2 rounded-md mt-4">
         Subir Inventario
       </button>
     </div>

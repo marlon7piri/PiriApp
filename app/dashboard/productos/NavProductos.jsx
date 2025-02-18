@@ -29,21 +29,23 @@ const NavProductos = ({ productos }) => {
   }, 300);
 
   return (
-    <div className={`flex justify-evenly gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 ${styles.containerSearch}`}>
+    <div className={`flex justify-evenly gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 oveflow-hidden ${styles.containerSearch}`}>
       <input
         type="text"
         onChange={handlerSearch}
-        className="outline-none p-2  h-16 border-slate-900 rounded-md focus:border-sky-500"
+        className={styles.input_filters}
         placeholder="Buscar...."
       />
-      <div>
+      <div className="w-full overflow-hidden">
       <UploadExcel />
       </div>
       
-      <div className="flex gap-4">
+      <div className={styles.containerDownloadProductos}>
       
+        <div className="flex gap-2">
         <BotonEXCEL productos={productos} />
         <BotonPDF productos={productos} />
+        </div>
         <Boton texto="Nuevo" href="/dashboard/productos/new" />
       </div>
     </div>

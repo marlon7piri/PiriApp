@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
+import styles from '@/app/dashboard/productos/styles.module.css'
 
-const Boton = ({styles = "bg-sky-500 px-4 py-2 h-8 rounded-md flex justify-center items-center text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50",texto,href}) => {
+const Boton = ({texto,href}) => {
   return (
-    <Link className={styles} href={href || ''}>{texto}</Link>
+    <Link className={styles.btnPrimary} href={href || ''}>{texto}</Link>
   )
 }
 

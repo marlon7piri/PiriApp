@@ -59,7 +59,7 @@ const Filtros = ({ areas }) => {
 
       </select>
 
-      <button onClick={filtrarQuery} className="p-2 bg-sky-500 hover:bg-sky-900 transition duration-500 rounded-md">Filtrar</button>
+      <button onClick={filtrarQuery} className={styles.btnPrimary}>Filtrar</button>
     </div>
   );
 };

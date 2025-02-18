@@ -57,6 +57,7 @@ export default function Login() {
               placeholder="Correo"
               value={email}
               disabled={loginInProgress}
+              className='border focus:border-purple-500'
               onChange={(ev) => setEmail(ev.target.value)}
             />
             <input
@@ -65,6 +66,7 @@ export default function Login() {
               placeholder="Contraseña"
               value={password}
               disabled={loginInProgress}
+              className='border focus:border-purple-500'
               onChange={(ev) => setPassword(ev.target.value)}
             />
             {error && (

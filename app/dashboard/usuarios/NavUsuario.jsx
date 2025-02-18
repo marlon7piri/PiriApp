@@ -30,7 +30,7 @@ const NavUsuario = () => {
     <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input
         type="text"    onChange={handlerSearch} 
-        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
+        className={styles.input_filters}
         placeholder="Buscar...."
       />{" "}
       <Boton texto="Nuevo" href='/dashboard/usuarios/new'/>

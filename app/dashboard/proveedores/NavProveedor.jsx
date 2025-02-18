@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDebouncedCallback } from 'use-debounce'
 import React from "react";
 import UploadExcel from "@/app/components/UploadExcel ";
-import styles from './styles.module.css'
+import styles from '@/app/dashboard/productos/styles.module.css'
 
 const NavProveedor= ({ productos }) => {
   const searchparams = useSearchParams();
@@ -30,7 +30,7 @@ const NavProveedor= ({ productos }) => {
       <input
         type="text"
         onChange={handlerSearch}
-        className="outline-none p-2  h-16 border-slate-900 rounded-md focus:border-sky-500"
+        className={styles.input_filters}
         placeholder="Buscar...."
       />
        <Boton texto="Nueva" href="/dashboard/proveedores/new" />

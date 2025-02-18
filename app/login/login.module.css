@@ -24,6 +24,7 @@
   background-image: url("./../../public/wallpaperlogin.svg");
 }
 
+
 @media (width<600px) {
   .containerLogin {
     width: 100%;

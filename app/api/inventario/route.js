@@ -29,8 +29,10 @@ export async function POST(req) {
     }
     const inventarios = await Inventario.find({});
 
+
+    console.log({area})
     const exist = inventarios.find((inventario) => {
-      return inventario.fecha === fecha && inventario.area === area;
+      return inventario.fecha === fecha && inventario.area._id.toString() === area;
     });
 
     if (exist) {
