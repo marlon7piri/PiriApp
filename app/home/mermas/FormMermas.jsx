@@ -48,8 +48,11 @@ const FormMermas = ({ productos }) => {
 
   const enviarData = async (data) => {
 
-
-
+console.log({idSelected})
+    if (!idSelected?.nombre) {
+      alert('Debe seleccionar un producto')
+      return
+    }
     try {
       setLoading(true);
       const res = await fetch(`${UrlWeb}/mermas`, {
@@ -164,7 +167,7 @@ const FormMermas = ({ productos }) => {
 
               {...register("causa", { required: true })}
 
-              /*  {...register("nombre", { required: false })} */
+
               placeholder="causa"
             />
             {errors.causa && (

@@ -3,7 +3,7 @@ import { getProveedores } from '@/app/libs/actions/proveedores/get-proveedor'
 import { getServerSession } from 'next-auth'
 import React from 'react'
 import NavProveedor from './NavProveedor'
-import TablaProveedores from './TablaAreas'
+import TablaProveedores from './TablaProveedores'
 
 const page = async ({ searchParams }) => {
     const session = await getServerSession(authoptions)

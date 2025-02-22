@@ -12,7 +12,9 @@ const Areas = ({ areas }) => {
     <div className={styles.section}>
 
       <div className={styles.grid_card}>
-        {!areas || areas.length == 0 ? <h1>No hay areas aún</h1> : areas.map((area) => {
+        {!areas || areas.length == 0 ? <div className="w-screen text-center ">
+          <h1 className="text-center text-slate-50 text-2xl">No hay áreas aún</h1>
+        </div> : areas.map((area) => {
           return (
             <Link
               href={`/home/${area?._id}`}

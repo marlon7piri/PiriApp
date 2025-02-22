@@ -87,7 +87,7 @@ const TablaProductos = ({ productos }) => {
                 <td className="px-6 py-4 ">{product.stock_min}</td>
                 <td className="px-6 py-4">{product.proveedor}</td>
 
-                <td className="w-max px-2 py-2  flex gap-1 justify-center items-center">
+                <td className="w-max h-full px-2 py-2  flex gap-1 justify-center items-center ">
                   <Link
                     href={`/home/${product.area._id}/${product._id}`}
                     className=" rounded-full p-2 bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"

@@ -10,9 +10,13 @@ const MermasSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    
+
     cantidad: {
       type: Number,
+      required: true,
+    },
+    unidad: {
+      type: String,
       required: true,
     },
     causa: {
@@ -28,10 +32,10 @@ const MermasSchema = new mongoose.Schema(
       ref: 'User',
       required: true
     },
-    restaurante_id:{
-      type:String,
-      required:true
-     
+    restaurante_id: {
+      type: String,
+      required: true
+
     }
   },
   {

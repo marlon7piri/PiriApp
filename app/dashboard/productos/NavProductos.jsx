@@ -36,7 +36,7 @@ const NavProductos = ({ productos }) => {
         className={styles.input_filters}
         placeholder="Buscar...."
       />
-      <div className="w-full overflow-hidden">
+      <div className="w-full overflow-hidden ">
       <UploadExcel />
       </div>
       
