@@ -52,8 +52,7 @@ const FormEditProducto = ({ params, areas, proveedores }) => {
         try {
 
 
-            console.log(data)
-            const res = await fetch(`${UrlWeb}/productos/${params.idProducto}`, {
+           const res = await fetch(`${UrlWeb}/productos/${params.idProducto}`, {
                 method: "PUT",
                 headers: {
                     Accept: "application/json",
@@ -67,7 +66,7 @@ const FormEditProducto = ({ params, areas, proveedores }) => {
                 toast.success("Producto editado");
                 router.push("/dashboard/productos");
                 router.refresh();
-            }
+            } 
         } catch (error) {
             console.log(error)
         }
@@ -136,10 +135,12 @@ const FormEditProducto = ({ params, areas, proveedores }) => {
                 render={({ field }) => (
                     <>
                         <label htmlFor="">itbms</label>
+
                         <select
                             {...field}
                             className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
-                        >
+
+                        >   <option value={''}>Seleccione</option>
                             <option value={0}>0</option>
                             <option value={7}>7</option>
                             <option value={10}>10</option>

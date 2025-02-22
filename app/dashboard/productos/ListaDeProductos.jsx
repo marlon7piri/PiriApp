@@ -98,7 +98,7 @@ const ListaDeProductos = ({ productos }) => {
                   >
                     {product.mas_vendido ? "Si" : "No"}
                   </td>
-                  <td className="px-6 py-4">${product.itbms}</td>
+                  <td className="px-6 py-4">{product.itbms}%</td>
 
                   <td className="px-6 py-4">{product?.area?.nombre}</td>
                   <td className="px-6 py-4">

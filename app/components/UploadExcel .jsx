@@ -1,8 +1,10 @@
 'use client'
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const UploadExcel = () => {
   const [file, setFile] = useState(null);
+  const router = useRouter()
 
   const handleFileChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -23,6 +25,7 @@ const UploadExcel = () => {
 
     const data = await res.json();
     alert(data.message);
+    router.refresh()
   };
 
   return (

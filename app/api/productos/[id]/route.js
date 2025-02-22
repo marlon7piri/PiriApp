@@ -66,15 +66,17 @@ export async function PUT(req, { params }) {
   }
 
   if (itbms == 0) {
-    valor = precio_por_unidad / presentacion_por_unidad;
+    valor = precio_por_unidad / parseFloat(presentacion_por_unidad.toFixed(2));
+    
 
     costototal = valor;
   } else if (itbms == 7) {
-    valor = precio_por_unidad / presentacion_por_unidad;
+    valor = precio_por_unidad / parseFloat(presentacion_por_unidad.toFixed(2));
     impuesto_del_valor = valor * 0.07;
     costototal = valor + impuesto_del_valor;
+
   } else if (itbms == 10) {
-    valor = precio_por_unidad / presentacion_por_unidad;
+    valor = precio_por_unidad / parseFloat(presentacion_por_unidad.toFixed(2));
     impuesto_del_valor = valor * 0.1;
     costototal = valor + impuesto_del_valor;
   }
@@ -85,7 +87,6 @@ export async function PUT(req, { params }) {
     await connectDb();
 
 
-    
 
 
     const producto = await Products.findByIdAndUpdate(id, {
@@ -98,8 +99,8 @@ export async function PUT(req, { params }) {
       unidad,
       mas_vendido,
       proveedor,
-      itbms: impuestoProducto[itbms],
-      costo: costototal.toFixed(2),
+      itbms,
+      costo: parseFloat(costototal.toFixed(2)),
     });
 
     if (!producto) {

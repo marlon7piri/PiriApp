@@ -47,7 +47,7 @@ export async function GET(req) {
       // Procesar productos
       const productosAgotados = productos.filter(
         (producto) => producto.stock < producto.stock_min
-      );
+      ).slice(0,3);
   
       const productosMasVendidos = productos
         .filter((producto) => producto.mas_vendido)

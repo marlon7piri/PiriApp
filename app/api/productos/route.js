@@ -84,7 +84,7 @@ export async function POST(req) {
       proveedor,
       presentacion_por_unidad,
       precio_por_unidad,
-      itbms: impuestoProducto[itbms].toFixed(2),
+      itbms,
       costo: costototal.toFixed(2),
       restaurante_id: idFound || '',
     });
