@@ -87,7 +87,7 @@ export default function Login() {
         </div>
         <div>
 
-          <Image src={"./wallpaperlogin.svg"} width={800} height={300} objectFit="cover" />
+          <Image src={"./wallpaperlogin.svg"} width={800} height={300}  alt="wallpaper home"/>
 
         </div>
       </div>

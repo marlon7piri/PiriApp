@@ -39,6 +39,7 @@ const FiltrosProductos = ({productos}) => {
       params.delete('query')
     }
 
+    params.set("page",1)
     router.replace(`${path}?${params}`)
 
   }, 300);

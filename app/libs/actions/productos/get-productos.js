@@ -2,10 +2,10 @@ import { Products } from "@/app/libs/models/productos";
 import { connectDb } from "@/app/libs/mongoDb";
 import { findRestauranteId } from "../../findRestauranteId";
 
-export const getProductos = async (area, query, mas_vendido, orden, restaurante_id) => {
+export const getProductos = async (area, query,page=1, mas_vendido, orden, restaurante_id) => {
 
   const queryEx = new RegExp(query, 'i')
-  
+  const limit=5
   try {
     await connectDb();
     const idfound = await findRestauranteId(restaurante_id)
@@ -21,10 +21,12 @@ export const getProductos = async (area, query, mas_vendido, orden, restaurante_
     if (orden === 'mayor') ordenamiento.stock = -1
     if (orden === 'menor') ordenamiento.stock = 1
 
+    const skip = (page -1) * limit
 
-    const allproducts = await Products.find(filtro).sort(ordenamiento).populate('area nombre').lean();
+    const allproducts = await Products.find(filtro).skip(skip).limit(limit).sort(ordenamiento).populate('area nombre').lean();
+    const totalProducts = await Products.countDocuments(filtro)
 
-    return allproducts;
+    return {allproducts,totalPage:Math.ceil(totalProducts / limit)};
   } catch (error) {
     throw new Error('Error del servidor' + error)
   }
