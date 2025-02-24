@@ -25,6 +25,7 @@ const NavProductos = ({ productos }) => {
       params.delete("query");
     }
 
+    params.set("page",1)
     replace(`${pathname}?${params}`);
   }, 300);
 

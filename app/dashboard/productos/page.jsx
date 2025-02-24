@@ -4,9 +4,12 @@ import NavProductos from "./NavProductos";
 import { getAllProductos } from "@/app/libs/actions/productos/get-productos";
 import { getServerSession } from "next-auth";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
+import Pagination from "../usuarios/Pagination";
 
 export default async function Productos({ searchParams }) {
   const q = searchParams?.query || "";
+  const page = searchParams?.page || 1;
+
   const session = await getServerSession(authoptions)
 
 
@@ -15,21 +18,17 @@ export default async function Productos({ searchParams }) {
     return <div>No se encontró el ID del restaurante</div>;
   }
 
-  let productos;
-  try {
-    productos = await getAllProductos(q, session.user.restaurante_id);
-  } catch (error) {
-    return <div>Error al cargar los productos</div>;
-  }
-
+    const {allproducts,totalPage} = await getAllProductos(q,page, session.user.restaurante_id);
+ 
   
 
 
 
   return (
     <div className="flex flex-col gap-4 ">
-      <NavProductos productos={productos} />
-      <ListaDeProductos productos={productos} />
+      <NavProductos productos={allproducts} />
+      <ListaDeProductos productos={allproducts} />
+      <Pagination totalPage={totalPage} currentPage={page}/>
     </div>
   );
 }

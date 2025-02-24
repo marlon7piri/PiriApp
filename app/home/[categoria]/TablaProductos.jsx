@@ -29,7 +29,7 @@ const TablaProductos = ({ productos }) => {
 
   }
   return (
-    <table className=" w-2/4 min-h-[400px] m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-24">
+    <table className=" w-2/4  m-auto text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
       <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400  overflow-scroll">
         <tr>
 

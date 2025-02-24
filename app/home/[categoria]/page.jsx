@@ -28,14 +28,12 @@ const page  =  searchParams.page || 1
 
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center p-4 ">
+    <div className="w-full h-screen flex flex-col justify-center items-center p-8 ">
 
       <FiltrosProductos productos={allproducts} />
-      <div className="min-h-[500px] flex justify-center">
 
       <TablaProductos productos={allproducts} />
 
-      </div>
       <Pagination totalPage={totalPage} currentPage={page}/>
     </div>
   );
