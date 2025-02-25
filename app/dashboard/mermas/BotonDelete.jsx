@@ -39,7 +39,7 @@ const BotonDelete = ({ id}) => {
   return (
     <button
       onClick={deleteMermaController}
-      className=" rounded-full p-2 bg-red-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-red-700"
+      className=" rounded-md p-2 bg-red-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-red-700"
     >
       <DeleteIcon />
     </button>
