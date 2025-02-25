@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import Botones from "@/app/components/Boton";
 import TablaRow from "./TablaRow";
 
 

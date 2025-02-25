@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Botones from '../productos/Botones';
 import { convertidordefecha } from '@/app/libs/convertidordefecha';
 import EditIcon from '@/app/icons/EditIcon';
 import DeleteIcon from '@/app/icons/DeleteIcon';
