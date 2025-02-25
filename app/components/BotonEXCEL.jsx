@@ -25,7 +25,7 @@ const BotonEXCEL = ({ productos }) => {
   return (
     <button
       onClick={downloadInventory}
-      className="flex gap-2 justify-center items-center bg-green-700 h-8 w-auto p-6 text-slate-50 rounded-md hover:bg-green-900 "
+      className="flex gap-2 justify-center items-center bg-green-700 h-8 w-auto p-4 text-slate-50 rounded-md hover:bg-green-900 "
     >
       <ExcelIcon/>
     </button>
