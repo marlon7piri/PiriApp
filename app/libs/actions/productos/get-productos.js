@@ -32,27 +32,45 @@ export const getProductos = async (area, query, page = 1, mas_vendido, orden, re
   }
 };
 
-export const getAllProductos = async (query, page = 1, restaurante_id) => {
+export const getAllProductos = async (query, page = 1, restaurante_id, allData = 'no') => {
 
   const queryEx = new RegExp(query, 'i')
-  const limit = 10
+
+  let allproducts
+  let totalPage = 1
   try {
     await connectDb();
+
     const idfound = await findRestauranteId(restaurante_id)
     const filtro = { restaurante_id }
-
     filtro.restaurante_id = idfound
+
     if (query) filtro.nombre = { $regex: queryEx }
 
-    const skip = (page - 1) * limit
+    if (allData == 'si') {
 
-    const allproducts = await Products.find(filtro).skip(skip).limit(limit).populate('area nombre').lean();
-    if (!allproducts) {
-      throw new Error('No existen productos')
+      allproducts = await Products.find(filtro).populate('area nombre').lean();
+
+      if (!allproducts) {
+        throw new Error('No existen productos')
+      }
+    return { allproducts, totalPage };
+
+    } else {
+
+      const limit = 10
+      const skip = (page - 1) * limit
+
+      allproducts = await Products.find(filtro).skip(skip).limit(limit).populate('area nombre').lean();
+
+      if (!allproducts) {
+        throw new Error('No existen productos')
+      }
+      const totalProducts = await Products.countDocuments(filtro);
+      totalPage = Math.ceil(totalProducts / limit)
+      return { allproducts, totalPage };
     }
-    const totalProducts = await Products.countDocuments(filtro);
 
-    return { allproducts, totalPage: Math.ceil(totalProducts / limit) };
   } catch (error) {
     console.error("Error en getAllProductos:", error);
     throw new Error('Error del servidor' + error)

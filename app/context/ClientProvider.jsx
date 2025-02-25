@@ -2,8 +2,9 @@
 
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useParams, useRouter } from "next/navigation";
-import { useSession, SessionProvider } from "next-auth/react";
+import {  SessionProvider } from "next-auth/react";
 import toast from "react-hot-toast";
+import { getAllProductos } from "../libs/actions/productos/get-productos";
 const { createContext, useContext, useState, useEffect } = require("react");
 
 const ClientContext = createContext();
@@ -78,14 +79,14 @@ export const ClientProvider = ({ children }) => {
 
     const accion = confirm(`Seguro desea eliminar el inventario?`)
 
-    if(accion){
+    if (accion) {
       try {
         const res = await fetch(`${UrlWeb}/inventario/${id}`, {
           method: "DELETE",
         })
-  
-       
-        if(res.ok){
+
+
+        if (res.ok) {
           toast.success('Inventario eliminado')
           router.refresh()
         }
@@ -93,8 +94,12 @@ export const ClientProvider = ({ children }) => {
         throw new Error(error)
       }
     }
-    
+
   }
+
+
+
+
   return (
     <SessionProvider>
       <ClientContext.Provider

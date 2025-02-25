@@ -5,10 +5,10 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useDebouncedCallback } from 'use-debounce'
 import React from "react";
-import BotonEXCEL from "@/app/components/BotonEXCEL";
-import BotonPDF from "@/app/components/BotonPDF";
 import UploadExcel from "@/app/components/UploadExcel ";
 import styles from './styles.module.css'
+import BotonEXCEL from "@/app/components/BotonEXCEL";
+import BotonPDF from "@/app/components/BotonPDF";
 
 const NavProductos = ({ productos }) => {
   const searchparams = useSearchParams();
@@ -24,7 +24,7 @@ const NavProductos = ({ productos }) => {
       params.delete("query");
     }
 
-    params.set("page",1)
+    params.set("page", 1)
     replace(`${pathname}?${params}`);
   }, 300);
 
@@ -36,17 +36,18 @@ const NavProductos = ({ productos }) => {
         className={styles.input_filters}
         placeholder="Buscar...."
       />
-      <div className="w-full flex gap-2 overflow-hidden ">
-      <UploadExcel productos={productos}/>
-      <BotonEXCEL productos={productos} />
-      </div>
-      
-      <div className={styles.containerDownloadProductos}>
-      
-        <div className="flex gap-2">
+      <div className="w-full flex gap-2   items-center overflow-hidden ">
+        <UploadExcel productos={productos} />
         
-        <BotonPDF productos={productos} size={25}/>
-        </div>
+      </div>
+
+      <div className={styles.containerDownloadProductos}>
+
+
+
+
+
+
         <Boton texto="Nuevo" href="/dashboard/productos/new" />
       </div>
     </div>

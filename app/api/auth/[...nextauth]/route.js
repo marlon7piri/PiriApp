@@ -7,6 +7,7 @@ import { connectDb } from "@/app/libs/mongoDb";
 import bcrypt from "bcrypt";
 
 const login = async (credentials) => {
+ try {
   connectDb();
 
   const user = await User.findOne({ email: credentials.email });
@@ -21,6 +22,9 @@ const login = async (credentials) => {
 
 
   return user;
+ } catch (error) {
+  throw new Error(`Error login`,error)
+ }
 };
 export const authoptions = {
   pages: {
