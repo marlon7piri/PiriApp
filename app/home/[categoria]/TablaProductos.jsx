@@ -60,7 +60,7 @@ const TablaProductos = ({ productos }) => {
       <tbody className="w-full overflow-scroll">
         {!productos || productos.length == 0 ? (
           <h1 className="w-full   text-center text-xl text-slate-50">
-            No hay productos{" "}
+            No hay productos
           </h1>
         ) : (
           productos?.map((product) => {
