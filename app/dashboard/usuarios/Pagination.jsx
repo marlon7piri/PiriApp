@@ -23,7 +23,7 @@ const Pagination = ({ totalPage, currentPage }) => {
   const hasPrev = currentPage > 1;
   const hasNext = currentPage < totalPage;
   return (
-    <div className="flex gap-2 justify-center items-center mt-4 p-4">
+    <div className="flex gap-2 justify-center rounded-md items-center mt-4 p-4 bg-slate-50">
       <button
         className={`${hasPrev ? 'bg-sky-500 hover:bg-sky-700' : 'bg-slate-500'}  text-gray-900 px-4 py 2 rounded`}
         onClick={() => handlerChangePage("prev")}

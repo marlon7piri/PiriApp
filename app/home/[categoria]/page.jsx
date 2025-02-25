@@ -25,10 +25,14 @@ const page  =  searchParams.page || 1
 
 
  
-
+if(allproducts.length == 0){
+  return <div className="w-full h-screen flex justify-center items-center">
+    <h1 className="text-4xl text-slate-50">No hay productos</h1>
+    </div>
+}
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center p-8 ">
+    <div className="w-full  min-h-screen flex flex-col justify-center items-center p-8 ">
 
       <FiltrosProductos productos={allproducts} />
 

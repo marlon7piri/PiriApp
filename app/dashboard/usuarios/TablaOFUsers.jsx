@@ -67,7 +67,7 @@ const TablaOFUsers = ({ data }) => {
 
               <Link
                 href={`/dashboard/usuarios`} /* /dashboard/usuarios/${e._id} */
-                className="px-2 py-2 rounded bg-sky-500 font-medium text-slate-900 dark:text-blue-500 hover:bg-sky-700"
+                className="px-2 py-2 rounded bg-sky-500 font-medium text-slate-50 dark:text-blue-500 hover:bg-sky-700"
               >
                 <EditIcon />
               </Link>
@@ -75,7 +75,7 @@ const TablaOFUsers = ({ data }) => {
               <button
                 
                 onClick={() => alert('Funcion desabilitada por seguridad')/* () => deleteProduct(e._id) */}
-                className="px-2 py-2 rounded bg-red-500 font-medium text-slate-900   dark:text-blue-500 hover:bg-red-700"
+                className="px-2 py-2 rounded bg-red-500 font-medium text-slate-50   dark:text-blue-500 hover:bg-red-700"
               >
                 <DeleteIcon />
               </button>

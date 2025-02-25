@@ -3,7 +3,7 @@ import { SiMicrosoftexcel } from "react-icons/si";
 
 const ExcelIcon = ({styles='w-4 h-4'}) => {
   return (
-    <SiMicrosoftexcel className={styles}/>
+    <SiMicrosoftexcel className={styles} size={25}/>
   )
 }
 

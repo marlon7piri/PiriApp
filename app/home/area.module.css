@@ -15,11 +15,18 @@
   align-items: center;
   padding: 1rem;
   gap: 1.5rem;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
 }
+@media (width<1000px) {
+  
 
-@media (width<600px) {
+  .grid_card {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width<720px) {
   .section {
     width: 100%;
     flex-direction: column;

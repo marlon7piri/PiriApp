@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const UploadExcel = () => {
+const UploadExcel = ({productos}) => {
   const [file, setFile] = useState(null);
   const router = useRouter()
 
@@ -29,9 +29,9 @@ const UploadExcel = () => {
   };
 
   return (
-    <div className="flex flex-col w-[230px]">
+    <div className="flex flex-col w-max">
       <input type="file" accept=".xlsx, .xls" onChange={handleFileChange}/>
-      <button onClick={handleUpload} className="w-max bg-green-600 hover:bg-green-900 p-2 rounded-md mt-4">
+      <button disabled={!productos} onClick={handleUpload} className="w-max bg-green-600 hover:bg-green-900 p-4 rounded-md mt-4">
         Subir Inventario
       </button>
     </div>

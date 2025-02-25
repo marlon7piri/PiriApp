@@ -9,7 +9,7 @@ const BotonDelete = ({id}) => {
    
 
     return <button onClick={() => deleteInventario(id)}
-        className="px-2 py-1 rounded bg-red-500 font-medium text-slate-50   dark:text-slate-50 hover:bg-red-700 hover:cursor-pointer">
+        className="p-2 h-8 rounded bg-red-500 font-medium text-slate-50   dark:text-slate-50 hover:bg-red-700 hover:cursor-pointer">
 
 
 

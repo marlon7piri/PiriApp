@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
+import Spinner from "../components/Spinner";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,25 +18,35 @@ export default function Login() {
 
     setLoginInProgress(true);
 
-    const res = await signIn("credentials", {
-      email: email,
-      password: password,
-      redirect: false,
-    });
+    try {
+
+
+      const res = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
 
 
 
-    if (res.error) {
-      setError(res.error);
-      setEmail("");
-      setPassword("");
+      if (res.error) {
+        setError(res.error);
+        setEmail("");
+        setPassword("");
+        setLoginInProgress(false);
+
+      }
+
+
+      router.push("/home");
+    } catch (error) {
+
+    } finally {
       setLoginInProgress(false);
 
     }
 
 
-    router.push("/home");
-    setLoginInProgress(false);
   }
   return (
 
@@ -79,15 +90,15 @@ export default function Login() {
             <button
               disabled={loginInProgress}
               type="submit"
-              className="border transition duration-500 bg-[#502e50]  text-slate-50 hover:bg-slate-50 hover:text-sky-900 hover:border-slate-950 px-8  py-2 rounded-md w-max m-auto"
+              className="border transition duration-500 bg-[#502e50]  text-slate-50 hover:bg-[#2c102c] hover:text-sky-900 hover:border-slate-950 p-4 flex justify-center items-center rounded-md w-[200px] m-auto"
             >
-              {loginInProgress ? "loading..." : "Login"}
+              {loginInProgress ? <Spinner /> : "Login"}
             </button>
           </form>
         </div>
         <div>
 
-          <Image src={"./wallpaperlogin.svg"} width={800} height={300}  alt="wallpaper home"/>
+          <Image src={"./wallpaperlogin.svg"} width={800} height={300} alt="wallpaper home" />
 
         </div>
       </div>

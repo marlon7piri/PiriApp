@@ -144,7 +144,7 @@ const FiltrosProductos = ({productos}) => {
         <option value="todos">Todos</option>
         <option value="mas">Mas Vendidos</option>
       </select>
-      <div className='flex gap-4'>
+      <div className='flex h-full gap-4'>
         <BotonPDF productos={productos}
           setAvisodecorreo={setAvisodecorreo}
           avisodecorreo={avisodecorreo} />

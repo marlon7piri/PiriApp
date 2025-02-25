@@ -5,6 +5,7 @@ import { authoptions } from "@/app/api/auth/[...nextauth]/route";
 import TablaAreas from "./TablaAreas";
 import NavCategorias from "./NavProductos";
 import { getAreas } from "@/app/libs/actions/areas/get-areas";
+import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
 
 
 export default async function Categorias({ searchParams }) {
@@ -12,9 +13,13 @@ export default async function Categorias({ searchParams }) {
   const query = searchParams.query || ''
   const data = await getAreas(session?.user?.restaurante_id,query);
 
+
+  if(!data){
+    return <ShowEmptyComponent text={"No hay áreas"} color='dark'/>
+  }
   return (
     <div className="w-full ">
-      <h1 className="text-center text-gray-900 font-bold text-2xl">Categorias</h1>
+      <h1 className="text-center text-gray-900 font-bold text-2xl">Áreas</h1>
       <NavCategorias /> 
       <TablaAreas categorias={data} />
 

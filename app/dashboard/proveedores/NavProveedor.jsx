@@ -5,7 +5,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useDebouncedCallback } from 'use-debounce'
 import React from "react";
-import UploadExcel from "@/app/components/UploadExcel ";
 import styles from '@/app/dashboard/productos/styles.module.css'
 
 const NavProveedor= ({ productos }) => {
@@ -26,7 +25,7 @@ const NavProveedor= ({ productos }) => {
   }, 300);
 
   return (
-    <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
+    <div className={`flex justify-between gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input
         type="text"
         onChange={handlerSearch}

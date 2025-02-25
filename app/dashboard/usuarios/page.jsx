@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import { getUsuarios } from "@/app/libs/data";
 import { getServerSession } from "next-auth";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
+import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
 
 
 export default async function Users({searchParams}) {
@@ -12,8 +13,12 @@ export default async function Users({searchParams}) {
   const q = searchParams?.query || ""
   const data = await getUsuarios(q,session.user.restaurante_id);
 
+
+  if(!data){
+    return <ShowEmptyComponent text={"No hay usuarios"} color='dark'/>
+  }
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full">
       <h1 className="text-center text-gray-900 font-bold text-2xl">Usuarios</h1>
       <NavUsuario />
       <ListOfUsers data={data} />

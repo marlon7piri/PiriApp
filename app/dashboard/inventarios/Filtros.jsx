@@ -42,14 +42,14 @@ const Filtros = ({ areas }) => {
 
   }
   return (
-    <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
+    <div className={`flex justify-evenly items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input
         type="date"
         onChange={filtrar}
         value={filtros.fecha}
-        className="cursor-pointer"
+        className="cursor-pointer h-12"
       />
-      <select onChange={(e) => areafiltrada(e)} value={filtros.area} className="cursor-pointer">
+      <select onChange={(e) => areafiltrada(e)} value={filtros.area} className="cursor-pointer h-12">
 
         <option value="todos">todos</option>
 

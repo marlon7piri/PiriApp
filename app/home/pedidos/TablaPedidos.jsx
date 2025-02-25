@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 
-const TablaPedidos = () => {
-  const { pedidos, setPedidos, orden, setOrden } = useClientContext();
+const TablaPedidos = ({pedidos}) => {
+  const { setPedidos, orden, setOrden } = useClientContext();
   const router = useRouter();
   const[loading,setLoading]=useState(false)
 

@@ -25,7 +25,7 @@ const NavCategorias= () => {
   }, 300);
 
   return (
-    <div className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
+    <div className={`flex justify-between items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}>
       <input
         type="text"
         onChange={handlerSearch}

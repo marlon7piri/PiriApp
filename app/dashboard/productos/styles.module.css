@@ -5,6 +5,7 @@
 
 
 .input_filters {
+    min-width: 300px;
     outline: none;
     padding: 1rem;
     height: 50px;

@@ -31,13 +31,11 @@ const TablaRow = ({ proveedores }) => {
         }
         setLoading(false);
     };
+
+    
     return (
         <tbody className=''>
-            {proveedores?.length === 0 ? (
-                <h1 className="w-full   text-center text-2xl text-slate-900">
-                    No hay proveedores
-                </h1>
-            ) : (
+            {
                 proveedores?.map((cat) => {
                     return (
                         <tr
@@ -59,13 +57,13 @@ const TablaRow = ({ proveedores }) => {
                                 <div className="w-full h-max flex gap-2 ">
                                     <Link
                                         href={`/dashboard/proveedores/${cat._id}`}
-                                        className="flex justify-center items-center px-2 py-1 rounded bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"
+                                        className="flex justify-center items-center p-2 rounded bg-sky-500 font-medium text-slate-50 dark:text-slate-50 hover:bg-sky-700"
                                     >
                                         <EditIcon />
                                     </Link>
                                     <button
                                         onClick={() => deleteProveedor(cat._id)}
-                                        className="px-2 py-1 rounded bg-red-500 font-medium text-slate-50   dark:text-slate-50 hover:bg-red-700 hover:cursor-pointer"
+                                        className="p-2 rounded bg-red-500 font-medium text-slate-50   dark:text-slate-50 hover:bg-red-700 hover:cursor-pointer"
                                     >
                                         <DeleteIcon />
                                     </button>
@@ -74,7 +72,7 @@ const TablaRow = ({ proveedores }) => {
                         </tr>
                     );
                 })
-            )}
+            }
         </tbody>
     )
 }

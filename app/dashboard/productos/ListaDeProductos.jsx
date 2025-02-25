@@ -5,6 +5,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Botones from "./Botones";
 import { convertidordefecha } from "@/app/libs/convertidordefecha";
+import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
 
 const ListaDeProductos = ({ productos }) => {
 
@@ -12,10 +13,7 @@ const ListaDeProductos = ({ productos }) => {
 
 
 
-  if (!productos || productos.length === 0) {
-    return <div>No hay productos disponibles</div>;
-  }
-
+  
   return (
 
     <div className="w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -68,11 +66,7 @@ const ListaDeProductos = ({ productos }) => {
           </tr>
         </thead>
         <tbody className="w-full ">
-          {productos?.length === 0 ? (
-            <h1 className="w-full   text-center text-2xl text-slate-900">
-              No hay productos{" "}
-            </h1>
-          ) : (
+          {(
             productos?.map((product) => {
               return (
                 <tr

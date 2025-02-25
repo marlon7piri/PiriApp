@@ -5,6 +5,7 @@ import { getAllProductos } from "@/app/libs/actions/productos/get-productos";
 import { getServerSession } from "next-auth";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
 import Pagination from "../usuarios/Pagination";
+import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
 
 export default async function Productos({ searchParams }) {
   const q = searchParams?.query || "";
@@ -22,10 +23,13 @@ export default async function Productos({ searchParams }) {
  
   
 
-
+    if(!allproducts){
+      return <ShowEmptyComponent text={"No hay productos"} color='dark'/>
+    }
+  
 
   return (
-    <div className="flex flex-col gap-4 ">
+    <div className="w-full overflow-scroll flex flex-col gap-4 ">
       <NavProductos productos={allproducts} />
       <ListaDeProductos productos={allproducts} />
       <Pagination totalPage={totalPage} currentPage={page}/>

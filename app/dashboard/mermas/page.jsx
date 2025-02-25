@@ -4,6 +4,7 @@ import FiltrosMermas from "./FiltrosMermas";
 import { getMermas } from "@/app/libs/actions/mermas/get-mermas";
 import { getServerSession } from "next-auth";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
+import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
 
 const Mermas = async ({ searchParams }) => {
   const session = await getServerSession(authoptions)
@@ -12,6 +13,9 @@ const Mermas = async ({ searchParams }) => {
 
 
 
+  if(!mermas){
+    return <ShowEmptyComponent text={"No hay mermas"} color='dark'/>
+  }
 
   return (
     <div className="w-full h-screen ">

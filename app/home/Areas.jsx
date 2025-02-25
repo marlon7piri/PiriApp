@@ -7,14 +7,18 @@ import styles from './area.module.css'
 
 const Areas = ({ areas }) => {
 
+
+  if (areas.length == 0) {
+    return <div className="w-full h-screen flex justify-center items-center">
+      <h1 className="text-center text-slate-50 text-4xl">No hay áreas aún</h1>
+    </div>
+  }
   return (
 
     <div className={styles.section}>
 
       <div className={styles.grid_card}>
-        {!areas || areas.length == 0 ? <div className="w-screen text-center ">
-          <h1 className="text-center text-slate-50 text-2xl">No hay áreas aún</h1>
-        </div> : areas.map((area) => {
+        {areas.map((area) => {
           return (
             <Link
               href={`/home/${area?._id}`}

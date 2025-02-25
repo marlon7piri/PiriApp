@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import React from 'react'
 import { GrDocumentPdf } from 'react-icons/gr';
 
-const BotonPDF = ({productos,autor}) => {
+const BotonPDF = ({productos,autor,size=18}) => {
 
     const descargarPDF = () => {
         const fecha2 = new Date().toLocaleString().substring(0, 10);
@@ -37,9 +37,9 @@ const BotonPDF = ({productos,autor}) => {
   return (
     <button
         onClick={descargarPDF}
-        className="flex gap-2 justify-center items-center bg-red-700  h-4 w-auto p-4 text-slate-50 rounded-md hover:bg-red-900 "
+        className="flex gap-2 justify-center items-center bg-red-700 w-auto h-12 p-4 text-slate-50 rounded-md hover:bg-red-900 "
       >
-        <GrDocumentPdf />
+        <GrDocumentPdf size={size}/>
       </button>
   )
 }
