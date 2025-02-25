@@ -1,7 +1,18 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",  
     "paths": {
       "@/*": ["./*"]
-    }
-  }
+    }, 
+    "lib": ["dom", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "preserve"
+  },
+  "include": ["**/*.js", "**/*.jsx"],
+  "exclude": ["node_modules"]
 }
