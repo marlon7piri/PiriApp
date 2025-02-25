@@ -1,13 +1,14 @@
-.filtrosContainer{
+.filtrosContainer {
+    width: 90%;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:1rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
     margin-top: 13rem;
 }
 
-@media(width<600px){
-    .filtrosContainer{
-        grid-template-columns: repeat(1,1fr);
+@media(width<600px) {
+    .filtrosContainer {
+        grid-template-columns: repeat(1, 1fr);
 
     }
 }

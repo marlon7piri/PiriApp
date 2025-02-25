@@ -32,7 +32,7 @@ const Categoria = async ({ searchParams, params }) => {
   }
 
   return (
-    <div className="w-full  min-h-screen flex flex-col justify-center items-center p-8 ">
+    <div className="w-full min-h-screen flex flex-col justify-center items-center p-8 ">
 
       <FiltrosProductos productos={allproducts} />
 
