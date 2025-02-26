@@ -1,7 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { useSession } from "next-auth/react";
 import { ClientProvider } from "./context/ClientProvider";
 import Footer from "./components/Footer";
 import { FollowSession } from "./libs/FollowSession";
@@ -12,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Al-Alma Inventario",
-  description: "Una aplicacion para tener control de inventario",
+  title: "PiriApp",
+  description: "Gestiona tu inventario",
 };
 
 export default function RootLayout({ children }) {
@@ -22,10 +21,10 @@ export default function RootLayout({ children }) {
       <ClientProvider>
 
         <body className={poppins.className}>
-          <FollowSession>
+          <FollowSession/>
             {children}
 
-            </FollowSession>
+            
             <Footer />
             <Toaster />
         

@@ -7,24 +7,24 @@ import { connectDb } from "@/app/libs/mongoDb";
 import bcrypt from "bcrypt";
 
 const login = async (credentials) => {
- try {
-  connectDb();
+  try {
+    connectDb();
 
-  const user = await User.findOne({ email: credentials.email });
+    const user = await User.findOne({ email: credentials.email });
 
-  if (!user) throw new Error("Usuario no encontrado");
+    if (!user) throw new Error("Usuario no encontrado");
 
-  const passwordcorrect = await bcrypt.compare(
-    credentials.password,
-    user.password
-  );
-  if (!passwordcorrect) throw new Error("Credenciales invalidas");
+    const passwordcorrect = await bcrypt.compare(
+      credentials.password,
+      user.password
+    );
+    if (!passwordcorrect) throw new Error("Credenciales invalidas");
 
 
-  return user;
- } catch (error) {
-  throw new Error(`Error login`,error)
- }
+    return user;
+  } catch (error) {
+    throw new Error(`Error login`, error)
+  }
 };
 export const authoptions = {
   pages: {
@@ -32,7 +32,7 @@ export const authoptions = {
   },
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 60 //30 minutos
+    maxAge: 60 * 30 //30 minutos
   },
   providers: [
     CredentialsProvider({
@@ -50,7 +50,6 @@ export const authoptions = {
   callbacks: {
     async jwt({ token, user }) {
 
-      console.log({user})
       if (user) {
         token.username = user.username;
         token.email = user.email;
