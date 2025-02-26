@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import BotonEXCEL from "./BotonEXCEL";
 import BotonPDF from "./BotonPDF";
-
+import { RxUpload } from "react-icons/rx";
 const UploadExcel = ({ productos }) => {
   const [file, setFile] = useState(null);
   const router = useRouter();
@@ -59,22 +59,24 @@ const UploadExcel = ({ productos }) => {
   };
 
   return (
-    <div className="flex flex-col w-max">
+    <div className="flex flex-col gap-2">
       <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
 
-      <div className="flex gap-2 justify-start items-center">
-        <button disabled={!productos} onClick={handleUpload} className="w-max bg-green-600 hover:bg-green-900 p-4 rounded-md mt-4">
-          Subir Inventario
+      <div className="flex gap-2  justify-center items-center h-auto">
+      <abbr title="Subir inventario">
+        <button disabled={!productos} onClick={handleUpload} className="bg-green-700 p-2 text-slate-50 rounded-md hover:bg-green-900 ">
+          <RxUpload />
         </button>
-        <BotonEXCEL productos={productos} />
-        <BotonPDF productos={productos} />
-        <label htmlFor="">Todos:</label>
-        <input
-          type="checkbox"
-          checked={mostrarTodos}
-          onChange={handleToggleAllData}
-          className="cursor-pointer"
-        />
+      </abbr>
+      <BotonEXCEL productos={productos} />
+      <BotonPDF productos={productos} />
+      <label htmlFor="">Todos:</label>
+      <input
+        type="checkbox"
+        checked={mostrarTodos}
+        onChange={handleToggleAllData}
+        className="cursor-pointer"
+      />
       </div>
     </div>
   );

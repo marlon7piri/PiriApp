@@ -14,10 +14,12 @@ import InventoryIcon from "../icons/InventoryIcon";
 import MermaIcon from "../icons/MermaIcon";
 import ProveedorIcon from "../icons/ProveedorIcon";
 import AreaIcon from "../icons/AreaIcon";
+import { useClientContext } from "../context/ClientProvider";
 
 const NavBar = () => {
 
   const pathname = usePathname()
+  const {isVisibleMenu} =useClientContext()
 
 
   const fondoLinks = useCallback((links) => {
@@ -27,7 +29,7 @@ const NavBar = () => {
   }, [pathname])
 
   return (
-    <nav className="bg-slate-50 border border-slate-950 w-1/4 min-w-[150px] h-screen flex  flex-col  p-4 rounded-md">
+    isVisibleMenu && <nav  className={`bg-slate-50 border border-slate-950 w-1/4 min-w-[150px] h-screen flex  flex-col  p-4 rounded-md transition duration-500`}>
       <Image
         alt="logo al alma"
         src="/wallpaperlogin.svg"

@@ -2,10 +2,10 @@
 
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useParams, useRouter } from "next/navigation";
-import {  SessionProvider } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import toast from "react-hot-toast";
 import { getAllProductos } from "../libs/actions/productos/get-productos";
-const { createContext, useContext, useState, useEffect } = require("react");
+const { createContext, useContext, useState, useEffect, useRef } = require("react");
 
 const ClientContext = createContext();
 
@@ -24,6 +24,9 @@ export const ClientProvider = ({ children }) => {
   const [session, setSession] = useState({})
   const router = useRouter();
   const params = useParams();
+  const reNavDashboard = useRef(true)
+  const [isVisibleMenu, setIsVisibleMenu] = useState(true)
+
 
   const getProductoPorCategoria = async (categoria) => {
     const res = await fetch(
@@ -62,6 +65,12 @@ export const ClientProvider = ({ children }) => {
   };
 
 
+  
+
+  const changeWidth = () => {
+    setIsVisibleMenu(!isVisibleMenu)
+
+  }
 
   const conteoDineroTotal = (array) => {
     const valor = array?.reduce((acc, current) => {
@@ -125,7 +134,7 @@ export const ClientProvider = ({ children }) => {
           setAvisodecorreo,
           orden,
           deleteOrdenProduct,
-          setOrden, session, setSession, deleteInventario
+          setOrden, session, setSession, deleteInventario, changeWidth, isVisibleMenu
         }}
       >
         {children}

@@ -5,7 +5,8 @@
 
 
 .input_filters {
-    min-width: 300px;
+    width: 300px;
+    min-width: 220px;
     outline: none;
     padding: 1rem;
     height: 50px;
@@ -21,7 +22,7 @@
 
 .containerDownloadProductos {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .btnPrimary {
@@ -32,7 +33,7 @@
     min-width: 100px;
     padding: .5rem 1rem;
     background-color: #0ea5e9;
-    /* #0ea5e9  */
+    
     transition: .3s ease-in-out;
     border-radius: .5rem;
     outline: none;
@@ -52,17 +53,27 @@
         gap: 1rem
     }
 
-    .input_filters {
-        width: 100%;
-    }
+    
 
     .containerDownloadProductos {
         flex-direction: column;
+        gap:1rem
     }
 
     .btncontainer {
         display: flex;
         gap: 1rem;
         flex-direction: column
+    }
+
+    .input_filters {
+        width: 220px;
+        outline: none;
+        padding: 1rem;
+        height: 50px;
+        border: 1px solid #0f172a;
+        border-radius: .5rem;
+    
+    
     }
 }

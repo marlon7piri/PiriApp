@@ -7,8 +7,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import React from "react";
 import UploadExcel from "@/app/components/UploadExcel ";
 import styles from './styles.module.css'
-import BotonEXCEL from "@/app/components/BotonEXCEL";
-import BotonPDF from "@/app/components/BotonPDF";
+
 
 const NavProductos = ({ productos }) => {
   const searchparams = useSearchParams();
@@ -29,19 +28,19 @@ const NavProductos = ({ productos }) => {
   }, 300);
 
   return (
-    <div className={`flex justify-evenly gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 overflow-scroll ${styles.containerSearch}`}>
+    <div className={`flex justify-evenly   gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8  ${styles.containerSearch}`}>
       <input
         type="text"
         onChange={handlerSearch}
         className={styles.input_filters}
         placeholder="Buscar...."
       />
-      <div className="w-full flex gap-2   items-center overflow-hidden ">
+      <div className={`${styles.containerDownloadProductos}`}>
         <UploadExcel productos={productos} />
         
       </div>
 
-      <div className={styles.containerDownloadProductos}>
+      <div >
 
 
 
