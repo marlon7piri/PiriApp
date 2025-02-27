@@ -1,8 +1,11 @@
 "use client";
+import Spinner from "@/app/components/Spinner";
+import DeleteIcon from "@/app/icons/DeleteIcon";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useDebouncedCallback } from "use-debounce";
 
 const FormNewReceta = ({ allproductos }) => {
@@ -13,7 +16,7 @@ const FormNewReceta = ({ allproductos }) => {
     restaurante_id: "",
   });
   const { data: session } = useSession();
-
+  const [loading, setLoading] = useState(false);
   const [productosreceta, setProductosReceta] = useState([]);
   const [costo, setCosto] = useState(0);
   const search = useSearchParams();
@@ -74,33 +77,58 @@ const FormNewReceta = ({ allproductos }) => {
     });
   };
 
-  const sendReceta = async () => {
-    const newModel = productosreceta.map((e) => ({
-      producto: e.id,
-      cantidad: e.cantidad,
-    }));
+  const prepararReceta = async () => {
+    setLoading(true);
+    setTimeout(() => {
+      const newModel = productosreceta.map((e) => ({
+        producto: e.id,
+        cantidad: e.cantidad,
+      }));
 
-    setReceta({
-      nombre: receta.nombre,
-      productos: newModel,
-      costo: costo,
-      restaurante_id: session.user.restaurante_id,
-    });
-
-    console.log(receta);
-    const res = await fetch(`${UrlWeb}/recetas`, {
-      method: "POST",
-      body: JSON.stringify(receta),
-    });
-
-    const data = await res.json();
-
-    console.log(data);
+      setReceta({
+        nombre: receta.nombre,
+        productos: newModel,
+        costo: costo,
+        restaurante_id: session.user.restaurante_id,
+      });
+      setLoading(false);
+      toast.success("Receta agregada");
+    }, 2000);
   };
 
+  const createReceta = () => {
+    const sendReceta = async () => {
+      const res = await fetch(`${UrlWeb}/recetas`, {
+        method: "POST",
+        body: JSON.stringify(receta),
+      });
+
+      const data = await res.json();
+    };
+
+    toast
+      .promise(sendReceta(), {
+        loading: "Creando...",
+        success: "Receta creada",
+        error: "Error creando receta, intente nuevamente",
+      })
+      .catch((error) => {
+        throw new Error(`Error creando receta`, error);
+      });
+  };
+
+  const deleteProductOfRecipe = (id) => {
+    setProductosReceta((prevState) => {
+      const newRecipe = prevState.filter((y) => y.id !== id);
+      setCosto(
+        newRecipe.reduce((acc, obj) => acc + Number(obj.gasto), 0).toFixed(2)
+      );
+
+      return newRecipe;
+    });
+  };
   return (
     <div className="w-full h-screen">
-      <h1>Crear Receta</h1>
       <div className="flex gap-8">
         <form className="flex relative gap-2">
           <div className="flex flex-col gap-2 ">
@@ -116,6 +144,7 @@ const FormNewReceta = ({ allproductos }) => {
                 {existQuery &&
                   allproductos.map((e) => (
                     <p
+                      key={e._id}
                       onClick={() => addProducto(e)}
                       className="cursor-pointer hover:bg-slate-200"
                     >
@@ -125,55 +154,76 @@ const FormNewReceta = ({ allproductos }) => {
               </li>
             </ul>
           </div>
-
-          <button type="submit" className="bg-sky-500 p-2 rounded-md h-max">
-            Agregar
-          </button>
         </form>
 
-        <table className=" h-max border border-slate-900 p-2">
-          <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3 cursor-pointer">
-                Cantidad
-              </th>
-              <th scope="col" className="px-6 py-3 cursor-pointer">
-                Producto
-              </th>
-              <th scope="col" className="px-6 py-3 cursor-pointer">
-                Costo
-              </th>
-              <th scope="col" className="px-6 py-3 cursor-pointer">
-                Costo por cantidad
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {productosreceta?.map((item) => {
-              return (
-                <tr
-                  key={item._id}
-                  className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                >
-                  <td className="px-6 py-4 ">
-                    <input
-                      type="text"
-                      placeholder="0.56"
-                      className="w-[60px]"
-                      onChange={(e) => manejarGasto(e.target.value, item)}
-                    />
-                  </td>
-                  <td className="px-6 py-4 ">{item.nombre}</td>
-                  <td className="px-6 py-4 ">
-                    {item.costo}/ {item.unidad}
-                  </td>
-                  <td className="px-6 py-4 ">{item.gasto}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <button onClick={sendReceta}>Agregar</button>
+        <div className="flex gap-2 justify-start items-start">
+          <table className="w-full h-max  relative text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
+              <tr>
+                <th scope="col" className="px-6 py-3 cursor-pointer">
+                  Cantidad
+                </th>
+                <th scope="col" className="px-6 py-3 cursor-pointer">
+                  Producto
+                </th>
+                <th scope="col" className="px-6 py-3 cursor-pointer">
+                  Costo
+                </th>
+                <th scope="col" className="px-6 py-3 cursor-pointer">
+                  Costo por cantidad
+                </th>
+                <th scope="col" className="px-6 py-3 cursor-pointer"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {productosreceta?.map((item) => {
+                return (
+                  <tr
+                    key={item._id}
+                    className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td className="px-6 py-4 ">
+                      <input
+                        type="text"
+                        placeholder="0.56"
+                        className="w-[60px]"
+                        onChange={(e) => manejarGasto(e.target.value, item)}
+                      />
+                    </td>
+                    <td className="px-6 py-4 ">{item.nombre}</td>
+                    <td className="px-6 py-4 ">
+                      ${item.costo}/ {item.unidad}
+                    </td>
+                    <td className="px-6 py-4 ">${item.gasto}</td>
+                    <td className="px-6 py-4 ">
+                      <button
+                        onClick={() => deleteProductOfRecipe(item.id)}
+                        type="submit"
+                        className="bg-red-500 p-2 rounded-md h-max text-slate-50 hover:bg-red-700"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div className="flex flex-col gap-2">
+            <button
+              onClick={prepararReceta}
+              className="min-w-[100px] bg-sky-500 p-2 rounded-md flex justify-center items-center "
+            >
+              {loading ? <Spinner /> : "Agregar"}
+            </button>
+            <button
+              onClick={createReceta}
+              className="bg-sky-500 p-2 rounded-md"
+            >
+              Crear
+            </button>
+          </div>
+        </div>
       </div>
 
       <p className="text-2xl font-bold">Costo de la receta: ${costo}</p>

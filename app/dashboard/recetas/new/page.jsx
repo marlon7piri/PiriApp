@@ -16,7 +16,12 @@ const page = async ({ searchParams }) => {
     "si"
   );
 
-  return <FormNewReceta allproductos={allproducts} />;
+  return (
+    <div className="w-full h-screen flex flex-col gap-8 justify-center items-center">
+      <h1>Crear Receta</h1>
+      <FormNewReceta allproductos={allproducts} />
+    </div>
+  );
 };
 
 export default page;
