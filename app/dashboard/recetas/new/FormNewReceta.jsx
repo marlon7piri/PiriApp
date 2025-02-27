@@ -208,6 +208,9 @@ const FormNewReceta = ({ allproductos }) => {
                 );
               })}
             </tbody>
+            <p className="text-2xl font-semibold">
+              Costo de la receta: ${costo}
+            </p>
           </table>
           <div className="flex flex-col gap-2">
             <button
@@ -226,8 +229,6 @@ const FormNewReceta = ({ allproductos }) => {
           </div>
         </div>
       </div>
-
-      <p className="text-2xl font-bold">Costo de la receta: ${costo}</p>
     </div>
   );
 };
