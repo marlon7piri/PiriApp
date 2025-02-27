@@ -39,7 +39,7 @@ const TablaRecetas = ({ mermas, setMermas }) => {
                   <td className="px-6 py-4 text-gray-900 dark:text-slate-50">
                     {product.nombre}
                   </td>
-                  <td className="px-6 py-4">{product.costo}</td>
+                  <td className="px-6 py-4">${product.costo}</td>
 
                   <td className="px-6 py-4 ">
                     {convertidordefecha(product.createdAt)}
