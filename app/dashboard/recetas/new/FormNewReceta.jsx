@@ -217,8 +217,9 @@ const FormNewReceta = ({ allproductos }) => {
               {loading ? <Spinner /> : "Agregar"}
             </button>
             <button
+              disabled={loading}
               onClick={createReceta}
-              className="bg-sky-500 p-2 rounded-md"
+              className="bg-green-500 p-2 rounded-md"
             >
               Crear
             </button>
