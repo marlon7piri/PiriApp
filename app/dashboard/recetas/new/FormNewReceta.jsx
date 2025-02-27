@@ -172,7 +172,9 @@ const FormNewReceta = ({ allproductos }) => {
                 <th scope="col" className="px-6 py-3 cursor-pointer">
                   Costo por cantidad
                 </th>
-                <th scope="col" className="px-6 py-3 cursor-pointer"></th>
+                <th scope="col" className="px-6 py-3 cursor-pointer">
+                  Eliminar
+                </th>
               </tr>
             </thead>
             <tbody>
