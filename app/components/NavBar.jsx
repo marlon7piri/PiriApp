@@ -59,6 +59,10 @@ const NavBar = () => {
             <RecipeIcon />
             <Link href="/dashboard/recetas">Recetas</Link>
           </div>
+          <div className={fondoLinks("/dashboard/platos")}>
+            <RecipeIcon />
+            <Link href="/dashboard/platos">Platos</Link>
+          </div>
           <div className={fondoLinks("/dashboard/proveedores")}>
             <ProveedorIcon />
             <Link href="/dashboard/proveedores">Proveedores</Link>

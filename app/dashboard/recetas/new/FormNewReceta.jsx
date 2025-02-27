@@ -155,7 +155,6 @@ const FormNewReceta = ({ allproductos }) => {
             </ul>
           </div>
         </form>
-
         <div className="flex gap-2 justify-start items-start">
           <table className="w-full h-max  relative text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
@@ -210,7 +209,7 @@ const FormNewReceta = ({ allproductos }) => {
                 );
               })}
             </tbody>
-            <p className=" w-full text-2xl font-semibold">
+            <p className="w-full text-2xl font-semibold">
               Costo de la receta: ${costo}
             </p>
           </table>

@@ -20,8 +20,8 @@ const Mermas = async ({ searchParams }) => {
   return (
     <div className="w-full h-screen ">
       <div className="w-full h-full flex flex-col gap-4 p-4">
-        <h1 className="text-3xl font-bold text-center">Recetas</h1>
         <FiltrosRecetas />
+        <h1 className="text-3xl font-bold text-center">Recetas</h1>
         <TablaRecetas mermas={recetas} />
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { findRestauranteId } from "../../findRestauranteId";
-import { Receta } from "../../models/recetas";
+import { Item } from "../../models/item";
 import { connectDb } from "../../mongoDb";
 
-export const getRecetas = async (query, restaurante_id) => {
+export const getItems = async (query, restaurante_id) => {
   const queryExp = new RegExp(query, "i");
   try {
     await connectDb();
@@ -13,11 +13,8 @@ export const getRecetas = async (query, restaurante_id) => {
 
     if (!idRestaurante) throw new Error("Restaurante no encontrado");
 
-    const recetas = await Receta.find(filtro)
-      .populate("productos.producto nombre costo")
-      .lean();
-
-    return { recetas };
+    const items = await Item.find(filtro).populate("ingredientes");
+    return { items };
   } catch (error) {
     throw new Error("Error del servidor", error);
   }
