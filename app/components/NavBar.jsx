@@ -15,6 +15,7 @@ import MermaIcon from "../icons/MermaIcon";
 import ProveedorIcon from "../icons/ProveedorIcon";
 import AreaIcon from "../icons/AreaIcon";
 import { useClientContext } from "../context/ClientProvider";
+import RecipeIcon from "../icons/RecipeIcon";
 
 const NavBar = () => {
   const pathname = usePathname();
@@ -46,33 +47,27 @@ const NavBar = () => {
         />
         <ul className="w-full mt-6 flex flex-col gap-4">
           <div className={fondoLinks("/dashboard")}>
-            {" "}
             <DashboardIcon />
             <Link href="/dashboard">Dashboard</Link>
           </div>
 
           <div className={fondoLinks("/dashboard/productos")}>
-            {" "}
             <ProductIcon />
             <Link href="/dashboard/productos">Productos</Link>
           </div>
           <div className={fondoLinks("/dashboard/recetas")}>
-            {" "}
-            <ProductIcon />
+            <RecipeIcon />
             <Link href="/dashboard/recetas">Recetas</Link>
           </div>
           <div className={fondoLinks("/dashboard/proveedores")}>
-            {" "}
             <ProveedorIcon />
             <Link href="/dashboard/proveedores">Proveedores</Link>
           </div>
           <div className={fondoLinks("/dashboard/inventarios")}>
-            {" "}
             <InventoryIcon />
             <Link href="/dashboard/inventarios">Inventarios</Link>
           </div>
           <div className={fondoLinks("/dashboard/mermas")}>
-            {" "}
             <MermaIcon />
             <Link href="/dashboard/mermas">Mermas</Link>
           </div>

@@ -12,12 +12,13 @@ const FiltrosRecetas = () => {
   const searchparams = useSearchParams();
   const path = usePathname();
 
-  const Filtrar = () => {
+  const Filtrar = (e) => {
+    const busqueda = e.target.value;
     const params = new URLSearchParams(searchparams);
-    if (fecha) {
-      params.set("fecha", fecha);
+    if (busqueda) {
+      params.set("query", busqueda);
     } else {
-      params.delete("fecha");
+      params.delete("query");
     }
 
     replace(`${path}?${params}`);
@@ -32,18 +33,14 @@ const FiltrosRecetas = () => {
   };
   return (
     <div
-      className={`flex justify-evenly items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}
+      className={`flex justify-between items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}
     >
       <input
-        type="date"
-        onChange={(e) => setFecha(e.target.value)}
-        value={fecha}
-        className="cursor-pointer"
+        type="text"
+        onChange={Filtrar}
+        className={styles.input_filters}
+        placeholder="Buscar...."
       />
-      <div className={styles.btncontainer}>
-        <BotonComponent onClick={Filtrar} text="Filtrar" />
-        <BotonComponent onClick={limpiar} text="Limpiar" />
-      </div>
       <div>
         <Boton texto="Nuevo" href="/dashboard/recetas/new" />
       </div>

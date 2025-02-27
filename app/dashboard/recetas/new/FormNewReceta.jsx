@@ -208,7 +208,7 @@ const FormNewReceta = ({ allproductos }) => {
                 );
               })}
             </tbody>
-            <p className="text-2xl font-semibold">
+            <p className=" w-full text-2xl font-semibold">
               Costo de la receta: ${costo}
             </p>
           </table>
