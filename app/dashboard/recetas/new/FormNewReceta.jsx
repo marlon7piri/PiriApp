@@ -160,7 +160,7 @@ const FormNewReceta = ({ allproductos }) => {
           <table className="w-full h-max  relative text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
               <tr>
-                <th scope="col" className="px-6 py-3 cursor-pointer">
+                <th scope="col" className="px-2 py-3 cursor-pointer">
                   Cantidad
                 </th>
                 <th scope="col" className="px-6 py-3 cursor-pointer">
