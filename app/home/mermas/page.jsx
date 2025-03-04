@@ -8,9 +8,9 @@ import { authoptions } from '@/app/api/auth/[...nextauth]/route'
 
 const Mermas = async ({ searchParams }) => {
   const q = searchParams.query || ""
-
+  const allData = 'si';
   const session = await getServerSession(authoptions)
-  const productos = await getAllProductos(q,session?.user?.restaurante_id,'si')
+  const productos = await getAllProductos(q,session?.user?.restaurante_id,allData)
 
 
 
