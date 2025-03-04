@@ -17,7 +17,6 @@ const MermasSchema = new mongoose.Schema(
     },
     unidad: {
       type: String,
-      required: true,
     },
     causa: {
       type: String,
