@@ -11,15 +11,14 @@ const Mermas = async ({ searchParams }) => {
   const allData = 'si';
   const page = 1
   const session = await getServerSession(authoptions)
-  const {productos,totalPage} = await getAllProductos(q,page,session?.user?.restaurante_id,allData)
-
+  const {allproducts,totalPage} = await getAllProductos(q,page,session?.user?.restaurante_id,allData)
 
 
 
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center p-4 '>
       
-      <FormMermas productos={productos} />
+      <FormMermas productos={allproducts} />
     </div>
   )
 }

@@ -48,7 +48,6 @@ const FormMermas = ({ productos }) => {
 
   const enviarData = async (data) => {
 
-console.log({idSelected})
     if (!idSelected?.nombre) {
       alert('Debe seleccionar un producto')
       return
@@ -104,6 +103,7 @@ console.log({idSelected})
     } else {
       params.delete('query')
     }
+    params.set("page", 1)
     router.replace(`${path}?${params}`)
 
   }, 300)
@@ -132,7 +132,7 @@ console.log({idSelected})
           placeholder="Buscar producto"
         />
         {(!closelist && termino) && (<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
-          {productos.map((e) => {
+          {productos?.map((e) => {
             return <li
               className="cursor-pointer hover:bg-sky-500  p-2"
               value={e._id}
