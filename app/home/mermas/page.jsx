@@ -10,7 +10,7 @@ const Mermas = async ({ searchParams }) => {
   const q = searchParams.query || ""
 
   const session = await getServerSession(authoptions)
-  const productos = await getAllProductos(q,session?.user?.restaurante_id)
+  const productos = await getAllProductos(q,session?.user?.restaurante_id,'si')
 
 
 
