@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 import { PiPackageLight } from "react-icons/pi";
 
+const ProductIcon = ({ styles = "w-6 h-6" }) => {
+  return <PiPackageLight className={styles} />;
+};
 
-const ProductIcon = ({styles="w-6 h-6"}) => {
-  return <PiPackageLight className={styles}/>
-}
-
-export default ProductIcon
+export default ProductIcon;
