@@ -5,6 +5,7 @@ import React from "react";
 import NavProveedor from "./NavProveedor";
 import TablaProveedores from "./TablaProveedores";
 import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
+import Container from "@/app/components/Container";
 
 const page = async ({ searchParams }) => {
   const session = await getServerSession(authoptions);
@@ -19,13 +20,13 @@ const page = async ({ searchParams }) => {
   }
 
   return (
-    <div className="w-full ">
+    <Container>
       <NavProveedor />
       <h1 className="text-center text-gray-900 font-bold text-2xl">
         Proveedores
       </h1>
       <TablaProveedores proveedores={proveedores} />
-    </div>
+    </Container>
   );
 };
 

@@ -17,20 +17,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <ClientProvider>
+    <html lang="es">
+      <head>
+        <link rel="icon" href="./wallpaperlogin.svg" sizes="any" />
+      </head>
+      <body className={poppins.className}>
+        <ClientProvider>
+          <FollowSession />
+          {children}
 
-        <body className={poppins.className}>
-          <FollowSession/>
-            {children}
-
-            
-            <Footer />
-            <Toaster />
-        
-        </body>
-
-      </ClientProvider>
+          <Footer />
+          <Toaster />
+        </ClientProvider>
+      </body>
     </html>
   );
 }

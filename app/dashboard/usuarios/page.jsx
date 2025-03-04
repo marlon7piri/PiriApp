@@ -6,6 +6,7 @@ import { getUsuarios } from "@/app/libs/data";
 import { getServerSession } from "next-auth";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
 import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
+import Container from "@/app/components/Container";
 
 export default async function Users({ searchParams }) {
   const session = await getServerSession(authoptions);
@@ -16,11 +17,11 @@ export default async function Users({ searchParams }) {
     return <ShowEmptyComponent text={"No hay usuarios"} color="dark" />;
   }
   return (
-    <div className="w-full h-full">
+    <Container>
       <NavUsuario />
       <h1 className="text-center text-gray-900 font-bold text-2xl">Usuarios</h1>
       <ListOfUsers data={data} />
       <Pagination />
-    </div>
+    </Container>
   );
 }

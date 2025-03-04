@@ -5,6 +5,7 @@ import { getMermas } from "@/app/libs/actions/mermas/get-mermas";
 import { getServerSession } from "next-auth";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
 import ShowEmptyComponent from "@/app/components/ShowEmptyComponent";
+import Container from "@/app/components/Container";
 
 const Mermas = async ({ searchParams }) => {
   const session = await getServerSession(authoptions);
@@ -16,13 +17,11 @@ const Mermas = async ({ searchParams }) => {
   }
 
   return (
-    <div className="w-full h-screen ">
-      <div className="w-full h-full flex flex-col gap-4 p-4">
-        <FiltrosMermas />
-        <h1 className="text-3xl font-bold text-center">Mermas</h1>
-        <TablaMermas mermas={mermas} />
-      </div>
-    </div>
+    <Container>
+      <FiltrosMermas />
+      <h1 className="text-3xl font-bold text-center">Mermas</h1>
+      <TablaMermas mermas={mermas} />
+    </Container>
   );
 };
 

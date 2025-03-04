@@ -22,7 +22,7 @@ const NavPlatos = () => {
   };
   return (
     <div
-      className={`flex items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}
+      className={`flex  items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}
     >
       <div className={styles.btncontainer}>
         <input type="text" onChange={Filtrar} />

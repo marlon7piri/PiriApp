@@ -3,6 +3,7 @@ import FormNewReceta from "./FormNewReceta";
 import { authoptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { getAllProductos } from "@/app/libs/actions/productos/get-productos";
+import Container from "@/app/components/Container";
 
 const page = async ({ searchParams }) => {
   const session = await getServerSession(authoptions);
@@ -17,10 +18,10 @@ const page = async ({ searchParams }) => {
   );
 
   return (
-    <div className="w-full h-screen flex flex-col gap-8 justify-center items-center">
-      <h1>Crear Receta</h1>
+    <Container>
+      <h1 className="text-3xl font-normal text-center">Crear Receta</h1>
       <FormNewReceta allproductos={allproducts} />
-    </div>
+    </Container>
   );
 };
 

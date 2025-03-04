@@ -5,12 +5,12 @@ import { convertidordefecha } from "@/app/libs/convertidordefecha";
 
 const TablaInventarios = ({ inventarios, fecha }) => {
   return (
-    <div className="w-full overflow-scroll">
+    <div className="w-full ">
       <h1 className="mt-4 text-3xl font-bold text-center">
         Inventarios, fecha elegida: {fecha}
       </h1>
 
-      <table className="w-full h-full  relative text-sm text-left text-gray-500 dark:text-gray-400 mt-8">
+      <table className="w-full h-full  relative text-sm text-left text-gray-500 dark:text-gray-400 mt-8 shadow-2xl">
         <thead className=" text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
           <tr>
             <th scope="col" className="px-6 py-3  ">

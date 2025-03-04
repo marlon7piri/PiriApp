@@ -18,24 +18,34 @@ const FormNewReceta = ({ allproductos }) => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [productosreceta, setProductosReceta] = useState([]);
+  const [iscloseList, setIscloseList] = useState(true);
+  const [isRecetaAgregada, setIsRecetaAgregada] = useState(false);
   const [costo, setCosto] = useState(0);
   const search = useSearchParams();
   const path = usePathname();
   const router = useRouter();
   const existQuery = search.get("query");
+  const [busqueda, setBusqueda] = useState("");
 
-  const buscarProducto = useDebouncedCallback((e) => {
+  const buscarProducto = useDebouncedCallback((value) => {
     const params = new URLSearchParams(search);
-    const value = e.target.value;
-
     if (value) {
       params.set("query", value);
+
+      setIscloseList(!iscloseList);
     } else {
       params.delete("query");
+      setIscloseList(false);
     }
     params.set("page", 1);
     router.replace(`${path}?query=${value}`);
   }, 300);
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setBusqueda(value); // Se actualiza el estado inmediatamente
+    buscarProducto(value); // Luego se ejecuta la búsqueda con debounce
+  };
 
   const addProducto = (producto) => {
     setProductosReceta((prevState) => {
@@ -57,6 +67,8 @@ const FormNewReceta = ({ allproductos }) => {
 
       return prevState;
     });
+    setBusqueda("");
+    setIscloseList(!iscloseList);
   };
 
   const manejarGasto = (cantidad, item) => {
@@ -92,6 +104,7 @@ const FormNewReceta = ({ allproductos }) => {
         restaurante_id: session.user.restaurante_id,
       });
       setLoading(false);
+      setIsRecetaAgregada(!isRecetaAgregada);
       toast.success("Receta agregada");
     }, 2000);
   };
@@ -128,110 +141,133 @@ const FormNewReceta = ({ allproductos }) => {
     });
   };
   return (
-    <div className="w-full h-screen">
-      <div className="flex gap-8">
-        <form className="flex relative gap-2">
-          <div className="flex flex-col gap-2 ">
-            <input
-              type="text"
-              placeholder="Mojito...."
-              className="w-full"
-              onChange={(e) => setReceta({ ...receta, nombre: e.target.value })}
-            />
-            <input type="text" onChange={buscarProducto} className="w-full" />
-            <ul className="w-fullh-max max-h-[300px] overflow-y-scroll  bg-slate-300 p-2 rounded-md mt-4">
-              <li>
-                {existQuery &&
-                  allproductos.map((e) => (
-                    <p
-                      key={e._id}
-                      onClick={() => addProducto(e)}
-                      className="cursor-pointer hover:bg-slate-200"
-                    >
-                      {e.nombre}
-                    </p>
-                  ))}
-              </li>
-            </ul>
-          </div>
-        </form>
-        <div className="flex gap-2 justify-start items-start">
-          <table className="w-full h-max  relative text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
-              <tr>
-                <th scope="col" className="px-2 py-3 cursor-pointer">
-                  Cantidad
-                </th>
-                <th scope="col" className="px-6 py-3 cursor-pointer">
-                  Producto
-                </th>
-                <th scope="col" className="px-6 py-3 cursor-pointer">
-                  Costo
-                </th>
-                <th scope="col" className="px-6 py-3 cursor-pointer">
-                  Costo por cantidad
-                </th>
-                <th scope="col" className="px-6 py-3 cursor-pointer">
-                  Eliminar
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {productosreceta?.map((item) => {
-                return (
-                  <tr
-                    key={item._id}
-                    className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    <div
+      className="w-full h-full  flex flex-col"
+      onClick={() => setIscloseList(false)}
+    >
+      <div className="w-2/4 flex flex-col gap-2 justify-center items-center mx-auto  p-4 shadow-2xl rounded-md">
+        <form className=" w-full flex flex-col gap-2 relative ">
+          <input
+            type="text"
+            placeholder="Nombre de la receta"
+            className="w-full min-w-[300px]"
+            onChange={(e) => setReceta({ ...receta, nombre: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Buscar producto"
+            onChange={handleInputChange}
+            value={busqueda}
+            className="w-full min-w-[300px]"
+          />
+          <ul className=" absolute block top-24 z-10  w-full min-h-0 max-h-[300px] overflow-y-scroll  bg-slate-300  rounded-md ">
+            <li className="ml-2">
+              {existQuery &&
+                iscloseList &&
+                allproductos.map((e) => (
+                  <p
+                    key={e._id}
+                    onClick={() => addProducto(e)}
+                    className="cursor-pointer hover:bg-slate-200 "
                   >
-                    <td className="px-6 py-4 ">
-                      <input
-                        type="text"
-                        placeholder="0.56"
-                        className="w-[60px]"
-                        onChange={(e) => manejarGasto(e.target.value, item)}
-                      />
-                    </td>
-                    <td className="px-6 py-4 ">{item.nombre}</td>
-                    <td className="px-6 py-4 ">
-                      ${item.costo}/ {item.unidad}
-                    </td>
-                    <td className="px-6 py-4 ">${item.gasto}</td>
-                    <td className="px-6 py-4 ">
-                      <button
-                        onClick={() => deleteProductOfRecipe(item.id)}
-                        type="submit"
-                        className="bg-red-500 p-2 rounded-md h-max text-slate-50 hover:bg-red-700"
-                      >
-                        <DeleteIcon />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-            <p className="w-full text-2xl font-semibold">
-              Costo de la receta: ${costo}
-            </p>
-          </table>
-          <div className="flex flex-col gap-2">
-            <button
-              onClick={prepararReceta}
-              className="min-w-[100px] bg-sky-500 p-2 rounded-md flex justify-center items-center "
-            >
-              {loading ? <Spinner /> : "Agregar"}
-            </button>
-            <button
-              disabled={loading}
-              onClick={createReceta}
-              className="bg-green-500 p-2 rounded-md"
-            >
-              Crear
-            </button>
-          </div>
+                    {e.nombre}
+                  </p>
+                ))}
+            </li>
+          </ul>
+        </form>
+        <div className="w-full flex flex-col gap-2">
+          <button
+            onClick={prepararReceta}
+            className="w-full bg-sky-500 hover:bg-sky-700 p-2 rounded-md flex justify-center items-center "
+          >
+            {loading ? (
+              <Spinner />
+            ) : !isRecetaAgregada ? (
+              "Agregar"
+            ) : (
+              "Agregar mas"
+            )}
+          </button>
+          <button
+            disabled={loading || !isRecetaAgregada}
+            onClick={createReceta}
+            className={`w-full ${
+              isRecetaAgregada
+                ? "bg-green-500 hover:bg-green-700"
+                : "bg-slate-300 cursor-not-allowed"
+            }   p-2 rounded-md flex justify-center items-center `}
+          >
+            Crear
+          </button>
         </div>
+      </div>
+      <div>
+        <table className="w-3/4 h-max  mx-auto relative text-sm text-left text-gray-500 dark:text-gray-400 shadow-2xl mt-4">
+          <thead className="text-xs text-slate-900 uppercase bg-sky-500 dark:bg-gray-900 dark:text-gray-400   ">
+            <tr>
+              <th scope="col" className="px-2 py-3 cursor-pointer">
+                Cantidad
+              </th>
+              <th scope="col" className="px-6 py-3 cursor-pointer">
+                Producto
+              </th>
+              <th scope="col" className="px-6 py-3 cursor-pointer">
+                Costo
+              </th>
+              <th scope="col" className="px-6 py-3 cursor-pointer">
+                Costo por cantidad
+              </th>
+              <th scope="col" className="px-6 py-3 cursor-pointer">
+                Eliminar
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {productosreceta?.map((item) => {
+              return (
+                <tr
+                  key={item._id}
+                  className={`${
+                    isRecetaAgregada ? "bg-green-200" : "bg-white"
+                  }  border-b dark:bg-gray-800 dark:border-gray-700`}
+                >
+                  <td className="px-6 py-4 ">
+                    <input
+                      type="text"
+                      placeholder="0.56"
+                      className="w-[60px]"
+                      onChange={(e) => manejarGasto(e.target.value, item)}
+                    />
+                  </td>
+                  <td className="px-6 py-4 ">{item.nombre}</td>
+                  <td className="px-6 py-4 ">
+                    ${item.costo}/ {item.unidad}
+                  </td>
+                  <td className="px-6 py-4 ">${item.gasto}</td>
+                  <td className="px-6 py-4 ">
+                    <button
+                      onClick={() => deleteProductOfRecipe(item.id)}
+                      type="submit"
+                      className="bg-red-500 p-2 rounded-md h-max text-slate-50 hover:bg-red-700"
+                    >
+                      <DeleteIcon />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <p className="w-full text-2xl font-semibold">
+                Costo de la receta: ${costo}
+              </p>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   );
 };
-
 export default FormNewReceta;
