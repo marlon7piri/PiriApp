@@ -35,7 +35,7 @@ const NavBar = () => {
   return (
     isVisibleMenu && (
       <nav
-        className={`bg-slate-50 border border-slate-950 w-1/4 min-w-[150px] h-screen flex  flex-col  p-4 rounded-md transition duration-500`}
+        className={`bg-slate-50 border border-slate-950 w-1/4 min-w-[150px] min-h-screen flex  flex-col  p-4 rounded-md transition duration-500`}
       >
         <Image
           alt="logo al alma"

@@ -65,15 +65,20 @@ const FormNewPlato = ({ recetas }) => {
   };
 
   const deleteRecetaList = (id) => {
-    setRecetasSelected((prevState) => prevState.filter((y) => y !== id));
+    setRecetasSelected((prevState) => prevState.filter((y) => y.id !== id));
   };
 
   const enviarData = async (data, e) => {
     e.preventDefault();
 
+    if (recetasSelected.length == 0) {
+      toast.error("Tiene que seleccionar al menos una receta");
+      return;
+    }
+
     const send = async () => {
       let ids = recetasSelected.map((t) => t.id);
-      console.log(ids);
+
       try {
         const res = await fetch(`${UrlWeb}/item`, {
           method: "POST",
@@ -164,7 +169,7 @@ const FormNewPlato = ({ recetas }) => {
             <li key={e.id} className="flex justify-between">
               {e.nombre}
               <span
-                onClick={() => deleteRecetaList(e)}
+                onClick={() => deleteRecetaList(e.id)}
                 className="bg-red-500 p-2 rounded-md hover:bg-red-700 cursor-pointer"
               >
                 <DeleteIcon />
