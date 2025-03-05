@@ -58,10 +58,13 @@ const FormNewPlato = ({ recetas }) => {
 
   const selectReceta = (item) => {
     setIsListClose(!isListClose);
-    setRecetasSelected((prevState) => [
-      ...prevState,
-      { id: item._id, nombre: item.nombre },
-    ]);
+    setRecetasSelected((prevState) => {
+      const exist = prevState.find((r) => r.id == item._id);
+      if (!exist) {
+        return [...prevState, { id: item._id, nombre: item.nombre }];
+      }
+      return prevState;
+    });
   };
 
   const deleteRecetaList = (id) => {
