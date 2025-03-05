@@ -106,7 +106,7 @@ const FormNewPlato = ({ recetas }) => {
 
   return (
     <form
-      className="w-2/4 mx-auto flex flex-col gap-2 bg-slate-50 rounded-md shadow-2xl p-4"
+      className="w-2/4 min-w-[400px] mx-auto flex flex-col gap-2 bg-slate-50 rounded-md shadow-2xl p-4"
       onSubmit={handleSubmit(enviarData)}
     >
       <input
