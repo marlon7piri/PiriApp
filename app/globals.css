@@ -20,7 +20,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-image: linear-gradient(25deg, #10083a, #502e50, #8d5866, #cc867c)
+  background-image: linear-gradient(25deg, #10083a, #502e50, #8d5866, #cc867c);
 }
 
 input,
@@ -99,9 +99,11 @@ textarea {
 .card {
   height: 100%;
   border-radius: 50px;
-  background: linear-gradient(135deg,
-      rgb(0, 255, 214) 0%,
-      rgb(8, 226, 96) 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(0, 255, 214) 0%,
+    rgb(8, 226, 96) 100%
+  );
   transition: all 0.5s ease-in-out;
   transform-style: preserve-3d;
   box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px,
@@ -114,9 +116,11 @@ textarea {
   inset: 8px;
   border-radius: 55px;
   border-top-right-radius: 100%;
-  background: linear-gradient(0deg,
-      rgba(255, 255, 255, 0.349) 0%,
-      rgba(255, 255, 255, 0.815) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.349) 0%,
+    rgba(255, 255, 255, 0.815) 100%
+  );
   /* -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px); */
   transform: translate3d(0px, 0px, 25px);
@@ -355,8 +359,8 @@ textarea {
   z-index: 100;
 }
 
-.menu>Link:hover {
-  color: red
+.menu > Link:hover {
+  color: red;
 }
 
 .boton_hamburguesa {
@@ -381,6 +385,7 @@ textarea {
     right: 0%;
     transition: 0.3s linear;
     transform: translate(100%);
+    z-index: 500;
   }
 
   .menu {
@@ -397,6 +402,7 @@ textarea {
     right: 100%;
     transition: 0.3s linear;
     opacity: 1;
+    z-index: 500;
   }
 
   .boton_hamburguesa {
@@ -408,6 +414,6 @@ textarea {
     font-size: 30px;
     display: block;
     z-index: 500;
-    color: black
+    color: black;
   }
 }
