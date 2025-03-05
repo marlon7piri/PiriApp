@@ -101,8 +101,11 @@ const FormMermas = ({ productos }) => {
   }, 300);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(enviarData)} className={styles.form}>
+    <div onClick={() => setCloselist(true)}>
+      <form
+        onSubmit={handleSubmit(enviarData)}
+        className={`${styles.form} relative overflow-hidden`}
+      >
         {error && <span className="bg-red-500 text-white p-2">{error}</span>}
         <input
           value={termino}
@@ -114,11 +117,11 @@ const FormMermas = ({ productos }) => {
           placeholder="Buscar producto"
         />
         {!closelist && termino && (
-          <ul className="bg-slate-200 h-[100px] overflow-y-scroll">
+          <ul className="w-[90%] absolute top-20 z-10 bg-slate-400  max-h-[100px]  overflow-y-scroll">
             {productos?.map((e) => {
               return (
                 <li
-                  className="cursor-pointer hover:bg-sky-500  p-2"
+                  className="cursor-pointer hover:bg-slate-200  p-1"
                   value={e._id}
                   key={e._id}
                   onClick={() => selectProduct(e)}
