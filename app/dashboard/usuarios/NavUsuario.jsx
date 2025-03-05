@@ -9,7 +9,7 @@ import FiltroBusqueda from "@/app/components/FiltroBusqueda";
 const NavUsuario = () => {
   return (
     <div
-      className={`flex justify-between items-center gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}
+      className={`flex justify-between gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8 mb-8 ${styles.containerSearch}`}
     >
       <div className="h-12 flex justify-center ">
         <FiltroBusqueda />
