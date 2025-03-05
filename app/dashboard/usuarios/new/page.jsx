@@ -9,8 +9,6 @@ import { useRouter } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
 import { useSession } from "next-auth/react";
 
-
-
 const schema = yup
   .object({
     username: yup.string().max(20).required(),
@@ -22,20 +20,19 @@ const schema = yup
 
 const NewProducto = () => {
   const router = useRouter();
-   const {data:session} = useSession()
+  const { data: session } = useSession();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-reset,
+    reset,
     formState: { errors, isLoading },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const enviarData = async (data) => {
-
     try {
       setLoading(true);
       const res = await fetch(`${UrlWeb}/usuarios`, {
@@ -43,7 +40,10 @@ reset,
         headers: {
           Accept: "application/json",
         },
-        body: JSON.stringify({...data,restaurante_id:session?.user?.restaurante_id}),
+        body: JSON.stringify({
+          ...data,
+          restaurante_id: session?.user?.restaurante_id,
+        }),
       });
 
       if (!res.ok) {
@@ -54,8 +54,8 @@ reset,
         setLoading(false);
 
         toast.success("Usuario creado");
-        reset()
-      router.push("/dashboard/usuarios");
+        reset();
+        router.push("/dashboard/usuarios");
         router.refresh();
       }
     } catch (error) {
@@ -67,7 +67,7 @@ reset,
       onSubmit={handleSubmit(enviarData)}
       className="flex flex-col m-auto p-4 w-2/4 gap-4"
     >
-     { error &&  <span className="bg-red-500 text-white p-2">{error}</span>}
+      {error && <span className="bg-red-500 text-white p-2">{error}</span>}
       <input
         type="text"
         {...register("username", { required: true })}
@@ -149,7 +149,7 @@ reset,
         </div>
       </div>
       <input
-      /*   disabled={isLoading} */
+        /*   disabled={isLoading} */
         type="submit"
         value={loading ? " loading..." : "Crear"}
         className="bg-sky-500 px-4 py-2 rounded-md text-slate-900 hover:bg-sky-900 transition duration-500 hover:text-slate-50 cursor-pointer"

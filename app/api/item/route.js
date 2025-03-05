@@ -20,6 +20,8 @@ export async function POST(req) {
     });
 
     const savedItem = await newItem.save();
-    return NextResponse.json(savedItem);
-  } catch (error) {}
+    return NextResponse.json({ data: savedItem, status: 201 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error server" + error });
+  }
 }
