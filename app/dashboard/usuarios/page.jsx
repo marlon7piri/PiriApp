@@ -11,7 +11,7 @@ import Container from "@/app/components/Container";
 export default async function Users({ searchParams }) {
   const session = await getServerSession(authoptions);
   const q = searchParams?.query || "";
-  const data = await getUsuarios(q, session.user.restaurante_id);
+  const data = await getUsuarios(q, session.user?.restaurante_id);
 
   if (!data) {
     return <ShowEmptyComponent text={"No hay usuarios"} color="dark" />;

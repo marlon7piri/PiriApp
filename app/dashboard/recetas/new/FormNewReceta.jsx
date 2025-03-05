@@ -147,7 +147,7 @@ const FormNewReceta = ({ allproductos }) => {
       className="w-full h-full  flex flex-col"
       onClick={() => setIscloseList(false)}
     >
-      <div className="w-2/4 flex flex-col gap-2 justify-center items-center mx-auto  p-4 shadow-2xl rounded-md">
+      <div className="w-2/4 min-w-[300px] flex flex-col gap-2 justify-center items-center mx-auto  p-4 shadow-2xl rounded-md">
         <form className=" w-full flex flex-col gap-2 relative ">
           <input
             type="text"
