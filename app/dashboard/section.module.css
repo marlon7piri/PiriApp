@@ -5,14 +5,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: auto;
-  
+
   gap: 1rem;
   padding: 10px;
   position: relative;
 }
 
 .totalProductos {
- 
   background-color: #fff;
   box-shadow: 0px 0px 88px 26px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -23,7 +22,6 @@
 }
 
 .dineroInventario {
-  
   background-color: #fff;
   box-shadow: 0px 0px 88px 26px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -53,19 +51,16 @@
 
 @media (width<600px) {
   .section {
-
     grid-template-columns: repeat(1, 1fr);
-
-    
-
   }
   .totalProductos {
     min-height: 200px;
-    
   }
-  
+
   .dineroInventario {
     min-height: 200px;
-   
+  }
+  .productosCasiAgotados {
+    height: 100%;
   }
 }
