@@ -356,7 +356,7 @@ textarea {
   font-size: 18px;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 500;
 }
 
 .menu > Link:hover {
@@ -376,6 +376,7 @@ textarea {
 @media (width<600px) {
   .nav_container {
     width: 100%;
+    z-index: 9999;
   }
 
   .show_menu {
@@ -385,7 +386,7 @@ textarea {
     right: 0%;
     transition: 0.3s linear;
     transform: translate(100%);
-    z-index: 500;
+    z-index: 9999;
   }
 
   .menu {
@@ -402,18 +403,18 @@ textarea {
     right: 100%;
     transition: 0.3s linear;
     opacity: 1;
-    z-index: 500;
+    z-index: 9999;
   }
 
   .boton_hamburguesa {
     display: block;
-    z-index: 100;
+    z-index: 9999;
   }
 
   .boton_hamburguesa_close {
     font-size: 30px;
     display: block;
-    z-index: 500;
+    z-index: 9999;
     color: black;
   }
 }

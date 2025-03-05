@@ -104,9 +104,10 @@ const FormMermas = ({ productos }) => {
     <div onClick={() => setCloselist(true)}>
       <form
         onSubmit={handleSubmit(enviarData)}
-        className={`${styles.form} relative overflow-hidden`}
+        className={`${styles.form}   relative`}
       >
         {error && <span className="bg-red-500 text-white p-2">{error}</span>}
+
         <input
           value={termino}
           onChange={(e) => {
