@@ -38,6 +38,7 @@
   border-radius: 20px;
 
   padding: 10px;
+  overflow-y: scroll;
 }
 
 .productosCasiAgotados {
@@ -60,6 +61,9 @@
 
   .dineroInventario {
     min-height: 200px;
+  }
+  .masVendidos {
+    height: 100%;
   }
   .productosCasiAgotados {
     height: 100%;
