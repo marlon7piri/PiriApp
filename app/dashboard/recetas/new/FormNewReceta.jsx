@@ -42,7 +42,9 @@ const FormNewReceta = ({ allproductos }) => {
   }, 300);
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+    value = value.replace(/[^a-zA-Z0-9\s]/g, "");
+
     setBusqueda(value); // Se actualiza el estado inmediatamente
     buscarProducto(value); // Luego se ejecuta la búsqueda con debounce
   };
@@ -237,7 +239,13 @@ const FormNewReceta = ({ allproductos }) => {
                       type="text"
                       placeholder="0.56"
                       className="w-[60px]"
-                      onChange={(e) => manejarGasto(e.target.value, item)}
+                      onChange={(e) => {
+                        let cantidad = e.target.value;
+
+                        if (/^\d*\.?\d*$/.test(cantidad)) {
+                          manejarGasto(cantidad, item);
+                        }
+                      }}
                     />
                   </td>
                   <td className="px-6 py-4 ">{item.nombre}</td>
@@ -258,14 +266,12 @@ const FormNewReceta = ({ allproductos }) => {
               );
             })}
           </tbody>
-          <tfoot>
-            <tr>
-              <p className="w-full text-2xl font-semibold">
-                Costo de la receta: ${costo}
-              </p>
-            </tr>
-          </tfoot>
         </table>
+        <div className="w-full text-center">
+          <p className="w-full text-2xl font-semibold">
+            Costo de la receta: ${costo}
+          </p>
+        </div>
       </div>
     </div>
   );

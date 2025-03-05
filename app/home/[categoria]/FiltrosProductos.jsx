@@ -1,6 +1,11 @@
 "use client";
 
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useClientContext } from "../../context/ClientProvider";
@@ -12,12 +17,13 @@ import BotonPDF from "@/app/components/BotonPDF";
 import BotonEXCEL from "@/app/components/BotonEXCEL";
 import { useDebouncedCallback } from "use-debounce";
 import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
+import FiltroBusqueda from "@/app/components/FiltroBusqueda";
 
-const FiltrosProductos = ({productos}) => {
+const FiltrosProductos = ({ productos }) => {
   const {
     tablaProductos,
     setProductos,
-    
+
     setAvisodecorreo,
     avisodecorreo,
   } = useClientContext();
@@ -25,53 +31,30 @@ const FiltrosProductos = ({productos}) => {
   const params = useParams();
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
-  const [masvendidos, setMasvendidos] = useState('')
-  const searchparams = useSearchParams()
-  const path = usePathname()
-
-  const handlerSearch = useDebouncedCallback((e) => {
-    const params = new URLSearchParams(searchparams)
-    const termino = e.target.value
-
-    if (params) {
-      params.set('query', termino)
-    } else {
-      params.delete('query')
-    }
-
-    params.set("page",1)
-    router.replace(`${path}?${params}`)
-
-  }, 300);
-
-
-
+  const searchparams = useSearchParams();
+  const path = usePathname();
 
   const filtrarPorCantidades = (value) => {
-    const params = new URLSearchParams(searchparams)
+    const params = new URLSearchParams(searchparams);
 
     if (params) {
-      params.set('orden', value)
+      params.set("orden", value);
     } else {
-      params.delete('orden')
+      params.delete("orden");
     }
 
-    router.replace(`${path}?${params}`)
-
+    router.replace(`${path}?${params}`);
   };
 
   const filtarMasVendido = (e) => {
+    const params = new URLSearchParams(searchparams);
 
-    const params = new URLSearchParams(searchparams)
-
-
-    if (e.target.value === 'mas') {
-      params.set("mas_vendido", "true")
+    if (e.target.value === "mas") {
+      params.set("mas_vendido", "true");
     } else {
-      params.delete("mas_vendido")
+      params.delete("mas_vendido");
     }
-    router.replace(`${path}?${params}`)
-
+    router.replace(`${path}?${params}`);
   };
 
   const EnviarInventario = async () => {
@@ -99,7 +82,7 @@ const FiltrosProductos = ({productos}) => {
         productos,
         area,
         autor: session?.user?.id,
-        restaurante_id: session?.user?.restaurante_id
+        restaurante_id: session?.user?.restaurante_id,
       }),
     });
 
@@ -110,22 +93,13 @@ const FiltrosProductos = ({productos}) => {
     } else {
       toast.success("Inventario enviado");
       const result = await res.json();
-
     }
     setLoading(false);
   };
 
-
-
-
   return (
     <nav className={styles.filtrosContainer}>
-      <input
-        type="text"
-        onChange={handlerSearch}
-        className="outline-none p-2 border border-slate-900 rounded-md focus:border-sky-500"
-        placeholder="Buscar...."
-      />{" "}
+      <FiltroBusqueda />
       <select
         name=""
         id=""
@@ -144,10 +118,12 @@ const FiltrosProductos = ({productos}) => {
         <option value="todos">Todos</option>
         <option value="mas">Mas Vendidos</option>
       </select>
-      <div className='flex h-full gap-4'>
-        <BotonPDF productos={productos}
+      <div className="flex h-full gap-4">
+        <BotonPDF
+          productos={productos}
           setAvisodecorreo={setAvisodecorreo}
-          avisodecorreo={avisodecorreo} />
+          avisodecorreo={avisodecorreo}
+        />
         <BotonEXCEL productos={productos} />
       </div>
       <button

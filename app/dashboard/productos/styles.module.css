@@ -25,6 +25,7 @@
 }
 
 .btnPrimary {
+  max-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,5 +69,8 @@
     height: 50px;
     border: 1px solid #0f172a;
     border-radius: 0.5rem;
+  }
+  .btnPrimary {
+    min-width: 220px;
   }
 }

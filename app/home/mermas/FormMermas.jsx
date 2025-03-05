@@ -7,7 +7,7 @@ import * as yup from "yup";
 import toast from "react-hot-toast";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UrlWeb } from "@/app/libs/UrlWeb";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 import { useDebouncedCallback } from "use-debounce";
 import { useSession } from "next-auth/react";
 
@@ -21,22 +21,17 @@ const schema = yup
   })
   .required();
 
-
-
-
 const FormMermas = ({ productos }) => {
   const router = useRouter();
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [idSelected, setIdSelected] = useState({
-
-  })
-  const [termino, setTermino] = useState('')
-  const [closelist, setCloselist] = useState(true)
-  const searchparams = useSearchParams()
-  const path = usePathname()
+  const [idSelected, setIdSelected] = useState({});
+  const [termino, setTermino] = useState("");
+  const [closelist, setCloselist] = useState(true);
+  const searchparams = useSearchParams();
+  const path = usePathname();
   const {
     register,
     handleSubmit,
@@ -47,10 +42,9 @@ const FormMermas = ({ productos }) => {
   });
 
   const enviarData = async (data) => {
-
     if (!idSelected?.nombre) {
-      alert('Debe seleccionar un producto')
-      return
+      alert("Debe seleccionar un producto");
+      return;
     }
     try {
       setLoading(true);
@@ -64,7 +58,7 @@ const FormMermas = ({ productos }) => {
           nombre: idSelected.nombre,
           id: idSelected.id,
           autor: session?.user?.id,
-          restaurante_id: session?.user?.restaurante_id
+          restaurante_id: session?.user?.restaurante_id,
         }),
       });
 
@@ -85,62 +79,56 @@ const FormMermas = ({ productos }) => {
   };
 
   const selectProduct = (product) => {
-    setIdSelected({ id: product._id, nombre: product.nombre })
-    setTermino(product.nombre)
-    setCloselist(true)
-  }
+    setIdSelected({ id: product._id, nombre: product.nombre });
+    setTermino(product.nombre);
+    setCloselist(true);
+  };
 
   const handlerChange = useDebouncedCallback((e) => {
+    const params = new URLSearchParams(searchparams);
 
-    const params = new URLSearchParams(searchparams)
+    let nombre = e.target.value;
+    nombre = nombre.replace(/[^a-zA-Z0-9\s]/g, "");
 
-    const nombre = e.target.value
-
-
-    if (params) {
-      params.set('query', nombre)
-      setCloselist(false)
+    if (nombre.trim()) {
+      params.set("query", nombre);
+      setCloselist(false);
     } else {
-      params.delete('query')
+      params.delete("query");
     }
-    params.set("page", 1)
-    router.replace(`${path}?${params}`)
-
-  }, 300)
+    params.set("page", 1);
+    router.replace(`${path}?${params}`);
+  }, 300);
 
   return (
     <div>
-
-
-      <form
-        onSubmit={handleSubmit(enviarData)}
-        className={styles.form}
-      >
-
-
-
+      <form onSubmit={handleSubmit(enviarData)} className={styles.form}>
         {error && <span className="bg-red-500 text-white p-2">{error}</span>}
         <input
-
           value={termino}
           onChange={(e) => {
             setTermino(e.target.value); // Actualiza inmediatamente el estado
             handlerChange(e); // Luego llama a la función debounced
           }}
-
           /*  {...register("nombre", { required: false })} */
           placeholder="Buscar producto"
         />
-        {(!closelist && termino) && (<ul className="bg-slate-200 h-[100px] overflow-y-scroll">
-          {productos?.map((e) => {
-            return <li
-              className="cursor-pointer hover:bg-sky-500  p-2"
-              value={e._id}
-              key={e._id}
-              onClick={() => selectProduct(e)}>{e.nombre}</li>;
-
-          })}
-        </ul>)}
+        {!closelist && termino && (
+          <ul className="bg-slate-200 h-[100px] overflow-y-scroll">
+            {productos?.map((e) => {
+              return (
+                <li
+                  className="cursor-pointer hover:bg-sky-500  p-2"
+                  value={e._id}
+                  key={e._id}
+                  onClick={() => selectProduct(e)}
+                >
+                  {e.nombre}
+                </li>
+              );
+            })}
+          </ul>
+        )}
 
         {errors.nombre && (
           <span className="text-red-500">
@@ -159,21 +147,13 @@ const FormMermas = ({ productos }) => {
         )}
 
         <div className={styles.containerTextArea}>
-
           <div className="flex flex-col gap-2">
             <label htmlFor="">Causa</label>
             <input
-
-
               {...register("causa", { required: true })}
-
-
               placeholder="causa"
             />
-            {errors.causa && (
-              <span className="text-red-500">Es requerido</span>
-            )}
-
+            {errors.causa && <span className="text-red-500">Es requerido</span>}
 
             <label htmlFor="">Fecha</label>
 
@@ -194,7 +174,6 @@ const FormMermas = ({ productos }) => {
               <span className="text-red-500"> La direccion es requerida</span>
             )}
           </div>
-
         </div>
 
         <input
