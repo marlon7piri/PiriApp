@@ -27,6 +27,7 @@ const FormNewPlato = ({ recetas }) => {
   const { data: session } = useSession();
   const [isListClose, setIsListClose] = useState(true);
   const [recetasSelected, setRecetasSelected] = useState([]);
+  const [foodCost, setFoodCost] = useState(0)
   const search = useSearchParams();
   const query = search.get("query");
   const router = useRouter();
@@ -61,16 +62,38 @@ const FormNewPlato = ({ recetas }) => {
     setRecetasSelected((prevState) => {
       const exist = prevState.find((r) => r.id == item._id);
       if (!exist) {
-        return [...prevState, { id: item._id, nombre: item.nombre }];
+
+        return [...prevState, { id: item._id, nombre: item.nombre, costo: item.costo }];
       }
       return prevState;
     });
   };
 
   const deleteRecetaList = (id) => {
-    setRecetasSelected((prevState) => prevState.filter((y) => y.id !== id));
-  };
+    setRecetasSelected((prevState) => {
+      const filtered = prevState.filter((y) => y.id !== id)
+      
+        
 
+        setFoodCost(foodCost - foodCost)
+      
+      return filtered
+    });
+  };
+  const handlerPrice = (e) => {
+    let precio = Number(e.target.value)
+
+    if (precio !== 0) {
+      const costo = recetasSelected.reduce((acc, obj) => {
+        acc += obj.costo / precio * 100
+        return acc
+      }, 0)
+      setFoodCost(costo)
+    } else {
+      setFoodCost(0)
+
+    }
+  }
   const enviarData = async (data, e) => {
     e.preventDefault();
 
@@ -133,15 +156,7 @@ const FormNewPlato = ({ recetas }) => {
         {...register("descripcion")}
       />
       {errors.descripcion && <p className="text-red-500 font-bold"></p>}
-      <input
-        type="text"
-        placeholder="Precio"
-        name="precio"
-        {...register("precio", { required: true })}
-      />
-      {errors.precio && (
-        <p className="text-red-500 font-bold">{errors.precio.message}</p>
-      )}
+
       <div className=" w-full relative">
         <input
           type="text"
@@ -158,7 +173,7 @@ const FormNewPlato = ({ recetas }) => {
                 onClick={() => selectReceta(e)}
                 className="hover:bg-slate-500 cursor-pointer pl-1"
               >
-                {e.nombre}
+                {e.nombre} -${e.costo}
               </li>
             ))}
         </ul>
@@ -170,7 +185,7 @@ const FormNewPlato = ({ recetas }) => {
         ) : (
           recetasSelected.map((e) => (
             <li key={e.id} className="flex justify-between">
-              {e.nombre}
+              {e.nombre} -${e.costo}
               <span
                 onClick={() => deleteRecetaList(e.id)}
                 className="bg-red-500 p-2 rounded-md hover:bg-red-700 cursor-pointer"
@@ -181,15 +196,24 @@ const FormNewPlato = ({ recetas }) => {
           ))
         )}
       </ul>
-
+      <input
+        type="text"
+        placeholder="Precio"
+        name="precio"
+        onChange={handlerPrice}
+      /* {...register("precio", { required: true })} */
+      />
+      {errors.precio && (
+        <p className="text-red-500 font-bold">{errors.precio.message}</p>
+      )}
+      <span>Food Cost: %{foodCost?.toFixed(2)}</span>
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`flex justify-center items-center ${
-          isSubmitting
-            ? "bg-slate-500 cursor-not-allowed"
-            : "bg-sky-500 hover:bg-sky-700"
-        } rounded-md w-full p-4`}
+        className={`flex justify-center items-center ${isSubmitting
+          ? "bg-slate-500 cursor-not-allowed"
+          : "bg-sky-500 hover:bg-sky-700"
+          } rounded-md w-full p-4`}
       >
         {isSubmitting ? <Spinner /> : "Crear"}
       </button>
