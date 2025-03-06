@@ -60,7 +60,7 @@ const UploadExcel = ({ productos }) => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
 
       <div className="flex gap-2  justify-center items-center h-auto">
@@ -78,9 +78,9 @@ const UploadExcel = ({ productos }) => {
         onChange={handleToggleAllData}
         className="cursor-pointer"
       />
-      <div>
+     
         <Boton texto="Nuevo" href="/dashboard/productos/new" />
-      </div>
+      
       </div>
     </div>
   );
