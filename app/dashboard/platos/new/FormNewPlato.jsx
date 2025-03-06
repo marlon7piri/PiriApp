@@ -184,7 +184,7 @@ const FormNewPlato = ({ recetas }) => {
           <p>No hay recetas seleccionadas</p>
         ) : (
           recetasSelected.map((e) => (
-            <li key={e.id} className="flex justify-between">
+            <li key={e.id} className="flex justify-between pb-1">
               {e.nombre} -${e.costo}
               <span
                 onClick={() => deleteRecetaList(e.id)}
