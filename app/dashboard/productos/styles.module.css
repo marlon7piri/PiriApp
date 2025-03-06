@@ -42,10 +42,7 @@
 .btnPrimary:hover {
   background-color: #082f49;
 }
-.containerSearch {
-  width:1000px;
- 
-}
+
 @media (width<1000px) {
   .containerSearch {
     width: 100%;

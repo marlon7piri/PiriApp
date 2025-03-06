@@ -21,9 +21,7 @@ const NavProductos = ({ productos }) => {
         <UploadExcel productos={productos} />
       </div>
 
-      <div>
-        <Boton texto="Nuevo" href="/dashboard/productos/new" />
-      </div>
+      
     </div>
   );
 };

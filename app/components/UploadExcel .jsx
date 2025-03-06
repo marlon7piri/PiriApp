@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import BotonEXCEL from "./BotonEXCEL";
 import BotonPDF from "./BotonPDF";
 import { RxUpload } from "react-icons/rx";
+import Boton from "./Boton";
 const UploadExcel = ({ productos }) => {
   const [file, setFile] = useState(null);
   const router = useRouter();
@@ -77,6 +78,9 @@ const UploadExcel = ({ productos }) => {
         onChange={handleToggleAllData}
         className="cursor-pointer"
       />
+      <div>
+        <Boton texto="Nuevo" href="/dashboard/productos/new" />
+      </div>
       </div>
     </div>
   );
