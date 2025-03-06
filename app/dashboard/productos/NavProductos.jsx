@@ -12,7 +12,7 @@ import FiltroBusqueda from "@/app/components/FiltroBusqueda";
 const NavProductos = ({ productos }) => {
   return (
     <div
-      className={`flex justify-evenly   gap-4 bg-slate-50 shadow-2xl p-4 rounded-md mt-8  ${styles.containerSearch}`}
+      className={`flex justify-evenly   gap-x-2 bg-slate-50 shadow-2xl p-4 rounded-md mt-8  ${styles.containerSearch}`}
     >
       <div className="h-12 flex justify-center ">
         <FiltroBusqueda />
