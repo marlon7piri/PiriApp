@@ -15,19 +15,21 @@ import * as yup from "yup";
 const yupSchema = yup.object({
   nombre: yup.string().required("El nombre es requerido").trim(),
   descripcion: yup.string(),
-  precio: yup
+  /* precio: yup
     .number()
     .typeError("El precio tiene que ser un numero")
     .min(0, "El precio tiene que ser mayor a 0")
     .positive("El precio tiene que ser un numero positivo")
 
-    .required("El precio es requerido"),
+    .required("El precio es requerido"), */
 });
 const FormNewPlato = ({ recetas }) => {
   const { data: session } = useSession();
   const [isListClose, setIsListClose] = useState(true);
+  const [error, setError] = useState(null);
+  const [precio, setPrecio] = useState(0);
   const [recetasSelected, setRecetasSelected] = useState([]);
-  const [foodCost, setFoodCost] = useState(0)
+  const [foodCost, setFoodCost] = useState(0);
   const search = useSearchParams();
   const query = search.get("query");
   const router = useRouter();
@@ -36,6 +38,9 @@ const FormNewPlato = ({ recetas }) => {
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
+
     reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm({
@@ -62,8 +67,10 @@ const FormNewPlato = ({ recetas }) => {
     setRecetasSelected((prevState) => {
       const exist = prevState.find((r) => r.id == item._id);
       if (!exist) {
-
-        return [...prevState, { id: item._id, nombre: item.nombre, costo: item.costo }];
+        return [
+          ...prevState,
+          { id: item._id, nombre: item.nombre, costo: item.costo },
+        ];
       }
       return prevState;
     });
@@ -71,34 +78,42 @@ const FormNewPlato = ({ recetas }) => {
 
   const deleteRecetaList = (id) => {
     setRecetasSelected((prevState) => {
-      const filtered = prevState.filter((y) => y.id !== id)
-      
-        
+      const filtered = prevState.filter((y) => y.id !== id);
 
-        setFoodCost(foodCost - foodCost)
-      
-      return filtered
+      setFoodCost(foodCost - foodCost);
+
+      return filtered;
     });
   };
   const handlerPrice = (e) => {
-    let precio = Number(e.target.value)
+    let valor = e.target.value;
+    setPrecio(valor);
 
-    if (precio !== 0) {
-      const costo = recetasSelected.reduce((acc, obj) => {
-        acc += obj.costo / precio * 100
-        return acc
-      }, 0)
-      setFoodCost(costo)
-    } else {
-      setFoodCost(0)
-
+    // Validación manual
+    if (isNaN(valor) || valor <= 0) {
+      setError("El precio debe ser un número positivo mayor que 0");
+      setFoodCost(0);
+      return;
     }
-  }
+
+    // Calcular el Food Cost si el precio es válido
+    const costo = recetasSelected.reduce((acc, obj) => {
+      return acc + (obj.costo / valor) * 100;
+    }, 0);
+
+    setFoodCost(costo);
+    setError("");
+  };
+
   const enviarData = async (data, e) => {
     e.preventDefault();
 
     if (recetasSelected.length == 0) {
       toast.error("Tiene que seleccionar al menos una receta");
+      return;
+    }
+    if (foodCost == 0) {
+      setError("Tiene que determinar el food cost del plato");
       return;
     }
 
@@ -110,6 +125,7 @@ const FormNewPlato = ({ recetas }) => {
           method: "POST",
           body: JSON.stringify({
             ...data,
+            precio: precio,
             ingredientes: ids,
             restaurante_id: session.user?.restaurante_id,
           }),
@@ -120,6 +136,7 @@ const FormNewPlato = ({ recetas }) => {
         if (result.status == 201) {
           setRecetasSelected([]);
           reset();
+          setError("");
           router.push("/dashboard/platos");
           router.refresh();
         }
@@ -200,20 +217,21 @@ const FormNewPlato = ({ recetas }) => {
         type="text"
         placeholder="Precio"
         name="precio"
+        value={precio}
         onChange={handlerPrice}
-      /* {...register("precio", { required: true })} */
       />
-      {errors.precio && (
-        <p className="text-red-500 font-bold">{errors.precio.message}</p>
-      )}
+
+      <p className="text-red-500 font-bold">{error}</p>
+
       <span>Food Cost: %{foodCost?.toFixed(2)}</span>
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`flex justify-center items-center ${isSubmitting
-          ? "bg-slate-500 cursor-not-allowed"
-          : "bg-sky-500 hover:bg-sky-700"
-          } rounded-md w-full p-4`}
+        className={`flex justify-center items-center ${
+          isSubmitting
+            ? "bg-slate-500 cursor-not-allowed"
+            : "bg-sky-500 hover:bg-sky-700"
+        } rounded-md w-full p-4`}
       >
         {isSubmitting ? <Spinner /> : "Crear"}
       </button>

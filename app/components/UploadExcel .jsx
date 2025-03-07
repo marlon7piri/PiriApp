@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import BotonEXCEL from "./BotonEXCEL";
@@ -38,7 +38,7 @@ const UploadExcel = ({ productos }) => {
 
   useEffect(() => {
     // Verificar si "allData" existe en los parámetros de la URL y actualizar el estado
-    if (searchParams.has('allData') && searchParams.get('allData') === 'si') {
+    if (searchParams.has("allData") && searchParams.get("allData") === "si") {
       setMostrarTodos(true);
     }
   }, [searchParams]);
@@ -63,24 +63,29 @@ const UploadExcel = ({ productos }) => {
     <div className="flex flex-col gap-4">
       <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
 
-      <div className="flex gap-2  justify-center items-center h-auto">
-      <abbr title="Subir inventario">
-        <button disabled={!productos} onClick={handleUpload} className="bg-green-700 p-2 text-slate-50 rounded-md hover:bg-green-900 ">
-          <RxUpload />
-        </button>
-      </abbr>
-      <BotonEXCEL productos={productos} />
-      <BotonPDF productos={productos} />
-      <label htmlFor="">Todos:</label>
-      <input
-        type="checkbox"
-        checked={mostrarTodos}
-        onChange={handleToggleAllData}
-        className="cursor-pointer"
-      />
-     
+      <div className="flex flex-col md:flex-col lg:flex-row gap-2  justify-between items-center h-auto">
+        <div className="flex gap-2">
+          <abbr title="Subir inventario">
+            <button
+              disabled={!productos}
+              onClick={handleUpload}
+              className="bg-green-700 p-2 text-slate-50 rounded-md hover:bg-green-900 "
+            >
+              <RxUpload />
+            </button>
+          </abbr>
+          <BotonEXCEL productos={productos} />
+          <BotonPDF productos={productos} />
+          <label htmlFor="">Todos:</label>
+          <input
+            type="checkbox"
+            checked={mostrarTodos}
+            onChange={handleToggleAllData}
+            className="cursor-pointer"
+          />
+        </div>
+
         <Boton texto="Nuevo" href="/dashboard/productos/new" />
-      
       </div>
     </div>
   );

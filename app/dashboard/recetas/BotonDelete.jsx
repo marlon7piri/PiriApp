@@ -8,7 +8,7 @@ import { useClientContext } from "@/app/context/ClientProvider";
 import React from "react";
 import DeleteIcon from "@/app/icons/DeleteIcon";
 
-const BotonDelete = ({ id}) => {
+const BotonDelete = ({ id }) => {
   const { setLoading } = useClientContext();
   const router = useRouter();
 
@@ -16,18 +16,18 @@ const BotonDelete = ({ id}) => {
     try {
       if (confirm("Seguro desea eliminar el producto")) {
         setLoading(true);
-        const res = await fetch(`${UrlWeb}/mermas/${id}`, {
+        const res = await fetch(`${UrlWeb}/recetas/${id}`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
         });
         const data = await res.json();
-      
+
         if (!res.ok) {
           toast.error("algo salio mal");
         }
-      
-        toast.success("Producto eliminado");
-      router.refresh(); 
+
+        toast.success("Receta eliminada");
+        router.refresh();
 
         setLoading(false);
       }
