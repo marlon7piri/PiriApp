@@ -35,7 +35,6 @@ export const getProductos = async (area, query, page = 1, mas_vendido, orden, re
 export const getAllProductos = async (query, page = 1, restaurante_id, allData = 'no') => {
 
   const queryEx = new RegExp(query, 'i')
-console.log(query, page, restaurante_id, allData)
   let allproducts
   let totalPage = 1
   try {

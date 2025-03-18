@@ -48,7 +48,15 @@ export const authoptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+
+      if (session && trigger === 'update') {
+        return {
+          ...token, 
+          ...session.user
+        }
+      }
+
 
       if (user) {
         token.username = user.username;
@@ -61,6 +69,8 @@ export const authoptions = {
       return token;
     },
     async session({ session, token }) {
+
+
       if (session.user) {
         session.user.username = token.username;
         session.user.email = token.email;

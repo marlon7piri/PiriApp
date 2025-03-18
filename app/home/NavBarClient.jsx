@@ -3,18 +3,37 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { redirect, usePathname, useRouter } from "next/navigation";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 import Image from "next/image";
 import { IoClose } from "react-icons/io5";
 import { useClientContext } from "../context/ClientProvider";
+import { UrlWeb } from "../libs/UrlWeb";
 
+
+const getRestaurante = async () => {
+  const sess = await getSession()
+
+  const res = await fetch(`${UrlWeb}/restaurante?restaurante_id=${sess?.user?.id}`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    }
+
+  })
+
+  const data = await res.json()
+
+  return data
+
+}
 const NavBarClient = () => {
   const { setSession } = useClientContext()
   const [cambiarclase, setCambiarclase] = useState(false);
-  const { back } = useRouter();
-  const { data: session } = useSession();
+  const { back ,refresh} = useRouter();
+  const [restaurante, setRestaurante] = useState([])
+  const { data: session, update } = useSession();
   const path = usePathname()
 
   const showMenu = () => {
@@ -26,16 +45,36 @@ const NavBarClient = () => {
 
     setSession(session);
 
+    const loadResta = async () => {
+
+      if (session?.user?.id) {
+        const restauran = await getRestaurante()
+
+        setRestaurante(restauran)
+      }
+
+    }
+
+    loadResta()
 
   }, [])
 
 
-  const backFunction = () => {
-    back();
-    document.getElementById("menu").classList.toggle("show_menu");
-    setCambiarclase(!cambiarclase);
-  };
 
+  const handlerRestaurante = async (e) => {
+    const selectedId = e.target.value;
+
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        restaurante_id: selectedId
+      }
+    })
+    refresh()
+
+
+  }
   const isActive = (ruta) => {
     return path == ruta ? `text-purple-900` : `text-slate-900`
   }
@@ -65,9 +104,18 @@ const NavBarClient = () => {
               Pedidos
             </Link>
             {session?.user.isAdmin ? (
-              <Link href="/dashboard" onClick={showMenu}>
-                Dashboard
-              </Link>
+              (<div className="flex gap-2 items-center justify-center">
+                <Link href="/dashboard" onClick={showMenu}>
+                  Dashboard
+                </Link>
+                <select name="" id="" onChange={handlerRestaurante}>
+                  {
+                    restaurante && restaurante?.map((e) => <option key={e._id} value={e._id}>{e?.nombre}</option>)
+                  }
+
+                </select>
+              
+              </div>)
             ) : (
               ""
             )}

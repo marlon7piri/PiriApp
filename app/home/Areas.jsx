@@ -21,6 +21,7 @@ const Areas = ({ areas }) => {
         {areas.map((area) => {
           return (
             <Link
+            key={area?._id}
               href={`/home/${area?._id}`}
               className="w-[220px] h-[200px] bg-slate-50  rounded-md flex flex-col justify-center items-center hover:scale-105 transition duration-500 cursor-pointer shadow-2xl"
             >

@@ -1,18 +1,21 @@
 import { NextResponse } from "next/server";
 import { connectDb } from "@/app/libs/mongoDb";
 import { Restaurante } from "@/app/libs/models/restaurante";
-import { User } from "@/app/libs/models/usuarios";
-import bcrypt from "bcrypt";
-import { Products } from "@/app/libs/models/productos";
 
-export async function GET() {
+
+export async function GET(req) {
+  const searchParams = req.nextUrl.searchParams
+  const restaurante_id = searchParams.get("restaurante_id")
   try {
-    connectDb();
-    const restaurantes = await Restaurante.find({}).populate("usuarios").populate('productos');
 
-    if (!restaurantes)
+    connectDb();
+    const restaurantes = await Restaurante.find({usuarios:restaurante_id}).populate("usuarios").populate('productos');
+
+    if (!restaurantes) {
       return NextResponse.json({ message: "No hay restaurantes" });
 
+    }
+    
     return NextResponse.json(restaurantes);
   } catch (error) {
     console.log(error);
